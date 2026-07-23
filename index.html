@@ -9,26 +9,32 @@
 </head>
 <body class="bg-[#0b0b0c] text-white font-sans antialiased selection:bg-yellow-400 selection:text-black">
 
+  <!-- Górny pasek nawigacji -->
   <header class="fixed top-0 left-0 right-0 z-50 bg-[#0b0b0c]/80 backdrop-blur-md border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
+      <!-- Logo -->
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-yellow-500 to-amber-300 flex items-center justify-center font-black text-black text-xl shadow-lg shadow-yellow-500/20">⚡</div>
         <span class="font-extrabold text-xl tracking-wider">Flashcode</span>
       </div>
 
+      <!-- Menu -->
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
         <a href="#start" class="text-white transition hover:text-yellow-400">Start</a>
         <a href="#zespol" class="transition hover:text-yellow-400">Zespół</a>
+        <a href="#narzedzia" class="transition hover:text-yellow-400">Narzędzia MC</a>
         <a href="#uslugi" class="transition hover:text-yellow-400">Usługi</a>
       </nav>
 
+      <!-- Przycisk kontakt -->
       <a href="https://discord.gg/zErtg676k" target="_blank" class="hidden sm:flex items-center gap-2 border border-white/10 bg-white/5 px-4 py-2 rounded-full text-sm font-medium transition hover:bg-white/10 hover:border-white/20">
         <i data-lucide="message-square" class="w-4 h-4"></i> Napisz do nas
       </a>
     </div>
   </header>
 
+  <!-- Sekcja Start / Hero -->
   <section id="start" class="pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -47,12 +53,13 @@
             <a href="#zespol" class="inline-flex justify-center items-center gap-2 bg-gradient-to-r from-yellow-400 to-amber-400 text-black font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-yellow-400/20 transition hover:opacity-90">
               Porozmawiajmy <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </a>
-            <a href="https://pl.namemc.com" target="_blank" class="inline-flex justify-center items-center gap-2 border border-white/10 bg-white/5 px-6 py-3.5 rounded-xl font-semibold transition hover:bg-white/10">
-              Narzędzia Minecraft ↗
+            <a href="#narzedzia" class="inline-flex justify-center items-center gap-2 border border-white/10 bg-white/5 px-6 py-3.5 rounded-xl font-semibold transition hover:bg-white/10">
+              Narzędzia Minecraft ↓
             </a>
           </div>
         </div>
 
+        <!-- Terminal -->
         <div class="bg-[#121214] border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
           <div class="bg-[#18181b] px-4 py-3 border-b border-white/10 flex items-center gap-2">
             <div class="w-3 h-3 rounded-full bg-red-500"></div>
@@ -70,6 +77,7 @@
     </div>
   </section>
 
+  <!-- Sekcja Zespół -->
   <section id="zespol" class="py-20 bg-[#09090b] border-t border-white/5">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-2xl mx-auto mb-16">
@@ -77,41 +85,79 @@
         <p class="text-gray-400 text-sm sm:text-base">Poznaj ludzi, którzy stoją za sukcesem Twoich projektów.</p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
         <div class="bg-[#121214] border border-white/10 p-6 rounded-2xl text-center">
           <div class="w-16 h-16 rounded-2xl bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 flex items-center justify-center text-2xl font-black mx-auto mb-4">K</div>
           <h3 class="text-lg font-bold mb-1">Kayn</h3>
           <span class="text-xs text-yellow-400 font-semibold uppercase tracking-wider block mb-3">Developer</span>
-          <p class="text-gray-400 text-sm">Tworzy profesjonalne strony, nowoczesne boty oraz stabilne serwery Minecraft.</p>
+          <p class="text-gray-400 text-sm">Developer stron, botów oraz zaawansowanych serwerów Minecraft.</p>
         </div>
-
         <div class="bg-[#121214] border border-white/10 p-6 rounded-2xl text-center">
           <div class="w-16 h-16 rounded-2xl bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 flex items-center justify-center text-2xl font-black mx-auto mb-4">N</div>
           <h3 class="text-lg font-bold mb-1">n0va.dev</h3>
-          <span class="text-xs text-yellow-400 font-semibold uppercase tracking-wider block mb-3">Developer / Creator</span>
-          <p class="text-gray-400 text-sm">Specjalizuje się w programowaniu, stronach internetowych i systemach webowych.</p>
+          <span class="text-xs text-yellow-400 font-semibold uppercase tracking-wider block mb-3">Developer</span>
+          <p class="text-gray-400 text-sm">Tworzy boty Discord, strony internetowe oraz serwery Minecraft.</p>
         </div>
-
         <div class="bg-[#121214] border border-white/10 p-6 rounded-2xl text-center">
           <div class="w-16 h-16 rounded-2xl bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 flex items-center justify-center text-2xl font-black mx-auto mb-4">G</div>
           <h3 class="text-lg font-bold mb-1">Gucio</h3>
-          <span class="text-xs text-yellow-400 font-semibold uppercase tracking-wider block mb-3">Fullstack Dev</span>
-          <p class="text-gray-400 text-sm">Zajmuje się tworzeniem zaawansowanych botów Discord, stron oraz konfiguracją serwerów MC.</p>
-        </div>
-
-        <div class="bg-[#121214] border border-white/10 p-6 rounded-2xl text-center">
-          <div class="w-16 h-16 rounded-2xl bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 flex items-center justify-center text-2xl font-black mx-auto mb-4">Q</div>
-          <h3 class="text-lg font-bold mb-1">Qezo</h3>
           <span class="text-xs text-yellow-400 font-semibold uppercase tracking-wider block mb-3">Developer</span>
-          <p class="text-gray-400 text-sm">Również rozwija boty Discord, tworzy strony internetowe oraz serwery Minecraft.</p>
+          <p class="text-gray-400 text-sm">Zajmuje się tworzeniem botów Discord, stron oraz serwerów Minecraft.</p>
         </div>
-
       </div>
     </div>
   </section>
 
-  <section id="uslugi" class="py-20 bg-[#0b0b0c] border-t border-white/5">
+  <!-- Sekcja: Narzędzia Minecraft (Generator kapitalików i rang) -->
+  <section id="narzedzia" class="py-20 bg-[#0b0b0c] border-t border-white/5">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-black mb-3">Narzędzia Minecraft</h2>
+        <p class="text-gray-400 text-sm">Generator kapitalików oraz kreator stylów i rang do gry.</p>
+      </div>
+
+      <div class="bg-[#121214] border border-white/10 p-6 sm:p-8 rounded-2xl space-y-6">
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Wpisz tekst (np. nazwa rangi lub ogłoszenia):</label>
+          <input type="text" id="input-text" placeholder="Wpisz coś..." value="WŁAŚCICIEL" oninput="updateGenerator()" class="w-full bg-[#18181b] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Styl / Formatowanie:</label>
+            <select id="select-style" onchange="updateGenerator()" class="w-full bg-[#18181b] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400">
+              <option value="caps">Kapitaliki (Małe kapitaliki / Styl rang)</option>
+              <option value="upper">Wielkie litery (UPPERCASE)</option>
+              <option value="bracket">[ Ozdobne nawiasy ]</option>
+              <option value="star">★ Gwiazdki po bokach ★</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Kolor tekstu:</label>
+            <select id="select-color" onchange="updateGenerator()" class="w-full bg-[#18181b] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400">
+              <option value="text-yellow-400">Żółty (Gold)</option>
+              <option value="text-red-500">Czerwony</option>
+              <option value="text-green-400">Zielony</option>
+              <option value="text-blue-400">Niebieski</option>
+              <option value="text-purple-400">Fioletowy</option>
+              <option value="text-white">Biały</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Wynik -->
+        <div class="pt-4 border-t border-white/10">
+          <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Wynik (Podgląd):</label>
+          <div id="output-box" class="bg-[#18181b] border border-white/10 rounded-xl p-6 text-center text-2xl font-black tracking-wider text-yellow-400">
+            ẆŁȞŚĊİİĖŁ
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sekcja Usługi -->
+  <section id="uslugi" class="py-20 bg-[#09090b] border-t border-white/5">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-2xl mx-auto mb-16">
         <h2 class="text-3xl sm:text-4xl font-black mb-4">Od pomysłu do stabilnego wdrożenia.</h2>
@@ -119,8 +165,8 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        
-        <div class="bg-[#121214] border border-white/10 hover:border-yellow-400/50 transition rounded-2xl p-6 flex flex-col justify-between group">
+        <!-- Kafel 1 -->
+        <div class="bg-[#121214] border border-white/10 hover:border-yellow-400/50 transition rounded-2xl p-6 flex flex-col justify-between">
           <div>
             <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-yellow-400 mb-4">
               <i data-lucide="code" class="w-6 h-6"></i>
@@ -135,7 +181,8 @@
           </div>
         </div>
 
-        <div class="bg-[#121214] border border-white/10 hover:border-yellow-400/50 transition rounded-2xl p-6 flex flex-col justify-between group">
+        <!-- Kafel 2 -->
+        <div class="bg-[#121214] border border-white/10 hover:border-yellow-400/50 transition rounded-2xl p-6 flex flex-col justify-between">
           <div>
             <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-yellow-400 mb-4">
               <i data-lucide="cpu" class="w-6 h-6"></i>
@@ -150,7 +197,8 @@
           </div>
         </div>
 
-        <div class="bg-[#121214] border border-white/10 hover:border-yellow-400/50 transition rounded-2xl p-6 flex flex-col justify-between group">
+        <!-- Kafel 3 -->
+        <div class="bg-[#121214] border border-white/10 hover:border-yellow-400/50 transition rounded-2xl p-6 flex flex-col justify-between">
           <div>
             <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-yellow-400 mb-4">
               <i data-lucide="package" class="w-6 h-6"></i>
@@ -165,7 +213,8 @@
           </div>
         </div>
 
-        <div class="bg-[#121214] border border-white/10 hover:border-yellow-400/50 transition rounded-2xl p-6 flex flex-col justify-between group">
+        <!-- Kafel 4 -->
+        <div class="bg-[#121214] border border-white/10 hover:border-yellow-400/50 transition rounded-2xl p-6 flex flex-col justify-between">
           <div>
             <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-yellow-400 mb-4">
               <i data-lucide="palette" class="w-6 h-6"></i>
@@ -179,13 +228,39 @@
             <a href="https://discord.gg/zErtg676k" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider bg-white/5 border border-white/10 px-4 py-2 rounded-xl hover:bg-white/10 transition">Kliknij zamówić ↗</a>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
+  <!-- Skrypty i interaktywny generator -->
   <script>
     lucide.createIcons();
+
+    function updateGenerator() {
+      const text = document.getElementById('input-text').value || '';
+      const style = document.getElementById('select-style').value;
+      const colorClass = document.getElementById('select-color').value;
+      const outputBox = document.getElementById('output-box');
+
+      outputBox.className = `bg-[#18181b] border border-white/10 rounded-xl p-6 text-center text-2xl font-black tracking-wider ${colorClass}`;
+
+      let result = text;
+      if (style === 'caps') {
+        const smallCapsMap = {
+          'a': 'ᴀ', 'b': 'ʙ', 'c': 'ᴄ', 'd': 'ᴅ', 'e': 'ᴇ', 'f': 'ꜰ', 'g': 'ɢ', 'h': 'ʜ', 'i': 'ɪ', 'j': 'ᴊ', 'k': 'ᴋ', 'l': 'ʟ', 'm': 'ᴍ', 'n': 'ɴ', 'o': 'ᴏ', 'p': 'ᴘ', 'q': 'ꞯ', 'r': 'ʀ', 's': 'ꜱ', 't': 'ᴛ', 'u': 'ᴜ', 'v': 'ᴠ', 'w': 'ᴡ', 'x': 'x', 'y': 'ʏ', 'z': 'ᴢ',
+          'A': 'ᴀ', 'B': 'ʙ', 'C': 'ᴄ', 'D': 'ᴅ', 'E': 'ᴇ', 'F': 'ꜰ', 'G': 'ɢ', 'H': 'ʜ', 'I': 'ɪ', 'J': 'ᴊ', 'K': 'ᴋ', 'L': 'ʟ', 'M': 'ᴍ', 'N': 'ɴ', 'O': 'ᴏ', 'P': 'ᴘ', 'Q': 'ꞯ', 'R': 'ʀ', 'S': 'ꜱ', 'T': 'ᴛ', 'U': 'ᴜ', 'V': 'ᴠ', 'W': 'ᴡ', 'X': 'x', 'Y': 'ʏ', 'Z': 'ᴢ'
+        };
+        result = text.split('').map(char => smallCapsMap[char] || char).join('');
+      } else if (style === 'upper') {
+        result = text.toUpperCase();
+      } else if (style === 'bracket') {
+        result = `[ ${text.toUpperCase()} ]`;
+      } else if (style === 'star') {
+        result = `★ ${text.toUpperCase()} ★`;
+      }
+
+      outputBox.textContent = result;
+    }
   </script>
 </body>
 </html>
