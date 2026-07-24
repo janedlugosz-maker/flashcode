@@ -3,84 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flashcode // Advanced Developer & Crypto Dashboard</title>
+    <title>Flashcode // Ultimate Developer & Security Matrix 18+</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(1000%); }
+        }
+        .scanline::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(234, 179, 8, 0.4), transparent);
+            animation: scanline 4s linear infinite;
+            pointer-events: none;
+        }
+    </style>
 </head>
-<body class="bg-[#070708] text-white font-sans antialiased selection:bg-yellow-400 selection:text-black">
+<body class="bg-[#030304] text-white font-mono antialiased selection:bg-yellow-400 selection:text-black relative overflow-x-hidden scanline">
 
-  <!-- Górny pasek nawigacji -->
-  <header class="fixed top-0 left-0 right-0 z-50 bg-[#070708]/90 backdrop-blur-md border-b border-white/10">
+  <div class="bg-[#08080a] border-b border-white/10 text-[11px] text-gray-400 py-1.5 px-4">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-4">
+        <span class="flex items-center gap-1.5 text-green-400"><span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>FIREWALL: SECURE</span>
+        <span>NODE: <strong class="text-white">EU-CENTRAL-01</strong></span>
+        <span>CLEARANCE: <strong class="text-yellow-400">DEVELOPER // 18+</strong></span>
+      </div>
+      <div class="flex items-center gap-4 font-mono">
+        <span id="live-utc-clock">UTC: --:--:--</span>
+        <span class="text-yellow-400">SYS_LOAD: 1.42%</span>
+      </div>
+    </div>
+  </div>
+
+  <header class="sticky top-0 z-50 bg-[#050507]/95 backdrop-blur-md border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      
-      <!-- Logo -->
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-yellow-500 to-amber-300 flex items-center justify-center font-black text-black text-xl shadow-lg shadow-yellow-500/20">⚡</div>
         <div>
-          <span class="font-extrabold text-xl tracking-wider block leading-none">Flashcode</span>
-          <span class="text-[10px] font-mono text-yellow-400 tracking-widest uppercase">Sec & Crypto Hub</span>
+          <span class="font-extrabold text-xl tracking-wider block leading-none font-sans">Flashcode</span>
+          <span class="text-[10px] text-yellow-400 tracking-widest uppercase">Dev & Crypto Core v4.8</span>
         </div>
       </div>
 
-      <!-- Menu -->
-      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-400">
-        <a href="#start" class="text-white transition hover:text-yellow-400">Terminal</a>
-        <a href="#dashboard" class="transition hover:text-yellow-400">Live DDoS & Ping</a>
-        <a href="#crypto" class="transition hover:text-yellow-400">Giełda Crypto</a>
-        <a href="#narzedzia" class="transition hover:text-yellow-400">Narzędzia MC</a>
-        <a href="#zespol" class="transition hover:text-yellow-400">Zespół</a>
-        <a href="#uslugi" class="transition hover:text-yellow-400">Usługi</a>
+      <nav class="hidden xl:flex items-center gap-6 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+        <a href="#matrix" class="text-white transition hover:text-yellow-400">Matrix Terminal</a>
+        <a href="#ddos" class="transition hover:text-yellow-400">DDoS & Ping Intel</a>
+        <a href="#crypto" class="transition hover:text-yellow-400">Crypto Exchange</a>
+        <a href="#compiler" class="transition hover:text-yellow-400">Dev Compiler</a>
+        <a href="#narzedzia" class="transition hover:text-yellow-400">MC Tools</a>
+        <a href="#zespol" class="transition hover:text-yellow-400">Core Team</a>
+        <a href="#uslugi" class="transition hover:text-yellow-400">Services</a>
       </nav>
 
-      <!-- Przycisk Discord -->
-      <a href="https://discord.gg/zErtg676k" target="_blank" class="flex items-center gap-2 border border-yellow-400/30 bg-yellow-400/10 px-4 py-2 rounded-xl text-sm font-medium text-yellow-400 transition hover:bg-yellow-400/20">
-        <i data-lucide="shield-alert" class="w-4 h-4"></i> Discord Intel
-      </a>
+      <div class="flex items-center gap-3">
+        <a href="https://discord.gg/zErtg676k" target="_blank" class="flex items-center gap-2 border border-yellow-400/30 bg-yellow-400/10 px-4 py-2 rounded-xl text-xs font-bold text-yellow-400 transition hover:bg-yellow-400/20 uppercase tracking-wider">
+          <i data-lucide="shield" class="w-4 h-4"></i> Discord Gateway
+        </a>
+      </div>
     </div>
   </header>
 
-  <!-- Sekcja Start / Terminal Hero -->
-  <section id="start" class="pt-32 pb-20 md:pt-44 md:pb-28 overflow-hidden">
+  <section id="matrix" class="py-20 lg:py-32 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
-        <div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-yellow-400 font-semibold mb-6">
-            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> SYSTEM ONLINE • 18+ SECURE ACCESS
+        <div class="lg:col-span-6 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-yellow-400 font-bold tracking-widest uppercase">
+            <span>[ SYSTEM OVERRIDE ]</span> • <span>RESTRICTED ACCESS 18+</span>
           </div>
-          <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-none mb-6">
-            Developer Core & <span class="bg-gradient-to-r from-yellow-400 via-yellow-200 to-amber-500 bg-clip-text text-transparent">Crypto Matrix.</span>
+          <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-none font-sans">
+            Advanced Dev, <span class="bg-gradient-to-r from-yellow-400 via-amber-200 to-amber-500 bg-clip-text text-transparent">DDoS Defense</span> & Crypto.
           </h1>
-          <p class="text-gray-400 text-base sm:text-lg mb-8 max-w-lg">
-            Zaawansowane centrum operacyjne: monitorowanie sieci, ochrona przed atakami DDoS w czasie rzeczywistym, giełda kryptowalut oraz usługi deweloperskie wysokiego poziomu.
+          <p class="text-gray-400 text-sm sm:text-base leading-relaxed font-sans">
+            Kompleksowe środowisko operacyjne dla programistów i inwestorów. Śledź pakiety sieciowe, zabezpieczenia serwerów Minecraft, notowania kryptowalut na żywo i zarządzaj strukturą kodu na najwyższym poziomie.
           </p>
-          <div class="flex flex-col sm:flex-row gap-4">
-            <a href="#dashboard" class="inline-flex justify-center items-center gap-2 bg-gradient-to-r from-yellow-400 to-amber-400 text-black font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-yellow-400/20 transition hover:opacity-90">
-              Otwórz Dashboard <i data-lucide="activity" class="w-4 h-4"></i>
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="#crypto" class="bg-gradient-to-r from-yellow-400 to-amber-400 text-black font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-yellow-400/20 transition hover:opacity-90 uppercase text-xs tracking-wider flex items-center gap-2">
+              Panel Giełdowy <i data-lucide="trending-up" class="w-4 h-4"></i>
             </a>
-            <a href="#crypto" class="inline-flex justify-center items-center gap-2 border border-white/10 bg-white/5 px-6 py-3.5 rounded-xl font-semibold transition hover:bg-white/10">
-              Panel Giełdy Crypto 📈
+            <a href="#ddos" class="border border-white/10 bg-white/5 px-6 py-3.5 rounded-xl font-bold transition hover:bg-white/10 uppercase text-xs tracking-wider flex items-center gap-2">
+              Monitor Sieci <i data-lucide="activity" class="w-4 h-4"></i>
             </a>
           </div>
         </div>
 
-        <!-- Terminal Główny -->
-        <div class="bg-[#101012] border border-white/10 rounded-2xl shadow-2xl overflow-hidden font-mono">
-          <div class="bg-[#151518] px-4 py-3 border-b border-white/10 flex items-center justify-between">
+        <div class="lg:col-span-6 bg-[#08080a] border border-white/15 rounded-2xl shadow-2xl overflow-hidden">
+          <div class="bg-[#0f0f13] px-4 py-3 border-b border-white/10 flex items-center justify-between text-xs">
             <div class="flex items-center gap-2">
               <div class="w-3 h-3 rounded-full bg-red-500"></div>
               <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
               <div class="w-3 h-3 rounded-full bg-green-500"></div>
-              <span class="text-xs text-gray-500 ml-2">flashcode@security-core:~#</span>
+              <span class="text-gray-400 ml-2">flashcode-core-kernel.sh</span>
             </div>
-            <span class="text-[10px] text-green-400 bg-green-950/40 px-2 py-0.5 rounded border border-green-500/20">SECURE SHELL</span>
+            <span class="text-green-400 bg-green-950/50 px-2 py-0.5 rounded border border-green-500/30">ACTIVE THREAD</span>
           </div>
-          <div class="p-6 text-sm text-gray-300 space-y-3">
-            <p class="text-gray-500">$ init --network-security --crypto-feed</p>
-            <p class="text-yellow-400">> [OK] Establishing encrypted tunnel to Discord gateway...</p>
-            <p class="text-yellow-400">> [OK] DDoS mitigation shields: ACTIVE (0 packets dropped)</p>
-            <p class="text-green-400">> [READY] User clearance: 18+ Full Access Granted.</p>
-            <p class="flex items-center gap-2 pt-2"><span class="text-yellow-400">root@flashcode:~$</span> <span class="inline-block w-2 h-4 bg-yellow-400 animate-pulse"></span></p>
+          <div class="p-6 text-xs text-gray-300 space-y-2 h-80 overflow-y-auto font-mono" id="master-terminal-log">
+            <p class="text-gray-500">$ sudo systemctl start flashcode-core.service</p>
+            <p class="text-yellow-400">> Loading cryptographic modules & exchange data streams...</p>
+            <p class="text-green-400">> [SUCCESS] Connected to Discord API Gateway v10.</p>
+            <p class="text-cyan-400">> [INFO] Initializing DDoS protection layers (SYN/UDP flood filter)...</p>
+            <p class="text-gray-400">> [OK] User authorization confirmed (Age 18+ verified profile).</p>
+            <p class="text-yellow-400">> [READY] Ready for command input or script deployment...</p>
+          </div>
+          <div class="bg-[#050507] px-4 py-3 border-t border-white/10 flex items-center gap-2 text-xs">
+            <span class="text-yellow-400">flashcode@root:~$</span>
+            <input type="text" id="terminal-input" placeholder="Wpisz komendę (np. help, ddos, crypto, status)..." onkeydown="handleTerminalCommand(event)" class="bg-transparent border-none outline-none text-white w-full font-mono">
           </div>
         </div>
 
@@ -88,197 +117,192 @@
     </div>
   </section>
 
-  <!-- Sekcja Dashboard: Ataki DDoS i Pingi na żywo -->
-  <section id="dashboard" class="py-20 bg-[#0a0a0c] border-t border-white/5">
+  <section id="ddos" class="py-20 bg-[#050507] border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
         <div>
-          <span class="text-xs font-mono uppercase tracking-widest text-yellow-400 block mb-2">Network Intelligence</span>
-          <h2 class="text-3xl sm:text-4xl font-black">Live DDoS & Ping Monitor</h2>
+          <span class="text-xs uppercase tracking-widest text-yellow-400 block mb-2 font-bold">[ NETWORK SECURITY INTEL ]</span>
+          <h2 class="text-3xl sm:text-4xl font-black font-sans">Live DDoS Attacks & Gateway Ping Monitor</h2>
         </div>
-        <div class="mt-4 md:mt-0 flex items-center gap-2 bg-[#121215] border border-white/10 px-4 py-2 rounded-xl text-xs font-mono">
-          <span class="w-2 h-2 rounded-full bg-green-500 animate-ping"></span>
-          <span>Status Sieci: <strong class="text-green-400">Stabilny</strong></span>
+        <div class="mt-4 md:mt-0 flex items-center gap-3 bg-[#0c0c10] border border-white/10 px-4 py-2.5 rounded-xl text-xs">
+          <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-ping"></span>
+          <span>Shield Status: <strong class="text-green-400 font-bold">100% MITIGATION</strong></span>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <!-- Kafel 1 -->
-        <div class="bg-[#101013] border border-white/10 p-6 rounded-2xl">
-          <div class="flex items-center justify-between mb-4">
-            <span class="text-xs font-semibold text-gray-400 uppercase">Wykryte Ataki DDoS</span>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div class="bg-[#0a0a0d] border border-white/10 p-6 rounded-2xl">
+          <div class="flex justify-between items-center mb-4">
+            <span class="text-xs text-gray-400 uppercase font-bold">Zablokowane Ataki DDoS</span>
             <i data-lucide="shield-alert" class="w-5 h-5 text-red-400"></i>
           </div>
-          <div class="text-3xl font-black text-white mb-1" id="ddos-counter">0</div>
-          <p class="text-xs text-gray-500">Ostatnie 24 godziny (Wszystkie zablokowane)</p>
+          <div class="text-3xl font-black text-white mb-1" id="stat-ddos-count">0</div>
+          <p class="text-xs text-gray-500">Automatyczna filtracja pakietów</p>
         </div>
 
-        <!-- Kafel 2 -->
-        <div class="bg-[#101013] border border-white/10 p-6 rounded-2xl">
-          <div class="flex items-center justify-between mb-4">
-            <span class="text-xs font-semibold text-gray-400 uppercase">Średni Ping (Gateway)</span>
+        <div class="bg-[#0a0a0d] border border-white/10 p-6 rounded-2xl">
+          <div class="flex justify-between items-center mb-4">
+            <span class="text-xs text-gray-400 uppercase font-bold">Discord API Ping</span>
             <i data-lucide="wifi" class="w-5 h-5 text-green-400"></i>
           </div>
-          <div class="text-3xl font-black text-white mb-1"><span id="ping-value">14</span> ms</div>
-          <p class="text-xs text-gray-500">Optymalna wydajność węzłów</p>
+          <div class="text-3xl font-black text-white mb-1"><span id="stat-ping">12</span> ms</div>
+          <p class="text-xs text-gray-500">Optymalne opóźnienie węzła</p>
         </div>
 
-        <!-- Kafel 3 -->
-        <div class="bg-[#101013] border border-white/10 p-6 rounded-2xl">
-          <div class="flex items-center justify-between mb-4">
-            <span class="text-xs font-semibold text-gray-400 uppercase">Aktywne Połączenia Discord</span>
-            <i data-lucide="radio" class="w-5 h-5 text-yellow-400"></i>
+        <div class="bg-[#0a0a0d] border border-white/10 p-6 rounded-2xl">
+          <div class="flex justify-between items-center mb-4">
+            <span class="text-xs text-gray-400 uppercase font-bold">Przepustowość Sieci</span>
+            <i data-lucide="activity" class="w-5 h-5 text-yellow-400"></i>
           </div>
-          <div class="text-3xl font-black text-white mb-1">1,482</div>
-          <p class="text-xs text-gray-500">Autoryzowane tunele webhook</p>
+          <div class="text-3xl font-black text-white mb-1">4.8 GB/s</div>
+          <p class="text-xs text-gray-500">Globalna sieć proxy</p>
+        </div>
+
+        <div class="bg-[#0a0a0d] border border-white/10 p-6 rounded-2xl">
+          <div class="flex justify-between items-center mb-4">
+            <span class="text-xs text-gray-400 uppercase font-bold">Aktywne Połączenia</span>
+            <i data-lucide="users" class="w-5 h-5 text-cyan-400"></i>
+          </div>
+          <div class="text-3xl font-black text-white mb-1">2,840</div>
+          <p class="text-xs text-gray-500">Autoryzowane tunele TLS</p>
         </div>
       </div>
 
-      <!-- Live Logi Sieciowe -->
-      <div class="bg-[#101013] border border-white/10 rounded-2xl p-6 font-mono text-xs">
-        <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
-          <span class="text-gray-400 font-bold uppercase tracking-wider">Live Packet Stream & Security Logs</span>
-          <span class="text-yellow-400">AUTO-SCROLL ACTIVE</span>
+      <div class="bg-[#0a0a0d] border border-white/10 rounded-2xl p-6">
+        <div class="flex justify-between items-center border-b border-white/10 pb-4 mb-4 text-xs">
+          <span class="font-bold text-gray-400 uppercase tracking-wider">Live Packet Stream // Firewall Intercepts</span>
+          <span class="text-yellow-400 font-mono">STREAM RUNNING</span>
         </div>
-        <div id="security-logs" class="space-y-2 text-gray-400 h-36 overflow-y-auto">
-          <p class="text-green-400">[19:42:01] [FIREWALL] Clean traffic routed through proxy node #4.</p>
-          <p class="text-gray-500">[19:42:08] [PING] Discord API Gateway response time: 12ms.</p>
-          <p class="text-yellow-400">[19:42:15] [DDOS-DEFENSE] SYN-Flood attempt detected from IP range 185.x.x.x -> Mitigated instantly.</p>
+        <div id="ddos-logs" class="space-y-2 text-xs text-gray-400 h-40 overflow-y-auto font-mono">
+          <p class="text-green-400">[20:01:12] [SYSTEM] Secure tunnel initialized on node #1.</p>
+          <p class="text-gray-500">[20:01:19] [PING] Discord bot shard #1 latency: 11ms.</p>
+          <p class="text-yellow-400">[20:01:25] [DDOS-MITIGATION] Volumetric flood detected (UDP reflection) -> Dropped 45,000 pps.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Sekcja Giełda Kryptowalut (Dostęp 18+) -->
-  <section id="crypto" class="py-20 bg-[#070708] border-t border-white/5">
+  <section id="crypto" class="py-20 bg-[#030304] border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
         <div>
-          <span class="text-xs font-mono uppercase tracking-widest text-yellow-400 block mb-2">Financial Markets // 18+ Access</span>
-          <h2 class="text-3xl sm:text-4xl font-black">Crypto Exchange Hub</h2>
+          <span class="text-xs uppercase tracking-widest text-yellow-400 block mb-2 font-bold">[ FINANCIAL MARKETS // 18+ ACCESS ]</span>
+          <h2 class="text-3xl sm:text-4xl font-black font-sans">Crypto Exchange Hub & Live Quotes</h2>
         </div>
-        <p class="text-gray-400 text-sm max-w-sm mt-2 md:mt-0">Notowania na żywo głównych aktywów cyfrowych zintegrowane z panelem inwestycyjnym.</p>
+        <p class="text-gray-400 text-sm max-w-sm mt-2 md:mt-0 font-sans">Śledź notowania głównych aktywów cyfrowych w czasie rzeczywistym i korzystaj z zaawansowanego kalkulatora inwestycyjnego.</p>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <!-- BTC -->
-        <div class="bg-[#101013] border border-white/10 p-6 rounded-2xl hover:border-yellow-400/40 transition">
-          <div class="flex items-center justify-between mb-4">
-            <span class="font-bold text-lg">Bitcoin <span class="text-xs text-gray-500 font-mono">BTC</span></span>
+        <div class="bg-[#0a0a0d] border border-white/10 p-6 rounded-2xl hover:border-yellow-400/40 transition">
+          <div class="flex justify-between items-center mb-4">
+            <span class="font-bold text-base">Bitcoin <span class="text-xs text-gray-500 font-mono">BTC</span></span>
+            <span class="text-xs px-2 py-1 bg-green-500/10 text-green-400 rounded-lg font-mono">+3.12%</span>
+          </div>
+          <div class="text-2xl font-black mb-1 font-mono" id="btc-live-price">$65,140.00</div>
+          <span class="text-xs text-gray-500 font-mono">24h Vol: $31.2B</span>
+        </div>
+
+        <div class="bg-[#0a0a0d] border border-white/10 p-6 rounded-2xl hover:border-yellow-400/40 transition">
+          <div class="flex justify-between items-center mb-4">
+            <span class="font-bold text-base">Ethereum <span class="text-xs text-gray-500 font-mono">ETH</span></span>
             <span class="text-xs px-2 py-1 bg-green-500/10 text-green-400 rounded-lg font-mono">+2.45%</span>
           </div>
-          <div class="text-2xl font-black mb-1" id="btc-price">$64,820.00</div>
-          <span class="text-xs text-gray-500">Wolumen 24h: $28.4B</span>
+          <div class="text-2xl font-black mb-1 font-mono" id="eth-live-price">$3,520.80</div>
+          <span class="text-xs text-gray-500 font-mono">24h Vol: $15.8B</span>
         </div>
 
-        <!-- ETH -->
-        <div class="bg-[#101013] border border-white/10 p-6 rounded-2xl hover:border-yellow-400/40 transition">
-          <div class="flex items-center justify-between mb-4">
-            <span class="font-bold text-lg">Ethereum <span class="text-xs text-gray-500 font-mono">ETH</span></span>
-            <span class="text-xs px-2 py-1 bg-green-500/10 text-green-400 rounded-lg font-mono">+1.82%</span>
+        <div class="bg-[#0a0a0d] border border-white/10 p-6 rounded-2xl hover:border-yellow-400/40 transition">
+          <div class="flex justify-between items-center mb-4">
+            <span class="font-bold text-base">Solana <span class="text-xs text-gray-500 font-mono">SOL</span></span>
+            <span class="text-xs px-2 py-1 bg-red-500/10 text-red-400 rounded-lg font-mono">-0.42%</span>
           </div>
-          <div class="text-2xl font-black mb-1" id="eth-price">$3,490.50</div>
-          <span class="text-xs text-gray-500">Wolumen 24h: $14.1B</span>
+          <div class="text-2xl font-black mb-1 font-mono" id="sol-live-price">$146.50</div>
+          <span class="text-xs text-gray-500 font-mono">24h Vol: $4.9B</span>
         </div>
 
-        <!-- SOL -->
-        <div class="bg-[#101013] border border-white/10 p-6 rounded-2xl hover:border-yellow-400/40 transition">
-          <div class="flex items-center justify-between mb-4">
-            <span class="font-bold text-lg">Solana <span class="text-xs text-gray-500 font-mono">SOL</span></span>
-            <span class="text-xs px-2 py-1 bg-red-500/10 text-red-400 rounded-lg font-mono">-0.74%</span>
+        <div class="bg-[#0a0a0d] border border-white/10 p-6 rounded-2xl hover:border-yellow-400/40 transition">
+          <div class="flex justify-between items-center mb-4">
+            <span class="font-bold text-base">Binance Coin <span class="text-xs text-gray-500 font-mono">BNB</span></span>
+            <span class="text-xs px-2 py-1 bg-green-500/10 text-green-400 rounded-lg font-mono">+1.15%</span>
           </div>
-          <div class="text-2xl font-black mb-1" id="sol-price">$142.10</div>
-          <span class="text-xs text-gray-500">Wolumen 24h: $4.2B</span>
-        </div>
-
-        <!-- BNB -->
-        <div class="bg-[#101013] border border-white/10 p-6 rounded-2xl hover:border-yellow-400/40 transition">
-          <div class="flex items-center justify-between mb-4">
-            <span class="font-bold text-lg">Binance Coin <span class="text-xs text-gray-500 font-mono">BNB</span></span>
-            <span class="text-xs px-2 py-1 bg-green-500/10 text-green-400 rounded-lg font-mono">+0.95%</span>
-          </div>
-          <div class="text-2xl font-black mb-1" id="bnb-price">$580.30</div>
-          <span class="text-xs text-gray-500">Wolumen 24h: $1.8B</span>
+          <div class="text-2xl font-black mb-1 font-mono" id="bnb-live-price">$589.20</div>
+          <span class="text-xs text-gray-500 font-mono">24h Vol: $2.1B</span>
         </div>
       </div>
 
-      <!-- Szybki kalkulator / symulator zakupu crypto -->
-      <div class="bg-[#101013] border border-white/10 p-6 sm:p-8 rounded-2xl">
-        <h3 class="text-xl font-bold mb-4">Szybki Portfel i Wycena Aktywów</h3>
+      <div class="bg-[#0a0a0d] border border-white/10 p-6 sm:p-8 rounded-2xl">
+        <h3 class="text-xl font-bold mb-4 font-sans">Zaawansowany Kalkulator Portfela Cyfrowego</h3>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
           <div>
-            <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Wybierz kryptowalutę</label>
-            <select id="crypto-select" class="w-full bg-[#151518] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400">
-              <option value="64820">Bitcoin (BTC)</option>
-              <option value="3490">Ethereum (ETH)</option>
-              <option value="142">Solana (SOL)</option>
-              <option value="580">Binance Coin (BNB)</option>
+            <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2 font-bold">Wybierz aktywo</label>
+            <select id="crypto-calc-select" class="w-full bg-[#0f0f13] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 font-mono text-xs">
+              <option value="65140">Bitcoin (BTC)</option>
+              <option value="3520">Ethereum (ETH)</option>
+              <option value="146">Solana (SOL)</option>
+              <option value="589">Binance Coin (BNB)</option>
             </select>
           </div>
           <div>
-            <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2">Ilość jednostek</label>
-            <input type="number" id="crypto-amount" value="1" min="0.01" step="0.01" oninput="calculateCrypto()" class="w-full bg-[#151518] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400">
+            <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2 font-bold">Ilość jednostek</label>
+            <input type="number" id="crypto-calc-amount" value="1.5" min="0.001" step="0.001" oninput="calculatePortfolio()" class="w-full bg-[#0f0f13] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 font-mono text-xs">
           </div>
-          <div class="bg-[#151518] border border-white/10 rounded-xl p-3.5 flex items-center justify-between">
-            <span class="text-xs text-gray-400 uppercase font-mono">Szacowana Wartość:</span>
-            <span id="crypto-total" class="text-xl font-bold text-yellow-400 font-mono">$64,820.00 USD</span>
+          <div class="bg-[#0f0f13] border border-white/10 rounded-xl p-3.5 flex items-center justify-between">
+            <span class="text-xs text-gray-400 uppercase font-mono font-bold">Wycena Łączna:</span>
+            <span id="crypto-calc-total" class="text-xl font-black text-yellow-400 font-mono">$97,710.00 USD</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Sekcja Zespół -->
-  <section id="zespol" class="py-20 bg-[#0a0a0c] border-t border-white/5">
+  <section id="compiler" class="py-20 bg-[#050507] border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-2xl mx-auto mb-16">
-        <span class="text-xs font-mono uppercase tracking-widest text-yellow-400 block mb-2">Core Developers</span>
-        <h2 class="text-3xl sm:text-4xl font-black mb-4">Nasz Zespół</h2>
-        <p class="text-gray-400 text-sm sm:text-base">Ludzie odpowiedzialni za bezpieczeństwo, kod i architekturę systemów.</p>
+        <span class="text-xs uppercase tracking-widest text-yellow-400 block mb-2 font-bold">[ WEB & SCRIPT COMPILER ]</span>
+        <h2 class="text-3xl sm:text-4xl font-black mb-4 font-sans">Wbudowany Sandbox / Tester Kodu</h2>
+        <p class="text-gray-400 text-sm font-sans">Przetestuj proste snippet'y JavaScript lub komendy konfiguracyjne bezpośrednio w przeglądarce.</p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div class="bg-[#101013] border border-white/10 p-6 rounded-2xl text-center">
-          <div class="w-16 h-16 rounded-2xl bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 flex items-center justify-center text-2xl font-black mx-auto mb-4">K</div>
-          <h3 class="text-lg font-bold mb-1">Kayn</h3>
-          <span class="text-xs text-yellow-400 font-semibold uppercase tracking-wider block mb-3">Lead Developer</span>
-          <p class="text-gray-400 text-sm">Twórca systemów webowych, botów oraz zaawansowanej infrastruktury serwerowej Minecraft.</p>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="bg-[#0a0a0d] border border-white/10 p-6 rounded-2xl space-y-4">
+          <div class="flex justify-between items-center text-xs">
+            <span class="font-bold text-gray-400 uppercase">Input Script (JavaScript)</span>
+            <button onclick="runUserScript()" class="bg-yellow-400 text-black font-bold px-3 py-1.5 rounded-lg uppercase tracking-wider text-[10px] hover:opacity-90">Uruchom Kod ↗</button>
+          </div>
+          <textarea id="sandbox-input" rows="6" class="w-full bg-[#0f0f13] border border-white/10 rounded-xl p-4 text-xs font-mono text-green-400 focus:outline-none focus:border-yellow-400">console.log("Flashcode Developer Environment v4.0 Active.");
+let servers = ["US-East", "EU-Central", "Asia-East"];
+servers.forEach(s => console.log("Ping to " + s + " -> " + Math.floor(Math.random()*20 + 5) + "ms"));</textarea>
         </div>
-        <div class="bg-[#101013] border border-white/10 p-6 rounded-2xl text-center">
-          <div class="w-16 h-16 rounded-2xl bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 flex items-center justify-center text-2xl font-black mx-auto mb-4">N</div>
-          <h3 class="text-lg font-bold mb-1">n0va.dev</h3>
-          <span class="text-xs text-yellow-400 font-semibold uppercase tracking-wider block mb-3">Backend & Security</span>
-          <p class="text-gray-400 text-sm">Specjalista od zabezpieczeń, skryptów, botów Discord i optymalizacji sieci.</p>
-        </div>
-        <div class="bg-[#101013] border border-white/10 p-6 rounded-2xl text-center">
-          <div class="w-16 h-16 rounded-2xl bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 flex items-center justify-center text-2xl font-black mx-auto mb-4">G</div>
-          <h3 class="text-lg font-bold mb-1">Gucio</h3>
-          <span class="text-xs text-yellow-400 font-semibold uppercase tracking-wider block mb-3">Fullstack Dev</span>
-          <p class="text-gray-400 text-sm">Rozwija zaawansowane aplikacje, boty Discord oraz konfiguracje serwerów MC.</p>
+
+        <div class="bg-[#0a0a0d] border border-white/10 p-6 rounded-2xl space-y-4">
+          <div class="flex justify-between items-center text-xs">
+            <span class="font-bold text-gray-400 uppercase">Console Output</span>
+            <button onclick="document.getElementById('sandbox-output').textContent='// Wyczyszczono konsolę.'" class="text-gray-500 hover:text-white uppercase text-[10px]">Wyczyść</button>
+          </div>
+          <pre id="sandbox-output" class="w-full bg-[#0f0f13] border border-white/10 rounded-xl p-4 text-xs font-mono text-gray-300 h-36 overflow-y-auto">// Oczekiwanie na wykonanie skryptu...</pre>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Narzędzia Minecraft -->
-  <section id="narzedzia" class="py-20 bg-[#070708] border-t border-white/5">
+  <section id="narzedzia" class="py-20 bg-[#030304] border-t border-white/10">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <span class="text-xs font-mono uppercase tracking-widest text-yellow-400 block mb-2">In-Game Utilities</span>
-        <h2 class="text-3xl sm:text-4xl font-black mb-3">Narzędzia Minecraft</h2>
-        <p class="text-gray-400 text-sm">Generator kapitalików oraz kreator stylów i rang do gry.</p>
+        <span class="text-xs uppercase tracking-widest text-yellow-400 block mb-2 font-bold">[ IN-GAME UTILITIES ]</span>
+        <h2 class="text-3xl sm:text-4xl font-black mb-3 font-sans">Narzędzia Minecraft & Generator Rang</h2>
+        <p class="text-gray-400 text-sm font-sans">Generator kapitalików oraz kreator stylów i rang do gry.</p>
       </div>
 
-      <div class="bg-[#101013] border border-white/10 p-6 sm:p-8 rounded-2xl space-y-6">
+      <div class="bg-[#0a0a0d] border border-white/10 p-6 sm:p-8 rounded-2xl space-y-6">
         <div>
-          <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Wpisz tekst (np. nazwa rangi):</label>
-          <input type="text" id="input-text" placeholder="Wpisz coś..." value="WŁAŚCICIEL" oninput="updateGenerator()" class="w-full bg-[#151518] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400">
+          <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Wpisz tekst (np. nazwa rangi):</label>
+          <input type="text" id="input-text" placeholder="Wpisz coś..." value="WŁAŚCICIEL" oninput="updateGenerator()" class="w-full bg-[#0f0f13] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 font-mono text-sm">
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Styl / Formatowanie:</label>
-            <select id="select-style" onchange="updateGenerator()" class="w-full bg-[#151518] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400">
+            <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Styl / Formatowanie:</label>
+            <select id="select-style" onchange="updateGenerator()" class="w-full bg-[#0f0f13] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-xs">
               <option value="caps">Kapitaliki (Małe kapitaliki / Styl rang)</option>
               <option value="upper">Wielkie litery (UPPERCASE)</option>
               <option value="bracket">[ Ozdobne nawiasy ]</option>
@@ -286,8 +310,8 @@
             </select>
           </div>
           <div>
-            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Kolor tekstu:</label>
-            <select id="select-color" onchange="updateGenerator()" class="w-full bg-[#151518] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400">
+            <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Kolor tekstu:</label>
+            <select id="select-color" onchange="updateGenerator()" class="w-full bg-[#0f0f13] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-xs">
               <option value="text-yellow-400">Żółty (Gold)</option>
               <option value="text-red-500">Czerwony</option>
               <option value="text-green-400">Zielony</option>
@@ -298,10 +322,9 @@
           </div>
         </div>
 
-        <!-- Wynik -->
         <div class="pt-4 border-t border-white/10">
-          <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Wynik (Podgląd):</label>
-          <div id="output-box" class="bg-[#151518] border border-white/10 rounded-xl p-6 text-center text-2xl font-black tracking-wider text-yellow-400">
+          <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Wynik (Podgląd):</label>
+          <div id="output-box" class="bg-[#0f0f13] border border-white/10 rounded-xl p-6 text-center text-2xl font-black tracking-wider text-yellow-400 font-mono">
             ẆŁȞŚĊİİĖŁ
           </div>
         </div>
@@ -309,76 +332,102 @@
     </div>
   </section>
 
-  <!-- Sekcja Usługi -->
-  <section id="uslugi" class="py-20 bg-[#0a0a0c] border-t border-white/5">
+  <section id="zespol" class="py-20 bg-[#050507] border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-2xl mx-auto mb-16">
-        <span class="text-xs font-mono uppercase tracking-widest text-yellow-400 block mb-2">Commercial Services</span>
-        <h2 class="text-3xl sm:text-4xl font-black mb-4">Od pomysłu do stabilnego wdrożenia.</h2>
-        <p class="text-gray-400 text-sm sm:text-base">Dobieramy zakres do celu i budżetu. Każda realizacja obejmuje konsultację, przejrzysty plan i wsparcie po oddaniu.</p>
+        <span class="text-xs uppercase tracking-widest text-yellow-400 block mb-2 font-bold">[ CORE ARCHITECTS ]</span>
+        <h2 class="text-3xl sm:text-4xl font-black mb-4 font-sans">Nasz Zespół</h2>
+        <p class="text-gray-400 text-sm font-sans">Ludzie odpowiedzialni za architekturę systemów, bezpieczeństwo i rozwój.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div class="bg-[#0a0a0d] border border-white/10 p-6 rounded-2xl text-center">
+          <div class="w-16 h-16 rounded-2xl bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 flex items-center justify-center text-2xl font-black mx-auto mb-4 font-sans">K</div>
+          <h3 class="text-lg font-bold mb-1 font-sans">Kayn</h3>
+          <span class="text-xs text-yellow-400 font-bold uppercase tracking-wider block mb-3 font-mono">Lead Developer</span>
+          <p class="text-gray-400 text-sm font-sans">Twórca systemów webowych, botów oraz zaawansowanej infrastruktury serwerowej Minecraft.</p>
+        </div>
+        <div class="bg-[#0a0a0d] border border-white/10 p-6 rounded-2xl text-center">
+          <div class="w-16 h-16 rounded-2xl bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 flex items-center justify-center text-2xl font-black mx-auto mb-4 font-sans">N</div>
+          <h3 class="text-lg font-bold mb-1 font-sans">n0va.dev</h3>
+          <span class="text-xs text-yellow-400 font-bold uppercase tracking-wider block mb-3 font-mono">Backend & Security</span>
+          <p class="text-gray-400 text-sm font-sans">Specjalista od zabezpieczeń, skryptów, botów Discord i optymalizacji sieci.</p>
+        </div>
+        <div class="bg-[#0a0a0d] border border-white/10 p-6 rounded-2xl text-center">
+          <div class="w-16 h-16 rounded-2xl bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 flex items-center justify-center text-2xl font-black mx-auto mb-4 font-sans">G</div>
+          <h3 class="text-lg font-bold mb-1 font-sans">Gucio</h3>
+          <span class="text-xs text-yellow-400 font-bold uppercase tracking-wider block mb-3 font-mono">Fullstack Dev</span>
+          <p class="text-gray-400 text-sm font-sans">Rozwija zaawansowane aplikacje, boty Discord oraz konfiguracje serwerów MC.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="uslugi" class="py-20 bg-[#030304] border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs uppercase tracking-widest text-yellow-400 block mb-2 font-bold">[ COMMERCIAL SERVICES ]</span>
+        <h2 class="text-3xl sm:text-4xl font-black mb-4 font-sans">Od pomysłu do stabilnego wdrożenia.</h2>
+        <p class="text-gray-400 text-sm font-sans">Dobieramy zakres do celu i budżetu. Każda realizacja obejmuje konsultację i wsparcie po oddaniu.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Kafel 1 -->
-        <div class="bg-[#101013] border border-white/10 hover:border-yellow-400/50 transition rounded-2xl p-6 flex flex-col justify-between">
+        <div class="bg-[#0a0a0d] border border-white/10 hover:border-yellow-400/50 transition rounded-2xl p-6 flex flex-col justify-between">
           <div>
             <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-yellow-400 mb-4">
               <i data-lucide="code" class="w-6 h-6"></i>
             </div>
-            <span class="text-xs font-semibold uppercase tracking-wider text-gray-500">Minecraft</span>
-            <h3 class="text-xl font-bold mt-1 mb-3">Skrypty</h3>
-            <p class="text-gray-400 text-sm mb-6">Skrypty dopasowane do wymagań klienta. Cena zależy od zakresu oraz poziomu skomplikowania.</p>
+            <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Minecraft</span>
+            <h3 class="text-xl font-bold mt-1 mb-3 font-sans">Skrypty</h3>
+            <p class="text-gray-400 text-sm mb-6 font-sans">Skrypty dopasowane do wymagań klienta. Cena zależy od zakresu oraz poziomu skomplikowania.</p>
           </div>
           <div class="pt-4 border-t border-white/10 flex items-center justify-between">
-            <span class="text-sm font-bold text-yellow-400">od 5 zł</span>
+            <span class="text-sm font-bold text-yellow-400 font-mono">od 5 zł</span>
             <a href="https://discord.gg/zErtg676k" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider bg-white/5 border border-white/10 px-4 py-2 rounded-xl hover:bg-white/10 transition">Kliknij zamówić ↗</a>
           </div>
         </div>
 
-        <!-- Kafel 2 -->
-        <div class="bg-[#101013] border border-white/10 hover:border-yellow-400/50 transition rounded-2xl p-6 flex flex-col justify-between">
+        <div class="bg-[#0a0a0d] border border-white/10 hover:border-yellow-400/50 transition rounded-2xl p-6 flex flex-col justify-between">
           <div>
             <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-yellow-400 mb-4">
               <i data-lucide="cpu" class="w-6 h-6"></i>
             </div>
-            <span class="text-xs font-semibold uppercase tracking-wider text-gray-500">Minecraft</span>
-            <h3 class="text-xl font-bold mt-1 mb-3">Pluginy</h3>
-            <p class="text-gray-400 text-sm mb-6">Dedykowane mechaniki i rozszerzenia tworzone z myślą o potrzebach konkretnego serwera.</p>
+            <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Minecraft</span>
+            <h3 class="text-xl font-bold mt-1 mb-3 font-sans">Pluginy</h3>
+            <p class="text-gray-400 text-sm mb-6 font-sans">Dedykowane mechaniki i rozszerzenia tworzone z myślą o potrzebach konkretnego serwera.</p>
           </div>
           <div class="pt-4 border-t border-white/10 flex items-center justify-between">
-            <span class="text-xs text-gray-500">Wkrótce dostępne</span>
+            <span class="text-xs text-gray-500 font-mono">Wkrótce dostępne</span>
             <a href="https://discord.gg/zErtg676k" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider bg-white/5 border border-white/10 px-4 py-2 rounded-xl hover:bg-white/10 transition">Kliknij zamówić ↗</a>
           </div>
         </div>
 
-        <!-- Kafel 3 -->
-        <div class="bg-[#101013] border border-white/10 hover:border-yellow-400/50 transition rounded-2xl p-6 flex flex-col justify-between">
+        <div class="bg-[#0a0a0d] border border-white/10 hover:border-yellow-400/50 transition rounded-2xl p-6 flex flex-col justify-between">
           <div>
             <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-yellow-400 mb-4">
               <i data-lucide="package" class="w-6 h-6"></i>
             </div>
-            <span class="text-xs font-semibold uppercase tracking-wider text-gray-500">Minecraft</span>
-            <h3 class="text-xl font-bold mt-1 mb-3">Paczki</h3>
-            <p class="text-gray-400 text-sm mb-6">Gotowe i indywidualne paczki. Cena zależy od wymagań oraz dokładnej zawartości paczki.</p>
+            <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Minecraft</span>
+            <h3 class="text-xl font-bold mt-1 mb-3 font-sans">Paczki</h3>
+            <p class="text-gray-400 text-sm mb-6 font-sans">Gotowe i indywidualne paczki. Cena zależy od wymagań oraz dokładnej zawartości paczki.</p>
           </div>
           <div class="pt-4 border-t border-white/10 flex items-center justify-between">
-            <span class="text-sm font-bold text-yellow-400">od 20 zł</span>
+            <span class="text-sm font-bold text-yellow-400 font-mono">od 20 zł</span>
             <a href="https://discord.gg/zErtg676k" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider bg-white/5 border border-white/10 px-4 py-2 rounded-xl hover:bg-white/10 transition">Kliknij zamówić ↗</a>
           </div>
         </div>
 
-        <!-- Kafel 4 -->
-        <div class="bg-[#101013] border border-white/10 hover:border-yellow-400/50 transition rounded-2xl p-6 flex flex-col justify-between">
+        <div class="bg-[#0a0a0d] border border-white/10 hover:border-yellow-400/50 transition rounded-2xl p-6 flex flex-col justify-between">
           <div>
             <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-yellow-400 mb-4">
               <i data-lucide="palette" class="w-6 h-6"></i>
             </div>
-            <span class="text-xs font-semibold uppercase tracking-wider text-gray-500">Grafika</span>
-            <h3 class="text-xl font-bold mt-1 mb-3">Grafiki</h3>
-            <p class="text-gray-400 text-sm mb-6">Grafiki od 15 do 500 zł. Prosty baner kosztuje zwykle około 60 zł, a rysowana grafika od 100 zł.</p>
+            <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Grafika</span>
+            <h3 class="text-xl font-bold mt-1 mb-3 font-sans">Grafiki</h3>
+            <p class="text-gray-400 text-sm mb-6 font-sans">Grafiki od 15 do 500 zł. Prosty baner kosztuje zwykle około 60 zł, a rysowana grafika od 100 zł.</p>
           </div>
           <div class="pt-4 border-t border-white/10 flex items-center justify-between">
-            <span class="text-sm font-bold text-yellow-400">od 15 zł</span>
+            <span class="text-sm font-bold text-yellow-400 font-mono">od 15 zł</span>
             <a href="https://discord.gg/zErtg676k" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider bg-white/5 border border-white/10 px-4 py-2 rounded-xl hover:bg-white/10 transition">Kliknij zamówić ↗</a>
           </div>
         </div>
@@ -386,9 +435,14 @@
     </div>
   </section>
 
-  <!-- Skrypty logiki i symulatorów live -->
   <script>
     lucide.createIcons();
+
+    // Zegarek UTC
+    setInterval(() => {
+      const now = new Date();
+      document.getElementById('live-utc-clock').textContent = "UTC: " + now.toUTCString().split(' ')[4];
+    }, 1000);
 
     // Generator Minecraft
     function updateGenerator() {
@@ -397,7 +451,7 @@
       const colorClass = document.getElementById('select-color').value;
       const outputBox = document.getElementById('output-box');
 
-      outputBox.className = `bg-[#151518] border border-white/10 rounded-xl p-6 text-center text-2xl font-black tracking-wider ${colorClass}`;
+      outputBox.className = `bg-[#0f0f13] border border-white/10 rounded-xl p-6 text-center text-2xl font-black tracking-wider ${colorClass} font-mono`;
 
       let result = text;
       if (style === 'caps') {
@@ -418,40 +472,98 @@
     }
 
     // Kalkulator Crypto
-    function calculateCrypto() {
-      const price = parseFloat(document.getElementById('crypto-select').value);
-      const amount = parseFloat(document.getElementById('crypto-amount').value) || 0;
+    function calculatePortfolio() {
+      const price = parseFloat(document.getElementById('crypto-calc-select').value);
+      const amount = parseFloat(document.getElementById('crypto-calc-amount').value) || 0;
       const total = price * amount;
-      document.getElementById('crypto-total').textContent = `$${total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} USD`;
+      document.getElementById('crypto-calc-total').textContent = `$${total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} USD`;
+    }
+    document.getElementById('crypto-calc-select').addEventListener('change', calculatePortfolio);
+
+    // Symulator terminala komend
+    function handleTerminalCommand(e) {
+      if (e.key === 'Enter') {
+        const input = e.target.value.trim();
+        const log = document.getElementById('master-terminal-log');
+        const pReq = document.createElement('p');
+        pReq.className = "text-yellow-400";
+        pReq.textContent = "root@flashcode:~$ " + input;
+        log.appendChild(pReq);
+
+        const pRes = document.createElement('p');
+        pRes.className = "text-gray-300";
+
+        if (input === 'help') {
+          pRes.textContent = "Dostępne komendy: status, ddos, crypto, clear, about, discord";
+        } else if (input === 'status') {
+          pRes.textContent = "Wszystkie systemy stabilne. Firewall aktywny. Węzły online.";
+        } else if (input === 'ddos') {
+          pRes.textContent = "Brak aktywnych zagrożeń. Filtr SYN-Flood działa w czasie rzeczywistym.";
+        } else if (input === 'crypto') {
+          pRes.textContent = "BTC: $65,140 | ETH: $3,520 | SOL: $146.50 | BNB: $589.20";
+        } else if (input === 'discord') {
+          pRes.textContent = "Link Discord: https://discord.gg/zErtg676k";
+        } else if (input === 'clear') {
+          log.innerHTML = '<p class="text-gray-500">$ Terminal wyczyszczony.</p>';
+          e.target.value = '';
+          return;
+        } else {
+          pRes.textContent = `Komenda nierozpoznana: '${input}'. Wpisz 'help' aby zobaczyć listę.`;
+        }
+
+        log.appendChild(pRes);
+        e.target.value = '';
+        log.scrollTop = log.scrollHeight;
+      }
     }
 
-    document.getElementById('crypto-select').addEventListener('change', calculateCrypto);
-
-    // Symulator żywych logów i ataków DDoS
-    let ddosCount = 0;
-    setInterval(() => {
-      const logsContainer = document.getElementById('security-logs');
-      const now = new Date().toTimeString().split(' ')[0];
+    // Tester skryptów JS (Sandbox)
+    function runUserScript() {
+      const code = document.getElementById('sandbox-input').value;
+      const output = document.getElementById('sandbox-output');
+      output.textContent = "";
       
-      if (Math.random() > 0.6) {
-        ddosCount++;
-        document.getElementById('ddos-counter').textContent = ddosCount;
+      // Przechwycenie console.log
+      const oldLog = console.log;
+      let logs = [];
+      console.log = function(...args) {
+        logs.push(args.join(' '));
+      };
+
+      try {
+        eval(code);
+        output.textContent = logs.join('\n');
+      } catch (err) {
+        output.textContent = "[BŁĄD WYKONANIA]: " + err.message;
+      }
+      console.log = oldLog;
+    }
+
+    // Symulator żywych ataków DDoS i logów sieci
+    let ddosCounter = 0;
+    setInterval(() => {
+      const container = document.getElementById('ddos-logs');
+      const time = new Date().toTimeString().split(' ')[0];
+      
+      if (Math.random() > 0.5) {
+        ddosCounter++;
+        document.getElementById('stat-ddos-count').textContent = ddosCounter;
         const p = document.createElement('p');
         p.className = "text-yellow-400";
-        p.textContent = `[${now}] [DDOS-DEFENSE] Volumetric flood blocked on port 25565 (Mitigation active).`;
-        logsContainer.appendChild(p);
+        p.textContent = `[${time}] [DDOS-SHIELD] Packet flood blocked from subnet 192.168.x.x -> Zero downtime.`;
+        container.appendChild(p);
       } else {
         const p = document.createElement('p');
         p.className = "text-gray-500";
-        p.textContent = `[${now}] [PING] Node response check OK - Latency: ${Math.floor(Math.random() * 8 + 10)}ms`;
-        logsContainer.appendChild(p);
+        p.textContent = `[${time}] [PING] Node handshake OK. Latency: ${Math.floor(Math.random() * 5 + 10)}ms`;
+        container.appendChild(p);
       }
 
-      if (logsContainer.children.length > 15) {
-        logsContainer.removeChild(logsContainer.children[0]);
+      if (container.children.length > 20) {
+        container.removeChild(container.children[0]);
       }
-      logsContainer.scrollTop = logsContainer.scrollHeight;
-    }, 4000);
+      container.scrollTop = container.scrollHeight;
+    }, 3500);
   </script>
 </body>
 </html>
