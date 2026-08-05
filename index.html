@@ -86,9 +86,9 @@
                     </h2>
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Klucz API Google Gemini</label>
-                            <input type="password" id="gemini-api-key" value="AQ.Ab8RN6I_2fq6B1ofExqbV0qQWFSDMAG-VCKOyqSkmpRSJw4_rA" placeholder="Wklej tutaj swój klucz API Gemini..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
-                            <p class="text-[11px] text-slate-500 mt-1">Klucz został pomyślnie skonfigurowany w aplikacji.</p>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Klucz API Google Gemini (Wpisz swój klucz)</label>
+                            <input type="password" id="gemini-api-key" placeholder="Wklej tutaj swój klucz API Gemini..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
+                            <p class="text-[11px] text-slate-500 mt-1">Klucz jest zapisywany bezpiecznie w Twojej przeglądarce i używany tylko do generowania kodu.</p>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div>
@@ -246,6 +246,18 @@
 
     <!-- JavaScript Application Engine -->
     <script>
+        // Zapamiętywanie klucza API w LocalStorage
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedKey = localStorage.getItem('gemini_api_key');
+            if (savedKey) {
+                document.getElementById('gemini-api-key').value = savedKey;
+            }
+        });
+
+        document.getElementById('gemini-api-key').addEventListener('input', (e) => {
+            localStorage.setItem('gemini_api_key', e.target.value.trim());
+        });
+
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(el => {
@@ -268,7 +280,7 @@
             const prompt = document.getElementById('sk-prompt').value.trim();
 
             if (!apiKey) {
-                alert('Wpisz klucz API Google Gemini!');
+                alert('Najpierw wpisz swój klucz API Google Gemini w polu powyżej!');
                 return;
             }
 
