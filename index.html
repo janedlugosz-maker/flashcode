@@ -25,6 +25,7 @@
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .small-caps-text { font-variant: small-caps; letter-spacing: 1.5px; text-transform: lowercase; }
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #07090e; }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
@@ -123,7 +124,7 @@
                             <button onclick="copyCode('sk-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj</button>
                         </div>
                     </div>
-                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs lg:text-sm text-emerald-400 overflow-x-auto border border-slate-900 min-h-[140px] flex items-center text-slate-500">// Tutaj pojawi się gotowy, poprawny kod skryptu po kliknięciu generowania...</pre>
+                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs lg:text-sm text-emerald-400 overflow-x-auto border border-slate-900 min-h-[140px]">// Tutaj pojawi się gotowy, poprawny kod skryptu po kliknięciu generowania...</pre>
                 </div>
             </div>
 
@@ -135,7 +136,7 @@
                     </h2>
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wygeneruj poniższy tekst na kapitaliki / formatowanie</label>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wygeneruj poniższy tekst na kapitaliki</label>
                             <textarea id="txt-input" rows="3" placeholder="Wpisz lub wklej tekst serwerowy..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-amber-500 focus:outline-none transition"></textarea>
                         </div>
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
@@ -152,7 +153,7 @@
                         <h3 class="font-semibold text-sm text-slate-300">Wynik transformacji:</h3>
                         <button onclick="copyCode('txt-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj wynik</button>
                     </div>
-                    <div id="txt-output" class="bg-slate-950 p-4 rounded-xl font-mono text-sm text-slate-200 overflow-x-auto border border-slate-900 min-h-[90px] flex items-center text-slate-500">Efekt pojawi się tutaj...</div>
+                    <div id="txt-output" class="bg-slate-950 p-4 rounded-xl font-mono text-sm text-slate-200 overflow-x-auto border border-slate-900 min-h-[90px] flex items-center text-slate-400">Efekt pojawi się tutaj...</div>
                 </div>
             </div>
 
@@ -241,7 +242,7 @@
         </section>
     </main>
 
-    <!-- JavaScript - Realna Logika i Narzędzia -->
+    <!-- JavaScript - Prawdziwa Logika i Narzędzia -->
     <script>
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -290,24 +291,41 @@
             saveHistory('Skrypt: /' + cmd, code);
         }
 
-        // 2. Transformator Tekstu
+        // 2. Transformator Tekstu - Prawdziwe kapitaliki Small Caps
         function transformTextAction(action) {
-            const input = document.getElementById('txt-input').value;
+            const inputField = document.getElementById('txt-input');
+            const outputDiv = document.getElementById('txt-output');
+            const input = inputField.value;
+
+            if (!input && action !== 'clear') {
+                outputDiv.innerText = 'Wpisz najpierw jakiś tekst powyżej!';
+                outputDiv.classList.remove('small-caps-text');
+                return;
+            }
+
             let result = "";
 
             if (action === 'caps') {
-                result = input.toUpperCase();
-            } else if (action === 'minecraft') {
-                result = input.split('').map(c => '&a' + c).join('');
+                outputDiv.classList.add('small-caps-text');
+                result = input; // Zachowuje małe litery, styl CSS zmienia je na kapitaliki (np. "hej" -> "h e j")
+            } else {
+                outputDiv.classList.remove('small-caps-text');
+            }
+
+            if (action === 'minecraft') {
+                result = input.split('').map(c => c === ' ' ? ' ' : '&a' + c).join('');
             } else if (action === 'lore') {
                 result = input.split('\n').map(line => `lore: "${line.toUpperCase()}"`).join('\n');
             } else if (action === 'clear') {
                 result = "";
-                document.getElementById('txt-input').value = "";
+                inputField.value = "";
+                outputDiv.classList.remove('small-caps-text');
             }
 
-            document.getElementById('txt-output').innerText = result || 'Brak danych do wyświetlenia.';
-            if (result) saveHistory('Transformacja Tekstu', result);
+            outputDiv.innerText = result || 'Brak danych do wyświetlenia.';
+            if (result && action !== 'clear') {
+                saveHistory('Transformacja Tekstu', result);
+            }
         }
 
         // 3. Menedżer Paczki Serwera
