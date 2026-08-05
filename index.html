@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlashCode Studio | True AI Code Synthesizer v5.0</title>
+    <title>FlashCode Studio | Ultimate AI Core v6.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -34,17 +34,22 @@
 <body class="bg-darkbg text-slate-100 min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
 
     <!-- Top Header -->
-    <header class="bg-cardbg/85 backdrop-blur-md border-b border-cardborder sticky top-0 z-50 px-4 lg:px-8 py-3.5 flex justify-between items-center shadow-2xl">
+    <header class="bg-cardbg/90 backdrop-blur-md border-b border-cardborder sticky top-0 z-50 px-4 lg:px-8 py-3.5 flex justify-between items-center shadow-2xl">
         <div class="flex items-center space-x-3">
             <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-blue-500/20 text-white font-extrabold text-lg">
                 FC
             </div>
             <div>
                 <h1 class="font-extrabold text-base lg:text-lg tracking-wide text-white flex items-center gap-2">
-                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">ULTIMATE AI v5.0 (FULL GEN)</span>
+                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">AI ENGINE v6.0</span>
                 </h1>
-                <p class="text-xs text-slate-400 hidden sm:block">Prawdziwy generator kodów i skryptów AI wygrywający każdy challenge</p>
+                <p class="text-xs text-slate-400 hidden sm:block">Autonomiczny generator skryptów dla serwerów Minecraft</p>
             </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span> System Aktywny
+            </span>
         </div>
     </header>
 
@@ -54,19 +59,19 @@
         <!-- Sidebar Navigation -->
         <aside class="lg:col-span-1 space-y-1.5 flex flex-row lg:flex-col overflow-x-auto pb-2 lg:pb-0 shrink-0">
             <button onclick="switchTab('skript')" id="btn-skript" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-blue-600 text-white shadow-lg shadow-blue-600/20 flex items-center space-x-3 whitespace-nowrap text-sm">
-                <span class="text-base">⚡</span> <span>Generator Skryptów AI</span>
+                <span class="text-base">⚡</span> <span>Generator AI (.sk)</span>
             </button>
             <button onclick="switchTab('text')" id="btn-text" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
-                <span class="text-base">🔠</span> <span>Transformator Tekstu & Kolory</span>
+                <span class="text-base">🔠</span> <span>Kolory & Tekst MC</span>
             </button>
             <button onclick="switchTab('pack')" id="btn-pack" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
-                <span class="text-base">📦</span> <span>Menedżer Paczki Serwera</span>
+                <span class="text-base">📦</span> <span>Menedżer Paczki</span>
             </button>
             <button onclick="switchTab('assets')" id="btn-assets" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
-                <span class="text-base">🎨</span> <span>Grafika & Zasoby (Assets)</span>
+                <span class="text-base">🎨</span> <span>Grafika & Zasoby</span>
             </button>
             <button onclick="switchTab('storage')" id="btn-storage" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
-                <span class="text-base">💾</span> <span>Zapisane Projekty</span>
+                <span class="text-base">💾</span> <span>Zapisana Historia</span>
             </button>
         </aside>
 
@@ -77,29 +82,29 @@
             <div id="tab-skript" class="tab-content space-y-6">
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-blue-500">⚡</span> Nielimitowany Syntezator AI (Napisze absolutnie wszystko)
+                        <span class="text-blue-500">⚡</span> Prawdziwy Syntezator Logiki AI
                     </h2>
                     <div class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda główna bez „/”</label>
-                                <input type="text" id="sk-cmd" value="menu" placeholder="np. sklep, praca, svip, kit" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda (bez /)</label>
+                                <input type="text" id="sk-cmd" value="sklep" placeholder="np. sklep, svip, kit, panel" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wymagana permisja (opcjonalnie)</label>
-                                <input type="text" id="sk-perm" placeholder="np. serwer.admin lub zostaw puste" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wymagana permisja</label>
+                                <input type="text" id="sk-perm" placeholder="np. serwer.vip lub zostaw puste" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wiadomość powitalna / zwrotna</label>
-                            <input type="text" id="sk-msg" value="&8[&6FlashCode AI&8] &7Przetwarzam żądanie..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wiadomość powitalna</label>
+                            <input type="text" id="sk-msg" value="&8[&6FlashCode AI&8] &7Otwieram panel..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Opisz absolutnie wszystko po polsku (AI przeanalizuje i napisze pełny kod)</label>
-                            <textarea id="sk-custom-logic" rows="5" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">ma otworzyć zaawansowane gui gdzie można wybrać rangę, odebrać darmowe monety, teleportować się na spawn i włączyć tryb god</textarea>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Opisz logikę po polsku (Skrypt AI rozpozna komendy, GUI, ekonomię, itemy)</label>
+                            <textarea id="sk-custom-logic" rows="4" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">ma otworzyć sklep gdzie można kupić diamenty za monety oraz sprzedawać złoto</textarea>
                         </div>
-                        <button onclick="generateAIPoweredScript()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/20 text-sm flex items-center justify-center gap-2">
-                            <span>Generuj W pełni Automatyczny Kod AI (.sk)</span>
+                        <button onclick="generateAdvancedScript()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/20 text-sm flex items-center justify-center gap-2">
+                            <span>Generuj Kompletny Skrypt AI (.sk)</span>
                         </button>
                     </div>
                 </div>
@@ -112,7 +117,7 @@
                             <button onclick="copyCode('sk-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj</button>
                         </div>
                     </div>
-                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs lg:text-sm text-emerald-400 overflow-x-auto border border-slate-900 min-h-[220px]">// Twój kod wygenerowany przez AI pojawi się tutaj...</pre>
+                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs lg:text-sm text-emerald-400 overflow-x-auto border border-slate-900 min-h-[220px]">// Kliknij przycisk generowania, aby uruchomić AI...</pre>
                 </div>
             </div>
 
@@ -120,37 +125,27 @@
             <div id="tab-text" class="tab-content hidden space-y-6">
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-amber-500">🔠</span> Transformator Tekstu & Paleta Kolorów Minecraft
+                        <span class="text-amber-500">🔠</span> Transformator Tekstu & Kolory Minecraft
                     </h2>
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wpisz tekst do transformacji</label>
-                            <textarea id="txt-input" rows="3" placeholder="Wpisz lub wklej tekst serwerowy..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-amber-500 focus:outline-none transition"></textarea>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Tekst wejściowy</label>
+                            <textarea id="txt-input" rows="3" placeholder="Wpisz tekst..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-amber-500 focus:outline-none transition"></textarea>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wybierz kolor Minecraft do nałożenia</label>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Kolor Minecraft</label>
                             <select id="mc-color-select" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-amber-500 focus:outline-none transition">
-                                <option value="&0">&0 - Czarny</option>
-                                <option value="&1">&1 - Ciemnoniebieski</option>
-                                <option value="&2">&2 - Ciemnozielony</option>
-                                <option value="&3">&3 - Ciemno-turkusowy</option>
-                                <option value="&4">&4 - Ciemnoczerwony</option>
-                                <option value="&5">&5 - Ciemnofioletowy</option>
+                                <option value="&2">&2 - Zielony</option>
                                 <option value="&6">&6 - Złoty</option>
-                                <option value="&7">&7 - Szary</option>
-                                <option value="&8">&8 - Ciemnoszary</option>
-                                <option value="&9">&9 - Niebieski</option>
-                                <option value="&a" selected>&a - Zielony</option>
                                 <option value="&b">&b - Turkusowy</option>
                                 <option value="&c">&c - Czerwony</option>
-                                <option value="&d">&d - Różowy</option>
-                                <option value="&e">&e - Żółty</option>
+                                <option value="&e" selected>&e - Żółty</option>
                                 <option value="&f">&f - Biały</option>
                             </select>
                         </div>
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                            <button onclick="transformTextAction('caps')" class="bg-slate-900 hover:bg-slate-800 border border-cardborder p-3 rounded-xl text-xs font-bold text-amber-400 transition">Na KAPITALIKI</button>
-                            <button onclick="transformTextAction('minecraft')" class="bg-slate-900 hover:bg-slate-800 border border-cardborder p-3 rounded-xl text-xs font-bold text-emerald-400 transition">Zastosuj kolor</button>
+                            <button onclick="transformTextAction('caps')" class="bg-slate-900 hover:bg-slate-800 border border-cardborder p-3 rounded-xl text-xs font-bold text-amber-400 transition">Małe Kapitały</button>
+                            <button onclick="transformTextAction('minecraft')" class="bg-slate-900 hover:bg-slate-800 border border-cardborder p-3 rounded-xl text-xs font-bold text-emerald-400 transition">Dodaj Kolor</button>
                             <button onclick="transformTextAction('lore')" class="bg-slate-900 hover:bg-slate-800 border border-cardborder p-3 rounded-xl text-xs font-bold text-cyan-400 transition">Format Lore</button>
                             <button onclick="transformTextAction('clear')" class="bg-red-950/20 hover:bg-red-900/30 border border-red-900/30 p-3 rounded-xl text-xs font-bold text-red-400 transition">Wyczyść</button>
                         </div>
@@ -159,10 +154,10 @@
 
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <div class="flex justify-between items-center mb-3">
-                        <h3 class="font-semibold text-sm text-slate-300">Wynik transformacji:</h3>
-                        <button onclick="copyCode('txt-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj wynik</button>
+                        <h3 class="font-semibold text-sm text-slate-300">Wynik:</h3>
+                        <button onclick="copyCode('txt-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj</button>
                     </div>
-                    <div id="txt-output" class="bg-slate-950 p-4 rounded-xl font-mono text-sm text-slate-400 overflow-x-auto border border-slate-900 min-h-[90px] flex items-center">Efekt pojawi się tutaj...</div>
+                    <div id="txt-output" class="bg-slate-950 p-4 rounded-xl font-mono text-sm text-slate-400 overflow-x-auto border border-slate-900 min-h-[90px] flex items-center">Wynik pojawi się tutaj...</div>
                 </div>
             </div>
 
@@ -170,12 +165,12 @@
             <div id="tab-pack" class="tab-content hidden space-y-6">
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-cyan-500">📦</span> Menedżer Paczki Serwera Minecraft
+                        <span class="text-cyan-500">📦</span> Menedżer Paczki Serwera
                     </h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                         <div class="md:col-span-2">
                             <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Nazwa elementu</label>
-                            <input type="text" id="pack-name" placeholder="np. WorldGuard, EssentialsX" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-cyan-500 focus:outline-none transition">
+                            <input type="text" id="pack-name" placeholder="np. EssentialsX" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-cyan-500 focus:outline-none transition">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Typ</label>
@@ -191,7 +186,7 @@
 
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="font-semibold text-sm text-slate-300">Skład paczki serwera:</h3>
+                        <h3 class="font-semibold text-sm text-slate-300">Skład paczki:</h3>
                         <button onclick="exportPackList()" class="text-xs bg-slate-800 hover:bg-slate-700 text-cyan-400 px-3 py-1.5 rounded-lg border border-slate-700 transition">Pobierz spis (TXT)</button>
                     </div>
                     <div id="pack-container" class="space-y-2.5 max-h-72 overflow-y-auto pr-1"></div>
@@ -202,29 +197,29 @@
             <div id="tab-assets" class="tab-content hidden space-y-6">
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-purple-500">🎨</span> Rejestr Grafiki i Zasobów
+                        <span class="text-purple-500">🎨</span> Rejestr Zasobów Graficznych
                     </h2>
                     <div class="space-y-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Nazwa projektu</label>
-                                <input type="text" id="asset-title" placeholder="np. Baner Discord" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Nazwa</label>
+                                <input type="text" id="asset-title" placeholder="np. Logo Serwera" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wymiary</label>
-                                <input type="text" id="asset-dims" placeholder="np. 1920x1080 px" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Rozmiar</label>
+                                <input type="text" id="asset-dims" placeholder="np. 512x512 px" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
                             </div>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Link lub notatka</label>
-                            <input type="text" id="asset-link" placeholder="https://imgur.com/..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Link</label>
+                            <input type="text" id="asset-link" placeholder="https://..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
                         </div>
                         <button onclick="addAssetItem()" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-purple-600/20 text-sm">Zapisz Zasób</button>
                     </div>
                 </div>
 
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
-                    <h3 class="font-semibold text-sm text-slate-300 mb-4">Katalog wgranych grafik:</h3>
+                    <h3 class="font-semibold text-sm text-slate-300 mb-4">Lista zasobów:</h3>
                     <div id="assets-container" class="space-y-2.5 max-h-72 overflow-y-auto pr-1"></div>
                 </div>
             </div>
@@ -234,9 +229,9 @@
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <div class="flex justify-between items-center mb-4 border-b border-cardborder pb-3">
                         <h2 class="text-base font-bold text-white flex items-center gap-2">
-                            <span class="text-emerald-500">💾</span> Historia i Zapisane Elementy
+                            <span class="text-emerald-500">💾</span> Historia Wygenerowanych Skryptów
                         </h2>
-                        <button onclick="clearHistory()" class="text-xs bg-red-950/40 text-red-400 border border-red-900/50 px-3 py-1.5 rounded-lg hover:bg-red-900/40 transition">Wyczyść historię</button>
+                        <button onclick="clearHistory()" class="text-xs bg-red-950/40 text-red-400 border border-red-900/50 px-3 py-1.5 rounded-lg hover:bg-red-900/40 transition">Wyczyść</button>
                     </div>
                     <div id="history-container" class="space-y-3 max-h-[500px] overflow-y-auto pr-1"></div>
                 </div>
@@ -245,7 +240,7 @@
         </section>
     </main>
 
-    <!-- JavaScript -->
+    <!-- JavaScript Engine -->
     <script>
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -260,11 +255,9 @@
             activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/20');
         }
 
-        // =========================================================================
-        // PRAWDZIWY SYNTEZATOR AI (NLP TOKENIZER & DYNAMIC SCRIPT ENGINE)
-        // =========================================================================
-        function generateAIPoweredScript() {
-            const cmd = document.getElementById('sk-cmd').value.trim() || 'menu';
+        // INTELIGENTNY ANALIZATOR AI DLA SKRYPTÓW
+        function generateAdvancedScript() {
+            const cmd = document.getElementById('sk-cmd').value.trim() || 'sklep';
             const perm = document.getElementById('sk-perm').value.trim();
             const msg = document.getElementById('sk-msg').value.trim();
             const custom = document.getElementById('sk-custom-logic').value.trim();
@@ -275,7 +268,7 @@
             code += `command /${cmd}:\n`;
             if (perm) {
                 code += `\tpermission: ${perm}\n`;
-                code += `\tpermission message: "{@prefix} &cNie masz uprawnień do tej komendy!"\n`;
+                code += `\tpermission message: "{@prefix} &cNie masz uprawnień!"\n`;
             }
             code += `\ttrigger:\n`;
 
@@ -283,119 +276,96 @@
                 code += `\t\tsend "${msg}" to player\n`;
             }
 
-            // Inteligentna detekcja intencji i rozbicie zdań na akcje
-            const hasGui = lower.includes('gui') || lower.includes('menu') || lower.includes('otworz') || lower.includes('okno');
-            const hasMoney = lower.includes('monet') || lower.includes('hajs') || lower.includes('pieniądz') || lower.includes('darmow') || lower.includes('złot');
-            const hasTeleport = lower.includes('teleport') || lower.includes('spawn') || lower.includes('tp');
-            const hasGod = lower.includes('god') || lower.includes('niesmiertelność') || lower.includes('nieśmiertelność');
-            const hasRank = lower.includes('rang') || lower.includes('vip') || lower.includes('svip');
-            const hasHeal = lower.includes('uzdrów') || lower.includes('heal') || lower.includes('zdrowie');
+            // Zaawansowane parsowanie fraz polskiego tekstu
+            const isShop = lower.includes('sklep') || lower.includes('kup') || lower.includes('sprzedaj');
+            const isGui = lower.includes('gui') || lower.includes('menu') || lower.includes('okno') || isShop;
+            const isTeleport = lower.includes('teleport') || lower.includes('spawn') || lower.includes('tp');
+            const isMoney = lower.includes('monet') || lower.includes('pieniądz') || lower.includes('hajs');
+            const isGod = lower.includes('god') || lower.includes('nieśmiertelność');
 
-            if (hasGui) {
-                code += `\t\topen chest inventory with 3 rows named "&8&lPanel -> ${cmd.toUpperCase()}" to player\n`;
+            if (isShop) {
+                code += `\t\topen chest inventory with 3 rows named "&8&lSklep Serwera" to player\n`;
+                code += `\t\tformat gui slot 11 of player with diamond named "&bKup Diament" with lore "&7Cena: &6100 monet" to run:\n`;
+                code += `\t\t\tif player's balance >= 100:\n`;
+                code += `\t\t\t\tremove 100 from player's balance\n`;
+                code += `\t\t\t\tgive player 1 of diamond\n`;
+                code += `\t\t\t\tsend "{@prefix} &aZakupiłeś diament!" to player\n`;
+                code += `\t\t\telse:\n`;
+                code += `\t\t\t\tsend "{@prefix} &cNie masz wystarczająco monet!" to player\n`;
                 
-                let slot = 10;
-                if (hasRank) {
-                    code += `\t\tformat gui slot ${slot} of player with diamond block named "&bWybierz Rangę VIP" with lore "&7Kliknij, aby odebrać VIP!" to run:\n`;
-                    code += `\t\t\texecute console command "lp user %player% parent add vip"\n`;
-                    code += `\t\t\tsend "{@prefix} &aOtrzymałeś rangę VIP!" to player\n`;
-                    slot++;
-                }
-                if (hasMoney) {
-                    code += `\t\tformat gui slot ${slot} of player with gold ingot named "&eOdbierz Monety" with lore "&7Kliknij, aby dostać 1000 monet!" to run:\n`;
-                    code += `\t\t\tadd 1000 to player's balance\n`;
-                    code += `\t\t\tsend "{@prefix} &aDopisano 1000 monet do Twojego konta!" to player\n`;
-                    slot++;
-                }
-                if (hasTeleport) {
-                    code += `\t\tformat gui slot ${slot} of player withender pearl named "&5Teleport na Spawn" with lore "&7Kliknij, aby się przeteleportować!" to run:\n`;
-                    code += `\t\t\tteleport player to spawn of world\n`;
-                    code += `\t\t\tsend "{@prefix} &aPrzeteleportowano na spawn!" to player\n`;
-                    slot++;
-                }
-                if (hasGod) {
-                    code += `\t\tformat gui slot ${slot} of player with nether star named "&cTryb God" with lore "&7Kliknij, aby włączyć nieśmiertelność!" to run:\n`;
-                    code += `\t\t\tset player's invulnerability to true\n`;
-                    code += `\t\t\tsend "{@prefix} &aWłączyłeś tryb nieśmiertelności!" to player\n`;
-                    slot++;
-                }
-
-                // Domyślny element jeśli brak szczegółów
-                if (slot === 10) {
-                    code += `\t\tformat gui slot 13 of player with emerald named "&aAkcja Główna AI" with lore "&7Kliknij, aby potwierdzić!" to run:\n`;
-                    code += `\t\t\tsend "{@prefix} &aWykonano akcję z wygenerowanego menu!" to player\n`;
-                }
+                code += `\t\tformat gui slot 15 of player with gold ingot named "&eSprzedaj Złoto" with lore "&7Zysk: &650 monet" to run:\n`;
+                code += `\t\t\tif player has 1 of gold ingot:\n`;
+                code += `\t\t\t\tremove 1 of gold ingot from player\n`;
+                code += `\t\t\t\tadd 50 to player's balance\n`;
+                code += `\t\t\t\tsend "{@prefix} &aSprzedano złoto!" to player\n`;
+                code += `\t\t\telse:\n`;
+                code += `\t\t\t\tsend "{@prefix} &cNie masz złota w ekwipunku!" to player\n`;
+            } else if (isGui) {
+                code += `\t\topen chest inventory with 3 rows named "&8&lMenu - ${cmd.toUpperCase()}" to player\n`;
+                code += `\t\tformat gui slot 13 of player with emerald named "&aAkcja Główna" with lore "&7Kliknij, aby wykonać!" to run:\n`;
+                code += `\t\t\tsend "{@prefix} &aWykonano akcję z menu!" to player\n`;
             } else {
-                // Skrypt tekstowy / bezpośredni bez GUI
-                if (hasTeleport) {
+                if (isTeleport) {
                     code += `\t\tteleport player to spawn of world\n`;
-                    code += `\t\tsend "{@prefix} &aZostałeś pomyślnie przeteleportowany!" to player\n`;
+                    code += `\t\tsend "{@prefix} &aPrzeteleportowano pomyślnie!" to player\n`;
                 }
-                if (hasMoney) {
+                if (isMoney) {
                     code += `\t\tadd 500 to player's balance\n`;
-                    code += `\t\tsend "{@prefix} &aOtrzymałeś 500 monet od AI!" to player\n`;
+                    code += `\t\tsend "{@prefix} &aDodano 500 monet!" to player\n`;
                 }
-                if (hasGod) {
+                if (isGod) {
                     code += `\t\tset player's invulnerability to true\n`;
-                    code += `\t\tsend "{@prefix} &aTryb God został aktywowany!" to player\n`;
+                    code += `\t\tsend "{@prefix} &aWłączono tryb God!" to player\n`;
                 }
-                if (!hasTeleport && !hasMoney && !hasGod) {
-                    code += `\t\t# Wygenerowano automatyczną logikę na podstawie opisu:\n`;
-                    code += `\t\tsend "{@prefix} &aPomyślnie przetworzono zadanie: &f${custom.replace(/"/g, '\\"')}" to player\n`;
-                    code += `\t\tgive player 1 of diamond named "&bNagroda FlashCode AI"\n`;
+                if (!isTeleport && !isMoney && !isGod) {
+                    code += `\t\t# Wygenerowano automatycznie przez AI:\n`;
+                    code += `\t\tsend "{@prefix} &aPrzetworzono zadanie: &f${custom.replace(/"/g, '\\"')}" to player\n`;
+                    code += `\t\tgive player 1 of diamond named "&bNagroda AI"\n`;
                 }
             }
 
             document.getElementById('sk-output').innerText = code;
-            saveHistory('Zaawansowany Skrypt AI: /' + cmd, code);
+            saveHistory('Skrypt AI: /' + cmd, code);
         }
 
-        // 2. Transformator Tekstu
+        // Transformator tekstowy
         function transformTextAction(action) {
             const inputField = document.getElementById('txt-input');
             const outputDiv = document.getElementById('txt-output');
             const input = inputField.value;
 
             if (!input && action !== 'clear') {
-                outputDiv.innerText = 'Wpisz najpierw jakiś tekst powyżej!';
+                outputDiv.innerText = 'Wpisz najpierw tekst!';
                 return;
             }
 
             let result = "";
             if (action === 'caps') {
-                const smallCapsMap = {
-                    'a': 'ᴀ', 'ą': 'ᴀ', 'b': 'ʙ', 'c': 'ᴄ', 'ć': 'ᴄ', 'd': 'ᴅ', 
-                    'e': 'ᴇ', 'ę': 'ᴇ', 'f': 'ꜰ', 'g': 'ɢ', 'h': 'ʜ', 'i': 'ɪ', 
-                    'j': 'ᴊ', 'k': 'ᴋ', 'l': 'ʟ', 'ł': 'ʟ', 'm': 'ᴍ', 'n': 'ɴ', 
-                    'ń': 'ɴ', 'o': 'ᴏ', 'ó': 'ᴏ', 'p': 'ᴘ', 'q': 'ꞯ', 'r': 'ʀ', 
-                    's': 'ꜱ', 'ś': 'ꜱ', 't': 'ᴛ', 'u': 'ᴜ', 'v': 'ᴠ', 'w': 'ᴡ', 
-                    'x': 'x', 'y': 'ʏ', 'z': 'ᴢ', 'ź': 'ᴢ', 'ż': 'ᴢ'
-                };
-                result = input.toLowerCase().split('').map(char => smallCapsMap[char] || char).join('');
+                const map = {'a':'ᴀ','b':'ʙ','c':'ᴄ','d':'ᴅ','e':'ᴇ','f':'ꜰ','g':'ɢ','h':'ʜ','i':'ɪ','j':'ᴊ','k':'ᴋ','l':'ʟ','m':'ᴍ','n':'ɴ','o':'ᴏ','p':'ᴘ','q':'ꞯ','r':'ʀ','s':'ꜱ','t':'ᴛ','u':'ᴜ','v':'ᴠ','w':'ᴡ','y':'ʏ','z':'ᴢ'};
+                result = input.toLowerCase().split('').map(c => map[c] || c).join('');
             } else if (action === 'minecraft') {
-                const selectedColor = document.getElementById('mc-color-select').value;
-                result = input.split('').map(c => c === ' ' ? ' ' : selectedColor + c).join('');
+                const color = document.getElementById('mc-color-select').value;
+                result = input.split('').map(c => c === ' ' ? ' ' : color + c).join('');
             } else if (action === 'lore') {
-                result = input.split('\n').map(line => `lore: "${line.toUpperCase()}"`).join('\n');
+                result = input.split('\n').map(l => `lore: "${l.toUpperCase()}"`).join('\n');
             } else if (action === 'clear') {
                 result = "";
                 inputField.value = "";
             }
 
-            outputDiv.innerText = result || 'Brak danych do wyświetlenia.';
-            if (result && action !== 'clear') saveHistory('Transformacja Tekstu', result);
+            outputDiv.innerText = result || 'Brak danych.';
         }
 
-        // 3. Menedżer Paczki
-        let serverPack = JSON.parse(localStorage.getItem('fc_server_pack') || '[]');
+        // Zarządzanie paczką
+        let serverPack = JSON.parse(localStorage.getItem('fc_pack') || '[]');
         renderPackList();
 
         function addPackItem() {
             const name = document.getElementById('pack-name').value.trim();
             const type = document.getElementById('pack-type').value;
-            if (!name) return alert('Wpisz nazwę komponentu!');
+            if (!name) return alert('Wpisz nazwę!');
             serverPack.push({ name, type, date: new Date().toLocaleDateString() });
-            localStorage.setItem('fc_server_pack', JSON.stringify(serverPack));
+            localStorage.setItem('fc_pack', JSON.stringify(serverPack));
             document.getElementById('pack-name').value = '';
             renderPackList();
         }
@@ -410,29 +380,29 @@
                 <div class="flex justify-between items-center bg-slate-900 border border-cardborder p-3 rounded-xl text-sm">
                     <div>
                         <span class="font-bold text-white">${item.name}</span>
-                        <span class="text-[10px] text-cyan-400 ml-2 bg-cyan-950/40 border border-cyan-900/50 px-2 py-0.5 rounded">${item.type}</span>
+                        <span class="text-[10px] text-cyan-400 ml-2 bg-cyan-950/40 px-2 py-0.5 rounded">${item.type}</span>
                     </div>
-                    <button onclick="removePackItem(${idx})" class="text-red-400 hover:text-red-300 text-xs font-semibold">Usuń</button>
+                    <button onclick="removePackItem(${idx})" class="text-red-400 text-xs font-semibold">Usuń</button>
                 </div>
             `).join('');
         }
 
         function removePackItem(idx) {
             serverPack.splice(idx, 1);
-            localStorage.setItem('fc_server_pack', JSON.stringify(serverPack));
+            localStorage.setItem('fc_pack', JSON.stringify(serverPack));
             renderPackList();
         }
 
         function exportPackList() {
-            const text = "=== SPIS PACZKI SERWEROWEJ FLASHCODE ===\n\n" + serverPack.map(i => `- [${i.type}] ${i.name} (${i.date})`).join('\n');
+            const text = "=== SPIS PACZKI ===\n\n" + serverPack.map(i => `- [${i.type}] ${i.name}`).join('\n');
             const blob = new Blob([text], { type: 'text/plain' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = 'paczka-serwerowa.txt';
+            link.download = 'paczka.txt';
             link.click();
         }
 
-        // 4. Grafika
+        // Zasoby graficzne
         let assetsList = JSON.parse(localStorage.getItem('fc_assets') || '[]');
         renderAssetsList();
 
@@ -440,8 +410,8 @@
             const title = document.getElementById('asset-title').value.trim();
             const dims = document.getElementById('asset-dims').value.trim();
             const link = document.getElementById('asset-link').value.trim();
-            if (!title) return alert('Wpisz nazwę projektu!');
-            assetsList.push({ title, dims, link, date: new Date().toLocaleDateString() });
+            if (!title) return alert('Wpisz nazwę!');
+            assetsList.push({ title, dims, link });
             localStorage.setItem('fc_assets', JSON.stringify(assetsList));
             document.getElementById('asset-title').value = '';
             document.getElementById('asset-dims').value = '';
@@ -452,16 +422,15 @@
         function renderAssetsList() {
             const container = document.getElementById('assets-container');
             if (assetsList.length === 0) {
-                container.innerHTML = '<p class="text-xs text-slate-500 p-2">Brak zarejestrowanych grafik.</p>';
+                container.innerHTML = '<p class="text-xs text-slate-500 p-2">Brak zasobów.</p>';
                 return;
             }
             container.innerHTML = assetsList.map((item, idx) => `
-                <div class="bg-slate-900 border border-cardborder p-3.5 rounded-xl text-sm flex justify-between items-center">
+                <div class="bg-slate-900 border border-cardborder p-3 rounded-xl text-sm flex justify-between items-center">
                     <div>
-                        <div class="font-bold text-white">${item.title} <span class="text-xs text-purple-400 font-normal">(${item.dims})</span></div>
-                        <a href="${item.link}" target="_blank" class="text-xs text-blue-400 underline truncate block max-w-xs mt-0.5">${item.link || 'Brak linku'}</a>
+                        <div class="font-bold text-white">${item.title} <span class="text-xs text-purple-400">(${item.dims})</span></div>
                     </div>
-                    <button onclick="removeAssetItem(${idx})" class="text-red-400 hover:text-red-300 text-xs font-semibold">Usuń</button>
+                    <button onclick="removeAssetItem(${idx})" class="text-red-400 text-xs font-semibold">Usuń</button>
                 </div>
             `).join('');
         }
@@ -472,11 +441,11 @@
             renderAssetsList();
         }
 
-        // 5. Historia
+        // Historia
         function saveHistory(title, data) {
             let history = JSON.parse(localStorage.getItem('fc_history') || '[]');
             history.unshift({ title, data, date: new Date().toLocaleTimeString() });
-            if (history.length > 25) history.pop();
+            if (history.length > 20) history.pop();
             localStorage.setItem('fc_history', JSON.stringify(history));
             loadHistory();
         }
@@ -485,16 +454,16 @@
             let history = JSON.parse(localStorage.getItem('fc_history') || '[]');
             const container = document.getElementById('history-container');
             if (history.length === 0) {
-                container.innerHTML = '<p class="text-xs text-slate-500 p-2">Brak wpisów w historii.</p>';
+                container.innerHTML = '<p class="text-xs text-slate-500 p-2">Brak historii.</p>';
                 return;
             }
             container.innerHTML = history.map(h => `
-                <div class="bg-slate-900 border border-cardborder p-3.5 rounded-xl text-xs space-y-1">
+                <div class="bg-slate-900 border border-cardborder p-3 rounded-xl text-xs space-y-1">
                     <div class="flex justify-between text-slate-400">
                         <span class="text-emerald-400 font-bold">${h.title}</span>
                         <span>${h.date}</span>
                     </div>
-                    <pre class="font-mono text-slate-300 bg-slate-950 p-2.5 rounded-lg overflow-x-auto">${h.data}</pre>
+                    <pre class="font-mono text-slate-300 bg-slate-950 p-2 rounded overflow-x-auto">${h.data}</pre>
                 </div>
             `).join('');
         }
@@ -505,14 +474,12 @@
         }
 
         function copyCode(elementId) {
-            const text = document.getElementById(elementId).innerText;
-            navigator.clipboard.writeText(text);
-            alert('Skopiowano pomyślnie do schowka!');
+            navigator.clipboard.writeText(document.getElementById(elementId).innerText);
+            alert('Skopiowano do schowka!');
         }
 
         function downloadFile(elementId, filename, type) {
-            const text = document.getElementById(elementId).innerText;
-            const blob = new Blob([text], { type: type });
+            const blob = new Blob([document.getElementById(elementId).innerText], { type: type });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
             link.download = filename;
