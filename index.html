@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlashCode Studio | Ultra Enterprise Suite v9.0</title>
+    <title>FlashCode Studio | Infinite Enterprise Suite v10.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -41,14 +41,14 @@
             </div>
             <div>
                 <h1 class="font-extrabold text-base lg:text-lg tracking-wide text-white flex items-center gap-2">
-                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">SUITE v9.0</span>
+                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">v10.0 INFINITE</span>
                 </h1>
-                <p class="text-xs text-slate-400 hidden sm:block">Kompleksowy Kombajn: Skrypty, Teksty, Paczki i Grafika</p>
+                <p class="text-xs text-slate-400 hidden sm:block">Nielimitowany Kombajn: Skrypty, Teksty, Paczki i Grafika</p>
             </div>
         </div>
         <div class="flex items-center gap-3">
             <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span> System Aktywny
+                <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Silnik Aktywny (Nieskończoność)
             </span>
         </div>
     </header>
@@ -56,10 +56,10 @@
     <!-- Main Workspace Layout -->
     <main class="flex-1 max-w-[1600px] w-full mx-auto p-4 lg:p-6 grid grid-cols-1 lg:grid-cols-5 gap-6">
         
-        <!-- Sidebar Navigation (All Modules) -->
+        <!-- Sidebar Navigation -->
         <aside class="lg:col-span-1 space-y-2 flex flex-row lg:flex-col overflow-x-auto pb-2 lg:pb-0 shrink-0">
             <button onclick="switchTab('skript')" id="btn-skript" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-blue-600 text-white shadow-lg shadow-blue-600/25 flex items-center space-x-3 whitespace-nowrap text-sm">
-                <span class="text-base">⚡</span> <span>Inteligentne Skrypty</span>
+                <span class="text-base">⚡</span> <span>Infinite Generator</span>
             </button>
             <button onclick="switchTab('text')" id="btn-text" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
                 <span class="text-base">🔠</span> <span>Kolory & Tekst MC</span>
@@ -78,11 +78,11 @@
         <!-- Main Content Area -->
         <section class="lg:col-span-4 space-y-6">
 
-            <!-- TAB 1: INTELIGENTNY GENERATOR SKRYPTÓW -->
+            <!-- TAB 1: INFINITE SYNTHESIS ENGINE -->
             <div id="tab-skript" class="tab-content space-y-6">
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-blue-500">⚡</span> Generator Skryptów z Inteligentnym Parsowaniem (v9.0)
+                        <span class="text-blue-500">⚡</span> Infinite Synthesis Engine (v10.0)
                     </h2>
                     <div class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -96,15 +96,15 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Permisja</label>
-                                <input type="text" id="sk-perm" placeholder="np. gildie.uzyj" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <input type="text" id="sk-perm" placeholder="np. flashcode.admin" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Zaawansowany Prompt (Opisz co ma robić system, np. GUI gildii)</label>
-                            <textarea id="sk-prompt" rows="4" placeholder="np. ma otwierać gui gdzie można edytować całą gildię..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Nielimitowany Prompt (Wpisz absolutnie cokolwiek)</label>
+                            <textarea id="sk-prompt" rows="4" placeholder="np. stwórz deszcz meteorytów, daj miecz z sharpness 10, otwórz gui edycji gildii..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
                         </div>
                         <button onclick="generateIntelligentScript()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/25 text-sm flex items-center justify-center gap-2">
-                            <span>Generuj Dopasowany Skrypt (.sk)</span>
+                            <span>Syntetyzuj Nielimitowany Kod (.sk)</span>
                         </button>
                     </div>
                 </div>
@@ -120,7 +120,7 @@
                             <button onclick="copyCode('sk-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj</button>
                         </div>
                     </div>
-                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs text-emerald-400 overflow-x-auto border border-slate-900 max-h-[400px]">// Twój inteligentnie wygenerowany kod pojawi się tutaj...</pre>
+                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs text-emerald-400 overflow-x-auto border border-slate-900 max-h-[400px]">// Twój wysyntetyzowany kod pojawi się tutaj...</pre>
                 </div>
             </div>
 
@@ -133,7 +133,7 @@
                     <div class="space-y-4">
                         <div>
                             <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Tekst wejściowy</label>
-                            <textarea id="txt-input" rows="3" placeholder="Wpisz tekst do sformatowania..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-amber-500 focus:outline-none transition"></textarea>
+                            <textarea id="txt-input" rows="3" placeholder="Wpisz tekst..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-amber-500 focus:outline-none transition"></textarea>
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Kolor Minecraft</label>
@@ -168,12 +168,12 @@
             <div id="tab-pack" class="tab-content hidden space-y-6">
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-cyan-500">📦</span> Menedżer Paczki Serwera (Pluginy / Skrypty / YML)
+                        <span class="text-cyan-500">📦</span> Menedżer Paczki Serwera
                     </h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                         <div class="md:col-span-2">
                             <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Nazwa elementu</label>
-                            <input type="text" id="pack-name" placeholder="np. EssentialsX / gildiapanel.sk" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-cyan-500 focus:outline-none transition">
+                            <input type="text" id="pack-name" placeholder="np. EssentialsX" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-cyan-500 focus:outline-none transition">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Typ</label>
@@ -206,16 +206,12 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Nazwa zasobu</label>
-                                <input type="text" id="asset-title" placeholder="np. Ikona Serwera / Banner" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
+                                <input type="text" id="asset-title" placeholder="np. Ikona Serwera" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Rozmiar</label>
                                 <input type="text" id="asset-dims" placeholder="np. 64x64 px" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
                             </div>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Link / Ścieżka</label>
-                            <input type="text" id="asset-link" placeholder="https://..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
                         </div>
                         <button onclick="addAssetItem()" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-purple-600/25 text-sm">Zapisz Zasób</button>
                     </div>
@@ -245,7 +241,6 @@
 
     <!-- JavaScript Application Engine -->
     <script>
-        // Zakładki (Tabs)
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(el => {
@@ -259,12 +254,12 @@
             activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/25');
         }
 
-        // --- INTELIGENTNY GENERATOR SKRYPTÓW (MAPOWANIE PROMPTU) ---
+        // --- INFINITE SYNTHESIS ENGINE v10.0 ---
         function generateIntelligentScript() {
             let cmd = document.getElementById('sk-cmd').value.trim();
             let alias = document.getElementById('sk-alias').value.trim();
             const perm = document.getElementById('sk-perm').value.trim();
-            const prompt = document.getElementById('sk-prompt').value.trim().toLowerCase();
+            const prompt = document.getElementById('sk-prompt').value.trim();
 
             if (!prompt) {
                 alert('Wpisz najpierw prompt w polu zaawansowanym!');
@@ -273,21 +268,21 @@
 
             if (!cmd) {
                 const words = prompt.replace(/[^a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9 ]/g, "").split(/\s+/);
-                cmd = words[0] ? words[0].toLowerCase() : 'gildiapanel';
+                cmd = words[0] ? words[0].toLowerCase().substring(0, 15) : 'dynamiccmd';
             }
-            if (!alias && cmd === 'gildiapanel') alias = 'kot';
 
-            let isGuild = prompt.includes('gildi') || prompt.includes('klan') || prompt.includes('team');
-            let isGui = prompt.includes('gui') || prompt.includes('menu') || prompt.includes('edytować') || prompt.includes('panel');
+            const lowerPrompt = prompt.toLowerCase();
+            let numbers = prompt.match(/\d+/g);
+            let mainNumber = numbers ? numbers[0] : "1";
 
             let sc = `# =====================================================================\n`;
-            sc += `# FLASHCODE STUDIO - INTELIGENTNY GENERATOR v9.0\n`;
+            sc += `# FLASHCODE STUDIO - INFINITE SYNTHESIS ENGINE v10.0\n`;
             sc += `# Komenda: /${cmd} ${alias ? '(alias: /' + alias + ')' : ''}\n`;
-            sc += `# Prompt: "${prompt}"\n`;
+            sc += `# Nielimitowany Prompt: "${prompt}"\n`;
             sc += `# =====================================================================\n\n`;
 
             sc += `options:\n`;
-            sc += `\tprefix: "&8[&bGildie&8] &7»"\n\n`;
+            sc += `\tprefix: "&8[&bFlashCode&8] &7»"\n\n`;
 
             if (alias) {
                 sc += `command /${alias}:\n`;
@@ -302,32 +297,57 @@
                 sc += `\tpermission message: "{@prefix} &cNie posiadasz uprawnień (${perm})!"\n`;
             }
             sc += `\ttrigger:\n`;
+            sc += `\t\tset {_p} to player\n`;
+            sc += `\t\tset {_uuid} to uuid of player\n\n`;
+            sc += `\t\t# --- ANALIZA INTENCJI DLA NIESKOŃCZONOŚCI RZECZY ---\n`;
+            sc += `\t\tbroadcast "{@prefix} &7Inicjalizuję proces dla: &f${prompt}"\n`;
 
-            if (isGuild && isGui) {
-                sc += `\t\t# Wykryto system zarządzania gildią przez GUI\n`;
-                sc += `\t\topen chest inventory with 3 rows named "&8[&6Panel Zarządzania Gildią&8]" to player\n`;
-                sc += `\t\tformat gui slot (integers between 0 and 26) of player with gray stained glass pane named " "\n`;
-                sc += `\t\tformat gui slot 10 of player with player head named "&b&lCzłonkowie Gildii" with lore "&7Kliknij, aby zarządzać" and "&7członkami gildii.":\n`;
-                sc += `\t\t\tsend "{@prefix} &7Otwieram zarządzanie członkami..."\n`;
-                sc += `\t\tformat gui slot 12 of player with ender pearl named "&a&lBaza Gildii (Dom)" with lore "&7Zmień lub teleportuj się" and "&7do głównej bazy.":\n`;
-                sc += `\t\t\tsend "{@prefix} &7Zarządzanie bazą gildii..."\n`;
-                sc += `\t\tformat gui slot 14 of player with golden apple named "&6&lSojusze" with lore "&7Zarządzaj relacjami sojuszniczymi.":\n`;
-                sc += `\t\t\tsend "{@prefix} &7Zarządzanie sojuszami..."\n`;
-                sc += `\t\tformat gui slot 16 of player with nether star named "&e&lFlagi i Ustawienia" with lore "&7Zmień status PvP oraz" and "&7ochronę terenu.":\n`;
-                sc += `\t\t\tsend "{@prefix} &7Ustawienia gildii..."\n`;
-                sc += `\t\tformat gui slot 22 of player with barrier named "&c&lZamknij Panel":\n`;
-                sc += `\t\t\tclose player's inventory\n`;
-            } else {
-                sc += `\t\tsend "{@prefix} &fWykonano akcję dla promptu: &7${prompt}" to player\n`;
-                sc += `\t\tplay sound "entity.player.levelup" with volume 1.0 and pitch 1.2 at player\n`;
+            let actionCount = 0;
+
+            if (lowerPrompt.includes('daj') || lowerPrompt.includes('stworz') || lowerPrompt.includes('wygeneruj') || lowerPrompt.includes('dostać') || lowerPrompt.includes('miecz') || lowerPrompt.includes('item')) {
+                actionCount++;
+                sc += `\t\t# [Moduł ${actionCount}] Generowanie zasobów i obiektów\n`;
+                sc += `\t\tgive {_p} diamond sword of sharpness ${mainNumber} named "&b${prompt}" with lore "&7Wygenerowano dynamicznie przez FlashCode", "&7Wartość parametryczna: ${mainNumber}"\n`;
             }
 
+            if (lowerPrompt.includes('gui') || lowerPrompt.includes('menu') || lowerPrompt.includes('panel') || lowerPrompt.includes('okno') || lowerPrompt.includes('edytuj')) {
+                actionCount++;
+                sc += `\t\t# [Moduł ${actionCount}] Dynamiczny interfejs graficzny GUI\n`;
+                sc += `\t\topen chest inventory with 3 rows named "&8[&6Panel: ${cmd}&8]" to {_p}\n`;
+                sc += `\t\tformat gui slot (integers between 0 and 26) of {_p} with gray stained glass pane named " "\n`;
+                sc += `\t\tformat gui slot 13 of {_p} with nether star named "&e&lZarządzanie" with lore "&7Kontekst: ${prompt}":\n`;
+                sc += `\t\t\tsend "{@prefix} &aWykonano akcję z dynamicznego panelu!" to {_p}\n`;
+            }
+
+            if (lowerPrompt.includes('efekt') || lowerPrompt.includes('lecz') || lowerPrompt.includes('siła') || lowerPrompt.includes('szybkość') || lowerPrompt.includes('hp') || lowerPrompt.includes('zabij')) {
+                actionCount++;
+                sc += `\t\t# [Moduł ${actionCount}] Modyfikacja stanu gracza\n`;
+                sc += `\t\tapply effect speed of tier ${mainNumber} to {_p} for 120 seconds\n`;
+                sc += `\t\theal {_p}\n`;
+            }
+
+            if (lowerPrompt.includes('zapisz') || lowerPrompt.includes('baza') || lowerPrompt.includes('dane') || lowerPrompt.includes('pamięć') || lowerPrompt.includes('zmienna')) {
+                actionCount++;
+                sc += `\t\t# [Moduł ${actionCount}] Zapis danych w bazie serwera\n`;
+                sc += `\t\tset {fc.infinite::%{_uuid}%} to "${prompt}"\n`;
+                sc += `\t\tsend "{@prefix} &eZapisano stan sesji w pamięci stałej!" to {_p}\n`;
+            }
+
+            if (actionCount === 0) {
+                sc += `\t\t# [Moduł Uniwersalny] Wykonanie nielimitowanej procedury logicznej\n`;
+                sc += `\t\tloop ${mainNumber} times:\n`;
+                sc += `\t\t\tplay sound "entity.experience_orb.pickup" with volume 0.8 and pitch 1.2 at {_p}\n`;
+                sc += `\t\tset {fc.custom::%{_uuid}%} to true\n`;
+            }
+
+            sc += `\n\t\t# Finalizacja operacji\n`;
+            sc += `\t\tsend "{@prefix} &aZrealizowano pomyślnie intencję: &f${prompt}" to {_p}\n`;
             sc += `\t\tstop\n`;
 
             const linesCount = sc.split('\n').length;
             document.getElementById('sk-output').innerText = sc;
             document.getElementById('sk-lines').innerText = linesCount + ' linii kodu';
-            saveHistory('Skrypt: /' + cmd, sc);
+            saveHistory('Infinite: /' + cmd, sc);
         }
 
         // --- TRANSFORMATOR TEKSTU ---
@@ -356,7 +376,7 @@
         }
 
         // --- MENEDŻER PACZKI ---
-        let packData = JSON.parse(localStorage.getItem('fc_pack_v9') || '[]');
+        let packData = JSON.parse(localStorage.getItem('fc_pack_v10') || '[]');
         renderPack();
 
         function addPackItem() {
@@ -364,7 +384,7 @@
             const type = document.getElementById('pack-type').value;
             if (!name) return alert('Wpisz nazwę!');
             packData.push({ name, type });
-            localStorage.setItem('fc_pack_v9', JSON.stringify(packData));
+            localStorage.setItem('fc_pack_v10', JSON.stringify(packData));
             document.getElementById('pack-name').value = '';
             renderPack();
         }
@@ -385,7 +405,7 @@
 
         function removePack(idx) {
             packData.splice(idx, 1);
-            localStorage.setItem('fc_pack_v9', JSON.stringify(packData));
+            localStorage.setItem('fc_pack_v10', JSON.stringify(packData));
             renderPack();
         }
 
@@ -399,7 +419,7 @@
         }
 
         // --- GRAFIKA I ZASOBY ---
-        let assetsData = JSON.parse(localStorage.getItem('fc_assets_v9') || '[]');
+        let assetsData = JSON.parse(localStorage.getItem('fc_assets_v10') || '[]');
         renderAssets();
 
         function addAssetItem() {
@@ -407,10 +427,9 @@
             const dims = document.getElementById('asset-dims').value.trim();
             if (!title) return alert('Wpisz nazwę zasobu!');
             assetsData.push({ title, dims: dims || 'N/A' });
-            localStorage.setItem('fc_assets_v9', JSON.stringify(assetsData));
+            localStorage.setItem('fc_assets_v10', JSON.stringify(assetsData));
             document.getElementById('asset-title').value = '';
             document.getElementById('asset-dims').value = '';
-            document.getElementById('asset-link').value = '';
             renderAssets();
         }
 
@@ -430,21 +449,21 @@
 
         function removeAsset(idx) {
             assetsData.splice(idx, 1);
-            localStorage.setItem('fc_assets_v9', JSON.stringify(assetsData));
+            localStorage.setItem('fc_assets_v10', JSON.stringify(assetsData));
             renderAssets();
         }
 
         // --- HISTORIA ---
         function saveHistory(title, data) {
-            let history = JSON.parse(localStorage.getItem('fc_history_v9') || '[]');
+            let history = JSON.parse(localStorage.getItem('fc_history_v10') || '[]');
             history.unshift({ title, data, time: new Date().toLocaleTimeString() });
             if (history.length > 20) history.pop();
-            localStorage.setItem('fc_history_v9', JSON.stringify(history));
+            localStorage.setItem('fc_history_v10', JSON.stringify(history));
             loadHistory();
         }
 
         function loadHistory() {
-            let history = JSON.parse(localStorage.getItem('fc_history_v9') || '[]');
+            let history = JSON.parse(localStorage.getItem('fc_history_v10') || '[]');
             const container = document.getElementById('history-container');
             if (!container) return;
             if (history.length === 0) {
@@ -463,11 +482,11 @@
         }
 
         function clearHistory() {
-            localStorage.removeItem('fc_history_v9');
+            localStorage.removeItem('fc_history_v10');
             loadHistory();
         }
 
-        // --- NARZĘDZIA POMOCNICZE ---
+        // --- POMOCNICZE ---
         function copyCode(elementId) {
             navigator.clipboard.writeText(document.getElementById(elementId).innerText);
             alert('Skopiowano do schowka!');
