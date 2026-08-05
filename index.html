@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlashCode Studio | Infinite Enterprise Suite v10.0</title>
+    <title>FlashCode Studio | Gemini AI Edition v11.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -41,14 +41,14 @@
             </div>
             <div>
                 <h1 class="font-extrabold text-base lg:text-lg tracking-wide text-white flex items-center gap-2">
-                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">v10.0 INFINITE</span>
+                    FLASHCODE STUDIO <span class="text-[10px] bg-purple-500/10 text-purple-400 border border-purple-500/20 px-2 py-0.5 rounded-full font-mono">GEMINI AI v11.0</span>
                 </h1>
-                <p class="text-xs text-slate-400 hidden sm:block">Nielimitowany Kombajn: Skrypty, Teksty, Paczki i Grafika</p>
+                <p class="text-xs text-slate-400 hidden sm:block">Inteligentny Generator Skryptów z Prawdziwym AI</p>
             </div>
         </div>
         <div class="flex items-center gap-3">
-            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Silnik Aktywny (Nieskończoność)
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                <span class="w-2 h-2 mr-1.5 bg-purple-500 rounded-full animate-pulse"></span> Tryb Gemini AI
             </span>
         </div>
     </header>
@@ -59,7 +59,7 @@
         <!-- Sidebar Navigation -->
         <aside class="lg:col-span-1 space-y-2 flex flex-row lg:flex-col overflow-x-auto pb-2 lg:pb-0 shrink-0">
             <button onclick="switchTab('skript')" id="btn-skript" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-blue-600 text-white shadow-lg shadow-blue-600/25 flex items-center space-x-3 whitespace-nowrap text-sm">
-                <span class="text-base">⚡</span> <span>Infinite Generator</span>
+                <span class="text-base">⚡</span> <span>Gemini Skript AI</span>
             </button>
             <button onclick="switchTab('text')" id="btn-text" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
                 <span class="text-base">🔠</span> <span>Kolory & Tekst MC</span>
@@ -78,33 +78,38 @@
         <!-- Main Content Area -->
         <section class="lg:col-span-4 space-y-6">
 
-            <!-- TAB 1: INFINITE SYNTHESIS ENGINE -->
+            <!-- TAB 1: GEMINI AI SKRIPT GENERATOR -->
             <div id="tab-skript" class="tab-content space-y-6">
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-blue-500">⚡</span> Infinite Synthesis Engine (v10.0)
+                        <span class="text-purple-400">✨</span> Google Gemini AI - Generator Skryptów Minecraft
                     </h2>
                     <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Klucz API Google Gemini (Wpisz swój klucz)</label>
+                            <input type="password" id="gemini-api-key" placeholder="Wklej tutaj swój klucz API Gemini..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
+                            <p class="text-[11px] text-slate-500 mt-1">Klucz jest zapisywany bezpiecznie w Twojej przeglądarce i używany tylko do generowania kodu.</p>
+                        </div>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda Główna</label>
-                                <input type="text" id="sk-cmd" placeholder="np. gildiapanel" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <input type="text" id="sk-cmd" placeholder="np. praca" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Alias</label>
-                                <input type="text" id="sk-alias" placeholder="np. kot" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <input type="text" id="sk-alias" placeholder="np. jobs" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Permisja</label>
-                                <input type="text" id="sk-perm" placeholder="np. flashcode.admin" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <input type="text" id="sk-perm" placeholder="np. flashcode.admin" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
                             </div>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Nielimitowany Prompt (Wpisz absolutnie cokolwiek)</label>
-                            <textarea id="sk-prompt" rows="4" placeholder="np. stwórz deszcz meteorytów, daj miecz z sharpness 10, otwórz gui edycji gildii..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Prompt dla AI (Opisz dokładnie co ma robić skrypt)</label>
+                            <textarea id="sk-prompt" rows="4" placeholder="np. zrób gui gdzie można wybrać pracę naciskając diamentową siekierę..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition"></textarea>
                         </div>
-                        <button onclick="generateIntelligentScript()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/25 text-sm flex items-center justify-center gap-2">
-                            <span>Syntetyzuj Nielimitowany Kod (.sk)</span>
+                        <button onclick="generateIntelligentScript()" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-purple-600/25 text-sm flex items-center justify-center gap-2">
+                            <span>Generuj kod przez Gemini AI (.sk)</span>
                         </button>
                     </div>
                 </div>
@@ -112,15 +117,15 @@
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <div class="flex justify-between items-center mb-3">
                         <h3 class="font-semibold text-sm text-slate-300 flex items-center gap-2">
-                            <span>Wynik Skryptu:</span>
-                            <span id="sk-lines" class="text-xs text-blue-400 font-mono bg-blue-950/40 px-2 py-0.5 rounded border border-blue-900/40">0 linii</span>
+                            <span>Wynik Skryptu AI:</span>
+                            <span id="sk-lines" class="text-xs text-purple-400 font-mono bg-purple-950/40 px-2 py-0.5 rounded border border-purple-900/40">0 linii</span>
                         </h3>
                         <div class="flex gap-2">
-                            <button onclick="downloadFile('sk-output', 'skrypt.sk', 'text/plain')" class="text-xs bg-slate-800 hover:bg-slate-700 text-blue-400 px-3 py-1.5 rounded-lg border border-slate-700 transition">Pobierz .sk</button>
+                            <button onclick="downloadFile('sk-output', 'skrypt.sk', 'text/plain')" class="text-xs bg-slate-800 hover:bg-slate-700 text-purple-400 px-3 py-1.5 rounded-lg border border-slate-700 transition">Pobierz .sk</button>
                             <button onclick="copyCode('sk-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj</button>
                         </div>
                     </div>
-                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs text-emerald-400 overflow-x-auto border border-slate-900 max-h-[400px]">// Twój wysyntetyzowany kod pojawi się tutaj...</pre>
+                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs text-emerald-400 overflow-x-auto border border-slate-900 max-h-[450px]">// Twój kod wygenerowany przez Gemini AI pojawi się tutaj...</pre>
                 </div>
             </div>
 
@@ -241,6 +246,18 @@
 
     <!-- JavaScript Application Engine -->
     <script>
+        // Zapamiętywanie klucza API w LocalStorage
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedKey = localStorage.getItem('gemini_api_key');
+            if (savedKey) {
+                document.getElementById('gemini-api-key').value = savedKey;
+            }
+        });
+
+        document.getElementById('gemini-api-key').addEventListener('input', (e) => {
+            localStorage.setItem('gemini_api_key', e.target.value.trim());
+        });
+
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(el => {
@@ -254,100 +271,73 @@
             activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/25');
         }
 
-        // --- INFINITE SYNTHESIS ENGINE v10.0 ---
-        function generateIntelligentScript() {
-            let cmd = document.getElementById('sk-cmd').value.trim();
-            let alias = document.getElementById('sk-alias').value.trim();
+        // --- PRAWDZIWE GEMINI AI INTEGRATION ---
+        async function generateIntelligentScript() {
+            const apiKey = document.getElementById('gemini-api-key').value.trim();
+            const cmd = document.getElementById('sk-cmd').value.trim() || 'customcmd';
+            const alias = document.getElementById('sk-alias').value.trim();
             const perm = document.getElementById('sk-perm').value.trim();
             const prompt = document.getElementById('sk-prompt').value.trim();
 
-            if (!prompt) {
-                alert('Wpisz najpierw prompt w polu zaawansowanym!');
+            if (!apiKey) {
+                alert('Najpierw wpisz swój klucz API Google Gemini w polu powyżej!');
                 return;
             }
 
-            if (!cmd) {
-                const words = prompt.replace(/[^a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9 ]/g, "").split(/\s+/);
-                cmd = words[0] ? words[0].toLowerCase().substring(0, 15) : 'dynamiccmd';
+            if (!prompt) {
+                alert('Wpisz prompt opisujący, co ma robić skrypt!');
+                return;
             }
 
-            const lowerPrompt = prompt.toLowerCase();
-            let numbers = prompt.match(/\d+/g);
-            let mainNumber = numbers ? numbers[0] : "1";
+            const outputEl = document.getElementById('sk-output');
+            const linesEl = document.getElementById('sk-lines');
+            outputEl.innerText = '⏳ Gemini AI generuje profesjonalny kod Skript... Proszę czekać...';
 
-            let sc = `# =====================================================================\n`;
-            sc += `# FLASHCODE STUDIO - INFINITE SYNTHESIS ENGINE v10.0\n`;
-            sc += `# Komenda: /${cmd} ${alias ? '(alias: /' + alias + ')' : ''}\n`;
-            sc += `# Nielimitowany Prompt: "${prompt}"\n`;
-            sc += `# =====================================================================\n\n`;
+            const systemInstruction = "Jesteś ekspertem w tworzeniu skryptów Minecraft (plugin Skript). Generujesz wyłącznie czysty, poprawny i działający kod Skript na podstawie żądania użytkownika. Nie dodawaj żadnego tekstu objaśniającego ani formatowania markdown z blokiem kodu typu ```skript, zwróć wyłącznie czysty tekst kodu.";
+            
+            const userContent = `Stwórz skrypt Minecraft Skript o następujących parametrach:
+- Główna komenda: /${cmd}
+${alias ? '- Alias komendy: /' + alias : ''}
+${perm ? '- Wymagana permisja: ' + perm : ''}
+- Opis i wymagania od użytkownika (zrealizuj to w 100% dokładnie z wszystkimi szczegółami przedmiotów, GUI lub logiką): ${prompt}`;
 
-            sc += `options:\n`;
-            sc += `\tprefix: "&8[&bFlashCode&8] &7»"\n\n`;
+            try {
+                const response = await fetch(`[https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$](https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$){apiKey}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        contents: [
+                            {
+                                parts: [
+                                    { text: systemInstruction + "\n\n" + userContent }
+                                ]
+                            }
+                        ]
+                    })
+                });
 
-            if (alias) {
-                sc += `command /${alias}:\n`;
-                sc += `\ttrigger:\n`;
-                sc += `\t\tmake player execute command "${cmd}"\n`;
-                sc += `\t\tstop\n\n`;
+                const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error.message || 'Błąd API Gemini');
+                }
+
+                let generatedCode = data.candidates[0].content.parts[0].text;
+                
+                // Oczyszczenie z ewentualnych znaczników markdown codeblock
+                generatedCode = generatedCode.replace(/^```[a-z]*\n?/i, '').replace(/```\s*$/, '').trim();
+
+                outputEl.innerText = generatedCode;
+                const linesCount = generatedCode.split('\n').length;
+                linesEl.innerText = linesCount + ' linii kodu';
+                saveHistory('Gemini AI: /' + cmd, generatedCode);
+
+            } catch (error) {
+                outputEl.innerText = '❌ Błąd podczas komunikacji z Gemini AI:\n' + error.message;
+                alert('Wystąpił błąd: ' + error.message);
             }
-
-            sc += `command /${cmd}:\n`;
-            if (perm) {
-                sc += `\tpermission: ${perm}\n`;
-                sc += `\tpermission message: "{@prefix} &cNie posiadasz uprawnień (${perm})!"\n`;
-            }
-            sc += `\ttrigger:\n`;
-            sc += `\t\tset {_p} to player\n`;
-            sc += `\t\tset {_uuid} to uuid of player\n\n`;
-            sc += `\t\t# --- ANALIZA INTENCJI DLA NIESKOŃCZONOŚCI RZECZY ---\n`;
-            sc += `\t\tbroadcast "{@prefix} &7Inicjalizuję proces dla: &f${prompt}"\n`;
-
-            let actionCount = 0;
-
-            if (lowerPrompt.includes('daj') || lowerPrompt.includes('stworz') || lowerPrompt.includes('wygeneruj') || lowerPrompt.includes('dostać') || lowerPrompt.includes('miecz') || lowerPrompt.includes('item')) {
-                actionCount++;
-                sc += `\t\t# [Moduł ${actionCount}] Generowanie zasobów i obiektów\n`;
-                sc += `\t\tgive {_p} diamond sword of sharpness ${mainNumber} named "&b${prompt}" with lore "&7Wygenerowano dynamicznie przez FlashCode", "&7Wartość parametryczna: ${mainNumber}"\n`;
-            }
-
-            if (lowerPrompt.includes('gui') || lowerPrompt.includes('menu') || lowerPrompt.includes('panel') || lowerPrompt.includes('okno') || lowerPrompt.includes('edytuj')) {
-                actionCount++;
-                sc += `\t\t# [Moduł ${actionCount}] Dynamiczny interfejs graficzny GUI\n`;
-                sc += `\t\topen chest inventory with 3 rows named "&8[&6Panel: ${cmd}&8]" to {_p}\n`;
-                sc += `\t\tformat gui slot (integers between 0 and 26) of {_p} with gray stained glass pane named " "\n`;
-                sc += `\t\tformat gui slot 13 of {_p} with nether star named "&e&lZarządzanie" with lore "&7Kontekst: ${prompt}":\n`;
-                sc += `\t\t\tsend "{@prefix} &aWykonano akcję z dynamicznego panelu!" to {_p}\n`;
-            }
-
-            if (lowerPrompt.includes('efekt') || lowerPrompt.includes('lecz') || lowerPrompt.includes('siła') || lowerPrompt.includes('szybkość') || lowerPrompt.includes('hp') || lowerPrompt.includes('zabij')) {
-                actionCount++;
-                sc += `\t\t# [Moduł ${actionCount}] Modyfikacja stanu gracza\n`;
-                sc += `\t\tapply effect speed of tier ${mainNumber} to {_p} for 120 seconds\n`;
-                sc += `\t\theal {_p}\n`;
-            }
-
-            if (lowerPrompt.includes('zapisz') || lowerPrompt.includes('baza') || lowerPrompt.includes('dane') || lowerPrompt.includes('pamięć') || lowerPrompt.includes('zmienna')) {
-                actionCount++;
-                sc += `\t\t# [Moduł ${actionCount}] Zapis danych w bazie serwera\n`;
-                sc += `\t\tset {fc.infinite::%{_uuid}%} to "${prompt}"\n`;
-                sc += `\t\tsend "{@prefix} &eZapisano stan sesji w pamięci stałej!" to {_p}\n`;
-            }
-
-            if (actionCount === 0) {
-                sc += `\t\t# [Moduł Uniwersalny] Wykonanie nielimitowanej procedury logicznej\n`;
-                sc += `\t\tloop ${mainNumber} times:\n`;
-                sc += `\t\t\tplay sound "entity.experience_orb.pickup" with volume 0.8 and pitch 1.2 at {_p}\n`;
-                sc += `\t\tset {fc.custom::%{_uuid}%} to true\n`;
-            }
-
-            sc += `\n\t\t# Finalizacja operacji\n`;
-            sc += `\t\tsend "{@prefix} &aZrealizowano pomyślnie intencję: &f${prompt}" to {_p}\n`;
-            sc += `\t\tstop\n`;
-
-            const linesCount = sc.split('\n').length;
-            document.getElementById('sk-output').innerText = sc;
-            document.getElementById('sk-lines').innerText = linesCount + ' linii kodu';
-            saveHistory('Infinite: /' + cmd, sc);
         }
 
         // --- TRANSFORMATOR TEKSTU ---
@@ -376,7 +366,7 @@
         }
 
         // --- MENEDŻER PACZKI ---
-        let packData = JSON.parse(localStorage.getItem('fc_pack_v10') || '[]');
+        let packData = JSON.parse(localStorage.getItem('fc_pack_v11') || '[]');
         renderPack();
 
         function addPackItem() {
@@ -384,7 +374,7 @@
             const type = document.getElementById('pack-type').value;
             if (!name) return alert('Wpisz nazwę!');
             packData.push({ name, type });
-            localStorage.setItem('fc_pack_v10', JSON.stringify(packData));
+            localStorage.setItem('fc_pack_v11', JSON.stringify(packData));
             document.getElementById('pack-name').value = '';
             renderPack();
         }
@@ -405,7 +395,7 @@
 
         function removePack(idx) {
             packData.splice(idx, 1);
-            localStorage.setItem('fc_pack_v10', JSON.stringify(packData));
+            localStorage.setItem('fc_pack_v11', JSON.stringify(packData));
             renderPack();
         }
 
@@ -419,7 +409,7 @@
         }
 
         // --- GRAFIKA I ZASOBY ---
-        let assetsData = JSON.parse(localStorage.getItem('fc_assets_v10') || '[]');
+        let assetsData = JSON.parse(localStorage.getItem('fc_assets_v11') || '[]');
         renderAssets();
 
         function addAssetItem() {
@@ -427,7 +417,7 @@
             const dims = document.getElementById('asset-dims').value.trim();
             if (!title) return alert('Wpisz nazwę zasobu!');
             assetsData.push({ title, dims: dims || 'N/A' });
-            localStorage.setItem('fc_assets_v10', JSON.stringify(assetsData));
+            localStorage.setItem('fc_assets_v11', JSON.stringify(assetsData));
             document.getElementById('asset-title').value = '';
             document.getElementById('asset-dims').value = '';
             renderAssets();
@@ -449,21 +439,21 @@
 
         function removeAsset(idx) {
             assetsData.splice(idx, 1);
-            localStorage.setItem('fc_assets_v10', JSON.stringify(assetsData));
+            localStorage.setItem('fc_assets_v11', JSON.stringify(assetsData));
             renderAssets();
         }
 
         // --- HISTORIA ---
         function saveHistory(title, data) {
-            let history = JSON.parse(localStorage.getItem('fc_history_v10') || '[]');
+            let history = JSON.parse(localStorage.getItem('fc_history_v11') || '[]');
             history.unshift({ title, data, time: new Date().toLocaleTimeString() });
             if (history.length > 20) history.pop();
-            localStorage.setItem('fc_history_v10', JSON.stringify(history));
+            localStorage.setItem('fc_history_v11', JSON.stringify(history));
             loadHistory();
         }
 
         function loadHistory() {
-            let history = JSON.parse(localStorage.getItem('fc_history_v10') || '[]');
+            let history = JSON.parse(localStorage.getItem('fc_history_v11') || '[]');
             const container = document.getElementById('history-container');
             if (!container) return;
             if (history.length === 0) {
@@ -473,7 +463,7 @@
             container.innerHTML = history.map(h => `
                 <div class="bg-slate-900 border border-cardborder p-3 rounded-xl text-xs space-y-1">
                     <div class="flex justify-between text-slate-400">
-                        <span class="text-emerald-400 font-bold">${h.title}</span>
+                        <span class="text-purple-400 font-bold">${h.title}</span>
                         <span>${h.time}</span>
                     </div>
                     <pre class="font-mono text-slate-300 bg-slate-950 p-2 rounded overflow-x-auto">${h.data}</pre>
@@ -482,7 +472,7 @@
         }
 
         function clearHistory() {
-            localStorage.removeItem('fc_history_v10');
+            localStorage.removeItem('fc_history_v11');
             loadHistory();
         }
 
