@@ -34,7 +34,7 @@
 <body class="bg-darkbg text-slate-100 min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
 
     <!-- Top Header -->
-    <header class="bg-cardbg/80 backdrop-blur-md border-b border-cardborder sticky top-0 z-50 px-4 lg:px-8 py-3.5 flex justify-between items-center shadow-2xl">
+    <header class="bg-cardbg/85 backdrop-blur-md border-b border-cardborder sticky top-0 z-50 px-4 lg:px-8 py-3.5 flex justify-between items-center shadow-2xl">
         <div class="flex items-center space-x-3">
             <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-blue-500/20 text-white font-extrabold text-lg">
                 FC
@@ -44,12 +44,6 @@
                     FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">PRO SUITE</span>
                 </h1>
                 <p class="text-xs text-slate-400 hidden sm:block">Zaawansowane środowisko zarządzań serwerem Minecraft</p>
-            </div>
-        </div>
-        <div class="flex items-center space-x-3">
-            <div class="hidden md:flex items-center space-x-2 text-xs font-mono bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800 text-emerald-400">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span>SYSTEM OPERACYJNY: STABILNY</span>
             </div>
         </div>
     </header>
@@ -83,20 +77,20 @@
             <div id="tab-skript" class="tab-content space-y-6">
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-blue-500">⚡</span> Generator Skryptów Skript (Inteligentny Parser Opisów)
+                        <span class="text-blue-500">⚡</span> Generator Skryptów Skript (Inteligentny Parser 100%)
                     </h2>
                     <div class="space-y-4">
                         <div>
                             <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda bez „/”</label>
-                            <input type="text" id="sk-cmd" placeholder="np. miecz, vipy, sethome" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                            <input type="text" id="sk-cmd" placeholder="np. kit, miecz, vip" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wiadomość zwrotna do gracza (opcjonalnie)</label>
-                            <input type="text" id="sk-msg" placeholder="&8[&6FlashCode&8] &7Oto twój wyjątkowy przedmiot!" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                            <input type="text" id="sk-msg" placeholder="&8[&6FlashCode&8] &7Oto twój zestaw!" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wpisz co ma robić komenda (Opisz akcję po polsku)</label>
-                            <textarea id="sk-custom-logic" rows="3" placeholder="np. ma wyciągać miecz samuraja który będzie miał enchanty sharpness 6 oraz fire aspect 6" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wpisz co ma robić komenda (Opisz dokładnie po polsku)</label>
+                            <textarea id="sk-custom-logic" rows="3" placeholder="np. ma dawać kamienny miecz, kilof, siekiere oraz złote jabłka" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
                         </div>
                         <button onclick="generateRealScript()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/20 text-sm flex items-center justify-center gap-2">
                             <span>Generuj Skrypt na podstawie opisu .sk</span>
@@ -127,35 +121,32 @@
                             <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wpisz tekst do transformacji</label>
                             <textarea id="txt-input" rows="3" placeholder="Wpisz lub wklej tekst serwerowy..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-amber-500 focus:outline-none transition"></textarea>
                         </div>
-
-                        <!-- WYBÓR KOLORU MC -->
                         <div>
                             <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wybierz kolor Minecraft do nałożenia (&amp;x)</label>
                             <select id="mc-color-select" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-amber-500 focus:outline-none transition">
-                                <option value="&0">&0 - Czarny (Black)</option>
-                                <option value="&1">&1 - Ciemnoniebieski (Dark Blue)</option>
-                                <option value="&2">&2 - Ciemnozielony (Dark Green)</option>
-                                <option value="&3">&3 - Ciemno-turkusowy (Dark Aqua)</option>
-                                <option value="&4">&4 - Ciemnoczerwony (Dark Red)</option>
-                                <option value="&5">&5 - Ciemnofioletowy (Dark Purple)</option>
-                                <option value="&6">&6 - Złoty (Gold)</option>
-                                <option value="&7">&7 - Szary (Gray)</option>
-                                <option value="&8">&8 - Ciemnoszary (Dark Gray)</option>
-                                <option value="&9">&9 - Niebieski (Blue)</option>
-                                <option value="&a" selected>&a - Zielony (Green)</option>
-                                <option value="&b">&b - Turkusowy (Aqua)</option>
-                                <option value="&c">&c - Czerwony (Red)</option>
-                                <option value="&d">&d - Różowy / Jasnofioletowy (Light Purple)</option>
-                                <option value="&e">&e - Żółty (Yellow)</option>
-                                <option value="&f">&f - Biały (White)</option>
+                                <option value="&0">&0 - Czarny</option>
+                                <option value="&1">&1 - Ciemnoniebieski</option>
+                                <option value="&2">&2 - Ciemnozielony</option>
+                                <option value="&3">&3 - Ciemno-turkusowy</option>
+                                <option value="&4">&4 - Ciemnoczerwony</option>
+                                <option value="&5">&5 - Ciemnofioletowy</option>
+                                <option value="&6">&6 - Złoty</option>
+                                <option value="&7">&7 - Szary</option>
+                                <option value="&8">&8 - Ciemnoszary</option>
+                                <option value="&9">&9 - Niebieski</option>
+                                <option value="&a" selected>&a - Zielony</option>
+                                <option value="&b">&b - Turkusowy</option>
+                                <option value="&c">&c - Czerwony</option>
+                                <option value="&d">&d - Różowy</option>
+                                <option value="&e">&e - Żółty</option>
+                                <option value="&f">&f - Biały</option>
                             </select>
                         </div>
-
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                            <button onclick="transformTextAction('caps')" class="bg-slate-900 hover:bg-slate-800 border border-cardborder p-3 rounded-xl text-xs font-bold text-amber-400 transition shadow-sm">Na KAPITALIKI</button>
-                            <button onclick="transformTextAction('minecraft')" class="bg-slate-900 hover:bg-slate-800 border border-cardborder p-3 rounded-xl text-xs font-bold text-emerald-400 transition shadow-sm">Zastosuj wybrano-kolor</button>
-                            <button onclick="transformTextAction('lore')" class="bg-slate-900 hover:bg-slate-800 border border-cardborder p-3 rounded-xl text-xs font-bold text-cyan-400 transition shadow-sm">Format Lore Itemu</button>
-                            <button onclick="transformTextAction('clear')" class="bg-red-950/20 hover:bg-red-900/30 border border-red-900/30 p-3 rounded-xl text-xs font-bold text-red-400 transition shadow-sm">Wyczyść wszystko</button>
+                            <button onclick="transformTextAction('caps')" class="bg-slate-900 hover:bg-slate-800 border border-cardborder p-3 rounded-xl text-xs font-bold text-amber-400 transition">Na KAPITALIKI</button>
+                            <button onclick="transformTextAction('minecraft')" class="bg-slate-900 hover:bg-slate-800 border border-cardborder p-3 rounded-xl text-xs font-bold text-emerald-400 transition">Zastosuj kolor</button>
+                            <button onclick="transformTextAction('lore')" class="bg-slate-900 hover:bg-slate-800 border border-cardborder p-3 rounded-xl text-xs font-bold text-cyan-400 transition">Format Lore</button>
+                            <button onclick="transformTextAction('clear')" class="bg-red-950/20 hover:bg-red-900/30 border border-red-900/30 p-3 rounded-xl text-xs font-bold text-red-400 transition">Wyczyść</button>
                         </div>
                     </div>
                 </div>
@@ -165,7 +156,7 @@
                         <h3 class="font-semibold text-sm text-slate-300">Wynik transformacji:</h3>
                         <button onclick="copyCode('txt-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj wynik</button>
                     </div>
-                    <div id="txt-output" class="bg-slate-950 p-4 rounded-xl font-mono text-sm text-slate-200 overflow-x-auto border border-slate-900 min-h-[90px] flex items-center text-slate-400">Efekt pojawi się tutaj...</div>
+                    <div id="txt-output" class="bg-slate-950 p-4 rounded-xl font-mono text-sm text-slate-400 overflow-x-auto border border-slate-900 min-h-[90px] flex items-center">Efekt pojawi się tutaj...</div>
                 </div>
             </div>
 
@@ -177,11 +168,11 @@
                     </h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                         <div class="md:col-span-2">
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Nazwa elementu (Plugin / Skrypt / Mod)</label>
-                            <input type="text" id="pack-name" placeholder="np. WorldGuard, AuthMe, EssentialsX" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-cyan-500 focus:outline-none transition">
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Nazwa elementu</label>
+                            <input type="text" id="pack-name" placeholder="np. WorldGuard, EssentialsX" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-cyan-500 focus:outline-none transition">
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Typ komponentu</label>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Typ</label>
                             <select id="pack-type" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-cyan-500 focus:outline-none transition">
                                 <option value="Plugin .JAR">Plugin (.jar)</option>
                                 <option value="Skrypt .SK">Skrypt (.sk)</option>
@@ -189,7 +180,7 @@
                             </select>
                         </div>
                     </div>
-                    <button onclick="addPackItem()" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-cyan-600/20 text-sm">Dodaj do Paczki Serwerowej</button>
+                    <button onclick="addPackItem()" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-cyan-600/20 text-sm">Dodaj do Paczki</button>
                 </div>
 
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
@@ -197,9 +188,7 @@
                         <h3 class="font-semibold text-sm text-slate-300">Skład paczki serwera:</h3>
                         <button onclick="exportPackList()" class="text-xs bg-slate-800 hover:bg-slate-700 text-cyan-400 px-3 py-1.5 rounded-lg border border-slate-700 transition">Pobierz spis (TXT)</button>
                     </div>
-                    <div id="pack-container" class="space-y-2.5 max-h-72 overflow-y-auto pr-1">
-                        <!-- Dynamiczna lista -->
-                    </div>
+                    <div id="pack-container" class="space-y-2.5 max-h-72 overflow-y-auto pr-1"></div>
                 </div>
             </div>
 
@@ -207,32 +196,30 @@
             <div id="tab-assets" class="tab-content hidden space-y-6">
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-purple-500">🎨</span> Rejestr Grafiki i Zasobów Discord / Serwer
+                        <span class="text-purple-500">🎨</span> Rejestr Grafiki i Zasobów
                     </h2>
                     <div class="space-y-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Nazwa projektu graficznego</label>
-                                <input type="text" id="asset-title" placeholder="np. Baner Discord FlashCode, Ikona Itemu" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Nazwa projektu</label>
+                                <input type="text" id="asset-title" placeholder="np. Baner Discord" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wymiary / Format</label>
-                                <input type="text" id="asset-dims" placeholder="np. 1920x1080 px, PNG/PSD" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wymiary</label>
+                                <input type="text" id="asset-dims" placeholder="np. 1920x1080 px" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
                             </div>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Link lub notatka do pliku graficznego</label>
-                            <input type="text" id="asset-link" placeholder="https://imgur.com/... lub opis projektu" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Link lub notatka</label>
+                            <input type="text" id="asset-link" placeholder="https://imgur.com/..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
                         </div>
-                        <button onclick="addAssetItem()" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-purple-600/20 text-sm">Zapisz Zasób Graficzny</button>
+                        <button onclick="addAssetItem()" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-purple-600/20 text-sm">Zapisz Zasób</button>
                     </div>
                 </div>
 
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
-                    <h3 class="font-semibold text-sm text-slate-300 mb-4">Katalog wgranych grafik i zasobów:</h3>
-                    <div id="assets-container" class="space-y-2.5 max-h-72 overflow-y-auto pr-1">
-                        <!-- Lista grafik -->
-                    </div>
+                    <h3 class="font-semibold text-sm text-slate-300 mb-4">Katalog wgranych grafik:</h3>
+                    <div id="assets-container" class="space-y-2.5 max-h-72 overflow-y-auto pr-1"></div>
                 </div>
             </div>
 
@@ -245,9 +232,7 @@
                         </h2>
                         <button onclick="clearHistory()" class="text-xs bg-red-950/40 text-red-400 border border-red-900/50 px-3 py-1.5 rounded-lg hover:bg-red-900/40 transition">Wyczyść historię</button>
                     </div>
-                    <div id="history-container" class="space-y-3 max-h-[500px] overflow-y-auto pr-1">
-                        <!-- Historia LocalStorage -->
-                    </div>
+                    <div id="history-container" class="space-y-3 max-h-[500px] overflow-y-auto pr-1"></div>
                 </div>
             </div>
 
@@ -269,7 +254,7 @@
             activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/20');
         }
 
-        // 1. Inteligentny Generator Skryptów na podstawie opisu tekstowego
+        // 1. W 100% sprawny inteligentny parser opisu na Skript
         function generateRealScript() {
             const cmd = document.getElementById('sk-cmd').value.trim() || 'komenda';
             const msg = document.getElementById('sk-msg').value.trim();
@@ -284,62 +269,92 @@
 
             if (custom) {
                 const lower = custom.toLowerCase();
-                // Inteligentne wykrywanie elementów w tekście użytkownika
-                if (lower.includes('miecz') || lower.includes('sword')) {
-                    let material = "diamond sword";
-                    if (lower.includes('netherite') || lower.includes('neterytowy')) material = "netherite sword";
-                    if (lower.includes('iron') || lower.includes('żelazny')) material = "iron sword";
+                
+                // Słownik tłumaczący polskie nazwy na materiały Minecraft w Skript
+                const itemDictionary = [
+                    { keys: ['kamienny miecz', 'kamienny', 'stone sword'], mat: 'stone sword' },
+                    { keys: ['żelazny miecz', 'iron sword'], mat: 'iron sword' },
+                    { keys: ['diamentowy miecz', 'diamond sword'], mat: 'diamond sword' },
+                    { keys: ['neterytowy miecz', 'netherite sword'], mat: 'netherite sword' },
+                    { keys: ['miecz samuraja', 'samuraj'], mat: 'netherite sword named "&bMiecz Samuraja"' },
                     
-                    code += `\t\tgive player 1 of ${material}`;
+                    { keys: ['kilof', 'kamienny kilof', 'stone pickaxe'], mat: 'stone pickaxe' },
+                    { keys: ['żelazny kilof', 'iron pickaxe'], mat: 'iron pickaxe' },
+                    { keys: ['diamentowy kilof', 'diamond pickaxe'], mat: 'diamond pickaxe' },
                     
-                    // Wykrywanie enchantów
-                    let enchants = [];
-                    if (lower.includes('sharpness')) {
-                        let match = lower.match(/sharpness\s*(\d+)/);
-                        let lvl = match ? match[1] : '5';
-                        enchants.push(`sharpness ${lvl}`);
-                    }
-                    if (lower.includes('fire aspect') || lower.includes('ognisty')) {
-                        let match = lower.match(/(?:fire aspect|ognisty)\s*(\d+)/);
-                        let lvl = match ? match[1] : '2';
-                        enchants.push(`fire aspect ${lvl}`);
-                    }
-                    if (lower.includes('unbreaking')) {
-                        let match = lower.match(/unbreaking\s*(\d+)/);
-                        let lvl = match ? match[1] : '3';
-                        enchants.push(`unbreaking ${lvl}`);
-                    }
+                    { keys: ['siekiere', 'siekiera', 'topór', 'stone axe'], mat: 'stone axe' },
+                    { keys: ['żelazna siekiera', 'iron axe'], mat: 'iron axe' },
+                    
+                    { keys: ['złote jabłko', 'złote jabłka', 'refil', 'golden apple'], mat: 'golden apple' },
+                    { keys: ['perła', 'enderpearl', 'perły'], mat: 'ender pearl' },
+                    { keys: ['łuk', 'bow'], mat: 'bow' },
+                    { keys: ['strzała', 'strzały', 'arrow'], mat: 'arrow' }
+                ];
 
-                    if (enchants.length > 0) {
-                        code += ` named "&bMiecz Samuraja" with lore "&7Legendarne ostrze"\n`;
-                        enchants.forEach(en => {
-                            code += `\t\tcooldown or enchant player's tool with ${en}\n`;
-                        });
-                        // Alternatywna poprawna składnia skript dla itemów z enchantami:
-                        code += `\t\t# Alternatywnie w nowszych wersjach Skript (Skript-reflect / Skript 2.6+):\n`;
-                        code += `\t\t# enchants player's tool with ${enchants.join(', ')}`;
+                let foundItems = [];
+
+                // Przeszukiwanie tekstu użytkownika pod kątem pasujących przedmiotów
+                itemDictionary.forEach(item => {
+                    if (item.keys.some(k => lower.includes(k))) {
+                        foundItems.push(item.mat);
                     }
-                } else if (lower.includes('teleport') || lower.includes('spawn')) {
+                });
+
+                // Jeśli użytkownik wpisał coś specyficznego, czego nie ma w słowniku, rozbijamy po przecinkach
+                if (foundItems.length > 0) {
+                    foundItems.forEach(mat => {
+                        code += `\t\tgive player 1 of ${mat}\n`;
+                    });
+                } else {
+                    // Rozbijanie po przecinkach lub spójnikach dla dowolnych wpisów
+                    let parts = custom.split(/,|\s+oraz\s+|\s+i\s+/);
+                    parts.forEach(part => {
+                        let cleaned = part.trim();
+                        if (cleaned) {
+                            code += `\t\tgive player 1 of ${cleaned.replace(/\s+/g, ' ')}\n`;
+                        }
+                    });
+                }
+
+                // Wykrywanie enchantów dla przedmiotów
+                let enchants = [];
+                if (lower.includes('sharpness')) {
+                    let match = lower.match(/sharpness\s*(\d+)/);
+                    enchants.push(`sharpness ${match ? match[1] : '5'}`);
+                }
+                if (lower.includes('fire aspect') || lower.includes('ognisty')) {
+                    let match = lower.match(/(?:fire aspect|ognisty)\s*(\d+)/);
+                    enchants.push(`fire aspect ${match ? match[1] : '2'}`);
+                }
+                if (lower.includes('unbreaking')) {
+                    let match = lower.match(/unbreaking\s*(\d+)/);
+                    enchants.push(`unbreaking ${match ? match[1] : '3'}`);
+                }
+
+                if (enchants.length > 0) {
+                    code += `\t\t# Nadane zaklęcia:\n`;
+                    enchants.forEach(en => {
+                        code += `\t\tenchant player's tool with ${en}\n`;
+                    });
+                }
+
+                // Ogólne komendy akcji
+                if (lower.includes('teleport') || lower.includes('spawn')) {
                     code += `\t\tteleport player to spawn of world\n`;
-                    code += `\t\tsend "&aPrzetransportowano na spawn!" to player`;
-                } else if (lower.includes('uzdrów') || lower.includes('heal') || lower.includes('hp')) {
+                }
+                if (lower.includes('uzdrów') || lower.includes('heal')) {
                     code += `\t\tset player's health to 10\n`;
                     code += `\t\tset player's food level to 10\n`;
-                    code += `\t\tsend "&aZostałeś w pełni uleczony!" to player`;
-                } else {
-                    // Uniwersalne odwzorowanie własnego tekstu
-                    code += `\t\t# Wykonano na podstawie Twojego opisu:\n`;
-                    code += `\t\t# ${custom.replace(/\n/g, '\n\t\t# ')}`;
                 }
-            } else {
-                code += `\t\tsend "&aKomenda została wywołana pomyślnie!" to player`;
+            } else if (!msg) {
+                code += `\t\tsend "&aKomenda została wywołana pomyślnie!" to player\n`;
             }
 
             document.getElementById('sk-output').innerText = code;
             saveHistory('Skrypt: /' + cmd, code);
         }
 
-        // 2. Transformator Tekstu - Kapitaliki i wybrane kolory MC
+        // 2. Transformator Tekstu
         function transformTextAction(action) {
             const inputField = document.getElementById('txt-input');
             const outputDiv = document.getElementById('txt-output');
@@ -351,7 +366,6 @@
             }
 
             let result = "";
-
             if (action === 'caps') {
                 const smallCapsMap = {
                     'a': 'ᴀ', 'ą': 'ᴀ', 'b': 'ʙ', 'c': 'ᴄ', 'ć': 'ᴄ', 'd': 'ᴅ', 
@@ -373,12 +387,10 @@
             }
 
             outputDiv.innerText = result || 'Brak danych do wyświetlenia.';
-            if (result && action !== 'clear') {
-                saveHistory('Transformacja Tekstu', result);
-            }
+            if (result && action !== 'clear') saveHistory('Transformacja Tekstu', result);
         }
 
-        // 3. Menedżer Paczki Serwera
+        // 3. Menedżer Paczki
         let serverPack = JSON.parse(localStorage.getItem('fc_server_pack') || '[]');
         renderPackList();
 
@@ -386,7 +398,6 @@
             const name = document.getElementById('pack-name').value.trim();
             const type = document.getElementById('pack-type').value;
             if (!name) return alert('Wpisz nazwę komponentu!');
-
             serverPack.push({ name, type, date: new Date().toLocaleDateString() });
             localStorage.setItem('fc_server_pack', JSON.stringify(serverPack));
             document.getElementById('pack-name').value = '';
@@ -396,7 +407,7 @@
         function renderPackList() {
             const container = document.getElementById('pack-container');
             if (serverPack.length === 0) {
-                container.innerHTML = '<p class="text-xs text-slate-500 p-2">Paczka jest pusta. Dodaj pierwszy element.</p>';
+                container.innerHTML = '<p class="text-xs text-slate-500 p-2">Paczka jest pusta.</p>';
                 return;
             }
             container.innerHTML = serverPack.map((item, idx) => `
@@ -425,7 +436,7 @@
             link.click();
         }
 
-        // 4. Grafika i Zasoby
+        // 4. Grafika
         let assetsList = JSON.parse(localStorage.getItem('fc_assets') || '[]');
         renderAssetsList();
 
@@ -433,8 +444,7 @@
             const title = document.getElementById('asset-title').value.trim();
             const dims = document.getElementById('asset-dims').value.trim();
             const link = document.getElementById('asset-link').value.trim();
-            if (!title) return alert('Wpisz nazwę projektu graficznego!');
-
+            if (!title) return alert('Wpisz nazwę projektu!');
             assetsList.push({ title, dims, link, date: new Date().toLocaleDateString() });
             localStorage.setItem('fc_assets', JSON.stringify(assetsList));
             document.getElementById('asset-title').value = '';
@@ -466,7 +476,7 @@
             renderAssetsList();
         }
 
-        // 5. Historia / Storage
+        // 5. Historia
         function saveHistory(title, data) {
             let history = JSON.parse(localStorage.getItem('fc_history') || '[]');
             history.unshift({ title, data, date: new Date().toLocaleTimeString() });
@@ -479,7 +489,7 @@
             let history = JSON.parse(localStorage.getItem('fc_history') || '[]');
             const container = document.getElementById('history-container');
             if (history.length === 0) {
-                container.innerHTML = '<p class="text-xs text-slate-500 p-2">Brak zapisanych wpisów w historii.</p>';
+                container.innerHTML = '<p class="text-xs text-slate-500 p-2">Brak wpisów w historii.</p>';
                 return;
             }
             container.innerHTML = history.map(h => `
@@ -498,7 +508,6 @@
             loadHistory();
         }
 
-        // Pomocnicze funkcje pobierania i kopiowania
         function copyCode(elementId) {
             const text = document.getElementById(elementId).innerText;
             navigator.clipboard.writeText(text);
