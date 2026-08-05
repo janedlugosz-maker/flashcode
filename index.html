@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlashCode Studio Pro - Ultimate Dev Kit</title>
+    <title>FlashCode Studio | Professional Dev Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -11,9 +11,10 @@
             theme: {
                 extend: {
                     colors: {
-                        darkbg: '#090d16',
-                        cardbg: '#111827',
-                        accent: '#06b6d4',
+                        darkbg: '#07090e',
+                        cardbg: '#0f172a',
+                        cardborder: '#1e293b',
+                        accent: '#3b82f6',
                         minecraft: '#f59e0b'
                     }
                 }
@@ -21,148 +22,218 @@
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap');
-        body { font-family: 'Inter', sans-serif; }
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #07090e; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
     </style>
 </head>
-<body class="bg-darkbg text-gray-100 min-h-screen flex flex-col">
+<body class="bg-darkbg text-slate-100 min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
 
-    <!-- Header -->
-    <header class="bg-cardbg border-b border-gray-800 p-4 sticky top-0 z-50 flex justify-between items-center shadow-lg">
+    <!-- Top Header -->
+    <header class="bg-cardbg/80 backdrop-blur-md border-b border-cardborder sticky top-0 z-50 px-4 lg:px-8 py-3.5 flex justify-between items-center shadow-2xl">
         <div class="flex items-center space-x-3">
-            <span class="text-2xl">⚡</span>
-            <h1 class="font-extrabold text-xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-amber-400">FLASHCODE STUDIO PRO</h1>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-blue-500/20 text-white font-extrabold text-lg">
+                FC
+            </div>
+            <div>
+                <h1 class="font-extrabold text-base lg:text-lg tracking-wide text-white flex items-center gap-2">
+                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">PRO SUITE</span>
+                </h1>
+                <p class="text-xs text-slate-400 hidden sm:block">Zaawansowane środowisko zarządzań serwerem Minecraft</p>
+            </div>
         </div>
-        <div class="text-xs bg-gray-800 px-3 py-1.5 rounded-full border border-gray-700 text-cyan-400 font-mono">
-            SYSTEM: ONLINE v3.0
+        <div class="flex items-center space-x-3">
+            <div class="hidden md:flex items-center space-x-2 text-xs font-mono bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800 text-emerald-400">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>SYSTEM OPERACYJNY: STABILNY</span>
+            </div>
         </div>
     </header>
 
-    <!-- Main Container -->
-    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+    <!-- Main Workspace -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 lg:p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
         
         <!-- Sidebar Navigation -->
-        <aside class="lg:col-span-1 space-y-2 flex flex-row lg:flex-col overflow-x-auto pb-2 lg:pb-0">
-            <button onclick="switchTab('skript')" id="btn-skript" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-cyan-600 text-white shadow-md flex items-center space-x-2 whitespace-nowrap">
-                <span>💻</span> <span>Generator Skryptów</span>
+        <aside class="lg:col-span-1 space-y-1.5 flex flex-row lg:flex-col overflow-x-auto pb-2 lg:pb-0 shrink-0">
+            <button onclick="switchTab('skript')" id="btn-skript" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-blue-600 text-white shadow-lg shadow-blue-600/20 flex items-center space-x-3 whitespace-nowrap text-sm">
+                <span class="text-base">⚡</span> <span>Generator Skryptów (.sk)</span>
             </button>
-            <button onclick="switchTab('text')" id="btn-text" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-cardbg hover:bg-gray-800 text-gray-300 flex items-center space-x-2 whitespace-nowrap">
-                <span>🔠</span> <span>Formatowanie i Kapitaliki</span>
+            <button onclick="switchTab('text')" id="btn-text" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
+                <span class="text-base">🔠</span> <span>Transformator Tekstu & Kolory</span>
             </button>
-            <button onclick="switchTab('pack')" id="btn-pack" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-cardbg hover:bg-gray-800 text-gray-300 flex items-center space-x-2 whitespace-nowrap">
-                <span>📦</span> <span>Menedżer Paczki MC</span>
+            <button onclick="switchTab('pack')" id="btn-pack" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
+                <span class="text-base">📦</span> <span>Menedżer Paczki Serwera</span>
             </button>
-            <button onclick="switchTab('storage')" id="btn-storage" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-cardbg hover:bg-gray-800 text-gray-300 flex items-center space-x-2 whitespace-nowrap">
-                <span>📂</span> <span>Archiwum Plików</span>
+            <button onclick="switchTab('assets')" id="btn-assets" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
+                <span class="text-base">🎨</span> <span>Grafika & Zasoby (Assets)</span>
+            </button>
+            <button onclick="switchTab('storage')" id="btn-storage" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
+                <span class="text-base">💾</span> <span>Zapisane Projekty</span>
             </button>
         </aside>
 
         <!-- Content Area -->
         <section class="lg:col-span-3 space-y-6">
 
-            <!-- TAB 1: SKRYPTY -->
-            <div id="tab-skript" class="tab-content space-y-4">
-                <div class="bg-cardbg border border-gray-800 p-6 rounded-2xl shadow-xl">
-                    <h2 class="text-lg font-bold text-cyan-400 mb-4 flex items-center gap-2">🛠️ Realny Generator Skryptów (.sk)</h2>
+            <!-- TAB 1: GENERATOR SKRYPTÓW -->
+            <div id="tab-skript" class="tab-content space-y-6">
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
+                    <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
+                        <span class="text-blue-500">⚡</span> Generator Skryptów Skript
+                    </h2>
                     <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-1">Nazwa komendy / eventu</label>
-                            <input type="text" id="sk-name" placeholder="np. vipy, sethome, gildie" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-cyan-500 focus:outline-none">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda bez „/”</label>
+                                <input type="text" id="sk-cmd" placeholder="np. vipy, sethome, gildie" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Typ logiki komendy</label>
+                                <select id="sk-type" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                    <option value="message">Wysłanie wiadomości do gracza</option>
+                                    <option value="heal">Leczenie / Odnowienie HP i głodu</option>
+                                    <option value="teleport">Teleportacja na spawn</option>
+                                    <option value="broadcast">Ogłoszenie globalne na serwerze</option>
+                                </select>
+                            </div>
                         </div>
                         <div>
-                            <label class="block text-sm text-gray-400 mb-1">Typ logiki</label>
-                            <select id="sk-type" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-cyan-500 focus:outline-none">
-                                <option value="command">Prosta Komenda z Wiadomością</option>
-                                <option value="heal">Komenda Leczenia / Odnowienia</option>
-                                <option value="join">Event Wejścia Gracza (First Join / Join)</option>
-                                <option value="block">Blokada niszczenia / Ochrona terenu</option>
-                            </select>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wiadomość zwrotna (opcjonalne)</label>
+                            <input type="text" id="sk-msg" placeholder="&8[&6FlashCode&8] &7Operacja wykonana pomyślnie!" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                         </div>
                         <div>
-                            <label class="block text-sm text-gray-400 mb-1">Wiadomość zwrotna / Prefix</label>
-                            <input type="text" id="sk-msg" placeholder="&8[&6FlashCode&8] &7Twój komunikat..." class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-cyan-500 focus:outline-none">
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wpisz co ma robić komenda (Własna instrukcja logiczna)</label>
+                            <textarea id="sk-custom-logic" rows="2" placeholder="np. sprawdź czy gracz ma uprawnienie flashcode.admin..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
                         </div>
-                        <button onclick="generateScript()" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold p-3 rounded-lg transition shadow-lg">Generuj i Zapisz Skrypt</button>
+                        <button onclick="generateRealScript()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/20 text-sm flex items-center justify-center gap-2">
+                            <span>Generuj Skrypt .sk</span>
+                        </button>
                     </div>
                 </div>
 
-                <div class="bg-cardbg border border-gray-800 p-6 rounded-2xl shadow-xl">
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="font-semibold text-gray-300">Podgląd wygenerowanego kodu:</h3>
-                        <button onclick="copyCode('sk-output')" class="text-xs bg-gray-800 hover:bg-gray-700 text-cyan-400 px-3 py-1 rounded border border-gray-700">Kopiuj</button>
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="font-semibold text-sm text-slate-300">Wygenerowany Kod Skryptu:</h3>
+                        <div class="flex gap-2">
+                            <button onclick="downloadFile('sk-output', 'skrypt.sk', 'text/plain')" class="text-xs bg-slate-800 hover:bg-slate-700 text-blue-400 px-3 py-1.5 rounded-lg border border-slate-700 transition">Pobierz .sk</button>
+                            <button onclick="copyCode('sk-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj</button>
+                        </div>
                     </div>
-                    <pre id="sk-output" class="bg-gray-950 p-4 rounded-xl font-mono text-sm text-emerald-400 overflow-x-auto border border-gray-800 min-h-[120px]">// Tutaj pojawi się gotowy kod skryptu...</pre>
+                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs lg:text-sm text-emerald-400 overflow-x-auto border border-slate-900 min-h-[140px] flex items-center text-slate-500">// Tutaj pojawi się gotowy, poprawny kod skryptu po kliknięciu generowania...</pre>
                 </div>
             </div>
 
-            <!-- TAB 2: TEKST I KAPITALIKI -->
-            <div id="tab-text" class="tab-content hidden space-y-4">
-                <div class="bg-cardbg border border-gray-800 p-6 rounded-2xl shadow-xl">
-                    <h2 class="text-lg font-bold text-amber-400 mb-4 flex items-center gap-2">🔠 Edytor i Transformator Tekstu MC</h2>
+            <!-- TAB 2: TRANSFORMATOR TEKSTU -->
+            <div id="tab-text" class="tab-content hidden space-y-6">
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
+                    <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
+                        <span class="text-amber-500">🔠</span> Transformator Tekstu & Formatowanie Minecraft
+                    </h2>
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm text-gray-400 mb-1">Wpisz tekst do modyfikacji</label>
-                            <textarea id="txt-input" rows="3" placeholder="Wpisz tekst serwerowy..." class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-amber-500 focus:outline-none"></textarea>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wygeneruj poniższy tekst na kapitaliki / formatowanie</label>
+                            <textarea id="txt-input" rows="3" placeholder="Wpisz lub wklej tekst serwerowy..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-amber-500 focus:outline-none transition"></textarea>
                         </div>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                            <button onclick="transformText('caps')" class="bg-gray-800 hover:bg-gray-700 border border-gray-700 p-3 rounded-lg text-sm font-semibold text-amber-300 transition">Na KAPITALIKI</button>
-                            <button onclick="transformText('minecraft')" class="bg-gray-800 hover:bg-gray-700 border border-gray-700 p-3 rounded-lg text-sm font-semibold text-emerald-400 transition">Dodaj &a Kolory</button>
-                            <button onclick="transformText('lore')" class="bg-gray-800 hover:bg-gray-700 border border-gray-700 p-3 rounded-lg text-sm font-semibold text-cyan-400 transition">Format Lore Itemu</button>
-                            <button onclick="transformText('clear')" class="bg-red-950/40 hover:bg-red-900/40 border border-red-900/50 p-3 rounded-lg text-sm font-semibold text-red-400 transition">Wyczyść</button>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                            <button onclick="transformTextAction('caps')" class="bg-slate-900 hover:bg-slate-800 border border-cardborder p-3 rounded-xl text-xs font-bold text-amber-400 transition shadow-sm">Na KAPITALIKI</button>
+                            <button onclick="transformTextAction('minecraft')" class="bg-slate-900 hover:bg-slate-800 border border-cardborder p-3 rounded-xl text-xs font-bold text-emerald-400 transition shadow-sm">Dodaj Kolory &a</button>
+                            <button onclick="transformTextAction('lore')" class="bg-slate-900 hover:bg-slate-800 border border-cardborder p-3 rounded-xl text-xs font-bold text-cyan-400 transition shadow-sm">Format Lore Itemu</button>
+                            <button onclick="transformTextAction('clear')" class="bg-red-950/20 hover:bg-red-900/30 border border-red-900/30 p-3 rounded-xl text-xs font-bold text-red-400 transition shadow-sm">Wyczyść wszystko</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-cardbg border border-gray-800 p-6 rounded-2xl shadow-xl">
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="font-semibold text-gray-300">Wynik operacji:</h3>
-                        <button onclick="copyCode('txt-output')" class="text-xs bg-gray-800 hover:bg-gray-700 text-amber-400 px-3 py-1 rounded border border-gray-700">Kopiuj</button>
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="font-semibold text-sm text-slate-300">Wynik transformacji:</h3>
+                        <button onclick="copyCode('txt-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj wynik</button>
                     </div>
-                    <div id="txt-output" class="bg-gray-950 p-4 rounded-xl font-mono text-sm text-gray-200 overflow-x-auto border border-gray-800 min-h-[80px]">Efekt pojawi się tutaj...</div>
+                    <div id="txt-output" class="bg-slate-950 p-4 rounded-xl font-mono text-sm text-slate-200 overflow-x-auto border border-slate-900 min-h-[90px] flex items-center text-slate-500">Efekt pojawi się tutaj...</div>
                 </div>
             </div>
 
             <!-- TAB 3: MENEDŻER PACZKI -->
-            <div id="tab-pack" class="tab-content hidden space-y-4">
-                <div class="bg-cardbg border border-gray-800 p-6 rounded-2xl shadow-xl">
-                    <h2 class="text-lg font-bold text-cyan-400 mb-4 flex items-center gap-2">📦 Kreator Paczki Serwerowej MC</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-1">Nazwa Pluginu / Elementu Paczki</label>
-                            <input type="text" id="pack-item-name" placeholder="np. WorldGuard, AuthMe, Skript" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-cyan-500 focus:outline-none">
+            <div id="tab-pack" class="tab-content hidden space-y-6">
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
+                    <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
+                        <span class="text-cyan-500">📦</span> Menedżer Paczki Serwera Minecraft
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Nazwa elementu (Plugin / Skrypt / Mod)</label>
+                            <input type="text" id="pack-name" placeholder="np. WorldGuard, AuthMe, EssentialsX" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-cyan-500 focus:outline-none transition">
                         </div>
                         <div>
-                            <label class="block text-sm text-gray-400 mb-1">Kategoria</label>
-                            <select id="pack-item-cat" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-cyan-500 focus:outline-none">
-                                <option value="Plugin (.jar)">Plugin (.jar)</option>
-                                <option value="Skrypt (.sk)">Skrypt (.sk)</option>
-                                <option value="Konfiguracja">Konfiguracja / Config</option>
-                                <option value="Grafika / Zasoby">Grafika / Zasoby</option>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Typ komponentu</label>
+                            <select id="pack-type" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-cyan-500 focus:outline-none transition">
+                                <option value="Plugin .JAR">Plugin (.jar)</option>
+                                <option value="Skrypt .SK">Skrypt (.sk)</option>
+                                <option value="Konfiguracja YML">Konfiguracja (YML)</option>
                             </select>
                         </div>
                     </div>
-                    <button onclick="addPackItem()" class="w-full bg-amber-600 hover:bg-amber-500 text-gray-950 font-bold p-3 rounded-lg transition shadow-lg">Dodaj do Paczki Serwerowej</button>
+                    <button onclick="addPackItem()" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-cyan-600/20 text-sm">Dodaj do Paczki Serwerowej</button>
                 </div>
 
-                <div class="bg-cardbg border border-gray-800 p-6 rounded-2xl shadow-xl">
-                    <h3 class="font-semibold text-gray-300 mb-3">Zawartość Twojej paczki:</h3>
-                    <div id="pack-list" class="space-y-2 max-h-60 overflow-y-auto pr-2">
-                        <!-- Dynamiczna lista elementów -->
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-semibold text-sm text-slate-300">Skład paczki serwera:</h3>
+                        <button onclick="exportPackList()" class="text-xs bg-slate-800 hover:bg-slate-700 text-cyan-400 px-3 py-1.5 rounded-lg border border-slate-700 transition">Pobierz spis (TXT)</button>
                     </div>
-                    <button onclick="exportPackManifest()" class="mt-4 bg-gray-800 hover:bg-gray-700 border border-gray-700 text-cyan-400 w-full py-2.5 rounded-lg text-sm font-semibold transition">Eksportuj spis paczki do pliku TXT</button>
+                    <div id="pack-container" class="space-y-2.5 max-h-72 overflow-y-auto pr-1">
+                        <!-- Dynamiczna lista -->
+                    </div>
                 </div>
             </div>
 
-            <!-- TAB 4: ARCHIWUM -->
-            <div id="tab-storage" class="tab-content hidden space-y-4">
-                <div class="bg-cardbg border border-gray-800 p-6 rounded-2xl shadow-xl">
-                    <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-lg font-bold text-emerald-400">📂 Zapisane Skrypty i Pliki w Pamięci</h2>
-                        <button onclick="clearStorage()" class="text-xs bg-red-950/50 text-red-400 border border-red-900 px-3 py-1 rounded hover:bg-red-900/50">Wyczyść historię</button>
+            <!-- TAB 4: GRAFIKA I ZASOBY -->
+            <div id="tab-assets" class="tab-content hidden space-y-6">
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
+                    <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
+                        <span class="text-purple-500">🎨</span> Rejestr Grafiki i Zasobów Discord / Serwer
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Nazwa projektu graficznego</label>
+                                <input type="text" id="asset-title" placeholder="np. Baner Discord FlashCode, Ikona Itemu" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wymiary / Format</label>
+                                <input type="text" id="asset-dims" placeholder="np. 1920x1080 px, PNG/PSD" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Link lub notatka do pliku graficznego</label>
+                            <input type="text" id="asset-link" placeholder="https://imgur.com/... lub opis projektu" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
+                        </div>
+                        <button onclick="addAssetItem()" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-purple-600/20 text-sm">Zapisz Zasób Graficzny</button>
                     </div>
-                    <div id="saved-items-container" class="space-y-3">
-                        <!-- Wpisy z LocalStorage -->
+                </div>
+
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
+                    <h3 class="font-semibold text-sm text-slate-300 mb-4">Katalog wgranych grafik i zasobów:</h3>
+                    <div id="assets-container" class="space-y-2.5 max-h-72 overflow-y-auto pr-1">
+                        <!-- Lista grafik -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 5: ZAPISANE PROJEKTY -->
+            <div id="tab-storage" class="tab-content hidden space-y-6">
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
+                    <div class="flex justify-between items-center mb-4 border-b border-cardborder pb-3">
+                        <h2 class="text-base font-bold text-white flex items-center gap-2">
+                            <span class="text-emerald-500">💾</span> Historia i Zapisane Elementy
+                        </h2>
+                        <button onclick="clearHistory()" class="text-xs bg-red-950/40 text-red-400 border border-red-900/50 px-3 py-1.5 rounded-lg hover:bg-red-900/40 transition">Wyczyść historię</button>
+                    </div>
+                    <div id="history-container" class="space-y-3 max-h-[500px] overflow-y-auto pr-1">
+                        <!-- Historia LocalStorage -->
                     </div>
                 </div>
             </div>
@@ -170,144 +241,209 @@
         </section>
     </main>
 
-    <!-- JavaScript Logika -->
+    <!-- JavaScript - Realna Logika i Narzędzia -->
     <script>
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(el => {
-                el.classList.remove('bg-cyan-600', 'text-white', 'shadow-md');
-                el.classList.add('bg-cardbg', 'text-gray-300');
+                el.classList.remove('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/20');
+                el.classList.add('bg-cardbg', 'text-slate-300', 'border', 'border-transparent');
             });
 
             document.getElementById('tab-' + tabId).classList.remove('hidden');
             const activeBtn = document.getElementById('btn-' + tabId);
-            activeBtn.classList.remove('bg-cardbg', 'text-gray-300');
-            activeBtn.classList.add('bg-cyan-600', 'text-white', 'shadow-md');
+            activeBtn.classList.remove('bg-cardbg', 'text-slate-300', 'border', 'border-transparent');
+            activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/20');
         }
 
         // 1. Generator Skryptów
-        function generateScript() {
-            const name = document.getElementById('sk-name').value.trim() || 'mojakomenda';
+        function generateRealScript() {
+            const cmd = document.getElementById('sk-cmd').value.trim() || 'flashcode';
             const type = document.getElementById('sk-type').value;
-            const msg = document.getElementById('sk-msg').value.trim() || '&8[&6FlashCode&8] &7Działa poprawnie!';
-            
-            let code = "";
-            if (type === 'command') {
-                code = `command /${name}:\n\ttrigger:\n\t\tsend "${msg}" to player`;
+            const msg = document.getElementById('sk-msg').value.trim() || '&8[&6FlashCode&8] &7Sukces!';
+            const custom = document.getElementById('sk-custom-logic').value.trim();
+
+            let code = `command /${cmd}:\n`;
+            if (custom) {
+                code += `\tdescription: "${custom}"\n`;
+            }
+            code += `\ttrigger:\n`;
+
+            if (type === 'message') {
+                code += `\t\tsend "${msg}" to player`;
             } else if (type === 'heal') {
-                code = `command /${name}:\n\tpermission: flashcode.heal\n\ttrigger:\n\t\tset player's health to 10\n\t\tsend "${msg}" to player`;
-            } else if (type === 'join') {
-                code = `on join:\n\tset join message to "${msg}"`;
-            } else if (type === 'block') {
-                code = `on break of stone:\n\tcancel event\n\tsend "${msg}" to player`;
+                code += `\t\tset player's health to 10\n`;
+                code += `\t\tset player's food level to 10\n`;
+                code += `\t\tsend "${msg}" to player`;
+            } else if (type === 'teleport') {
+                code += `\t\tteleport player to spawn of world\n`;
+                code += `\t\tsend "${msg}" to player`;
+            } else if (type === 'broadcast') {
+                code += `\t\tbroadcast "${msg}"`;
+            }
+
+            if (custom) {
+                code += `\n\t\t# Logika użytkownika: ${custom}`;
             }
 
             document.getElementById('sk-output').innerText = code;
-            saveToLocalStorage('Skrypt: ' + name, code);
+            saveHistory('Skrypt: /' + cmd, code);
         }
 
         // 2. Transformator Tekstu
-        function transformText(action) {
+        function transformTextAction(action) {
             const input = document.getElementById('txt-input').value;
-            let output = "";
+            let result = "";
 
             if (action === 'caps') {
-                output = input.toUpperCase();
+                result = input.toUpperCase();
             } else if (action === 'minecraft') {
-                output = input.split('').map(c => '&a' + c).join('');
+                result = input.split('').map(c => '&a' + c).join('');
             } else if (action === 'lore') {
-                output = input.split('\n').map(line => `lore: "${line}"`).join('\n');
+                result = input.split('\n').map(line => `lore: "${line.toUpperCase()}"`).join('\n');
             } else if (action === 'clear') {
-                output = "";
+                result = "";
                 document.getElementById('txt-input').value = "";
             }
 
-            document.getElementById('txt-output').innerText = output;
+            document.getElementById('txt-output').innerText = result || 'Brak danych do wyświetlenia.';
+            if (result) saveHistory('Transformacja Tekstu', result);
         }
 
-        // 3. Menedżer Paczki
-        let serverPack = JSON.parse(localStorage.getItem('fc_pack') || '[]');
-        renderPack();
+        // 3. Menedżer Paczki Serwera
+        let serverPack = JSON.parse(localStorage.getItem('fc_server_pack') || '[]');
+        renderPackList();
 
         function addPackItem() {
-            const name = document.getElementById('pack-item-name').value.trim();
-            const cat = document.getElementById('pack-item-cat').value;
-            if(!name) return alert('Wpisz nazwę elementu!');
+            const name = document.getElementById('pack-name').value.trim();
+            const type = document.getElementById('pack-type').value;
+            if (!name) return alert('Wpisz nazwę komponentu!');
 
-            serverPack.push({name, cat, date: new Date().toLocaleDateString()});
-            localStorage.setItem('fc_pack', JSON.stringify(serverPack));
-            document.getElementById('pack-item-name').value = '';
-            renderPack();
+            serverPack.push({ name, type, date: new Date().toLocaleDateString() });
+            localStorage.setItem('fc_server_pack', JSON.stringify(serverPack));
+            document.getElementById('pack-name').value = '';
+            renderPackList();
         }
 
-        function renderPack() {
-            const container = document.getElementById('pack-list');
+        function renderPackList() {
+            const container = document.getElementById('pack-container');
             if (serverPack.length === 0) {
-                container.innerHTML = '<p class="text-sm text-gray-500">Paczka jest pusta. Dodaj pierwsze elementy.</p>';
+                container.innerHTML = '<p class="text-xs text-slate-500 p-2">Paczka jest pusta. Dodaj pierwszy element.</p>';
                 return;
             }
             container.innerHTML = serverPack.map((item, idx) => `
-                <div class="flex justify-between items-center bg-gray-900 border border-gray-800 p-3 rounded-xl">
+                <div class="flex justify-between items-center bg-slate-900 border border-cardborder p-3 rounded-xl text-sm">
                     <div>
-                        <span class="font-semibold text-white">${item.name}</span>
-                        <span class="text-xs text-cyan-400 ml-2 bg-gray-800 px-2 py-0.5 rounded">${item.cat}</span>
+                        <span class="font-bold text-white">${item.name}</span>
+                        <span class="text-[10px] text-cyan-400 ml-2 bg-cyan-950/40 border border-cyan-900/50 px-2 py-0.5 rounded">${item.type}</span>
                     </div>
-                    <button onclick="removePackItem(${idx})" class="text-red-400 hover:text-red-300 text-xs">Usuń</button>
+                    <button onclick="removePackItem(${idx})" class="text-red-400 hover:text-red-300 text-xs font-semibold">Usuń</button>
                 </div>
             `).join('');
         }
 
         function removePackItem(idx) {
             serverPack.splice(idx, 1);
-            localStorage.setItem('fc_pack', JSON.stringify(serverPack));
-            renderPack();
+            localStorage.setItem('fc_server_pack', JSON.stringify(serverPack));
+            renderPackList();
         }
 
-        function exportPackManifest() {
-            const text = "=== FLASHCODE SERVER PACK MANIFEST ===\n\n" + serverPack.map(i => `- [${i.cat}] ${i.name} (Dodano: ${i.date})`).join('\n');
+        function exportPackList() {
+            const text = "=== SPIS PACZKI SERWEROWEJ FLASHCODE ===\n\n" + serverPack.map(i => `- [${i.type}] ${i.name} (${i.date})`).join('\n');
             const blob = new Blob([text], { type: 'text/plain' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = 'paczka-manifest.txt';
+            link.download = 'paczka-serwerowa.txt';
             link.click();
         }
 
-        // 4. LocalStorage Archiwum
-        function saveToLocalStorage(title, data) {
+        // 4. Grafika i Zasoby
+        let assetsList = JSON.parse(localStorage.getItem('fc_assets') || '[]');
+        renderAssetsList();
+
+        function addAssetItem() {
+            const title = document.getElementById('asset-title').value.trim();
+            const dims = document.getElementById('asset-dims').value.trim();
+            const link = document.getElementById('asset-link').value.trim();
+            if (!title) return alert('Wpisz nazwę projektu graficznego!');
+
+            assetsList.push({ title, dims, link, date: new Date().toLocaleDateString() });
+            localStorage.setItem('fc_assets', JSON.stringify(assetsList));
+            document.getElementById('asset-title').value = '';
+            document.getElementById('asset-dims').value = '';
+            document.getElementById('asset-link').value = '';
+            renderAssetsList();
+        }
+
+        function renderAssetsList() {
+            const container = document.getElementById('assets-container');
+            if (assetsList.length === 0) {
+                container.innerHTML = '<p class="text-xs text-slate-500 p-2">Brak zarejestrowanych grafik.</p>';
+                return;
+            }
+            container.innerHTML = assetsList.map((item, idx) => `
+                <div class="bg-slate-900 border border-cardborder p-3.5 rounded-xl text-sm flex justify-between items-center">
+                    <div>
+                        <div class="font-bold text-white">${item.title} <span class="text-xs text-purple-400 font-normal">(${item.dims})</span></div>
+                        <a href="${item.link}" target="_blank" class="text-xs text-blue-400 underline truncate block max-w-xs mt-0.5">${item.link || 'Brak linku'}</a>
+                    </div>
+                    <button onclick="removeAssetItem(${idx})" class="text-red-400 hover:text-red-300 text-xs font-semibold">Usuń</button>
+                </div>
+            `).join('');
+        }
+
+        function removeAssetItem(idx) {
+            assetsList.splice(idx, 1);
+            localStorage.setItem('fc_assets', JSON.stringify(assetsList));
+            renderAssetsList();
+        }
+
+        // 5. Historia / Storage
+        function saveHistory(title, data) {
             let history = JSON.parse(localStorage.getItem('fc_history') || '[]');
-            history.unshift({title, data, date: new Date().toLocaleTimeString()});
-            if(history.length > 20) history.pop();
+            history.unshift({ title, data, date: new Date().toLocaleTimeString() });
+            if (history.length > 25) history.pop();
             localStorage.setItem('fc_history', JSON.stringify(history));
             loadHistory();
         }
 
         function loadHistory() {
             let history = JSON.parse(localStorage.getItem('fc_history') || '[]');
-            const container = document.getElementById('saved-items-container');
-            if(history.length === 0) {
-                container.innerHTML = '<p class="text-sm text-gray-500">Brak zapisanych elementów w historii.</p>';
+            const container = document.getElementById('history-container');
+            if (history.length === 0) {
+                container.innerHTML = '<p class="text-xs text-slate-500 p-2">Brak zapisanych wpisów w historii.</p>';
                 return;
             }
             container.innerHTML = history.map(h => `
-                <div class="bg-gray-900 border border-gray-800 p-3 rounded-xl">
-                    <div class="flex justify-between text-xs text-gray-400 mb-1">
-                        <span class="text-cyan-400 font-semibold">${h.title}</span>
+                <div class="bg-slate-900 border border-cardborder p-3.5 rounded-xl text-xs space-y-1">
+                    <div class="flex justify-between text-slate-400">
+                        <span class="text-emerald-400 font-bold">${h.title}</span>
                         <span>${h.date}</span>
                     </div>
-                    <pre class="font-mono text-xs text-gray-300 bg-gray-950 p-2 rounded overflow-x-auto">${h.data}</pre>
+                    <pre class="font-mono text-slate-300 bg-slate-950 p-2.5 rounded-lg overflow-x-auto">${h.data}</pre>
                 </div>
             `).join('');
         }
 
-        function clearStorage() {
+        function clearHistory() {
             localStorage.removeItem('fc_history');
             loadHistory();
         }
 
+        // Pomocnicze funkcje pobierania i kopiowania
         function copyCode(elementId) {
             const text = document.getElementById(elementId).innerText;
             navigator.clipboard.writeText(text);
-            alert('Skopiowano do schowka!');
+            alert('Skopiowano pomyślnie do schowka!');
+        }
+
+        function downloadFile(elementId, filename, type) {
+            const text = document.getElementById(elementId).innerText;
+            const blob = new Blob([text], { type: type });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            link.click();
         }
 
         loadHistory();
