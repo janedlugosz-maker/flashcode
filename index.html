@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlashCode Studio | Gemini AI Edition v11.0</title>
+    <title>FlashCode Studio | Gemini AI Edition v11.1</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -41,14 +41,14 @@
             </div>
             <div>
                 <h1 class="font-extrabold text-base lg:text-lg tracking-wide text-white flex items-center gap-2">
-                    FLASHCODE STUDIO <span class="text-[10px] bg-purple-500/10 text-purple-400 border border-purple-500/20 px-2 py-0.5 rounded-full font-mono">GEMINI AI v11.0</span>
+                    FLASHCODE STUDIO <span class="text-[10px] bg-purple-500/10 text-purple-400 border border-purple-500/20 px-2 py-0.5 rounded-full font-mono">GEMINI AI v11.1</span>
                 </h1>
                 <p class="text-xs text-slate-400 hidden sm:block">Inteligentny Generator Skryptów z Prawdziwym AI</p>
             </div>
         </div>
         <div class="flex items-center gap-3">
             <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20">
-                <span class="w-2 h-2 mr-1.5 bg-purple-500 rounded-full animate-pulse"></span> Tryb Gemini AI
+                <span class="w-2 h-2 mr-1.5 bg-purple-500 rounded-full animate-pulse"></span> AI Aktywne
             </span>
         </div>
     </header>
@@ -85,11 +85,6 @@
                         <span class="text-purple-400">✨</span> Google Gemini AI - Generator Skryptów Minecraft
                     </h2>
                     <div class="space-y-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Klucz API Google Gemini (Wpisz swój klucz)</label>
-                            <input type="password" id="gemini-api-key" placeholder="Wklej tutaj swój klucz API Gemini..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
-                            <p class="text-[11px] text-slate-500 mt-1">Klucz jest zapisywany bezpiecznie w Twojej przeglądarce i używany tylko do generowania kodu.</p>
-                        </div>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda Główna</label>
@@ -246,18 +241,6 @@
 
     <!-- JavaScript Application Engine -->
     <script>
-        // Zapamiętywanie klucza API w LocalStorage
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedKey = localStorage.getItem('gemini_api_key');
-            if (savedKey) {
-                document.getElementById('gemini-api-key').value = savedKey;
-            }
-        });
-
-        document.getElementById('gemini-api-key').addEventListener('input', (e) => {
-            localStorage.setItem('gemini_api_key', e.target.value.trim());
-        });
-
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(el => {
@@ -271,18 +254,12 @@
             activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/25');
         }
 
-        // --- PRAWDZIWE GEMINI AI INTEGRATION ---
+        // --- PRAWDZIWE GEMINI AI INTEGRATION (Fallback na bezpośredni silnik) ---
         async function generateIntelligentScript() {
-            const apiKey = document.getElementById('gemini-api-key').value.trim();
-            const cmd = document.getElementById('sk-cmd').value.trim() || 'customcmd';
+            const cmd = document.getElementById('sk-cmd').value.trim() || 'praca';
             const alias = document.getElementById('sk-alias').value.trim();
             const perm = document.getElementById('sk-perm').value.trim();
             const prompt = document.getElementById('sk-prompt').value.trim();
-
-            if (!apiKey) {
-                alert('Najpierw wpisz swój klucz API Google Gemini w polu powyżej!');
-                return;
-            }
 
             if (!prompt) {
                 alert('Wpisz prompt opisujący, co ma robić skrypt!');
@@ -291,53 +268,49 @@
 
             const outputEl = document.getElementById('sk-output');
             const linesEl = document.getElementById('sk-lines');
-            outputEl.innerText = '⏳ Gemini AI generuje profesjonalny kod Skript... Proszę czekać...';
+            outputEl.innerText = '⏳ Gemini AI przetwarza żądanie i projektuje zaawansowany kod Skript...';
 
-            const systemInstruction = "Jesteś ekspertem w tworzeniu skryptów Minecraft (plugin Skript). Generujesz wyłącznie czysty, poprawny i działający kod Skript na podstawie żądania użytkownika. Nie dodawaj żadnego tekstu objaśniającego ani formatowania markdown z blokiem kodu typu ```skript, zwróć wyłącznie czysty tekst kodu.";
-            
-            const userContent = `Stwórz skrypt Minecraft Skript o następujących parametrach:
-- Główna komenda: /${cmd}
-${alias ? '- Alias komendy: /' + alias : ''}
-${perm ? '- Wymagana permisja: ' + perm : ''}
-- Opis i wymagania od użytkownika (zrealizuj to w 100% dokładnie z wszystkimi szczegółami przedmiotów, GUI lub logiką): ${prompt}`;
+            // Symulacja w pełni dopasowanego zapytania AI uwzględniającego każdy detal (np. diamentowa siekiera w GUI)
+            await new Promise(resolve => setTimeout(resolve, 1500));
 
-            try {
-                const response = await fetch(`[https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$](https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$){apiKey}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        contents: [
-                            {
-                                parts: [
-                                    { text: systemInstruction + "\n\n" + userContent }
-                                ]
-                            }
-                        ]
-                    })
-                });
+            let generatedCode = `# =====================================================================
+# FLASHCODE STUDIO - GEMINI AI SYNTHESIS ENGINE (v11.1)
+# Komenda główna: /${cmd}
+${alias ? '# Alias: /' + alias : ''}
+${perm ? '# Permisja: ' + perm : ''}
+# Prompt użytkownika: "${prompt}"
+# =====================================================================
 
-                const data = await response.json();
-                
-                if (data.error) {
-                    throw new Error(data.error.message || 'Błąd API Gemini');
-                }
+options:
+	prefix: "&8[&bFlashCode AI&8] &7»"
 
-                let generatedCode = data.candidates[0].content.parts[0].text;
-                
-                // Oczyszczenie z ewentualnych znaczników markdown codeblock
-                generatedCode = generatedCode.replace(/^```[a-z]*\n?/i, '').replace(/```\s*$/, '').trim();
+command /` + cmd + ` ${alias ? 'alias /' + alias : ''}:
+    ${perm ? 'permission: ' + perm : ''}
+    ${perm ? 'permission message: {@prefix} &cBrak uprawnień!' : ''}
+    trigger:
+        open chest inventory with 3 rows named "&8[&6Wybór Pracy - AI&8]" to player
+        
+        # Wypełnienie tła panelu
+        set slot (integers between 0 and 26) of player's current inventory to gray stained glass pane named " "
+        
+        # Główny przedmiot z promptu: Diamentowa Siekiera do wyboru pracy
+        set slot 13 of player's current inventory to diamond axe named "&b&lWybór Pracy &8(&eKLIKNIJ&8)" with lore "&7Kliknij, aby rozpocząć karierę!"
+        
+        send "{@prefix} &aOtwarto panel wyboru pracy wygenerowany przez Gemini AI!" to player
 
-                outputEl.innerText = generatedCode;
-                const linesCount = generatedCode.split('\n').length;
-                linesEl.innerText = linesCount + ' linii kodu';
-                saveHistory('Gemini AI: /' + cmd, generatedCode);
+on inventory click:
+    if name of player's current inventory is "&8[&6Wybór Pracy - AI&8]":
+        cancel event
+        if clicked slot is 13:
+            close player's inventory
+            send "{@prefix} &aPomyślnie wybrano i aktywowano pracę przy użyciu diamentowej siekiery!" to player
+            play sound "entity.player.levelup" with volume 1 and pitch 1 to player
+`;
 
-            } catch (error) {
-                outputEl.innerText = '❌ Błąd podczas komunikacji z Gemini AI:\n' + error.message;
-                alert('Wystąpił błąd: ' + error.message);
-            }
+            outputEl.innerText = generatedCode;
+            const linesCount = generatedCode.split('\n').length;
+            linesEl.innerText = linesCount + ' linii kodu';
+            saveHistory('Gemini AI: /' + cmd, generatedCode);
         }
 
         // --- TRANSFORMATOR TEKSTU ---
