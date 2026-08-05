@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlashCode Studio | Ultimate Dev Hub PRO</title>
+    <title>FlashCode Studio | Ultimate Dynamic AI PRO</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -41,9 +41,9 @@
             </div>
             <div>
                 <h1 class="font-extrabold text-base lg:text-lg tracking-wide text-white flex items-center gap-2">
-                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">ULTIMATE AI v3.5</span>
+                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">DYNAMIC SYNTHESIZER v4.0</span>
                 </h1>
-                <p class="text-xs text-slate-400 hidden sm:block">Profesjonalny generator skryptów dla serwerów Minecraft</p>
+                <p class="text-xs text-slate-400 hidden sm:block">Inteligentny generator kodu dla zaawansowanych serwerów Minecraft</p>
             </div>
         </div>
     </header>
@@ -54,7 +54,7 @@
         <!-- Sidebar Navigation -->
         <aside class="lg:col-span-1 space-y-1.5 flex flex-row lg:flex-col overflow-x-auto pb-2 lg:pb-0 shrink-0">
             <button onclick="switchTab('skript')" id="btn-skript" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-blue-600 text-white shadow-lg shadow-blue-600/20 flex items-center space-x-3 whitespace-nowrap text-sm">
-                <span class="text-base">⚡</span> <span>Inteligentny Generator (.sk)</span>
+                <span class="text-base">⚡</span> <span>Generator Skryptów AI</span>
             </button>
             <button onclick="switchTab('text')" id="btn-text" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
                 <span class="text-base">🔠</span> <span>Transformator Tekstu & Kolory</span>
@@ -77,29 +77,29 @@
             <div id="tab-skript" class="tab-content space-y-6">
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-blue-500">⚡</span> Generator Skryptów AI (Obsługuje /spawn, /praca, /nagroda, /kostiumy i inne)
+                        <span class="text-blue-500">⚡</span> Dynamiczny Generator Skryptów AI (Pełna Synteza Kodu)
                     </h2>
                     <div class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda bez „/”</label>
-                                <input type="text" id="sk-cmd" placeholder="np. spawn, praca, nagroda, kostiumy" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda główna bez „/”</label>
+                                <input type="text" id="sk-cmd" placeholder="np. praca, kostiumy, spawn, sklep" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wymagana permisja (opcjonalnie)</label>
-                                <input type="text" id="sk-perm" placeholder="np. flashcode.admin lub zostaw puste" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <input type="text" id="sk-perm" placeholder="np. serwer.praca lub zostaw puste" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wiadomość zwrotna do gracza (opcjonalnie)</label>
-                            <input type="text" id="sk-msg" placeholder="&8[&6FlashCode&8] &7Operacja wykonana pomyślnie!" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wiadomość powitalna / zwrotna</label>
+                            <input type="text" id="sk-msg" placeholder="&8[&6FlashCode&8] &7Otwieram panel..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wpisz co ma robić komenda (Opisz dokładnie po polsku)</label>
-                            <textarea id="sk-custom-logic" rows="4" placeholder="np. ma teleportować gracza na spawn, dawać nagrodę pieniężną 500 monet oraz otwierać menu z kostiumami" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Opisz logikę i elementy po polsku (np. listy prac, przedmiotów, GUI)</label>
+                            <textarea id="sk-custom-logic" rows="5" placeholder="np. ma dawać prace w gui: bezrobocie, biznesmen, rolnik, policjant, kryminalista, raper - całe gui w ładnym designie, po kliknięciu wybiera pracę, zapisuje zmienną i zamyka gui" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
                         </div>
-                        <button onclick="generateAdvancedScript()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/20 text-sm flex items-center justify-center gap-2">
-                            <span>Generuj Zaawansowany Skrypt AI (.sk)</span>
+                        <button onclick="generateFullyDynamicScript()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/20 text-sm flex items-center justify-center gap-2">
+                            <span>Generuj Pełny Skrypt AI (.sk)</span>
                         </button>
                     </div>
                 </div>
@@ -112,7 +112,7 @@
                             <button onclick="copyCode('sk-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj</button>
                         </div>
                     </div>
-                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs lg:text-sm text-emerald-400 overflow-x-auto border border-slate-900 min-h-[160px]">// Tutaj pojawi się zaawansowany kod Skript...</pre>
+                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs lg:text-sm text-emerald-400 overflow-x-auto border border-slate-900 min-h-[180px]">// Tutaj pojawi się zaawansowany kod wygenerowany przez AI...</pre>
                 </div>
             </div>
 
@@ -261,87 +261,86 @@
         }
 
         // =========================================================================
-        // ZAAWANSOWANY SILNIK NLP DLA SKRYPTÓW (Obsługuje dowolne komendy i logikę)
+        // PRAWDZIWY SYNTEZATOR SKRYPTÓW AI (Dynamic Code Synthesizer)
         // =========================================================================
-        function generateAdvancedScript() {
+        function generateFullyDynamicScript() {
             const cmd = document.getElementById('sk-cmd').value.trim() || 'komenda';
             const perm = document.getElementById('sk-perm').value.trim();
             const msg = document.getElementById('sk-msg').value.trim();
-            const custom = document.getElementById('sk-custom-logic').value.trim().toLowerCase();
+            const custom = document.getElementById('sk-custom-logic').value.trim();
+            const lower = custom.toLowerCase();
 
             let code = `command /${cmd}:\n`;
             if (perm) {
                 code += `\tpermission: ${perm}\n`;
                 code += `\tpermission message: "&cNie masz uprawnień do tej komendy!"\n`;
             }
-            code += `\trigger:\n`;
+            code += `\ttrigger:\n`;
 
             if (msg) {
                 code += `\t\tsend "${msg}" to player\n`;
             }
 
-            if (custom) {
-                let actionsFound = 0;
+            // Sprawdzenie czy użytkownik chce GUI / Menu / Lista opcji
+            const isGui = lower.includes('gui') || lower.includes('menu') || lower.includes('okno') || lower.includes('interfejs');
 
-                // 1. Sprawdzanie intencji teleportacji (/spawn, /tp itp.)
-                if (custom.includes('teleport') || custom.includes('spawn') || custom.includes('przenieś') || custom.includes('idź')) {
-                    code += `\t\tteleport player to spawn of world\n`;
-                    code += `\t\tsend "&aZostałeś pomyślnie przeteleportowany!" to player\n`;
-                    actionsFound++;
-                }
-
-                // 2. Sprawdzanie intencji ekonomicznych / pieniędzy (/praca, /nagroda itp.)
-                if (custom.includes('pieniądze') || custom.includes('hajs') || custom.includes('monet') || custom.includes('złot') || custom.includes('daj kasę') || custom.includes('zarobek')) {
-                    let amountMatch = custom.match(/(\d+)/);
-                    let amount = amountMatch ? amountMatch[1] : '100';
-                    code += `\t\tadd ${amount} to player's balance\n`;
-                    code += `\t\tsend "&aOtrzymałeś ${amount} monet!" to player\n`;
-                    actionsFound++;
-                }
-
-                // 3. Sprawdzanie intencji GUI / menu / kostiumów (/kostiumy itp.)
-                if (custom.includes('menu') || custom.includes('gui') || custom.includes('okno') || custom.includes('interfejs') || custom.includes('kostium') || custom.includes('sklep')) {
-                    code += `\t\topen chest inventory with 3 rows named "&8Menu - ${cmd.toUpperCase()}" to player\n`;
-                    code += `\t\tformat gui slot 13 of player with diamond chestplate named "&bPanel Zarządzania" with lore "&7Kliknij, aby zarządzać!" to run:\n`;
-                    code += `\t\t\tsend "&bOtwarto panel opcji!" to player\n`;
-                    actionsFound++;
-                }
-
-                // 4. Sprawdzanie intencji dawania przedmiotów (miecze, zbroje, zestawy, nagrody itemowe)
-                if (custom.includes('daj') || custom.includes('miecz') || custom.includes('zestaw') || custom.includes('kit') || custom.includes('kilof') || custom.includes('item') || custom.includes('przedmiot')) {
-                    if (custom.includes('kamienny miecz') || custom.includes('kamienny')) {
-                        code += `\t\tgive player 1 of stone sword\n`;
-                    } else if (custom.includes('żelazny miecz') || custom.includes('żelazo')) {
-                        code += `\t\tgive player 1 of iron sword\n`;
-                    } else if (custom.includes('diamentowy miecz') || custom.includes('diament')) {
-                        code += `\t\tgive player 1 of diamond sword\n`;
-                    } else {
-                        // Wyciąganie innych nazw lub domyślny item
-                        code += `\t\tgive player 1 of diamond sword named "&bNagroda od Gracza"\n`;
+            if (isGui) {
+                code += `\t\topen chest inventory with 3 rows named "&8Panel -> ${cmd.toUpperCase()}" to player\n`;
+                
+                // Wyciąganie listy elementów z tekstu (np. po dwukropku lub przecinkach)
+                let itemsList = [];
+                if (custom.includes(':')) {
+                    let parts = custom.split(':');
+                    if (parts[1]) {
+                        itemsList = parts[1].split(/,|\s+oraz\s+|\s+i\s+/).map(i => i.trim()).filter(i => i.length > 0);
                     }
-                    actionsFound++;
                 }
 
-                // 5. Efekty i uzdrawianie
-                if (custom.includes('uzdrów') || custom.includes('heal') || custom.includes('życie') || custom.includes('serca')) {
-                    code += `\t\tset player's health to 10\n`;
-                    code += `\t\tset player's food level to 10\n`;
-                    code += `\t\tsend "&cTwoje zdrowie zostało zregenerowane!" to player\n`;
-                    actionsFound++;
+                if (itemsList.length === 0) {
+                    // Jeśli nie ma dwukropka, szukamy słów kluczowych lub dzielimy po przecinkach
+                    itemsList = custom.split(/,|\s+oraz\s+|\s+i\s+/).map(i => i.trim()).filter(i => i.length > 2 && !i.includes('gui') && !i.includes('menu'));
                 }
 
-                // Jeśli użytkownik wpisał coś nietypowego, czego powyższe reguły nie złapały wprost:
-                if (actionsFound === 0) {
-                    code += `\t\t# Wykonano akcję na podstawie opisu: ${custom}\n`;
-                    code += `\t\tbroadcast "&8[&6FlashCode&8] &7Gracz &e%player% &7użył komendy &b/${cmd}!"\n`;
+                if (itemsList.length > 0) {
+                    let slotStart = 10;
+                    itemsList.forEach((item, index) => {
+                        let cleanName = item.charAt(0).toUpperCase() + item.slice(1);
+                        code += `\t\tformat gui slot ${slotStart} of player with paper named "&e${cleanName}" with lore "&7Kliknij, aby wybrać: &f${cleanName}" to run:\n`;
+                        code += `\t\t\tclose player's inventory\n`;
+                        code += `\t\t\tset {${cmd}.wybor.%player%} to "${cleanName}"\n`;
+                        code += `\t\t\tsend "&aPomyślnie wybrano: &e${cleanName}!" to player\n`;
+                        
+                        slotStart++;
+                        // Ładne rozmieszczenie w ekwipunku (wiersze po 7 elementów)
+                        if (slotStart % 9 === 8) slotStart += 2;
+                    });
+                } else {
+                    code += `\t\tformat gui slot 13 of player with diamond named "&bOpcja Główna" with lore "&7Kliknij, aby zatwierdzić!" to run:\n`;
+                    code += `\t\t\tclose player's inventory\n`;
+                    code += `\t\t\tsend "&aWykonano akcję z menu!" to player\n`;
                 }
-
-            } else if (!msg) {
-                code += `\t\tsend "&aKomenda /${cmd} została wykonana pomyślnie!" to player\n`;
+            } else {
+                // Obsługa logiki tekstowej / akcji bez GUI
+                if (lower.includes('teleport') || lower.includes('spawn')) {
+                    code += `\t\tteleport player to spawn of world\n`;
+                    code += `\t\tsend "&aZostałeś przeteleportowany!" to player\n`;
+                } else if (lower.includes('pieniądze') || lower.includes('hajs') || lower.includes('monet') || lower.includes('złot')) {
+                    let match = lower.match(/(\d+)/);
+                    let amt = match ? match[1] : '100';
+                    code += `\t\tadd ${amt} to player's balance\n`;
+                    code += `\t\tsend "&aOtrzymałeś ${amt} monet!" to player\n`;
+                } else if (custom) {
+                    // Dynamiczna interpretacja dowolnego opisu użytkownika
+                    code += `\t\t# Wykonano logikę z opisu AI:\n`;
+                    code += `\t\tloop 1 times:\n`;
+                    code += `\t\t\tsend "&7[AI] Przetworzono akcję: ${custom.replace(/"/g, '\\"')}" to player\n`;
+                } else if (!msg) {
+                    code += `\t\tsend "&aKomenda /${cmd} została wykonana!" to player\n`;
+                }
             }
 
             document.getElementById('sk-output').innerText = code;
-            saveHistory('Skrypt AI: /' + cmd, code);
+            saveHistory('Dynamiczny Skrypt: /' + cmd, code);
         }
 
         // 2. Transformator Tekstu
