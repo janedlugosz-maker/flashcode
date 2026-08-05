@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlashCode Studio | Dynamic Prompt Engine v7.0</title>
+    <title>FlashCode Studio | Dynamic Prompt Engine v7.1</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -41,14 +41,14 @@
             </div>
             <div>
                 <h1 class="font-extrabold text-base lg:text-lg tracking-wide text-white flex items-center gap-2">
-                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">DYNAMIC PROMPT ENGINE v7.0</span>
+                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">ENGINE v7.1</span>
                 </h1>
-                <p class="text-xs text-slate-400 hidden sm:block">Silnik analizujący Twój dokładny prompt i generujący kod</p>
+                <p class="text-xs text-slate-400 hidden sm:block">Generator skryptów Minecraft</p>
             </div>
         </div>
         <div class="flex items-center gap-2">
             <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Dynamiczny Parser Aktywny
+                <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Gotowy do pracy
             </span>
         </div>
     </header>
@@ -82,13 +82,13 @@
             <div id="tab-skript" class="tab-content space-y-6">
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-blue-500">⚡</span> Prawdziwy Analizator Promptów
+                        <span class="text-blue-500">⚡</span> Generator Skryptów z Promptu
                     </h2>
                     <div class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda (bez /)</label>
-                                <input type="text" id="sk-cmd" value="custom" placeholder="np. mojakomenda" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <input type="text" id="sk-cmd" value="komenda" placeholder="np. item" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wymagana permisja</label>
@@ -96,11 +96,11 @@
                             </div>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wpisz dowolny prompt po polsku (każde słowo i liczba zostaną przeanalizowane)</label>
-                            <textarea id="sk-custom-logic" rows="4" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">daj mi netherytowy miecz sharpness 6 i 500 monet oraz przeteleportuj na spawn</textarea>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wpisz swój prompt (pole jest całkowicie puste)</label>
+                            <textarea id="sk-custom-logic" rows="4" placeholder="Wpisz tutaj, co ma robić skrypt..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
                         </div>
                         <button onclick="generateFromPrompt()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/20 text-sm flex items-center justify-center gap-2">
-                            <span>Przetwórz Prompt i Generuj Kod</span>
+                            <span>Generuj Kod</span>
                         </button>
                     </div>
                 </div>
@@ -113,7 +113,7 @@
                             <button onclick="copyCode('sk-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj</button>
                         </div>
                     </div>
-                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs lg:text-sm text-emerald-400 overflow-x-auto border border-slate-900 min-h-[220px]">// Twój wygenerowany kod na podstawie wpisanego promptu pojawi się tutaj...</pre>
+                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs lg:text-sm text-emerald-400 overflow-x-auto border border-slate-900 min-h-[220px]">// Twój kod pojawi się tutaj po wpisaniu promptu...</pre>
                 </div>
             </div>
 
@@ -236,7 +236,7 @@
         </section>
     </main>
 
-    <!-- JavaScript Dynamic Prompt Engine v7.0 -->
+    <!-- JavaScript Engine -->
     <script>
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -251,11 +251,16 @@
             activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/20');
         }
 
-        // DYNAMICZNY ANALIZATOR PROMPTU (analizuje każdą frazę wpisaną przez użytkownika)
         function generateFromPrompt() {
             const cmd = document.getElementById('sk-cmd').value.trim() || 'komenda';
             const perm = document.getElementById('sk-perm').value.trim();
             const promptText = document.getElementById('sk-custom-logic').value.trim();
+            
+            if (!promptText) {
+                alert('Wpisz najpierw co ma robić skrypt w polu promptu!');
+                return;
+            }
+
             const lower = promptText.toLowerCase();
 
             let code = `options:\n`;
@@ -266,17 +271,11 @@
                 code += `\tpermission message: "{@prefix} &cNie masz uprawnień!"\n`;
             }
             code += `\ttrigger:\n`;
-            code += `\t\tsend "{@prefix} &7Przetwarzam Twój prompt..." to player\n`;
 
-            // Rozbijamy prompt na pojedyncze słowa/frazy w celu dynamicznego wykrycia intencji
-            const words = lower.split(/\s+/);
-            
-            // 1. Sprawdzanie liczb podanych w prompcie (np. "500", "10")
             let foundNumbers = promptText.match(/\d+/g);
             let numberVal = foundNumbers ? foundNumbers[0] : '1';
-
-            // 2. Dynamiczne wykrywanie przedmiotów (szukamy słów kluczowych)
             let itemGiven = false;
+
             if (lower.includes('miecz') || lower.includes('sword')) {
                 let material = lower.includes('netheryt') ? 'netherite sword' : (lower.includes('diament') ? 'diamond sword' : 'iron sword');
                 let enchants = [];
@@ -287,36 +286,32 @@
                 let giveLine = `give player 1 of ${material}`;
                 if (enchants.length > 0) giveLine += ` of ${enchants.join(', ')}`;
                 code += `\t\t${giveLine}\n`;
-                code += `\t\tsend "{@prefix} &aOtrzymałeś przedmiot z Twojego promptu!" to player\n`;
+                code += `\t\tsend "{@prefix} &aOtrzymałeś przedmiot!" to player\n`;
                 itemGiven = true;
             }
 
-            // 3. Dynamiczne wykrywanie waluty / monet
             if (lower.includes('monet') || lower.includes('hajs') || lower.includes('pieniędz') || lower.includes('dolar')) {
                 code += `\t\tadd ${numberVal} to player's balance\n`;
-                code += `\t\tsend "{@prefix} &aDodano ${numberVal} monet zgodnie z życzeniem!" to player\n`;
+                code += `\t\tsend "{@prefix} &aDodano ${numberVal} monet!" to player\n`;
                 itemGiven = true;
             }
 
-            // 4. Dynamiczne wykrywanie teleportacji
             if (lower.includes('teleport') || lower.includes('spawn') || lower.includes('tp')) {
                 code += `\t\tteleport player to spawn of world\n`;
                 code += `\t\tsend "{@prefix} &aPrzeteleportowano na spawn!" to player\n`;
                 itemGiven = true;
             }
 
-            // 5. Jeśli żaden konkretny wzorzec nie pasował, wstawiamy uniwersalną akcję opartą w 100% na tekście promptu
             if (!itemGiven) {
-                code += `\t\t# Wykonanie akcji z Twojego promptu:\n`;
-                code += `\t\tsend "{@prefix} &ePrompt: &f${promptText.replace(/"/g, '\\"')}" to player\n`;
-                code += `\t\tgive player ${numberVal} of diamond named "&bWynik z Promptu"\n`;
+                code += `\t\t# Wykonanie akcji z promptu:\n`;
+                code += `\t\tsend "{@prefix} &eWykonano prompt: &f${promptText.replace(/"/g, '\\"')}" to player\n`;
+                code += `\t\tgive player ${numberVal} of diamond named "&bNagroda"\n`;
             }
 
             document.getElementById('sk-output').innerText = code;
             saveHistory('Prompt: ' + promptText, code);
         }
 
-        // Transformator tekstowy
         function transformTextAction(action) {
             const inputField = document.getElementById('txt-input');
             const outputDiv = document.getElementById('txt-output');
@@ -344,7 +339,6 @@
             outputDiv.innerText = result || 'Brak danych.';
         }
 
-        // Zarządzanie paczką
         let serverPack = JSON.parse(localStorage.getItem('fc_pack') || '[]');
         renderPackList();
 
@@ -390,7 +384,6 @@
             link.click();
         }
 
-        // Zasoby graficzne
         let assetsList = JSON.parse(localStorage.getItem('fc_assets') || '[]');
         renderAssetsList();
 
@@ -429,7 +422,6 @@
             renderAssetsList();
         }
 
-        // Historia
         function saveHistory(title, data) {
             let history = JSON.parse(localStorage.getItem('fc_history') || '[]');
             history.unshift({ title, data, date: new Date().toLocaleTimeString() });
