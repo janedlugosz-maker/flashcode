@@ -25,7 +25,6 @@
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
-        .small-caps-text { font-variant: small-caps; letter-spacing: 1.5px; text-transform: lowercase; }
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #07090e; }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
@@ -291,7 +290,7 @@
             saveHistory('Skrypt: /' + cmd, code);
         }
 
-        // 2. Transformator Tekstu - Prawdziwe kapitaliki Small Caps
+        // 2. Transformator Tekstu - Prawdziwe Unicode Small Caps dla kapitalików
         function transformTextAction(action) {
             const inputField = document.getElementById('txt-input');
             const outputDiv = document.getElementById('txt-output');
@@ -299,27 +298,24 @@
 
             if (!input && action !== 'clear') {
                 outputDiv.innerText = 'Wpisz najpierw jakiś tekst powyżej!';
-                outputDiv.classList.remove('small-caps-text');
                 return;
             }
 
             let result = "";
 
             if (action === 'caps') {
-                outputDiv.classList.add('small-caps-text');
-                result = input; // Zachowuje małe litery, styl CSS zmienia je na kapitaliki (np. "hej" -> "h e j")
-            } else {
-                outputDiv.classList.remove('small-caps-text');
-            }
-
-            if (action === 'minecraft') {
+                const smallCapsMap = {
+                    'a': 'ᴀ', 'b': 'ʙ', 'c': 'ᴄ', 'd': 'ᴅ', 'e': 'ᴇ', 'f': 'ꜰ', 'g': 'ɢ', 'h': 'ʜ', 'i': 'ɪ', 'j': 'ᴊ', 'k': 'ᴋ', 'l': 'ʟ', 'm': 'ᴍ', 'n': 'ɴ', 'o': 'ᴏ', 'p': 'ᴘ', 'q': 'ꞯ', 'r': 'ʀ', 's': 'ꜱ', 't': 'ᴛ', 'u': 'ᴜ', 'v': 'ᴠ', 'w': 'ᴡ', 'x': 'x', 'y': 'ʏ', 'z': 'ᴢ',
+                    'ą': 'ᴀ', 'ć': 'ᴄ', 'ę': 'ᴇ', 'ł': 'ʟ', 'ń': 'ɴ', 'ó': 'ᴏ', 'ś': 'ꜱ', 'ź': 'ᴢ', 'ż': 'ᴢ'
+                };
+                result = input.toLowerCase().split('').map(char => smallCapsMap[char] || char).join('');
+            } else if (action === 'minecraft') {
                 result = input.split('').map(c => c === ' ' ? ' ' : '&a' + c).join('');
             } else if (action === 'lore') {
                 result = input.split('\n').map(line => `lore: "${line.toUpperCase()}"`).join('\n');
             } else if (action === 'clear') {
                 result = "";
                 inputField.value = "";
-                outputDiv.classList.remove('small-caps-text');
             }
 
             outputDiv.innerText = result || 'Brak danych do wyświetlenia.';
