@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlashCode Studio | Dynamic Prompt Engine v7.1</title>
+    <title>FlashCode Studio | Dynamic Prompt Engine v7.2</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -41,14 +41,14 @@
             </div>
             <div>
                 <h1 class="font-extrabold text-base lg:text-lg tracking-wide text-white flex items-center gap-2">
-                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">ENGINE v7.1</span>
+                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">ENGINE v7.2</span>
                 </h1>
-                <p class="text-xs text-slate-400 hidden sm:block">Generator skryptów Minecraft</p>
+                <p class="text-xs text-slate-400 hidden sm:block">Inteligentny Generator Skryptów Minecraft</p>
             </div>
         </div>
         <div class="flex items-center gap-2">
             <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Gotowy do pracy
+                <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Gotowy
             </span>
         </div>
     </header>
@@ -88,7 +88,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda (bez /)</label>
-                                <input type="text" id="sk-cmd" value="komenda" placeholder="np. item" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <input type="text" id="sk-cmd" value="menu" placeholder="np. menu" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wymagana permisja</label>
@@ -96,11 +96,11 @@
                             </div>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wpisz swój prompt (pole jest całkowicie puste)</label>
-                            <textarea id="sk-custom-logic" rows="4" placeholder="Wpisz tutaj, co ma robić skrypt..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wpisz swój prompt (np. "ma otworzyć gui", "daj miecz", itp.)</label>
+                            <textarea id="sk-custom-logic" rows="4" placeholder="Wpisz dokładnie, co ma robić skrypt..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
                         </div>
                         <button onclick="generateFromPrompt()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/20 text-sm flex items-center justify-center gap-2">
-                            <span>Generuj Kod</span>
+                            <span>Generuj Kod Skryptu</span>
                         </button>
                     </div>
                 </div>
@@ -236,7 +236,7 @@
         </section>
     </main>
 
-    <!-- JavaScript Engine -->
+    <!-- JavaScript Engine v7.2 (Zaktualizowany parser) -->
     <script>
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -272,40 +272,42 @@
             }
             code += `\ttrigger:\n`;
 
-            let foundNumbers = promptText.match(/\d+/g);
-            let numberVal = foundNumbers ? foundNumbers[0] : '1';
-            let itemGiven = false;
+            let actionFound = false;
 
-            if (lower.includes('miecz') || lower.includes('sword')) {
+            // Obsługa GUI / Menu (otwieranie menu)
+            if (lower.includes('gui') || lower.includes('menu') || lower.includes('okno')) {
+                code += `\t\topen chest inventory with 3 rows named "&8Menu z Promptu" to player\n`;
+                code += `\t\tstop\n`;
+                actionFound = true;
+            }
+
+            // Obsługa miecza / itemów
+            if (lower.includes('miecz') || lower.includes('sword') || lower.includes('item')) {
                 let material = lower.includes('netheryt') ? 'netherite sword' : (lower.includes('diament') ? 'diamond sword' : 'iron sword');
-                let enchants = [];
-                if (lower.includes('sharp')) enchants.push('sharpness ' + (lower.match(/sharp[^\d]*(\d+)/)?.[1] || '5'));
-                if (lower.includes('unbreak')) enchants.push('unbreaking ' + (lower.match(/unbreak[^\d]*(\d+)/)?.[1] || '3'));
-                if (lower.includes('fire')) enchants.push('fire aspect ' + (lower.match(/fire[^\d]*(\d+)/)?.[1] || '2'));
-
-                let giveLine = `give player 1 of ${material}`;
-                if (enchants.length > 0) giveLine += ` of ${enchants.join(', ')}`;
-                code += `\t\t${giveLine}\n`;
-                code += `\t\tsend "{@prefix} &aOtrzymałeś przedmiot!" to player\n`;
-                itemGiven = true;
+                code += `\t\tgive player 1 of ${material} named "&bPrzedmiot z Promptu"\n`;
+                actionFound = true;
             }
 
-            if (lower.includes('monet') || lower.includes('hajs') || lower.includes('pieniędz') || lower.includes('dolar')) {
-                code += `\t\tadd ${numberVal} to player's balance\n`;
-                code += `\t\tsend "{@prefix} &aDodano ${numberVal} monet!" to player\n`;
-                itemGiven = true;
+            // Obsługa monet / waluty / hajsu
+            if (lower.includes('monet') || lower.includes('pieniędz') || lower.includes('hajs') || lower.includes('dolar')) {
+                let nums = promptText.match(/\d+/g);
+                let val = nums ? nums[0] : '100';
+                code += `\t\tadd ${val} to player's balance\n`;
+                code += `\t\tsend "{@prefix} &aDodano ${val} monet!" to player\n`;
+                actionFound = true;
             }
 
+            // Obsługa teleportacji
             if (lower.includes('teleport') || lower.includes('spawn') || lower.includes('tp')) {
                 code += `\t\tteleport player to spawn of world\n`;
-                code += `\t\tsend "{@prefix} &aPrzeteleportowano na spawn!" to player\n`;
-                itemGiven = true;
+                code += `\t\tsend "{@prefix} &aPrzeteleportowano!" to player\n`;
+                actionFound = true;
             }
 
-            if (!itemGiven) {
-                code += `\t\t# Wykonanie akcji z promptu:\n`;
-                code += `\t\tsend "{@prefix} &eWykonano prompt: &f${promptText.replace(/"/g, '\\"')}" to player\n`;
-                code += `\t\tgive player ${numberVal} of diamond named "&bNagroda"\n`;
+            // Jeśli wpisano coś niestandardowego, przekształcamy to bezpośrednio w kod skryptu (komentarz + wykonanie wysłania tekstu/akcji)
+            if (!actionFound) {
+                code += `\t\t# Dynamicznie przetworzony prompt: ${promptText}\n`;
+                code += `\t\tsend "{@prefix} &eWykonano akcję: &f${promptText.replace(/"/g, '\\"')}" to player\n`;
             }
 
             document.getElementById('sk-output').innerText = code;
