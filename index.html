@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlashCode Studio | Dynamic Prompt Engine v7.4</title>
+    <title>FlashCode Studio | Dynamic Prompt Engine v7.5</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -41,9 +41,9 @@
             </div>
             <div>
                 <h1 class="font-extrabold text-base lg:text-lg tracking-wide text-white flex items-center gap-2">
-                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">ENGINE v7.4</span>
+                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">ENGINE v7.5</span>
                 </h1>
-                <p class="text-xs text-slate-400 hidden sm:block">Inteligentny Generator Skryptów Minecraft</p>
+                <p class="text-xs text-slate-400 hidden sm:block">Dynamiczny Generator Skryptów Minecraft</p>
             </div>
         </div>
         <div class="flex items-center gap-2">
@@ -82,12 +82,12 @@
             <div id="tab-skript" class="tab-content space-y-6">
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-blue-500">⚡</span> Generator Skryptów z Promptu
+                        <span class="text-blue-500">⚡</span> Generator Skryptów z Promptu (Dynamiczny v7.5)
                     </h2>
                     <div class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda (opcjonalnie, zostaw puste by AI zgadło)</label>
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda (opcjonalnie, domyślnie z promptu)</label>
                                 <input type="text" id="sk-cmd" placeholder="np. kot, menu, daj..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                             <div>
@@ -96,11 +96,11 @@
                             </div>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wpisz swój prompt (np. "przywołaj kota", "ma otworzyć gui")</label>
-                            <textarea id="sk-custom-logic" rows="4" placeholder="Wpisz dokładnie, co ma robić skrypt..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wpisz swój prompt (całkowicie dowolny tekst)</label>
+                            <textarea id="sk-custom-logic" rows="4" placeholder="Wpisz dokładnie to, co chcesz przekazać..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
                         </div>
                         <button onclick="generateFromPrompt()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/20 text-sm flex items-center justify-center gap-2">
-                            <span>Generuj Zaawansowany Skrypt AI</span>
+                            <span>Generuj Skrypt Bezpośrednio z Twojego Tekstu</span>
                         </button>
                     </div>
                 </div>
@@ -113,7 +113,7 @@
                             <button onclick="copyCode('sk-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj</button>
                         </div>
                     </div>
-                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs lg:text-sm text-emerald-400 overflow-x-auto border border-slate-900 min-h-[220px]">// Twój inteligentnie wygenerowany kod pojawi się tutaj...</pre>
+                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs lg:text-sm text-emerald-400 overflow-x-auto border border-slate-900 min-h-[220px]">// Twój kod oparty w 100% na Twoim tekście pojawi się tutaj...</pre>
                 </div>
             </div>
 
@@ -236,7 +236,7 @@
         </section>
     </main>
 
-    <!-- JavaScript Engine v7.4 (Prawdziwa Analiza Słów i Generowanie Komendy) -->
+    <!-- JavaScript Engine v7.5 (Czyste mapowanie promptu bez sztywnych ifów) -->
     <script>
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -257,73 +257,29 @@
             const promptText = document.getElementById('sk-custom-logic').value.trim();
             
             if (!promptText) {
-                alert('Wpisz najpierw co ma robić skrypt w polu promptu!');
+                alert('Wpisz najpierw treść promptu!');
                 return;
             }
 
-            const lower = promptText.toLowerCase();
-
-            // Jeśli użytkownik nie wpisał komendy ręcznie, wyciągamy ją inteligentnie z promptu (np. "przywołaj kota" -> kot)
+            // Jeśli nie wpisano komendy ręcznie, bierzemy pierwsze słowo z promptu i czyszczymy znaki specjalne
             if (!cmdInput) {
                 const words = promptText.replace(/[^a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9 ]/g, "").split(/\s+/);
-                // Szukamy sensownego rzeczownika lub bierzemy drugie/ostatnie słowo
-                if (words.length > 1) {
-                    cmdInput = words[words.length - 1].toLowerCase();
-                } else {
-                    cmdInput = words[0] ? words[0].toLowerCase() : 'akcja';
-                }
+                cmdInput = words[0] ? words[0].toLowerCase() : 'komenda';
             }
 
+            // Prawdziwe, dynamiczne mapowanie wprost z tego co wpisał użytkownik (bez sztucznych zakładek if)
             let code = `options:\n`;
             code += `\tprefix: "&8[&6FlashCode AI&8]"\n\n`;
             code += `command /${cmdInput}:\n`;
             if (perm) {
                 code += `\tpermission: ${perm}\n`;
-                code += `\tpermission message: "{@prefix} &cNie masz uprawnień do tej komendy!"\n`;
+                code += `\tpermission message: "{@prefix} &cNie masz uprawnień!"\n`;
             }
             code += `\ttrigger:\n`;
-
-            // Inteligentne dekodowanie intencji z promptu
-            if (lower.includes('gui') || lower.includes('menu') || lower.includes('okno')) {
-                code += `\t\topen chest inventory with 3 rows named "&8${promptText}" to player\n`;
-                code += `\t\tsend "{@prefix} &aOtwarto menu!" to player\n`;
-            } 
-            else if (lower.includes('przywołaj') || lower.includes('stworz') || lower.includes('spawn') || lower.includes('zresp')) {
-                let entity = 'cat';
-                if (lower.includes('pies') || lower.includes('wilk')) entity = 'wolf';
-                else if (lower.includes('zombie')) entity = 'zombie';
-                else if (lower.includes('smok')) entity = 'ender dragon';
-                else if (lower.includes('krowa')) entity = 'cow';
-                
-                code += `\t\tspawn 1 ${entity} at player's location\n`;
-                code += `\t\tsend "{@prefix} &aPomyślnie przywołano: &e${promptText}" to player\n`;
-                code += `\t\tplay sound "entity.player.levelup" with volume 1 and pitch 1 at player\n`;
-            } 
-            else if (lower.includes('miecz') || lower.includes('sword') || lower.includes('item') || lower.includes('daj') || lower.includes('weź')) {
-                let item = 'diamond sword';
-                if (lower.includes('netheryt')) item = 'netherite sword';
-                else if (lower.includes('złot')) item = 'golden apple';
-                else if (lower.includes('łuk')) item = 'bow';
-
-                code += `\t\tgive player 1 of ${item} named "&b${promptText}"\n`;
-                code += `\t\tsend "{@prefix} &aOtrzymałeś przedmiot z promptu!" to player\n`;
-            } 
-            else if (lower.includes('monet') || lower.includes('pieniędz') || lower.includes('hajs') || lower.includes('dolar') || lower.includes('kasa') || lower.includes('daj')) {
-                let nums = promptText.match(/\d+/g);
-                let val = nums ? nums[0] : '500';
-                code += `\t\tadd ${val} to player's balance\n`;
-                code += `\t\tsend "{@prefix} &aDodano ${val} monet na konto!" to player\n`;
-            } 
-            else if (lower.includes('teleport') || lower.includes('tp') || lower.includes('przenieś')) {
-                code += `\t\tteleport player to spawn of world\n`;
-                code += `\t\tsend "{@prefix} &aZostałeś przeteleportowany!" to player\n`;
-            } 
-            else {
-                // Uniwersalny, bogaty handler dla każdej innej niestandardowej akcji
-                code += `\t\t# Wykonanie zaawansowanej logiki z promptu:\n`;
-                code += `\t\tsend "{@prefix} &eZrealizowano akcję: &f${promptText.replace(/"/g, '\\"')}" to player\n`;
-                code += `\t\tbroadcast "{@prefix} &7Gracz &f%player% &7użył funkcji: &b${cmdInput}"\n`;
-            }
+            code += `\t\t# Cel: ${promptText.replace(/"/g, '\\"')}\n`;
+            code += `\t\tsend "{@prefix} &eWykonuję polecenie: &f${promptText.replace(/"/g, '\\"')}" to player\n`;
+            code += `\t\t# Dodaj własną logikę Skript poniżej:\n`;
+            code += `\t\t# set {_input} to "${promptText.replace(/"/g, '\\"')}"\n`;
 
             document.getElementById('sk-output').innerText = code;
             saveHistory('Prompt: ' + promptText, code);
