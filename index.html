@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlashCode Studio | Ultra Enterprise Engine v8.0</title>
+    <title>FlashCode Studio | Ultra Enterprise Suite v9.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -33,7 +33,7 @@
 </head>
 <body class="bg-darkbg text-slate-100 min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
 
-    <!-- Top Enterprise Header -->
+    <!-- Top Header -->
     <header class="bg-cardbg/95 backdrop-blur-md border-b border-cardborder sticky top-0 z-50 px-4 lg:px-8 py-3.5 flex justify-between items-center shadow-2xl">
         <div class="flex items-center space-x-3">
             <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-blue-500/25 text-white font-extrabold text-lg">
@@ -41,14 +41,14 @@
             </div>
             <div>
                 <h1 class="font-extrabold text-base lg:text-lg tracking-wide text-white flex items-center gap-2">
-                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">ULTRA v8.0</span>
+                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">SUITE v9.0</span>
                 </h1>
-                <p class="text-xs text-slate-400 hidden sm:block">Enterprise Minecraft Skript & Server Architecture Engine</p>
+                <p class="text-xs text-slate-400 hidden sm:block">Kompleksowy Kombajn: Skrypty, Teksty, Paczki i Grafika</p>
             </div>
         </div>
         <div class="flex items-center gap-3">
-            <span id="system-status-badge" class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Silnik Aktywny (2000+ L)
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span> System Aktywny
             </span>
         </div>
     </header>
@@ -56,68 +56,55 @@
     <!-- Main Workspace Layout -->
     <main class="flex-1 max-w-[1600px] w-full mx-auto p-4 lg:p-6 grid grid-cols-1 lg:grid-cols-5 gap-6">
         
-        <!-- Multi-Module Sidebar -->
+        <!-- Sidebar Navigation (All Modules) -->
         <aside class="lg:col-span-1 space-y-2 flex flex-row lg:flex-col overflow-x-auto pb-2 lg:pb-0 shrink-0">
-            <button onclick="switchModule('generator')" id="mod-btn-generator" class="mod-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-blue-600 text-white shadow-lg shadow-blue-600/25 flex items-center space-x-3 whitespace-nowrap text-sm">
-                <span class="text-base">⚡</span> <span>Macro Generator (.sk)</span>
+            <button onclick="switchTab('skript')" id="btn-skript" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-blue-600 text-white shadow-lg shadow-blue-600/25 flex items-center space-x-3 whitespace-nowrap text-sm">
+                <span class="text-base">⚡</span> <span>Inteligentne Skrypty</span>
             </button>
-            <button onclick="switchModule('parser')" id="mod-btn-parser" class="mod-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
-                <span class="text-base">🔍</span> <span>Parser Skryptów</span>
+            <button onclick="switchTab('text')" id="btn-text" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
+                <span class="text-base">🔠</span> <span>Kolory & Tekst MC</span>
             </button>
-            <button onclick="switchModule('database')" id="mod-btn-database" class="mod-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
-                <span class="text-base">🗄️</span> <span>Baza Danych YML/JSON</span>
+            <button onclick="switchTab('pack')" id="btn-pack" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
+                <span class="text-base">📦</span> <span>Menedżer Paczki</span>
             </button>
-            <button onclick="switchModule('permissions')" id="mod-btn-permissions" class="mod-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
-                <span class="text-base">🛡️</span> <span>Moduł Permisji i Rang</span>
+            <button onclick="switchTab('assets')" id="btn-assets" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
+                <span class="text-base">🎨</span> <span>Grafika & Zasoby</span>
             </button>
-            <button onclick="switchModule('gui')" id="mod-btn-gui" class="mod-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
-                <span class="text-base">🪟</span> <span>Kreator GUI Chest</span>
-            </button>
-            <button onclick="switchModule('logger')" id="mod-btn-logger" class="mod-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
-                <span class="text-base">📊</span> <span>Konsola i Audit Log</span>
+            <button onclick="switchTab('storage')" id="btn-storage" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
+                <span class="text-base">💾</span> <span>Zapisana Historia</span>
             </button>
         </aside>
 
-        <!-- Main Content Area (Dynamic Enterprise Modules) -->
+        <!-- Main Content Area -->
         <section class="lg:col-span-4 space-y-6">
 
-            <!-- MODULE 1: MACRO GENERATOR -->
-            <div id="module-generator" class="enterprise-module space-y-6">
+            <!-- TAB 1: INTELIGENTNY GENERATOR SKRYPTÓW -->
+            <div id="tab-skript" class="tab-content space-y-6">
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-blue-500">⚡</span> Ultra Macro Generator Skryptów (v8.0)
+                        <span class="text-blue-500">⚡</span> Generator Skryptów z Inteligentnym Parsowaniem (v9.0)
                     </h2>
                     <div class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda Główna</label>
-                                <input type="text" id="gen-cmd" placeholder="np. gildiapanel, economy..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <input type="text" id="sk-cmd" placeholder="np. gildiapanel" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Alias komendy</label>
-                                <input type="text" id="gen-alias" placeholder="np. gp, eco" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Alias</label>
+                                <input type="text" id="sk-alias" placeholder="np. kot" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wymagana Permisja</label>
-                                <input type="text" id="gen-perm" placeholder="np. flashcode.admin" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Permisja</label>
+                                <input type="text" id="sk-perm" placeholder="np. gildie.uzyj" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Zaawansowany Prompt Logiki i Funkcjonalności</label>
-                            <textarea id="gen-prompt" rows="5" placeholder="Opisz dokładnie, co ma robić system, jakie mają być zmienne, eventy, warunki, tabele i zabezpieczenia..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Zaawansowany Prompt (Opisz co ma robić system, np. GUI gildii)</label>
+                            <textarea id="sk-prompt" rows="4" placeholder="np. ma otwierać gui gdzie można edytować całą gildię..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
                         </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <label class="flex items-center space-x-3 bg-slate-900 border border-cardborder p-3 rounded-xl cursor-pointer hover:border-slate-700 transition">
-                                <input type="checkbox" id="opt-async" checked class="w-4 h-4 rounded bg-slate-950 border-cardborder text-blue-600 focus:ring-0">
-                                <span class="text-xs font-medium text-slate-300">Wątkowanie Asynchroniczne (Wydajność TPS)</span>
-                            </label>
-                            <label class="flex items-center space-x-3 bg-slate-900 border border-cardborder p-3 rounded-xl cursor-pointer hover:border-slate-700 transition">
-                                <input type="checkbox" id="opt-sql" checked class="w-4 h-4 rounded bg-slate-950 border-cardborder text-blue-600 focus:ring-0">
-                                <span class="text-xs font-medium text-slate-300">Auto-zapis do bazy danych {fc.database::*}</span>
-                            </label>
-                        </div>
-                        <button onclick="executeMacroGenerator()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-4 rounded-xl transition shadow-lg shadow-blue-600/25 text-sm flex items-center justify-center gap-2">
-                            <span>Generuj Pełen Kod Enterprise (Wiele Bloków)</span>
+                        <button onclick="generateIntelligentScript()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/25 text-sm flex items-center justify-center gap-2">
+                            <span>Generuj Dopasowany Skrypt (.sk)</span>
                         </button>
                     </div>
                 </div>
@@ -125,203 +112,182 @@
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <div class="flex justify-between items-center mb-3">
                         <h3 class="font-semibold text-sm text-slate-300 flex items-center gap-2">
-                            <span>Wygenerowany Kod Systemu:</span>
-                            <span id="gen-lines-count" class="text-xs text-blue-400 font-mono bg-blue-950/40 px-2 py-0.5 rounded border border-blue-900/40">0 linii</span>
+                            <span>Wynik Skryptu:</span>
+                            <span id="sk-lines" class="text-xs text-blue-400 font-mono bg-blue-950/40 px-2 py-0.5 rounded border border-blue-900/40">0 linii</span>
                         </h3>
                         <div class="flex gap-2">
-                            <button onclick="downloadCodeFile()" class="text-xs bg-slate-800 hover:bg-slate-700 text-blue-400 px-3 py-1.5 rounded-lg border border-slate-700 transition">Pobierz .sk</button>
-                            <button onclick="copyModuleCode('gen-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj do schowka</button>
+                            <button onclick="downloadFile('sk-output', 'skrypt.sk', 'text/plain')" class="text-xs bg-slate-800 hover:bg-slate-700 text-blue-400 px-3 py-1.5 rounded-lg border border-slate-700 transition">Pobierz .sk</button>
+                            <button onclick="copyCode('sk-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj</button>
                         </div>
                     </div>
-                    <pre id="gen-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs text-emerald-400 overflow-x-auto border border-slate-900 max-h-[500px] leading-relaxed">// Wpisz prompt i kliknij generuj, aby uzyskać potężną strukturę skryptu...</pre>
+                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs text-emerald-400 overflow-x-auto border border-slate-900 max-h-[400px]">// Twój inteligentnie wygenerowany kod pojawi się tutaj...</pre>
                 </div>
             </div>
 
-            <!-- MODULE 2: PARSER SKRYPTÓW -->
-            <div id="module-parser" class="enterprise-module hidden space-y-6">
+            <!-- TAB 2: TRANSFORMATOR TEKSTU I KOLORY MC -->
+            <div id="tab-text" class="tab-content hidden space-y-6">
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-amber-500">🔍</span> Parser i Optymalizator Skryptów .SK
+                        <span class="text-amber-500">🔠</span> Transformator Tekstu & Kolory Minecraft
                     </h2>
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wklej kod skryptu do analizy i naprawy błędów składniowych</label>
-                            <textarea id="parser-input" rows="6" placeholder="options: ..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm font-mono focus:border-amber-500 focus:outline-none transition"></textarea>
-                        </div>
-                        <button onclick="runParserAction()" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-amber-600/25 text-sm">Uruchom Głęboką Analizę Składni</button>
-                    </div>
-                </div>
-
-                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
-                    <h3 class="font-semibold text-sm text-slate-300 mb-3">Wyniki Analizy i Raport Błędów:</h3>
-                    <div id="parser-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs text-slate-300 overflow-x-auto border border-slate-900 min-h-[120px]">Brak aktywnego skanowania.</div>
-                </div>
-            </div>
-
-            <!-- MODULE 3: BAZA DANYCH -->
-            <div id="module-database" class="enterprise-module hidden space-y-6">
-                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
-                    <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-cyan-500">🗄️</span> Menedżer Zmiennych i Bazy Danych
-                    </h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Klucz Zmiennej</label>
-                            <input type="text" id="db-key" placeholder="np. {player.balance::uuid}" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-cyan-500 focus:outline-none transition">
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Tekst wejściowy</label>
+                            <textarea id="txt-input" rows="3" placeholder="Wpisz tekst do sformatowania..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-amber-500 focus:outline-none transition"></textarea>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wartość</label>
-                            <input type="text" id="db-val" placeholder="np. 1500" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-cyan-500 focus:outline-none transition">
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Kolor Minecraft</label>
+                            <select id="mc-color" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-amber-500 focus:outline-none transition">
+                                <option value="&2">&2 - Zielony</option>
+                                <option value="&6">&6 - Złoty</option>
+                                <option value="&b">&b - Turkusowy</option>
+                                <option value="&c">&c - Czerwony</option>
+                                <option value="&e" selected>&e - Żółty</option>
+                                <option value="&f">&f - Biały</option>
+                            </select>
                         </div>
-                    </div>
-                    <button onclick="addDatabaseEntry()" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-cyan-600/25 text-sm">Zapisz w Bazie Danych</button>
-                </div>
-
-                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="font-semibold text-sm text-slate-300">Aktualne rekordy w pamięci:</h3>
-                        <button onclick="clearDatabase()" class="text-xs bg-red-950/40 text-red-400 border border-red-900/40 px-3 py-1.5 rounded-lg hover:bg-red-900/40 transition">Wyczyść Bazę</button>
-                    </div>
-                    <div id="database-container" class="space-y-2 max-h-72 overflow-y-auto pr-1"></div>
-                </div>
-            </div>
-
-            <!-- MODULE 4: PERMISJE I RANGI -->
-            <div id="module-permissions" class="enterprise-module hidden space-y-6">
-                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
-                    <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-purple-500">🛡️</span> Moduł Uprawnień i Grup Graczy
-                    </h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Nazwa Grupy / Rangi</label>
-                            <input type="text" id="perm-group" placeholder="np. Wlasciciel, Vip, Helper" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                            <button onclick="transformText('caps')" class="bg-slate-900 hover:bg-slate-800 border border-cardborder p-3 rounded-xl text-xs font-bold text-amber-400 transition">Małe Kapitały</button>
+                            <button onclick="transformText('color')" class="bg-slate-900 hover:bg-slate-800 border border-cardborder p-3 rounded-xl text-xs font-bold text-emerald-400 transition">Aplikuj Kolor</button>
+                            <button onclick="transformText('lore')" class="bg-slate-900 hover:bg-slate-800 border border-cardborder p-3 rounded-xl text-xs font-bold text-cyan-400 transition">Format Lore</button>
+                            <button onclick="transformText('clear')" class="bg-red-950/20 hover:bg-red-900/30 border border-red-900/30 p-3 rounded-xl text-xs font-bold text-red-400 transition">Wyczyść</button>
                         </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Przypisane Permisje (oddzielone przecinkami)</label>
-                            <input type="text" id="perm-list" placeholder="np. flashcode.*, essentials.fly" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
-                        </div>
-                    </div>
-                    <button onclick="addPermissionGroup()" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-purple-600/25 text-sm">Dodaj Grupę do Systemu</button>
-                </div>
-
-                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
-                    <h3 class="font-semibold text-sm text-slate-300 mb-3">Skonfigurowane Rangi i Uprawnienia:</h3>
-                    <div id="permissions-container" class="space-y-2 max-h-72 overflow-y-auto pr-1"></div>
-                </div>
-            </div>
-
-            <!-- MODULE 5: KREATOR GUI -->
-            <div id="module-gui" class="enterprise-module hidden space-y-6">
-                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
-                    <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-emerald-500">🪟</span> Kreator GUI Chest (Menu Interaktywne)
-                    </h2>
-                    <div class="space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Tytuł GUI (Kolory MC)</label>
-                                <input type="text" id="gui-title" placeholder="&8[&6Panel Główny&8]" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-emerald-500 focus:outline-none transition">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Rozmiar (Rzędy)</label>
-                                <select id="gui-rows" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-emerald-500 focus:outline-none transition">
-                                    <option value="1">1 Rząd (9 slotów)</option>
-                                    <option value="3" selected>3 Rzędy (27 slotów)</option>
-                                    <option value="6">6 Rzędów (54 sloty)</option>
-                                </select>
-                            </div>
-                        </div>
-                        <button onclick="generateGuiCode()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-emerald-600/25 text-sm">Generuj Kod Skryptu GUI</button>
                     </div>
                 </div>
 
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <div class="flex justify-between items-center mb-3">
-                        <h3 class="font-semibold text-sm text-slate-300">Wygenerowane GUI:</h3>
-                        <button onclick="copyModuleCode('gui-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-emerald-400 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj</button>
+                        <h3 class="font-semibold text-sm text-slate-300">Wynik:</h3>
+                        <button onclick="copyCode('txt-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj</button>
                     </div>
-                    <pre id="gui-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs text-emerald-400 overflow-x-auto border border-slate-900 min-h-[100px]">// Kod GUI pojawi się tutaj...</pre>
+                    <div id="txt-output" class="bg-slate-950 p-4 rounded-xl font-mono text-sm text-slate-300 overflow-x-auto border border-slate-900 min-h-[90px] flex items-center">Wynik pojawi się tutaj...</div>
                 </div>
             </div>
 
-            <!-- MODULE 6: LOGGER I AUDIT -->
-            <div id="module-logger" class="enterprise-module hidden space-y-6">
+            <!-- TAB 3: MENEDŻER PACZKI -->
+            <div id="tab-pack" class="tab-content hidden space-y-6">
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
+                    <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
+                        <span class="text-cyan-500">📦</span> Menedżer Paczki Serwera (Pluginy / Skrypty / YML)
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Nazwa elementu</label>
+                            <input type="text" id="pack-name" placeholder="np. EssentialsX / gildiapanel.sk" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-cyan-500 focus:outline-none transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Typ</label>
+                            <select id="pack-type" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-cyan-500 focus:outline-none transition">
+                                <option value="Plugin .JAR">Plugin (.jar)</option>
+                                <option value="Skrypt .SK">Skrypt (.sk)</option>
+                                <option value="Konfiguracja YML">Konfiguracja (YML)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button onclick="addPackItem()" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-cyan-600/25 text-sm">Dodaj do Paczki</button>
+                </div>
+
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-semibold text-sm text-slate-300">Skład paczki:</h3>
+                        <button onclick="exportPackList()" class="text-xs bg-slate-800 hover:bg-slate-700 text-cyan-400 px-3 py-1.5 rounded-lg border border-slate-700 transition">Pobierz spis (TXT)</button>
+                    </div>
+                    <div id="pack-container" class="space-y-2.5 max-h-72 overflow-y-auto pr-1"></div>
+                </div>
+            </div>
+
+            <!-- TAB 4: GRAFIKA I ZASOBY -->
+            <div id="tab-assets" class="tab-content hidden space-y-6">
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
+                    <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
+                        <span class="text-purple-500">🎨</span> Rejestr Zasobów Graficznych
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Nazwa zasobu</label>
+                                <input type="text" id="asset-title" placeholder="np. Ikona Serwera / Banner" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Rozmiar</label>
+                                <input type="text" id="asset-dims" placeholder="np. 64x64 px" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Link / Ścieżka</label>
+                            <input type="text" id="asset-link" placeholder="https://..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
+                        </div>
+                        <button onclick="addAssetItem()" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-purple-600/25 text-sm">Zapisz Zasób</button>
+                    </div>
+                </div>
+
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
+                    <h3 class="font-semibold text-sm text-slate-300 mb-4">Zapisane grafiki:</h3>
+                    <div id="assets-container" class="space-y-2.5 max-h-72 overflow-y-auto pr-1"></div>
+                </div>
+            </div>
+
+            <!-- TAB 5: ZAPISANA HISTORIA -->
+            <div id="tab-storage" class="tab-content hidden space-y-6">
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <div class="flex justify-between items-center mb-4 border-b border-cardborder pb-3">
                         <h2 class="text-base font-bold text-white flex items-center gap-2">
-                            <span class="text-rose-500">📊</span> Systemowy Dziennik Zdarzeń (Audit Log)
+                            <span class="text-emerald-500">💾</span> Historia Wygenerowanych Skryptów
                         </h2>
-                        <button onclick="clearAuditLogs()" class="text-xs bg-red-950/40 text-rose-400 border border-red-900/40 px-3 py-1.5 rounded-lg hover:bg-red-900/40 transition">Wyczyść Logi</button>
+                        <button onclick="clearHistory()" class="text-xs bg-red-950/40 text-red-400 border border-red-900/40 px-3 py-1.5 rounded-lg hover:bg-red-900/40 transition">Wyczyść</button>
                     </div>
-                    <div id="logger-container" class="space-y-2 max-h-[450px] overflow-y-auto pr-1 font-mono text-xs"></div>
+                    <div id="history-container" class="space-y-3 max-h-[500px] overflow-y-auto pr-1"></div>
                 </div>
             </div>
 
         </section>
     </main>
 
-    <!-- Ultra Enterprise Engine v8.0 Core Logic Script (Massive Structural Engine) -->
+    <!-- JavaScript Application Engine -->
     <script>
-        // System Navigation Switcher
-        function switchModule(modId) {
-            document.querySelectorAll('.enterprise-module').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.mod-btn').forEach(el => {
+        // Zakładki (Tabs)
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => {
                 el.classList.remove('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/25');
                 el.classList.add('bg-cardbg', 'text-slate-300', 'border', 'border-transparent');
             });
 
-            document.getElementById('module-' + modId).classList.remove('hidden');
-            const activeBtn = document.getElementById('mod-btn-' + modId);
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            const activeBtn = document.getElementById('btn-' + tabId);
             activeBtn.classList.remove('bg-cardbg', 'text-slate-300', 'border', 'border-transparent');
             activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/25');
-            logAudit('Przełączono moduł roboczy na: ' + modId);
         }
 
-        // Macro Generator Engine (Buduje potężny blok skryptu o dużej objętości)
-        function executeMacroGenerator() {
-            let cmd = document.getElementById('gen-cmd').value.trim();
-            const alias = document.getElementById('gen-alias').value.trim();
-            const perm = document.getElementById('gen-perm').value.trim();
-            const prompt = document.getElementById('gen-prompt').value.trim();
-            const asyncMode = document.getElementById('opt-async').checked;
-            const sqlMode = document.getElementById('opt-sql').checked;
+        // --- INTELIGENTNY GENERATOR SKRYPTÓW (MAPOWANIE PROMPTU) ---
+        function generateIntelligentScript() {
+            let cmd = document.getElementById('sk-cmd').value.trim();
+            let alias = document.getElementById('sk-alias').value.trim();
+            const perm = document.getElementById('sk-perm').value.trim();
+            const prompt = document.getElementById('sk-prompt').value.trim().toLowerCase();
 
             if (!prompt) {
-                alert('Musisz wpisać treść promptu logiki!');
+                alert('Wpisz najpierw prompt w polu zaawansowanym!');
                 return;
             }
 
             if (!cmd) {
-                const cleanWords = prompt.replace(/[^a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9 ]/g, "").split(/\s+/);
-                cmd = cleanWords[0] ? cleanWords[0].toLowerCase() : 'enterprise';
+                const words = prompt.replace(/[^a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9 ]/g, "").split(/\s+/);
+                cmd = words[0] ? words[0].toLowerCase() : 'gildiapanel';
             }
+            if (!alias && cmd === 'gildiapanel') alias = 'kot';
 
-            // Rozbudowany algorytm generujący wielopoziomowy, masowy kod skryptu (realna objętość i struktura)
+            let isGuild = prompt.includes('gildi') || prompt.includes('klan') || prompt.includes('team');
+            let isGui = prompt.includes('gui') || prompt.includes('menu') || prompt.includes('edytować') || prompt.includes('panel');
+
             let sc = `# =====================================================================\n`;
-            sc += `# FLASHCODE STUDIO - ULTRA ENTERPRISE ENGINE v8.0\n`;
-            sc += `# Moduł Główny: /${cmd} ${alias ? '(alias: /' + alias + ')' : ''}\n`;
-            sc += `# Wygenerowano automatycznie z promptu: "${prompt}"\n`;
-            sc += `# Konfiguracja: Async=${asyncMode}, SQL-Storage=${sqlMode}\n`;
+            sc += `# FLASHCODE STUDIO - INTELIGENTNY GENERATOR v9.0\n`;
+            sc += `# Komenda: /${cmd} ${alias ? '(alias: /' + alias + ')' : ''}\n`;
+            sc += `# Prompt: "${prompt}"\n`;
             sc += `# =====================================================================\n\n`;
 
             sc += `options:\n`;
-            sc += `\tprefix: "&8[&bFlashCode&8] &7»"\n`;
-            sc += `\tversion: "8.0.4-Enterprise"\n`;
-            sc += `\tauthor: "FlashCode AI Macro Core"\n`;
-            sc += `\tmax_limit: 1000\n`;
-            sc += `\taudit_mode: true\n\n`;
-
-            sc += `variables:\n`;
-            sc += `\t{fc.sys::status} = true\n`;
-            sc += `\t{fc.sys::executions} = 0\n`;
-            sc += `\t{fc.data::${cmd}::counter} = 0\n`;
-            sc += `\t{fc.cache::active_threads} = 0\n\n`;
-
-            sc += `on load:\n`;
-            sc += `\tbroadcast "{@prefix} &aŁadowanie modułu Enterprise /${cmd}..."\n`;
-            sc += `\tlog "[FlashCode] Pomyślnie zainicjalizowano strukturę v8.0 dla /${cmd}" to "flashcode_master.log"\n`;
-            sc += `\tset {fc.cache::active_threads} to 1\n\n`;
+            sc += `\tprefix: "&8[&bGildie&8] &7»"\n\n`;
 
             if (alias) {
                 sc += `command /${alias}:\n`;
@@ -330,238 +296,192 @@
                 sc += `\t\tstop\n\n`;
             }
 
-            sc += `command /${cmd} [<text>] [<text>]:\n`;
+            sc += `command /${cmd}:\n`;
             if (perm) {
                 sc += `\tpermission: ${perm}\n`;
-                sc += `\tpermission message: "{@prefix} &cNie posiadasz uprawnień do tego polecenia (${perm})!"\n`;
+                sc += `\tpermission message: "{@prefix} &cNie posiadasz uprawnień (${perm})!"\n`;
             }
             sc += `\ttrigger:\n`;
-            sc += `\t\tset {_p} to player\n`;
-            sc += `\t\tset {_uuid} to uuid of player\n`;
-            sc += `\t\tadd 1 to {fc.sys::executions}\n`;
-            sc += `\t\tadd 1 to {fc.data::${cmd}::counter}\n\n`;
 
-            if (asyncMode) {
-                sc += `\t\t# Wywołanie wątkowania asynchronicznego\n`;
-                sc += `\t\tasync:\n`;
-                sc += `\t\t\t# Walidacja struktur danych w tle\n`;
-                sc += `\t\t\twait 1 tick\n\n`;
+            if (isGuild && isGui) {
+                sc += `\t\t# Wykryto system zarządzania gildią przez GUI\n`;
+                sc += `\t\topen chest inventory with 3 rows named "&8[&6Panel Zarządzania Gildią&8]" to player\n`;
+                sc += `\t\tformat gui slot (integers between 0 and 26) of player with gray stained glass pane named " "\n`;
+                sc += `\t\tformat gui slot 10 of player with player head named "&b&lCzłonkowie Gildii" with lore "&7Kliknij, aby zarządzać" and "&7członkami gildii.":\n`;
+                sc += `\t\t\tsend "{@prefix} &7Otwieram zarządzanie członkami..."\n`;
+                sc += `\t\tformat gui slot 12 of player with ender pearl named "&a&lBaza Gildii (Dom)" with lore "&7Zmień lub teleportuj się" and "&7do głównej bazy.":\n`;
+                sc += `\t\t\tsend "{@prefix} &7Zarządzanie bazą gildii..."\n`;
+                sc += `\t\tformat gui slot 14 of player with golden apple named "&6&lSojusze" with lore "&7Zarządzaj relacjami sojuszniczymi.":\n`;
+                sc += `\t\t\tsend "{@prefix} &7Zarządzanie sojuszami..."\n`;
+                sc += `\t\tformat gui slot 16 of player with nether star named "&e&lFlagi i Ustawienia" with lore "&7Zmień status PvP oraz" and "&7ochronę terenu.":\n`;
+                sc += `\t\t\tsend "{@prefix} &7Ustawienia gildii..."\n`;
+                sc += `\t\tformat gui slot 22 of player with barrier named "&c&lZamknij Panel":\n`;
+                sc += `\t\t\tclose player's inventory\n`;
+            } else {
+                sc += `\t\tsend "{@prefix} &fWykonano akcję dla promptu: &7${prompt}" to player\n`;
+                sc += `\t\tplay sound "entity.player.levelup" with volume 1.0 and pitch 1.2 at player\n`;
             }
 
-            sc += `\t\t# Inicjalizacja głównych struktur logicznych z promptu użytkownika:\n`;
-            sc += `\t\tsend "{@prefix} &fAnaliza polecenia systemowego..." to {_p}\n`;
-            sc += `\t\tsend "{@prefix} &7Parametr 1: &e%arg-1 otherwise "brak"%" to {_p}\n`;
-            sc += `\t\tsend "{@prefix} &7Parametr 2: &e%arg-2 otherwise "brak"%" to {_p}\n\n`;
+            sc += `\t\tstop\n`;
 
-            sc += `\t\t# Wykonywanie operacji biznesowych opartych na promptcie:\n`;
-            sc += `\t\tloop 5 times:\n`;
-            sc += `\t\t\tsend "&8[Proces-%loop-index%] &7Wykonywanie instrukcji silnika v8.0..." to {_p}\n`;
-            sc += `\t\t\twait 2 ticks\n\n`;
-
-            if (sqlMode) {
-                sc += `\t\t# Zapisywanie danych do lokalnej bazy danych strukturalnych\n`;
-                sc += `\t\tset {fc.database::${cmd}::%{_uuid}%} to now\n`;
-                sc += `\t\tlog "[Database] Zapisano stan gracza %{_p}% dla modułu ${cmd}" to "flashcode_db.log"\n\n`;
-            }
-
-            sc += `\t\tplay sound "entity.player.levelup" with volume 1.0 and pitch 1.5 at {_p}\n`;
-            sc += `\t\tsend "{@prefix} &aOperacja zakończona sukcesem!" to {_p}\n`;
-            sc += `\t\tstop\n\n`;
-
-            // Dodatkowe pod-funkcje i eventy rozbudowujące kod do potężnej skali
-            sc += `on join:\n`;
-            sc += `\tset {fc.player::session::%%uuid of player%%} to true\n`;
-            sc += `\tset {fc.player::joins::%%uuid of player%%} to {fc.player::joins::%%uuid of player%%} + 1\n\n`;
-
-            sc += `on quit:\n`;
-            sc += `\tclear {fc.player::session::%%uuid of player%%}\n\n`;
-
-            sc += `function fc_GetSystemStatus() :: boolean:\n`;
-            sc += `\treturn {fc.sys::status}\n\n`;
-
-            sc += `function fc_LogAction(msg: text):\n`;
-            sc += `\tlog "%%{_msg}%%" to "flashcode_audit.log"\n`;
-
-            // Liczenie linijek i wyświetlanie
             const linesCount = sc.split('\n').length;
-            document.getElementById('gen-output').innerText = sc;
-            document.getElementById('gen-lines-count').innerText = linesCount + ' linii kodu';
-            logAudit('Wygenerowano makro skryptu dla /' + cmd + ' (' + linesCount + ' linii)');
+            document.getElementById('sk-output').innerText = sc;
+            document.getElementById('sk-lines').innerText = linesCount + ' linii kodu';
+            saveHistory('Skrypt: /' + cmd, sc);
         }
 
-        // Moduł Parsowania i Analizy
-        function runParserAction() {
-            const codeInput = document.getElementById('parser-input').value.trim();
-            const outputBox = document.getElementById('parser-output');
-            
-            if (!codeInput) {
-                outputBox.innerText = '[BŁĄD] Wprowadź kod skryptu do analizy.';
+        // --- TRANSFORMATOR TEKSTU ---
+        function transformText(action) {
+            const input = document.getElementById('txt-input').value;
+            const output = document.getElementById('txt-output');
+            if (!input && action !== 'clear') {
+                output.innerText = 'Wpisz najpierw tekst!';
                 return;
             }
 
-            let report = "[SPOKOK] Analiza składniowa w toku...\n";
-            report += "[INFO] Sprawdzanie poprawności wcięć (indentacja tabulatorami): OK\n";
-            report += "[INFO] Weryfikacja nazw zmiennych globalnych i lokalnych: OK\n";
-            report += "[INFO] Wykryto strukturę options oraz trigger.\n";
-            report += "[SUKCES] Kod spełnia wymogi silnika Skript 2.6+ / 2.7+.\n";
-            report += "[STATUS] Brak krytycznych błędów składniowych.";
-            
-            outputBox.innerText = report;
-            logAudit('Przeprowadzono analizę parsera dla wklejonego kodu.');
+            let res = "";
+            if (action === 'caps') {
+                const map = {'a':'ᴀ','b':'ʙ','c':'ᴄ','d':'ᴅ','e':'ᴇ','f':'ꜰ','g':'ɢ','h':'ʜ','i':'ɪ','j':'ᴊ','k':'ᴋ','l':'ʟ','m':'ᴍ','n':'ɴ','o':'ᴏ','p':'ᴘ','q':'ꞯ','r':'ʀ','s':'ꜱ','t':'ᴛ','u':'ᴜ','v':'ᴠ','w':'ᴡ','y':'ʏ','z':'ᴢ'};
+                res = input.toLowerCase().split('').map(c => map[c] || c).join('');
+            } else if (action === 'color') {
+                const col = document.getElementById('mc-color').value;
+                res = input.split('').map(c => c === ' ' ? ' ' : col + c).join('');
+            } else if (action === 'lore') {
+                res = input.split('\n').map(l => `lore: "${l.toUpperCase()}"`).join('\n');
+            } else if (action === 'clear') {
+                res = "";
+                document.getElementById('txt-input').value = "";
+            }
+            output.innerText = res || 'Brak danych.';
         }
 
-        // Baza Danych (LocalStorage Engine)
-        let dbStorage = JSON.parse(localStorage.getItem('fc_database_v8') || '[]');
-        renderDatabase();
+        // --- MENEDŻER PACZKI ---
+        let packData = JSON.parse(localStorage.getItem('fc_pack_v9') || '[]');
+        renderPack();
 
-        function addDatabaseEntry() {
-            const key = document.getElementById('db-key').value.trim();
-            const val = document.getElementById('db-val').value.trim();
-            if (!key || !val) return alert('Wypełnij klucz i wartość!');
-            dbStorage.push({ key, val, time: new Date().toLocaleTimeString() });
-            localStorage.setItem('fc_database_v8', JSON.stringify(dbStorage));
-            document.getElementById('db-key').value = '';
-            document.getElementById('db-val').value = '';
-            renderDatabase();
-            logAudit('Dodano rekord do bazy danych: ' + key);
+        function addPackItem() {
+            const name = document.getElementById('pack-name').value.trim();
+            const type = document.getElementById('pack-type').value;
+            if (!name) return alert('Wpisz nazwę!');
+            packData.push({ name, type });
+            localStorage.setItem('fc_pack_v9', JSON.stringify(packData));
+            document.getElementById('pack-name').value = '';
+            renderPack();
         }
 
-        function renderDatabase() {
-            const container = document.getElementById('database-container');
-            if (dbStorage.length === 0) {
-                container.innerHTML = '<p class="text-xs text-slate-500 p-2">Baza danych jest pusta.</p>';
+        function renderPack() {
+            const container = document.getElementById('pack-container');
+            if (packData.length === 0) {
+                container.innerHTML = '<p class="text-xs text-slate-500 p-2">Paczka jest pusta.</p>';
                 return;
             }
-            container.innerHTML = dbStorage.map((item, idx) => `
-                <div class="flex justify-between items-center bg-slate-900 border border-cardborder p-3 rounded-xl text-sm font-mono">
-                    <div>
-                        <span class="text-cyan-400 font-bold">${item.key}</span> = <span class="text-white">${item.val}</span>
-                        <span class="text-[10px] text-slate-500 ml-2">(${item.time})</span>
-                    </div>
-                    <button onclick="removeDbItem(${idx})" class="text-red-400 text-xs font-semibold">Usuń</button>
+            container.innerHTML = packData.map((item, idx) => `
+                <div class="flex justify-between items-center bg-slate-900 border border-cardborder p-3 rounded-xl text-sm">
+                    <div><span class="font-bold text-white">${item.name}</span> <span class="text-[10px] text-cyan-400 ml-2 bg-cyan-950/40 px-2 py-0.5 rounded">${item.type}</span></div>
+                    <button onclick="removePack(${idx})" class="text-red-400 text-xs font-semibold">Usuń</button>
                 </div>
             `).join('');
         }
 
-        function removeDbItem(idx) {
-            dbStorage.splice(idx, 1);
-            localStorage.setItem('fc_database_v8', JSON.stringify(dbStorage));
-            renderDatabase();
+        function removePack(idx) {
+            packData.splice(idx, 1);
+            localStorage.setItem('fc_pack_v9', JSON.stringify(packData));
+            renderPack();
         }
 
-        function clearDatabase() {
-            dbStorage = [];
-            localStorage.removeItem('fc_database_v8');
-            renderDatabase();
-            logAudit('Wyczyszczono całą bazę danych.');
-        }
-
-        // Moduł Permisji i Rang
-        let permStorage = JSON.parse(localStorage.getItem('fc_perms_v8') || '[]');
-        renderPermissions();
-
-        function addPermissionGroup() {
-            const group = document.getElementById('perm-group').value.trim();
-            const list = document.getElementById('perm-list').value.trim();
-            if (!group) return alert('Wpisz nazwę grupy!');
-            permStorage.push({ group, list: list || 'brak' });
-            localStorage.setItem('fc_perms_v8', JSON.stringify(permStorage));
-            document.getElementById('perm-group').value = '';
-            document.getElementById('perm-list').value = '';
-            renderPermissions();
-            logAudit('Dodano grupę permisji: ' + group);
-        }
-
-        function renderPermissions() {
-            const container = document.getElementById('permissions-container');
-            if (permStorage.length === 0) {
-                container.innerHTML = '<p class="text-xs text-slate-500 p-2">Brak zdefiniowanych grup.</p>';
-                return;
-            }
-            container.innerHTML = permStorage.map((p, idx) => `
-                <div class="bg-slate-900 border border-cardborder p-3 rounded-xl text-sm flex justify-between items-center">
-                    <div>
-                        <span class="font-bold text-purple-400">${p.group}</span> -> <span class="text-slate-300 font-mono text-xs">${p.list}</span>
-                    </div>
-                    <button onclick="removePermItem(${idx})" class="text-red-400 text-xs font-semibold">Usuń</button>
-                </div>
-            `).join('');
-        }
-
-        function removePermItem(idx) {
-            permStorage.splice(idx, 1);
-            localStorage.setItem('fc_perms_v8', JSON.stringify(permStorage));
-            renderPermissions();
-        }
-
-        // Kreator GUI
-        function generateGuiCode() {
-            const title = document.getElementById('gui-title').value.trim() || '&8Menu';
-            const rows = document.getElementById('gui-rows').value;
-
-            let code = `command /menu:\n`;
-            code += `\ttrigger:\n`;
-            code += `\t\topen chest inventory with ${rows} rows named "${title}" to player\n`;
-            code += `\t\tformat gui slot 4 of player with diamond named "&bWażny Przedmiot" with lore "&7Kliknij, aby użyć!":\n`;
-            code += `\t\t\tsend "{@prefix} &aKliknąłeś przedmiot w menu!"\n`;
-            code += `\t\t\tclose player's inventory\n`;
-
-            document.getElementById('gui-output').innerText = code;
-            logAudit('Wygenerowano kod GUI Chest.');
-        }
-
-        // Moduł Audit Logów
-        let auditLogs = JSON.parse(localStorage.getItem('fc_audit_v8') || '[]');
-        renderAuditLogs();
-
-        function logAudit(msg) {
-            const time = new Date().toLocaleTimeString();
-            auditLogs.unshift({ time, msg });
-            if (auditLogs.length > 50) auditLogs.pop();
-            localStorage.setItem('fc_audit_v8', JSON.stringify(auditLogs));
-            renderAuditLogs();
-        }
-
-        function renderAuditLogs() {
-            const container = document.getElementById('logger-container');
-            if (!container) return;
-            if (auditLogs.length === 0) {
-                container.innerHTML = '<p class="text-xs text-slate-500 p-2">Brak wpisów w dzienniku.</p>';
-                return;
-            }
-            container.innerHTML = auditLogs.map(l => `
-                <div class="bg-slate-900 border border-cardborder p-2.5 rounded-lg flex justify-between items-center text-slate-300">
-                    <span>${l.msg}</span>
-                    <span class="text-slate-500">${l.time}</span>
-                </div>
-            `).join('');
-        }
-
-        function clearAuditLogs() {
-            auditLogs = [];
-            localStorage.removeItem('fc_audit_v8');
-            renderAuditLogs();
-        }
-
-        // Narzędzia pomocnicze
-        function copyModuleCode(elementId) {
-            navigator.clipboard.writeText(document.getElementById(elementId).innerText);
-            alert('Skopiowano kod do schowka!');
-            logAudit('Skopiowano kod z elementu: ' + elementId);
-        }
-
-        function downloadCodeFile() {
-            const text = document.getElementById('gen-output').innerText;
+        function exportPackList() {
+            const text = "=== SPIS PACZKI ===\n\n" + packData.map(i => `- [${i.type}] ${i.name}`).join('\n');
             const blob = new Blob([text], { type: 'text/plain' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = 'enterprise_system.sk';
+            link.download = 'paczka.txt';
             link.click();
-            logAudit('Pobrano plik skryptu enterprise_system.sk');
         }
 
-        // Inicjalizacja logu startowego
-        logAudit('System Ultra Enterprise v8.0 zainicjalizowany pomyślnie.');
+        // --- GRAFIKA I ZASOBY ---
+        let assetsData = JSON.parse(localStorage.getItem('fc_assets_v9') || '[]');
+        renderAssets();
+
+        function addAssetItem() {
+            const title = document.getElementById('asset-title').value.trim();
+            const dims = document.getElementById('asset-dims').value.trim();
+            if (!title) return alert('Wpisz nazwę zasobu!');
+            assetsData.push({ title, dims: dims || 'N/A' });
+            localStorage.setItem('fc_assets_v9', JSON.stringify(assetsData));
+            document.getElementById('asset-title').value = '';
+            document.getElementById('asset-dims').value = '';
+            document.getElementById('asset-link').value = '';
+            renderAssets();
+        }
+
+        function renderAssets() {
+            const container = document.getElementById('assets-container');
+            if (assetsData.length === 0) {
+                container.innerHTML = '<p class="text-xs text-slate-500 p-2">Brak zasobów.</p>';
+                return;
+            }
+            container.innerHTML = assetsData.map((item, idx) => `
+                <div class="bg-slate-900 border border-cardborder p-3 rounded-xl text-sm flex justify-between items-center">
+                    <div><span class="font-bold text-white">${item.title}</span> <span class="text-xs text-purple-400">(${item.dims})</span></div>
+                    <button onclick="removeAsset(${idx})" class="text-red-400 text-xs font-semibold">Usuń</button>
+                </div>
+            `).join('');
+        }
+
+        function removeAsset(idx) {
+            assetsData.splice(idx, 1);
+            localStorage.setItem('fc_assets_v9', JSON.stringify(assetsData));
+            renderAssets();
+        }
+
+        // --- HISTORIA ---
+        function saveHistory(title, data) {
+            let history = JSON.parse(localStorage.getItem('fc_history_v9') || '[]');
+            history.unshift({ title, data, time: new Date().toLocaleTimeString() });
+            if (history.length > 20) history.pop();
+            localStorage.setItem('fc_history_v9', JSON.stringify(history));
+            loadHistory();
+        }
+
+        function loadHistory() {
+            let history = JSON.parse(localStorage.getItem('fc_history_v9') || '[]');
+            const container = document.getElementById('history-container');
+            if (!container) return;
+            if (history.length === 0) {
+                container.innerHTML = '<p class="text-xs text-slate-500 p-2">Brak historii.</p>';
+                return;
+            }
+            container.innerHTML = history.map(h => `
+                <div class="bg-slate-900 border border-cardborder p-3 rounded-xl text-xs space-y-1">
+                    <div class="flex justify-between text-slate-400">
+                        <span class="text-emerald-400 font-bold">${h.title}</span>
+                        <span>${h.time}</span>
+                    </div>
+                    <pre class="font-mono text-slate-300 bg-slate-950 p-2 rounded overflow-x-auto">${h.data}</pre>
+                </div>
+            `).join('');
+        }
+
+        function clearHistory() {
+            localStorage.removeItem('fc_history_v9');
+            loadHistory();
+        }
+
+        // --- NARZĘDZIA POMOCNICZE ---
+        function copyCode(elementId) {
+            navigator.clipboard.writeText(document.getElementById(elementId).innerText);
+            alert('Skopiowano do schowka!');
+        }
+
+        function downloadFile(elementId, filename, type) {
+            const blob = new Blob([document.getElementById(elementId).innerText], { type: type });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            link.click();
+        }
+
+        loadHistory();
     </script>
 </body>
 </html>
