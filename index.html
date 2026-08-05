@@ -1,1024 +1,316 @@
 <!DOCTYPE html>
-<html lang="pl" class="scroll-smooth">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flashcode // Ultimate Graphic & Developer Core Studio PRO</title>
+    <title>FlashCode Studio Pro - Ultimate Dev Kit</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#090d16',
+                        cardbg: '#111827',
+                        accent: '#06b6d4',
+                        minecraft: '#f59e0b'
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        @keyframes scanline {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(1000%); }
-        }
-        .scanline::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(234, 179, 8, 0.4), transparent);
-            animation: scanline 5s linear infinite;
-            pointer-events: none;
-        }
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #070709; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #eab308; }
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
     </style>
 </head>
-<body class="bg-[#030305] text-white font-sans antialiased selection:bg-yellow-400 selection:text-black relative overflow-x-hidden scanline custom-scrollbar">
+<body class="bg-darkbg text-gray-100 min-h-screen flex flex-col">
 
-  <!-- TOP TELEMETRY BAR -->
-  <div class="bg-[#070709] border-b border-white/10 text-[11px] text-gray-400 py-2 px-4 font-mono">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-      <div class="flex items-center gap-4">
-        <span class="flex items-center gap-1.5 text-green-400"><span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>GRAPHIC CORE: ONLINE</span>
-        <span>STUDIO ENGINE: <strong class="text-white">v10.0 ULTRA PRO</strong></span>
-        <span>ACCESS: <strong class="text-yellow-400">UNLIMITED / FREE 18+</strong></span>
-      </div>
-      <div class="flex items-center gap-4">
-        <span id="live-utc-clock">UTC: --:--:--</span>
-        <span class="text-yellow-400">GPU ACCELERATION: ACTIVE</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- NAVIGATION -->
-  <header class="sticky top-0 z-50 bg-[#050508]/95 backdrop-blur-md border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-yellow-500 via-amber-300 to-yellow-400 flex items-center justify-center font-black text-black text-2xl shadow-lg shadow-yellow-500/20">⚡</div>
-        <div>
-          <span class="font-extrabold text-xl tracking-wider block leading-none">Flashcode</span>
-          <span class="text-[10px] font-mono text-yellow-400 tracking-widest uppercase">Graphic & Dev Studio</span>
+    <!-- Header -->
+    <header class="bg-cardbg border-b border-gray-800 p-4 sticky top-0 z-50 flex justify-between items-center shadow-lg">
+        <div class="flex items-center space-x-3">
+            <span class="text-2xl">⚡</span>
+            <h1 class="font-extrabold text-xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-amber-400">FLASHCODE STUDIO PRO</h1>
         </div>
-      </div>
-
-      <nav class="hidden lg:flex items-center gap-6 text-xs font-semibold text-gray-400 uppercase tracking-wider">
-        <a href="#generator" class="text-white transition hover:text-yellow-400">Generator Grafiki</a>
-        <a href="#assets" class="transition hover:text-yellow-400">Zasoby & Szablony</a>
-        <a href="#narzedzia" class="transition hover:text-yellow-400">Narzędzia MC</a>
-        <a href="#uslugi" class="transition hover:text-yellow-400">Cennik Usług</a>
-        <a href="#zespol" class="transition hover:text-yellow-400">Zespół</a>
-      </nav>
-
-      <div class="flex items-center gap-3">
-        <a href="https://discord.gg/zErtg676k" target="_blank" class="flex items-center gap-2 border border-yellow-400/30 bg-yellow-400/10 px-4 py-2.5 rounded-xl text-xs font-bold text-yellow-400 transition hover:bg-yellow-400/20 uppercase tracking-wider">
-          <i data-lucide="message-square" class="w-4 h-4"></i> Discord Gateway
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <!-- HERO SECTION -->
-  <section class="py-20 lg:py-28 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto space-y-6">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-yellow-400 font-bold tracking-widest uppercase">
-          <span>[ ULTIMATE GRAPHIC SUITE ]</span> • <span>DARMOWE NARZĘDZIA PRO</span>
+        <div class="text-xs bg-gray-800 px-3 py-1.5 rounded-full border border-gray-700 text-cyan-400 font-mono">
+            SYSTEM: ONLINE v3.0
         </div>
-        <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-none">
-          Profesjonalne Studio Graficzne i <span class="bg-gradient-to-r from-yellow-400 via-amber-200 to-amber-500 bg-clip-text text-transparent">Generator Assetów.</span>
-        </h1>
-        <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
-          Pełnoprawne, zaawansowane środowisko pracy dla grafika. Stwórz banery, logotypy i oprawy wizualne o najwyższej precyzji w kilka chwil.
-        </p>
-      </div>
-    </div>
-  </section>
+    </header>
 
-  <!-- MAIN GRAPHIC GENERATOR -->
-  <section id="generator" class="py-20 bg-[#07070a] border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-        <div>
-          <span class="text-xs uppercase tracking-widest text-yellow-400 block mb-2 font-bold font-mono">[ LIVE GPU RENDERING ENGINE ]</span>
-          <h2 class="text-3xl sm:text-4xl font-black">Zaawansowany Edytor Graficzny</h2>
-        </div>
-        <p class="text-gray-400 text-sm max-w-md mt-2 md:mt-0">Dostosuj każdy parametr w czasie rzeczywistym. Pełna kontrola nad wyglądem Twojego projektu.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    <!-- Main Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
         
-        <!-- CONTROL PANEL -->
-        <div class="lg:col-span-5 bg-[#0b0b0f] border border-white/10 p-6 sm:p-8 rounded-2xl space-y-6">
-          <div class="flex items-center justify-between border-b border-white/10 pb-4">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-yellow-400 flex items-center gap-2">
-              <i data-lucide="sliders" class="w-4 h-4"></i> Parametry Projektu
-            </h3>
-            <span class="text-[10px] font-mono text-gray-500">ENGINE v10</span>
-          </div>
-
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2 font-bold">Typ Projektu:</label>
-            <select id="adv-type" onchange="renderAdvancedGraphic()" class="w-full bg-[#121218] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-xs font-mono">
-              <option value="banner">Baner YouTube / Social Media</option>
-              <option value="logo">Logotyp / Awatar (1:1)</option>
-              <option value="badge">Odznaka / Ranga Server</option>
-            </select>
-          </div>
-
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2 font-bold">Tekst Główny:</label>
-            <input type="text" id="adv-title" value="FLASHCODE" oninput="renderAdvancedGraphic()" class="w-full bg-[#121218] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-xs font-mono">
-          </div>
-
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2 font-bold">Podtekst / Slogan:</label>
-            <input type="text" id="adv-subtitle" value="ULTIMATE DESIGN STUDIO" oninput="renderAdvancedGraphic()" class="w-full bg-[#121218] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-xs font-mono">
-          </div>
-
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2 font-bold">Styl / Kolor:</label>
-              <select id="adv-theme" onchange="renderAdvancedGraphic()" class="w-full bg-[#121218] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-xs font-mono">
-                <option value="gold">Złoty Premium</option>
-                <option value="cyber">Cyberpunk Neon</option>
-                <option value="matrix">Matrix Green</option>
-                <option value="crimson">Crimson Red</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2 font-bold">Ikona:</label>
-              <select id="adv-icon" onchange="renderAdvancedGraphic()" class="w-full bg-[#121218] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-xs font-mono">
-                <option value="⚡">⚡ Błyskawica</option>
-                <option value="🛡️">🛡️ Tarcza</option>
-                <option value="👑">👑 Korona</option>
-                <option value="🔥">🔥 Ogień</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- CANVAS PREVIEW -->
-        <div class="lg:col-span-7 bg-[#0b0b0f] border border-white/10 p-6 sm:p-8 rounded-2xl flex flex-col justify-between min-h-[500px]">
-          <div class="flex items-center justify-between border-b border-white/10 pb-4 text-xs font-mono">
-            <span class="text-gray-400">RENDER PREVIEW // 4K OUTPUT</span>
-            <span class="text-green-400 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-green-500 animate-ping"></span> READY</span>
-          </div>
-
-          <div id="graphic-canvas-wrapper" class="w-full h-80 rounded-2xl flex flex-col items-center justify-center text-center p-8 relative overflow-hidden shadow-2xl transition-all duration-300 bg-gradient-to-tr from-yellow-600/20 via-black to-amber-500/10 border border-yellow-500/30 my-6">
-            <div class="absolute inset-0 bg-black/50 backdrop-blur-[2px]"></div>
-            <div class="relative z-10 space-y-4">
-              <div id="canvas-icon-el" class="w-20 h-20 rounded-2xl bg-yellow-400/20 border border-yellow-400/40 text-yellow-400 flex items-center justify-center text-4xl mx-auto shadow-xl shadow-yellow-500/20">⚡</div>
-              <h3 id="canvas-title-el" class="text-3xl sm:text-4xl font-black tracking-widest text-white">FLASHCODE</h3>
-              <p id="canvas-subtitle-el" class="text-xs uppercase tracking-[0.3em] text-yellow-400 font-mono font-bold">ULTIMATE DESIGN STUDIO</p>
-            </div>
-          </div>
-
-          <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/10 text-xs">
-            <span class="text-gray-500 font-mono">Format: PNG Wysoka Rozdzielczość</span>
-            <button onclick="alert('Grafika pomyślnie wyrenderowana i pobrana!')" class="bg-gradient-to-r from-yellow-400 to-amber-400 text-black font-bold px-6 py-3 rounded-xl shadow-lg shadow-yellow-400/20 transition hover:opacity-90 uppercase tracking-wider flex items-center gap-2">
-              Pobierz Grafikę <i data-lucide="download" class="w-4 h-4"></i>
+        <!-- Sidebar Navigation -->
+        <aside class="lg:col-span-1 space-y-2 flex flex-row lg:flex-col overflow-x-auto pb-2 lg:pb-0">
+            <button onclick="switchTab('skript')" id="btn-skript" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-cyan-600 text-white shadow-md flex items-center space-x-2 whitespace-nowrap">
+                <span>💻</span> <span>Generator Skryptów</span>
             </button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- JAVASCRIPT ENGINE -->
-  <script>
-    lucide.createIcons();
-    setInterval(() => {
-      const now = new Date();
-      document.getElementById('live-utc-clock').textContent = "UTC: " + now.toUTCString().split(' ')[4];
-    }, 1000);
-
-    function renderAdvancedGraphic() {
-      const title = document.getElementById('adv-title').value || 'FLASHCODE';
-      const subtitle = document.getElementById('adv-subtitle').value || '';
-      const theme = document.getElementById('adv-theme').value;
-      const icon = document.getElementById('adv-icon').value;
-
-      document.getElementById('canvas-title-el').textContent = title;
-      document.getElementById('canvas-subtitle-el').textContent = subtitle;
-      document.getElementById('canvas-icon-el').textContent = icon;
-
-      const box = document.getElementById('graphic-canvas-wrapper');
-      if (theme === 'gold') {
-        box.className = "w-full h-80 rounded-2xl flex flex-col items-center justify-center text-center p-8 relative overflow-hidden shadow-2xl transition-all duration-300 bg-gradient-to-tr from-yellow-600/20 via-black to-amber-500/10 border border-yellow-500/30 my-6";
-      } else if (theme === 'cyber') {
-        box.className = "w-full h-80 rounded-2xl flex flex-col items-center justify-center text-center p-8 relative overflow-hidden shadow-2xl transition-all duration-300 bg-gradient-to-tr from-cyan-600/20 via-black to-purple-500/10 border border-cyan-500/30 my-6";
-      } else if (theme === 'matrix') {
-        box.className = "w-full h-80 rounded-2xl flex flex-col items-center justify-center text-center p-8 relative overflow-hidden shadow-2xl transition-all duration-300 bg-gradient-to-tr from-green-600/20 via-black to-emerald-500/10 border border-green-500/30 my-6";
-      } else {
-        box.className = "w-full h-80 rounded-2xl flex flex-col items-center justify-center text-center p-8 relative overflow-hidden shadow-2xl transition-all duration-300 bg-gradient-to-tr from-red-600/20 via-black to-rose-500/10 border border-red-500/30 my-6";
-      }
-    }
-  </script>
-  <!-- =================ASSETS & TEMPLATES GALLERY================ -->
-  <section id="assets" class="py-20 bg-[#030305] border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-        <div>
-          <span class="text-xs uppercase tracking-widest text-yellow-400 block mb-2 font-bold font-mono">[ COMMUNITY ASSETS // REPOSITORY ]</span>
-          <h2 class="text-3xl sm:text-4xl font-black">Gotowe Szablony i Zasoby</h2>
-        </div>
-        <p class="text-gray-400 text-sm max-w-md mt-2 md:mt-0">Wybierz gotowy preset graficzny, zaimportuj do edytora lub pobierz bezpośrednio na dysk.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        
-        <!-- Asset Card 1 -->
-        <div class="bg-[#0b0b0f] border border-white/10 rounded-2xl p-6 space-y-4 hover:border-yellow-400/50 transition-all group">
-          <div class="h-40 rounded-xl bg-gradient-to-tr from-yellow-500/20 via-black to-amber-500/10 border border-yellow-500/20 flex items-center justify-center relative overflow-hidden">
-            <span class="text-4xl group-hover:scale-110 transition-transform duration-300">⚡</span>
-            <span class="absolute top-3 right-3 text-[10px] font-mono bg-yellow-400/10 text-yellow-400 border border-yellow-400/30 px-2 py-1 rounded-md">BANNER 4K</span>
-          </div>
-          <div>
-            <h4 class="font-bold text-lg text-white group-hover:text-yellow-400 transition-colors">Cyber Gold Banner</h4>
-            <p class="text-xs text-gray-400 mt-1">Profesjonalny baner w odcieniach głębokiego złota i czerni dla twórców.</p>
-          </div>
-          <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs">
-            <span class="text-gray-500 font-mono">Pobrania: 1,420</span>
-            <button onclick="alert('Pobierano szablon: Cyber Gold Banner')" class="text-yellow-400 font-bold flex items-center gap-1 hover:underline">
-              Pobierz <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            <button onclick="switchTab('text')" id="btn-text" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-cardbg hover:bg-gray-800 text-gray-300 flex items-center space-x-2 whitespace-nowrap">
+                <span>🔠</span> <span>Formatowanie i Kapitaliki</span>
             </button>
-          </div>
-        </div>
-
-        <!-- Asset Card 2 -->
-        <div class="bg-[#0b0b0f] border border-white/10 rounded-2xl p-6 space-y-4 hover:border-yellow-400/50 transition-all group">
-          <div class="h-40 rounded-xl bg-gradient-to-tr from-cyan-500/20 via-black to-blue-500/10 border border-cyan-500/20 flex items-center justify-center relative overflow-hidden">
-            <span class="text-4xl group-hover:scale-110 transition-transform duration-300">🛡️</span>
-            <span class="absolute top-3 right-3 text-[10px] font-mono bg-cyan-400/10 text-cyan-400 border border-cyan-400/30 px-2 py-1 rounded-md">AVATAR 1:1</span>
-          </div>
-          <div>
-            <h4 class="font-bold text-lg text-white group-hover:text-yellow-400 transition-colors">Neon Cyber Shield</h4>
-            <p class="text-xs text-gray-400 mt-1">Nowoczesna odznaka z efektem neonowego podświetlenia i tarczy.</p>
-          </div>
-          <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs">
-            <span class="text-gray-500 font-mono">Pobrania: 980</span>
-            <button onclick="alert('Pobierano szablon: Neon Cyber Shield')" class="text-yellow-400 font-bold flex items-center gap-1 hover:underline">
-              Pobierz <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            <button onclick="switchTab('pack')" id="btn-pack" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-cardbg hover:bg-gray-800 text-gray-300 flex items-center space-x-2 whitespace-nowrap">
+                <span>📦</span> <span>Menedżer Paczki MC</span>
             </button>
-          </div>
-        </div>
-
-        <!-- Asset Card 3 -->
-        <div class="bg-[#0b0b0f] border border-white/10 rounded-2xl p-6 space-y-4 hover:border-yellow-400/50 transition-all group">
-          <div class="h-40 rounded-xl bg-gradient-to-tr from-green-500/20 via-black to-emerald-500/10 border border-green-500/20 flex items-center justify-center relative overflow-hidden">
-            <span class="text-4xl group-hover:scale-110 transition-transform duration-300">👑</span>
-            <span class="absolute top-3 right-3 text-[10px] font-mono bg-green-400/10 text-green-400 border border-green-400/30 px-2 py-1 rounded-md">BADGE PRO</span>
-          </div>
-          <div>
-            <h4 class="font-bold text-lg text-white group-hover:text-yellow-400 transition-colors">Matrix Royal Crown</h4>
-            <p class="text-xs text-gray-400 mt-1">Ekskluzywna korona w zielonej palecie barw dla rang administratorskich.</p>
-          </div>
-          <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs">
-            <span class="text-gray-500 font-mono">Pobrania: 2,150</span>
-            <button onclick="alert('Pobierano szablon: Matrix Royal Crown')" class="text-yellow-400 font-bold flex items-center gap-1 hover:underline">
-              Pobierz <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            <button onclick="switchTab('storage')" id="btn-storage" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-cardbg hover:bg-gray-800 text-gray-300 flex items-center space-x-2 whitespace-nowrap">
+                <span>📂</span> <span>Archiwum Plików</span>
             </button>
-          </div>
-        </div>
+        </aside>
 
-      </div>
-    </div>
-  </section>
+        <!-- Content Area -->
+        <section class="lg:col-span-3 space-y-6">
 
-  <!-- =================MC & TEXT TOOLS SECTION================ -->
-  <section id="narzedzia" class="py-20 bg-[#07070a] border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto text-center space-y-4 mb-16">
-        <span class="text-xs uppercase tracking-widest text-yellow-400 font-bold font-mono">[ UTILITIES & FORMATTERS ]</span>
-        <h2 class="text-3xl sm:text-4xl font-black">Narzędzia Tekstowe i Społecznościowe</h2>
-        <p class="text-gray-400 text-sm">Szybkie formatowanie tekstu dla deweloperów oraz administratorów serwerów Discord i Minecraft.</p>
-      </div>
+            <!-- TAB 1: SKRYPTY -->
+            <div id="tab-skript" class="tab-content space-y-4">
+                <div class="bg-cardbg border border-gray-800 p-6 rounded-2xl shadow-xl">
+                    <h2 class="text-lg font-bold text-cyan-400 mb-4 flex items-center gap-2">🛠️ Realny Generator Skryptów (.sk)</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-1">Nazwa komendy / eventu</label>
+                            <input type="text" id="sk-name" placeholder="np. vipy, sethome, gildie" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-cyan-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-1">Typ logiki</label>
+                            <select id="sk-type" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-cyan-500 focus:outline-none">
+                                <option value="command">Prosta Komenda z Wiadomością</option>
+                                <option value="heal">Komenda Leczenia / Odnowienia</option>
+                                <option value="join">Event Wejścia Gracza (First Join / Join)</option>
+                                <option value="block">Blokada niszczenia / Ochrona terenu</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-1">Wiadomość zwrotna / Prefix</label>
+                            <input type="text" id="sk-msg" placeholder="&8[&6FlashCode&8] &7Twój komunikat..." class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-cyan-500 focus:outline-none">
+                        </div>
+                        <button onclick="generateScript()" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold p-3 rounded-lg transition shadow-lg">Generuj i Zapisz Skrypt</button>
+                    </div>
+                </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        
-        <!-- Text Formatter Box -->
-        <div class="bg-[#0b0b0f] border border-white/10 p-6 sm:p-8 rounded-2xl space-y-6">
-          <h3 class="text-sm font-bold uppercase tracking-wider text-yellow-400 flex items-center gap-2">
-            <i data-lucide="type" class="w-4 h-4"></i> Generator Stylów Tekstu
-          </h3>
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2 font-bold">Wpisz tekst:</label>
-            <input type="text" id="tool-input-text" value="Flashcode Studio" oninput="processToolText()" class="w-full bg-[#121218] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-xs font-mono">
-          </div>
-          <div class="space-y-3 font-mono text-xs">
-            <div class="bg-[#121218] p-3 rounded-xl border border-white/5 flex justify-between items-center">
-              <span class="text-gray-500">Wielkie litery:</span>
-              <span id="res-upper" class="text-yellow-400 font-bold">FLASHCODE STUDIO</span>
+                <div class="bg-cardbg border border-gray-800 p-6 rounded-2xl shadow-xl">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-semibold text-gray-300">Podgląd wygenerowanego kodu:</h3>
+                        <button onclick="copyCode('sk-output')" class="text-xs bg-gray-800 hover:bg-gray-700 text-cyan-400 px-3 py-1 rounded border border-gray-700">Kopiuj</button>
+                    </div>
+                    <pre id="sk-output" class="bg-gray-950 p-4 rounded-xl font-mono text-sm text-emerald-400 overflow-x-auto border border-gray-800 min-h-[120px]">// Tutaj pojawi się gotowy kod skryptu...</pre>
+                </div>
             </div>
-            <div class="bg-[#121218] p-3 rounded-xl border border-white/5 flex justify-between items-center">
-              <span class="text-gray-500">W nawiasach:</span>
-              <span id="res-bracket" class="text-yellow-400 font-bold">[ FLASHCODE STUDIO ]</span>
+
+            <!-- TAB 2: TEKST I KAPITALIKI -->
+            <div id="tab-text" class="tab-content hidden space-y-4">
+                <div class="bg-cardbg border border-gray-800 p-6 rounded-2xl shadow-xl">
+                    <h2 class="text-lg font-bold text-amber-400 mb-4 flex items-center gap-2">🔠 Edytor i Transformator Tekstu MC</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-1">Wpisz tekst do modyfikacji</label>
+                            <textarea id="txt-input" rows="3" placeholder="Wpisz tekst serwerowy..." class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-amber-500 focus:outline-none"></textarea>
+                        </div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                            <button onclick="transformText('caps')" class="bg-gray-800 hover:bg-gray-700 border border-gray-700 p-3 rounded-lg text-sm font-semibold text-amber-300 transition">Na KAPITALIKI</button>
+                            <button onclick="transformText('minecraft')" class="bg-gray-800 hover:bg-gray-700 border border-gray-700 p-3 rounded-lg text-sm font-semibold text-emerald-400 transition">Dodaj &a Kolory</button>
+                            <button onclick="transformText('lore')" class="bg-gray-800 hover:bg-gray-700 border border-gray-700 p-3 rounded-lg text-sm font-semibold text-cyan-400 transition">Format Lore Itemu</button>
+                            <button onclick="transformText('clear')" class="bg-red-950/40 hover:bg-red-900/40 border border-red-900/50 p-3 rounded-lg text-sm font-semibold text-red-400 transition">Wyczyść</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-cardbg border border-gray-800 p-6 rounded-2xl shadow-xl">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-semibold text-gray-300">Wynik operacji:</h3>
+                        <button onclick="copyCode('txt-output')" class="text-xs bg-gray-800 hover:bg-gray-700 text-amber-400 px-3 py-1 rounded border border-gray-700">Kopiuj</button>
+                    </div>
+                    <div id="txt-output" class="bg-gray-950 p-4 rounded-xl font-mono text-sm text-gray-200 overflow-x-auto border border-gray-800 min-h-[80px]">Efekt pojawi się tutaj...</div>
+                </div>
             </div>
-            <div class="bg-[#121218] p-3 rounded-xl border border-white/5 flex justify-between items-center">
-              <span class="text-gray-500">Z gwiazdkami:</span>
-              <span id="res-star" class="text-yellow-400 font-bold">★ FLASHCODE STUDIO ★</span>
+
+            <!-- TAB 3: MENEDŻER PACZKI -->
+            <div id="tab-pack" class="tab-content hidden space-y-4">
+                <div class="bg-cardbg border border-gray-800 p-6 rounded-2xl shadow-xl">
+                    <h2 class="text-lg font-bold text-cyan-400 mb-4 flex items-center gap-2">📦 Kreator Paczki Serwerowej MC</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-1">Nazwa Pluginu / Elementu Paczki</label>
+                            <input type="text" id="pack-item-name" placeholder="np. WorldGuard, AuthMe, Skript" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-cyan-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-1">Kategoria</label>
+                            <select id="pack-item-cat" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-cyan-500 focus:outline-none">
+                                <option value="Plugin (.jar)">Plugin (.jar)</option>
+                                <option value="Skrypt (.sk)">Skrypt (.sk)</option>
+                                <option value="Konfiguracja">Konfiguracja / Config</option>
+                                <option value="Grafika / Zasoby">Grafika / Zasoby</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button onclick="addPackItem()" class="w-full bg-amber-600 hover:bg-amber-500 text-gray-950 font-bold p-3 rounded-lg transition shadow-lg">Dodaj do Paczki Serwerowej</button>
+                </div>
+
+                <div class="bg-cardbg border border-gray-800 p-6 rounded-2xl shadow-xl">
+                    <h3 class="font-semibold text-gray-300 mb-3">Zawartość Twojej paczki:</h3>
+                    <div id="pack-list" class="space-y-2 max-h-60 overflow-y-auto pr-2">
+                        <!-- Dynamiczna lista elementów -->
+                    </div>
+                    <button onclick="exportPackManifest()" class="mt-4 bg-gray-800 hover:bg-gray-700 border border-gray-700 text-cyan-400 w-full py-2.5 rounded-lg text-sm font-semibold transition">Eksportuj spis paczki do pliku TXT</button>
+                </div>
             </div>
-          </div>
-        </div>
 
-        <!-- Quick Stats / Server Info Box -->
-        <div class="bg-[#0b0b0f] border border-white/10 p-6 sm:p-8 rounded-2xl space-y-6 flex flex-col justify-between">
-          <div>
-            <h3 class="text-sm font-bold uppercase tracking-wider text-yellow-400 flex items-center gap-2 mb-4">
-              <i data-lucide="server" class="w-4 h-4"></i> Status Infrastruktury Studio
-            </h3>
-            <p class="text-xs text-gray-400 mb-6">Wszystkie systemy renderowania grafiki oraz węzły sieciowe działają z maksymalną wydajnością.</p>
-            
-            <div class="space-y-3 font-mono text-xs">
-              <div class="flex justify-between p-3 rounded-xl bg-[#121218] border border-white/5">
-                <span class="text-gray-400">Główny Serwer Renderowania:</span>
-                <span class="text-green-400 font-bold">STABLE (99.98%)</span>
-              </div>
-              <div class="flex justify-between p-3 rounded-xl bg-[#121218] border border-white/5">
-                <span class="text-gray-400">Średni Czas Wygenerowania Assetu:</span>
-                <span class="text-yellow-400 font-bold">0.14 ms</span>
-              </div>
-              <div class="flex justify-between p-3 rounded-xl bg-[#121218] border border-white/5">
-                <span class="text-gray-400">Aktywni Użytkownicy Online:</span>
-                <span class="text-white font-bold">1,284</span>
-              </div>
+            <!-- TAB 4: ARCHIWUM -->
+            <div id="tab-storage" class="tab-content hidden space-y-4">
+                <div class="bg-cardbg border border-gray-800 p-6 rounded-2xl shadow-xl">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-bold text-emerald-400">📂 Zapisane Skrypty i Pliki w Pamięci</h2>
+                        <button onclick="clearStorage()" class="text-xs bg-red-950/50 text-red-400 border border-red-900 px-3 py-1 rounded hover:bg-red-900/50">Wyczyść historię</button>
+                    </div>
+                    <div id="saved-items-container" class="space-y-3">
+                        <!-- Wpisy z LocalStorage -->
+                    </div>
+                </div>
             </div>
-          </div>
 
-          <a href="https://discord.gg/zErtg676k" target="_blank" class="w-full bg-white/5 hover:bg-white/10 border border-white/10 text-center py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition block">
-            Dołącz do Społeczności Discord
-          </a>
-        </div>
+        </section>
+    </main>
 
-      </div>
-    </div>
-  </section>
+    <!-- JavaScript Logika -->
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('bg-cyan-600', 'text-white', 'shadow-md');
+                el.classList.add('bg-cardbg', 'text-gray-300');
+            });
 
-  <!-- =================PRICING / SERVICES SECTION================ -->
-  <section id="uslugi" class="py-20 bg-[#030305] border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto text-center space-y-4 mb-16">
-        <span class="text-xs uppercase tracking-widest text-yellow-400 font-bold font-mono">[ COMMISSIONS & SERVICES ]</span>
-        <h2 class="text-3xl sm:text-4xl font-black">Profesjonalne Usługi Graficzne</h2>
-        <p class="text-gray-400 text-sm">Potrzebujesz unikalnego projektu na zamówienie? Sprawdź naszą ofertę komercyjną.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        
-        <div class="bg-[#0b0b0f] border border-white/10 p-8 rounded-3xl space-y-6 flex flex-col justify-between">
-          <div class="space-y-4">
-            <span class="text-[10px] font-mono bg-white/5 text-gray-300 border border-white/10 px-3 py-1 rounded-full">PAKIER BASIC</span>
-            <h3 class="text-2xl font-black">Baner Standard</h3>
-            <p class="text-xs text-gray-400">Idealny dla początkujących twórców i streamerów.</p>
-            <div class="text-3xl font-black text-yellow-400">49 zł <span class="text-xs text-gray-500 font-normal">/ projekt</span></div>
-            <ul class="space-y-2.5 text-xs text-gray-300 pt-4 border-t border-white/10">
-              <li class="flex items-center gap-2">✓ Szybka realizacja (24h)</li>
-              <li class="flex items-center gap-2">✓ Wysoka rozdzielczość</li>
-              <li class="flex items-center gap-2">✓ 1 darmowa poprawka</li>
-            </ul>
-          </div>
-          <a href="https://discord.gg/zErtg676k" target="_blank" class="w-full bg-white/5 hover:bg-white/10 border border-white/10 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition text-center block">Zamów na Discord</a>
-        </div>
-
-        <div class="bg-[#0b0b0f] border-2 border-yellow-400/50 p-8 rounded-3xl space-y-6 flex flex-col justify-between relative shadow-2xl shadow-yellow-500/10">
-          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-400 text-black text-[10px] font-black uppercase px-3 py-1 rounded-full tracking-wider">Najpopularniejszy</div>
-          <div class="space-y-4">
-            <span class="text-[10px] font-mono bg-yellow-400/10 text-yellow-400 border border-yellow-400/30 px-3 py-1 rounded-full">PAKIER PRO</span>
-            <h3 class="text-2xl font-black">Kompletna Identyfikacja</h3>
-            <p class="text-xs text-gray-400">Baner, avatar, panele pod stream i oprawa wizualna.</p>
-            <div class="text-3xl font-black text-yellow-400">149 zł <span class="text-xs text-gray-500 font-normal">/ zestaw</span></div>
-            <ul class="space-y-2.5 text-xs text-gray-300 pt-4 border-t border-white/10">
-              <li class="flex items-center gap-2">✓ Priorytetowa realizacja</li>
-              <li class="flex items-center gap-2">✓ Pliki źródłowe PSD / Figma</li>
-              <li class="flex items-center gap-2">✓ Nielimitowane poprawki</li>
-            </ul>
-          </div>
-          <a href="https://discord.gg/zErtg676k" target="_blank" class="w-full bg-gradient-to-r from-yellow-400 to-amber-400 text-black py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition hover:opacity-90 text-center block shadow-lg shadow-yellow-400/20">Wybierz Pakiet PRO</a>
-        </div>
-
-        <div class="bg-[#0b0b0f] border border-white/10 p-8 rounded-3xl space-y-6 flex flex-col justify-between">
-          <div class="space-y-4">
-            <span class="text-[10px] font-mono bg-white/5 text-gray-300 border border-white/10 px-3 py-1 rounded-full">PAKIER ENTERPRISE</span>
-            <h3 class="text-2xl font-black">Brand & Serwer</h3>
-            <p class="text-xs text-gray-400">Dla dużych projektów, serwerów i marek.</p>
-            <div class="text-3xl font-black text-yellow-400">349 zł <span class="text-xs text-gray-500 font-normal">/ całość</span></div>
-            <ul class="space-y-2.5 text-xs text-gray-300 pt-4 border-t border-white/10">
-              <li class="flex items-center gap-2">✓ Dedykowany grafik prowadzący</li>
-              <li class="flex items-center gap-2">✓ Pełne prawa komercyjne</li>
-              <li class="flex items-center gap-2">✓ Wsparcie techniczne 24/7</li>
-            </ul>
-          </div>
-          <a href="https://discord.gg/zErtg676k" target="_blank" class="w-full bg-white/5 hover:bg-white/10 border border-white/10 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition text-center block">Skontaktuj się</a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- =================FOOTER================ -->
-  <footer class="bg-[#050508] border-t border-white/10 py-12 text-xs text-gray-500 font-mono">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-yellow-500 to-yellow-400 flex items-center justify-center font-black text-black text-sm">⚡</div>
-        <span class="text-white font-bold tracking-wider">Flashcode Studio &copy; 2026</span>
-      </div>
-      <div class="flex items-center gap-6">
-        <a href="#generator" class="hover:text-yellow-400 transition">Generator</a>
-        <a href="#assets" class="hover:text-yellow-400 transition">Zasoby</a>
-        <a href="#uslugi" class="hover:text-yellow-400 transition">Cennik</a>
-        <a href="https://discord.gg/zErtg676k" target="_blank" class="hover:text-yellow-400 transition">Discord</a>
-      </div>
-      <div>
-        <span>ENGINE: <strong class="text-yellow-400">ULTIMATE PRO v10</strong></span>
-      </div>
-    </div>
-  </footer>
-
-  <!-- =================GLOBAL SCRIPT EXTENSION================ -->
-  <script>
-    function processToolText() {
-      const val = document.getElementById('tool-input-text').value || 'Flashcode Studio';
-      document.getElementById('res-upper').textContent = val.toUpperCase();
-      document.getElementById('res-bracket').textContent = `[ ${val.toUpperCase()} ]`;
-      document.getElementById('res-star').textContent = `★ ${val.toUpperCase()} ★`;
-    }
-  </script>
-  <section class="py-20 bg-[#050508] border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-        <div>
-          <span class="text-xs uppercase tracking-widest text-yellow-400 block mb-2 font-bold font-mono">[ BACKEND TELEMETRY & MANAGEMENT ]</span>
-          <h2 class="text-3xl sm:text-4xl font-black">Panel Zarządzania Studio (Admin)</h2>
-        </div>
-        <p class="text-gray-400 text-sm max-w-md mt-2 md:mt-0">Podgląd aktywnych procesów w tle, monitorowanie zasobów graficznych oraz zarządzanie kluczami sesji.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        <div class="bg-[#0b0b0f] border border-white/10 p-6 rounded-2xl space-y-4">
-          <div class="flex items-center justify-between border-b border-white/10 pb-3">
-            <h4 class="font-bold text-sm text-yellow-400 uppercase tracking-wider flex items-center gap-2">
-              <i data-lucide="cpu" class="w-4 h-4"></i> Stan Węzłów GPU
-            </h4>
-            <span class="text-[10px] font-mono text-green-400">OPTIMAL</span>
-          </div>
-          <div class="space-y-3 text-xs font-mono">
-            <div>
-              <div class="flex justify-between text-gray-400 mb-1">
-                <span>Obciążenie rdzenia A1:</span>
-                <span class="text-white">42%</span>
-              </div>
-              <div class="w-full h-2 bg-white/5 rounded-full overflow-hidden">
-                <div class="w-[42%] h-full bg-yellow-400 rounded-full"></div>
-              </div>
-            </div>
-            <div>
-              <div class="flex justify-between text-gray-400 mb-1">
-                <span>Pamięć VRAM Cache:</span>
-                <span class="text-white">1.8 / 8 GB</span>
-              </div>
-              <div class="w-full h-2 bg-white/5 rounded-full overflow-hidden">
-                <div class="w-[22%] h-full bg-green-400 rounded-full"></div>
-              </div>
-            </div>
-            <div>
-              <div class="flex justify-between text-gray-400 mb-1">
-                <span>Przepustowość sieci:</span>
-                <span class="text-white">1.2 GB/s</span>
-              </div>
-              <div class="w-full h-2 bg-white/5 rounded-full overflow-hidden">
-                <div class="w-[65%] h-full bg-blue-400 rounded-full"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-[#0b0b0f] border border-white/10 p-6 rounded-2xl space-y-4">
-          <div class="flex items-center justify-between border-b border-white/10 pb-3">
-            <h4 class="font-bold text-sm text-yellow-400 uppercase tracking-wider flex items-center gap-2">
-              <i data-lucide="terminal" class="w-4 h-4"></i> Konsola Zdarzeń
-            </h4>
-            <span class="text-[10px] font-mono text-gray-500">LIVE FEED</span>
-          </div>
-          <div class="bg-[#030305] border border-white/10 p-3 rounded-xl font-mono text-[11px] text-gray-400 space-y-1.5 h-36 overflow-y-auto custom-scrollbar">
-            <p class="text-green-400">[08:24:01] System booted successfully.</p>
-            <p class="text-gray-300">[08:24:12] GPU pipeline initialized.</p>
-            <p class="text-yellow-400">[08:24:45] Asset preset #02 loaded.</p>
-            <p class="text-gray-300">[08:25:02] New user session established.</p>
-            <p class="text-green-400">[08:25:30] All graphic modules operational.</p>
-          </div>
-        </div>
-
-        <div class="bg-[#0b0b0f] border border-white/10 p-6 rounded-2xl space-y-4 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
-              <h4 class="font-bold text-sm text-yellow-400 uppercase tracking-wider flex items-center gap-2">
-                <i data-lucide="shield-check" class="w-4 h-4"></i> Bezpieczeństwo
-              </h4>
-              <span class="text-[10px] font-mono text-yellow-400">SECURE</span>
-            </div>
-            <p class="text-xs text-gray-400 leading-relaxed mb-4">Wszystkie żądania generowania grafiki są szyfrowane za pomocą kluczy sesyjnych o wysokiej entropii.</p>
-          </div>
-          <button onclick="alert('Wyczyszczono pamięć podręczną przeglądarki i zresetowano bufory canvas!')" class="w-full bg-yellow-400/10 border border-yellow-400/30 text-yellow-400 font-bold py-2.5 rounded-xl text-xs uppercase tracking-wider hover:bg-yellow-400/20 transition">
-            Resetuj Bufor Cache
-          </button>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section class="py-20 bg-[#07070a] border-t border-white/10">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <span class="text-xs uppercase tracking-widest text-yellow-400 block mb-2 font-bold font-mono">[ KNOWLEDGE BASE ]</span>
-        <h2 class="text-3xl sm:text-4xl font-black mb-4">Często Zadawane Pytania (FAQ)</h2>
-        <p class="text-gray-400 text-sm">Wszystko, co musisz wiedzieć o korzystaniu z darmowego studia graficznego Flashcode.</p>
-      </div>
-
-      <div class="space-y-4">
-        
-        <div class="bg-[#0b0b0f] border border-white/10 p-6 rounded-2xl">
-          <h3 class="font-bold text-sm sm:text-base text-white mb-2 flex items-center justify-between">
-            <span>Czy korzystanie z generatora grafiki jest całkowicie darmowe?</span>
-            <span class="text-yellow-400 font-mono text-xs">01</span>
-          </h3>
-          <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Tak! Wszystkie podstawowe narzędzia, edytor na żywo oraz szablony są w pełni darmowe i dostępne dla każdego użytkownika bez żadnych ukrytych limitów.</p>
-        </div>
-
-        <div class="bg-[#0b0b0f] border border-white/10 p-6 rounded-2xl">
-          <h3 class="font-bold text-sm sm:text-base text-white mb-2 flex items-center justify-between">
-            <span>W jakiej rozdzielczości zapisywane są projekty?</span>
-            <span class="text-yellow-400 font-mono text-xs">02</span>
-          </h3>
-          <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Nasz silnik renderujący pozwala na eksport plików graficznych w wysokiej rozdzielczości (format PNG gotowy do użytku na YouTube, Discordzie czy stronach WWW).</p>
-        </div>
-
-        <div class="bg-[#0b0b0f] border border-white/10 p-6 rounded-2xl">
-          <h3 class="font-bold text-sm sm:text-base text-white mb-2 flex items-center justify-between">
-            <span>Jak zamówić indywidualny projekt komercyjny?</span>
-            <span class="text-yellow-400 font-mono text-xs">03</span>
-          </h3>
-          <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Wystarczy dołączyć do naszego oficjalnego serwera Discord za pomocą przycisku w prawym górnym rogu i otworzyć ticket w odpowiednim dziale zamówień.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <script>
-    // Dodatkowa inicjalizacja ikon Lucide dla nowych sekcji
-    if (typeof lucide !== 'undefined') {
-      lucide.createIcons();
-    }
-
-    // Automatyczna symulacja nowych logów w konsoli administracyjnej co kilka sekund
-    setInterval(() => {
-      const consoleBox = document.querySelector('.custom-scrollbar');
-      if (consoleBox) {
-        const timeStr = new Date().toTimeString().split(' ')[0];
-        const messages = [
-          "GPU sync packet received successfully.",
-          "Cache optimization cycle completed.",
-          "New connection verified from gateway node.",
-          "Asset rendering pipeline check: PASSED."
-        ];
-        const randomMsg = messages[Math.floor(Math.random() * messages.length)];
-        const p = document.createElement('p');
-        p.className = "text-gray-400";
-        p.textContent = `[${timeStr}] ${randomMsg}`;
-        consoleBox.appendChild(p);
-        consoleBox.scrollTop = consoleBox.scrollHeight;
-      }
-    }, 12000);
-  </script>
-  <!-- =================COMMUNITY & METRICS SUITE================ -->
-  <section class="py-20 bg-[#030305] border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
-        
-        <div class="bg-[#0b0b0f] border border-white/10 p-6 rounded-2xl space-y-2">
-          <div class="text-3xl font-black text-yellow-400 font-mono">15.4K+</div>
-          <div class="text-xs uppercase tracking-wider text-gray-400 font-semibold">Wygenerowanych Assetów</div>
-        </div>
-
-        <div class="bg-[#0b0b0f] border border-white/10 p-6 rounded-2xl space-y-2">
-          <div class="text-3xl font-black text-green-400 font-mono">99.9%</div>
-          <div class="text-xs uppercase tracking-wider text-gray-400 font-semibold">Uptime Systemu</div>
-        </div>
-
-        <div class="bg-[#0b0b0f] border border-white/10 p-6 rounded-2xl space-y-2">
-          <div class="text-3xl font-black text-cyan-400 font-mono">1.2K+</div>
-          <div class="text-xs uppercase tracking-wider text-gray-400 font-semibold">Aktywnych Twórców</div>
-        </div>
-
-        <div class="bg-[#0b0b0f] border border-white/10 p-6 rounded-2xl space-y-2">
-          <div class="text-3xl font-black text-purple-400 font-mono">24/7</div>
-          <div class="text-xs uppercase tracking-wider text-gray-400 font-semibold">Wsparcie Techniczne</div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- =================ADVANCED THEME BUILDER MODAL / BOX================ -->
-  <section class="py-20 bg-[#07070a] border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-[#0b0b0f] border border-white/10 p-8 sm:p-12 rounded-3xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-        <div class="space-y-6">
-          <span class="text-xs uppercase tracking-widest text-yellow-400 font-bold font-mono">[ CUSTOM ACCENT LAB ]</span>
-          <h3 class="text-3xl font-black">Personalizacja Palety Barw Studio</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            Wybierz wiodący kolor akcentu dla całego interfejsu Flashcode. Zmiana zostanie natychmiastowo zsynchronizowana ze wszystkimi elementami DOM oraz elementami canvas.
-          </p>
-          <div class="flex flex-wrap gap-3">
-            <button onclick="setStudioAccent('#eab308')" class="w-10 h-10 rounded-xl bg-yellow-500 border-2 border-white/20 shadow-lg hover:scale-110 transition-transform"></button>
-            <button onclick="setStudioAccent('#06b6d4')" class="w-10 h-10 rounded-xl bg-cyan-500 border-2 border-white/20 shadow-lg hover:scale-110 transition-transform"></button>
-            <button onclick="setStudioAccent('#22c55e')" class="w-10 h-10 rounded-xl bg-green-500 border-2 border-white/20 shadow-lg hover:scale-110 transition-transform"></button>
-            <button onclick="setStudioAccent('#ef4444')" class="w-10 h-10 rounded-xl bg-red-500 border-2 border-white/20 shadow-lg hover:scale-110 transition-transform"></button>
-            <button onclick="setStudioAccent('#a855f7')" class="w-10 h-10 rounded-xl bg-purple-500 border-2 border-white/20 shadow-lg hover:scale-110 transition-transform"></button>
-          </div>
-        </div>
-        <div class="bg-[#030305] border border-white/10 p-6 rounded-2xl font-mono text-xs text-gray-400 space-y-3">
-          <div class="flex items-center justify-between text-yellow-400 border-b border-white/10 pb-3">
-            <span>ACTIVE ACCENT CONFIG</span>
-            <span id="active-accent-code" class="text-white">#eab308</span>
-          </div>
-          <p>Status synchronizacji: <span class="text-green-400">OK</span></p>
-          <p>Tryb renderowania: <span class="text-white">HARDWARE ACCELERATED</span></p>
-          <p>Bufor ramki: <span class="text-white">60 FPS</span></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =================EXTENDED SCRIPT MODULE================ -->
-  <script>
-    function setStudioAccent(hexColor) {
-      document.getElementById('active-accent-code').textContent = hexColor;
-      // Dynamiczne podświetlenie elementów akcentowych
-      const accents = document.querySelectorAll('.text-yellow-400');
-      accents.forEach(el => {
-        if (!el.classList.contains('no-override')) {
-          el.style.color = hexColor;
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.classList.remove('bg-cardbg', 'text-gray-300');
+            activeBtn.classList.add('bg-cyan-600', 'text-white', 'shadow-md');
         }
-      });
-      alert('Zmieniono główny akcent kolorystyczny studia na: ' + hexColor);
-    }
 
-    if (typeof lucide !== 'undefined') {
-      lucide.createIcons();
-    }
-  </script>
-  <!-- =================SOURCE CODE EXPORT & REPOSITORY SUITE================ -->
-  <section class="py-20 bg-[#050508] border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-        <div>
-          <span class="text-xs uppercase tracking-widest text-yellow-400 block mb-2 font-bold font-mono">[ REPOSITORY EXPORT // CLI ]</span>
-          <h2 class="text-3xl sm:text-4xl font-black">Eksport i Podgląd Kodu Źródłowego</h2>
-        </div>
-        <p class="text-gray-400 text-sm max-w-md mt-2 md:mt-0">Szybki podgląd struktury wygenerowanego pliku oraz narzędzia eksportu bezpośrednio do Twojego edytora.</p>
-      </div>
+        // 1. Generator Skryptów
+        function generateScript() {
+            const name = document.getElementById('sk-name').value.trim() || 'mojakomenda';
+            const type = document.getElementById('sk-type').value;
+            const msg = document.getElementById('sk-msg').value.trim() || '&8[&6FlashCode&8] &7Działa poprawnie!';
+            
+            let code = "";
+            if (type === 'command') {
+                code = `command /${name}:\n\ttrigger:\n\t\tsend "${msg}" to player`;
+            } else if (type === 'heal') {
+                code = `command /${name}:\n\tpermission: flashcode.heal\n\ttrigger:\n\t\tset player's health to 10\n\t\tsend "${msg}" to player`;
+            } else if (type === 'join') {
+                code = `on join:\n\tset join message to "${msg}"`;
+            } else if (type === 'block') {
+                code = `on break of stone:\n\tcancel event\n\tsend "${msg}" to player`;
+            }
 
-      <div class="bg-[#0b0b0f] border border-white/10 rounded-3xl p-6 sm:p-8 space-y-6">
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-white/10 pb-4">
-          <div class="flex items-center gap-3 font-mono text-xs">
-            <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
-            <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
-            <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
-            <span class="text-gray-400 ml-2">index.html // Flashcode Ultimate Studio v10</span>
-          </div>
-          <button onclick="triggerCodeCopyNotification()" class="bg-white/5 hover:bg-white/10 border border-white/10 text-yellow-400 px-4 py-2 rounded-xl text-xs font-mono font-bold transition flex items-center gap-2">
-            <i data-lucide="copy" class="w-4 h-4"></i> Kopiuj Cały Kod Źródłowy
-          </button>
-        </div>
+            document.getElementById('sk-output').innerText = code;
+            saveToLocalStorage('Skrypt: ' + name, code);
+        }
 
-        <div class="bg-[#030305] border border-white/10 p-6 rounded-2xl font-mono text-xs text-gray-400 overflow-x-auto max-h-64 custom-scrollbar">
-          <pre class="leading-relaxed"><code class="text-yellow-400">&lt;!DOCTYPE html&gt;</code>
-<code class="text-white">&lt;html lang="pl" class="scroll-smooth"&gt;</code>
-  <code class="text-gray-500">&lt;!-- Flashcode Ultimate Core Engine initialized --&gt;</code>
-  <code class="text-cyan-400">&lt;head&gt;</code>
-    <code class="text-white">&lt;meta charset="UTF-8"&gt;</code>
-    <code class="text-white">&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</code>
-  <code class="text-cyan-400">&lt;/head&gt;</code>
-  <code class="text-green-400">&lt;body class="bg-[#030305] text-white"&gt;</code>
-    <code class="text-gray-400">&lt;!-- STUDIO PIPELINE READY --&gt;</code>
-  <code class="text-green-400">&lt;/body&gt;</code>
-<code class="text-white">&lt;/html&gt;</code></pre>
-        </div>
-      </div>
-    </div>
-  </section>
+        // 2. Transformator Tekstu
+        function transformText(action) {
+            const input = document.getElementById('txt-input').value;
+            let output = "";
 
-  <!-- =================TOAST NOTIFICATION SYSTEM CONTAINER================ -->
-  <div id="toast-container" class="fixed bottom-6 right-6 z-50 space-y-3 pointer-events-none"></div>
+            if (action === 'caps') {
+                output = input.toUpperCase();
+            } else if (action === 'minecraft') {
+                output = input.split('').map(c => '&a' + c).join('');
+            } else if (action === 'lore') {
+                output = input.split('\n').map(line => `lore: "${line}"`).join('\n');
+            } else if (action === 'clear') {
+                output = "";
+                document.getElementById('txt-input').value = "";
+            }
 
-  <!-- =================FINAL SCRIPT EXTENSION================ -->
-  <script>
-    function triggerCodeCopyNotification() {
-      showStudioToast("Sukces!", "Kod źródłowy został pomyślnie skopiowany do schowka.", "success");
-    }
+            document.getElementById('txt-output').innerText = output;
+        }
 
-    function showStudioToast(title, message, type = "success") {
-      const container = document.getElementById('toast-container');
-      if (!container) return;
+        // 3. Menedżer Paczki
+        let serverPack = JSON.parse(localStorage.getItem('fc_pack') || '[]');
+        renderPack();
 
-      const toast = document.createElement('div');
-      toast.className = "pointer-events-auto bg-[#0b0b0f] border border-white/10 text-white p-4 rounded-2xl shadow-2xl flex items-center gap-3 w-80 transform translate-y-4 opacity-0 transition-all duration-300";
-      
-      const iconColor = type === "success" ? "text-green-400" : "text-yellow-400";
-      
-      toast.innerHTML = `
-        <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center ${iconColor} font-bold text-lg">⚡</div>
-        <div class="flex-1">
-          <h5 class="text-xs font-bold uppercase tracking-wider text-white">${title}</h5>
-          <p class="text-[11px] text-gray-400 mt-0.5">${message}</p>
-        </div>
-      `;
+        function addPackItem() {
+            const name = document.getElementById('pack-item-name').value.trim();
+            const cat = document.getElementById('pack-item-cat').value;
+            if(!name) return alert('Wpisz nazwę elementu!');
 
-      container.appendChild(toast);
+            serverPack.push({name, cat, date: new Date().toLocaleDateString()});
+            localStorage.setItem('fc_pack', JSON.stringify(serverPack));
+            document.getElementById('pack-item-name').value = '';
+            renderPack();
+        }
 
-      setTimeout(() => {
-        toast.classList.remove('translate-y-4', 'opacity-0');
-      }, 50);
+        function renderPack() {
+            const container = document.getElementById('pack-list');
+            if (serverPack.length === 0) {
+                container.innerHTML = '<p class="text-sm text-gray-500">Paczka jest pusta. Dodaj pierwsze elementy.</p>';
+                return;
+            }
+            container.innerHTML = serverPack.map((item, idx) => `
+                <div class="flex justify-between items-center bg-gray-900 border border-gray-800 p-3 rounded-xl">
+                    <div>
+                        <span class="font-semibold text-white">${item.name}</span>
+                        <span class="text-xs text-cyan-400 ml-2 bg-gray-800 px-2 py-0.5 rounded">${item.cat}</span>
+                    </div>
+                    <button onclick="removePackItem(${idx})" class="text-red-400 hover:text-red-300 text-xs">Usuń</button>
+                </div>
+            `).join('');
+        }
 
-      setTimeout(() => {
-        toast.classList.add('translate-y-4', 'opacity-0');
-        setTimeout(() => toast.remove(), 300);
-      }, 4000);
-    }
+        function removePackItem(idx) {
+            serverPack.splice(idx, 1);
+            localStorage.setItem('fc_pack', JSON.stringify(serverPack));
+            renderPack();
+        }
 
-    if (typeof lucide !== 'undefined') {
-      lucide.createIcons();
-    }
-  </script>
-  <!-- =================GRADIENT & COLOR PALETTE STUDIO================ -->
-  <section class="py-20 bg-[#030305] border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-        <div>
-          <span class="text-xs uppercase tracking-widest text-yellow-400 block mb-2 font-bold font-mono">[ COLOR & GRADIENT LAB ]</span>
-          <h2 class="text-3xl sm:text-4xl font-black">Generator Przejść i Palet</h2>
-        </div>
-        <p class="text-gray-400 text-sm max-w-md mt-2 md:mt-0">Twórz unikalne kombinacje kolorystyczne dla swoich projektów graficznych i interfejsów.</p>
-      </div>
+        function exportPackManifest() {
+            const text = "=== FLASHCODE SERVER PACK MANIFEST ===\n\n" + serverPack.map(i => `- [${i.cat}] ${i.name} (Dodano: ${i.date})`).join('\n');
+            const blob = new Blob([text], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'paczka-manifest.txt';
+            link.click();
+        }
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        <!-- Palette 1 -->
-        <div class="bg-[#0b0b0f] border border-white/10 p-6 rounded-2xl space-y-4">
-          <div class="h-28 rounded-xl bg-gradient-to-r from-yellow-500 via-amber-300 to-yellow-600 shadow-lg"></div>
-          <div class="flex items-center justify-between text-xs font-mono">
-            <span class="text-white font-bold">Solar Flare</span>
-            <span class="text-yellow-400">#EAB308 → #FBBF24</span>
-          </div>
-          <button onclick="showStudioToast('Paleta', 'Skopiowano kody kolorów Solar Flare do schowka.', 'success')" class="w-full bg-white/5 hover:bg-white/10 border border-white/10 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition">
-            Kopiuj Kody CSS
-          </button>
-        </div>
+        // 4. LocalStorage Archiwum
+        function saveToLocalStorage(title, data) {
+            let history = JSON.parse(localStorage.getItem('fc_history') || '[]');
+            history.unshift({title, data, date: new Date().toLocaleTimeString()});
+            if(history.length > 20) history.pop();
+            localStorage.setItem('fc_history', JSON.stringify(history));
+            loadHistory();
+        }
 
-        <!-- Palette 2 -->
-        <div class="bg-[#0b0b0f] border border-white/10 p-6 rounded-2xl space-y-4">
-          <div class="h-28 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 shadow-lg"></div>
-          <div class="flex items-center justify-between text-xs font-mono">
-            <span class="text-white font-bold">Cyber Neon</span>
-            <span class="text-cyan-400">#06B6D4 → #9333EA</span>
-          </div>
-          <button onclick="showStudioToast('Paleta', 'Skopiowano kody kolorów Cyber Neon do schowka.', 'success')" class="w-full bg-white/5 hover:bg-white/10 border border-white/10 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition">
-            Kopiuj Kody CSS
-          </button>
-        </div>
+        function loadHistory() {
+            let history = JSON.parse(localStorage.getItem('fc_history') || '[]');
+            const container = document.getElementById('saved-items-container');
+            if(history.length === 0) {
+                container.innerHTML = '<p class="text-sm text-gray-500">Brak zapisanych elementów w historii.</p>';
+                return;
+            }
+            container.innerHTML = history.map(h => `
+                <div class="bg-gray-900 border border-gray-800 p-3 rounded-xl">
+                    <div class="flex justify-between text-xs text-gray-400 mb-1">
+                        <span class="text-cyan-400 font-semibold">${h.title}</span>
+                        <span>${h.date}</span>
+                    </div>
+                    <pre class="font-mono text-xs text-gray-300 bg-gray-950 p-2 rounded overflow-x-auto">${h.data}</pre>
+                </div>
+            `).join('');
+        }
 
-        <!-- Palette 3 -->
-        <div class="bg-[#0b0b0f] border border-white/10 p-6 rounded-2xl space-y-4">
-          <div class="h-28 rounded-xl bg-gradient-to-r from-green-500 via-emerald-400 to-teal-700 shadow-lg"></div>
-          <div class="flex items-center justify-between text-xs font-mono">
-            <span class="text-white font-bold">Matrix Emerald</span>
-            <span class="text-green-400">#22C55E → #0F766E</span>
-          </div>
-          <button onclick="showStudioToast('Paleta', 'Skopiowano kody kolorów Matrix Emerald do schowka.', 'success')" class="w-full bg-white/5 hover:bg-white/10 border border-white/10 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition">
-            Kopiuj Kody CSS
-          </button>
-        </div>
+        function clearStorage() {
+            localStorage.removeItem('fc_history');
+            loadHistory();
+        }
 
-      </div>
-    </div>
-  </section>
+        function copyCode(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text);
+            alert('Skopiowano do schowka!');
+        }
 
-  <!-- =================FINAL SCRIPT EXTENSION================ -->
-  <script>
-    if (typeof lucide !== 'undefined') {
-      lucide.createIcons();
-    }
-  </script>
-  <!-- =================VECTOR SHAPE LABORATORY================ -->
-  <section class="py-20 bg-[#07070a] border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-        <div>
-          <span class="text-xs uppercase tracking-widest text-yellow-400 block mb-2 font-bold font-mono">[ VECTOR NODE LAB ]</span>
-          <h2 class="text-3xl sm:text-4xl font-black">Laboratorium Kształtów Wektorowych</h2>
-        </div>
-        <p class="text-gray-400 text-sm max-w-md mt-2 md:mt-0">Generuj bazowe siatki geometrii i prymitywy wektorowe bezpośrednio w przeglądarce.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        
-        <!-- Shape Controls -->
-        <div class="bg-[#0b0b0f] border border-white/10 p-6 sm:p-8 rounded-2xl space-y-6">
-          <h3 class="text-sm font-bold uppercase tracking-wider text-yellow-400 flex items-center gap-2">
-            <i data-lucide="box" class="w-4 h-4"></i> Konfiguracja Prymitywu
-          </h3>
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2 font-bold">Wybierz Geometrię:</label>
-            <select id="vector-shape-type" onchange="updateVectorPreview()" class="w-full bg-[#121218] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-xs font-mono">
-              <option value="polygon">Wielokąt Fasetowy (Hexagon)</option>
-              <option value="prism">Pryzmat Trójwymiarowy</option>
-              <option value="ring">Pierścień Orbitalny</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2 font-bold">Gęstość Siatki Węzłów:</label>
-            <input type="range" id="vector-density" min="4" max="32" value="12" oninput="updateVectorPreview()" class="w-full accent-yellow-400 bg-transparent">
-          </div>
-          <button onclick="showStudioToast('Wektor', 'Pomyślnie wygenerowano i wyeksportowano siatkę wektorową SVG!', 'success')" class="w-full bg-yellow-400 text-black font-bold py-3 rounded-xl text-xs uppercase tracking-wider hover:opacity-90 transition shadow-lg shadow-yellow-400/20">
-            Eksportuj jako SVG
-          </button>
-        </div>
-
-        <!-- Shape Live Preview -->
-        <div class="bg-[#0b0b0f] border border-white/10 p-6 sm:p-8 rounded-2xl flex flex-col items-center justify-center min-h-[320px] relative overflow-hidden">
-          <div class="absolute inset-0 bg-gradient-to-tr from-yellow-500/5 via-transparent to-cyan-500/5"></div>
-          <div id="vector-preview-box" class="w-32 h-32 rounded-3xl bg-yellow-400/10 border-2 border-yellow-400/40 flex items-center justify-center text-yellow-400 text-5xl shadow-2xl transition-all duration-300">
-            ⬡
-          </div>
-          <span id="vector-info-label" class="text-xs font-mono text-gray-400 mt-6">GEOMETRY: HEXAGON // NODES: 12</span>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- =================FINAL SCRIPT EXTENSION================ -->
-  <script>
-    function updateVectorPreview() {
-      const type = document.getElementById('vector-shape-type').value;
-      const density = document.getElementById('vector-density').value;
-      const box = document.getElementById('vector-preview-box');
-      const label = document.getElementById('vector-info-label');
-
-      if (type === 'polygon') {
-        box.textContent = '⬡';
-      } else if (type === 'prism') {
-        box.textContent = '⬠';
-      } else {
-        box.textContent = '◎';
-      }
-
-      label.textContent = `GEOMETRY: ${type.toUpperCase()} // NODES: ${density}`;
-    }
-
-    if (typeof lucide !== 'undefined') {
-      lucide.createIcons();
-    }
-  </script>
-  <!-- =================SHADOW & GLOW STUDIO LAB================ -->
-  <section class="py-20 bg-[#030305] border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-        <div>
-          <span class="text-xs uppercase tracking-widest text-yellow-400 block mb-2 font-bold font-mono">[ SHADOW & LIGHT LAB ]</span>
-          <h2 class="text-3xl sm:text-4xl font-black">Laboratorium Poświaty i Cieni</h2>
-        </div>
-        <p class="text-gray-400 text-sm max-w-md mt-2 md:mt-0">Dostosuj parametry głębi, rozmycia oraz neonowego oświetlenia dla elementów interfejsu.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-        
-        <!-- Controls -->
-        <div class="bg-[#0b0b0f] border border-white/10 p-6 sm:p-8 rounded-2xl space-y-6">
-          <h3 class="text-sm font-bold uppercase tracking-wider text-yellow-400 flex items-center gap-2">
-            <i data-lucide="sun" class="w-4 h-4"></i> Parametry Światła
-          </h3>
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2 font-bold">Intensywność Poświaty:</label>
-            <input type="range" id="glow-intensity" min="0" max="50" value="20" oninput="updateGlowPreview()" class="w-full accent-yellow-400 bg-transparent">
-          </div>
-          <div>
-            <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2 font-bold">Promień Rozmycia (Blur):</label>
-            <input type="range" id="glow-blur" min="0" max="40" value="15" oninput="updateGlowPreview()" class="w-full accent-yellow-400 bg-transparent">
-          </div>
-          <button onclick="showStudioToast('Studio', 'Pomyślnie zsynchronizowano parametry oświetlenia!', 'success')" class="w-full bg-white/5 hover:bg-white/10 border border-white/10 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition">
-            Zastosuj Efekt
-          </button>
-        </div>
-
-        <!-- Preview Box -->
-        <div class="bg-[#0b0b0f] border border-white/10 p-12 rounded-2xl flex flex-col items-center justify-center min-h-[320px]">
-          <div id="glow-target-box" class="w-36 h-36 rounded-3xl bg-yellow-400 flex items-center justify-center text-black font-black text-2xl transition-all duration-300 shadow-2xl shadow-yellow-500/50">
-            GLOW
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- =================FINAL SCRIPT EXTENSION================ -->
-  <script>
-    function updateGlowPreview() {
-      const intensity = document.getElementById('glow-intensity').value;
-      const box = document.getElementById('glow-target-box');
-      box.style.boxShadow = `0 0 ${intensity * 2}px rgba(234, 179, 8, 0.8)`;
-    }
-
-    if (typeof lucide !== 'undefined') {
-      lucide.createIcons();
-    }
-  </script>
-  <!-- =================CODE HEALTH & DIAGNOSTIC SUITE================ -->
-  <section class="py-20 bg-[#050508] border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-        <div>
-          <span class="text-xs uppercase tracking-widest text-yellow-400 block mb-2 font-bold font-mono">[ SYSTEM DIAGNOSTICS // FINAL ]</span>
-          <h2 class="text-3xl sm:text-4xl font-black">Diagnostyka i Kondycja Środowiska</h2>
-        </div>
-        <p class="text-gray-400 text-sm max-w-md mt-2 md:mt-0">Ostateczny audyt wydajnościowy wszystkich zintegrowanych komponentów w jednym miejscu.</p>
-      </div>
-
-      <div class="bg-[#0b0b0f] border border-white/10 rounded-3xl p-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-        <div class="space-y-2">
-          <div class="text-xs uppercase tracking-wider text-gray-500 font-mono">Status Modułów</div>
-          <div class="text-2xl font-black text-green-400 font-mono">9 / 9 ONLINE</div>
-          <p class="text-[11px] text-gray-400">Wszystkie części i skrypty zostały poprawnie połączone.</p>
-        </div>
-        <div class="space-y-2">
-          <div class="text-xs uppercase tracking-wider text-gray-500 font-mono">Wydajność DOM</div>
-          <div class="text-2xl font-black text-yellow-400 font-mono">60 FPS (MAX)</div>
-          <p class="text-[11px] text-gray-400">Płynne animacje i akceleracja sprzętowa GPU.</p>
-        </div>
-        <div class="space-y-2">
-          <div class="text-xs uppercase tracking-wider text-gray-500 font-mono">Integritet Danych</div>
-          <div class="text-2xl font-black text-cyan-400 font-mono">100% SECURE</div>
-          <p class="text-[11px] text-gray-400">Brak błędów składniowych w kodzie źródłowym.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =================GLOBAL APP CORE INITIALIZER================ -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-      }
-      console.log("%c FLASHCODE ULTIMATE STUDIO v10.0 // ALL MODULES LOADED ", "background: #eab308; color: #000; font-weight: bold; padding: 4px 8px; border-radius: 4px;");
-    });
-  </script>
-  <!-- =================FINAL SESSION & METRICS FOOTER================ -->
-  <footer class="bg-[#030305] border-t border-white/10 py-16 text-xs text-gray-500 font-mono">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-yellow-500 to-amber-400 flex items-center justify-center font-black text-black text-base shadow-lg shadow-yellow-500/20">⚡</div>
-        <div>
-          <span class="text-white font-bold tracking-wider block">Flashcode Studio PRO</span>
-          <span class="text-[10px] text-gray-400">Wszystkie moduły zintegrowane pomyślnie.</span>
-        </div>
-      </div>
-      <div class="flex items-center gap-6">
-        <span class="text-gray-400">Czas sesji roboczej: <strong id="session-timer-display" class="text-yellow-400 font-mono">00:00:00</strong></span>
-      </div>
-      <div>
-        <span class="text-yellow-400 font-bold">CORE STATUS: 100% OPERATIONAL</span>
-      </div>
-    </div>
-  </footer>
-
-  <!-- =================ABSOLUTE FINAL INITIALIZER SCRIPT================ -->
-  <script>
-    // Globalny licznik czasu aktywnej sesji
-    let sessionSeconds = 0;
-    setInterval(() => {
-      sessionSeconds++;
-      const hrs = String(Math.floor(sessionSeconds / 3600)).padStart(2, '0');
-      const mins = String(Math.floor((sessionSeconds % 3600) / 60)).padStart(2, '0');
-      const secs = String(sessionSeconds % 60).padStart(2, '0');
-      const timerEl = document.getElementById('session-timer-display');
-      if (timerEl) {
-        timerEl.textContent = `${hrs}:${mins}:${secs}`;
-      }
-    }, 1000);
-
-    // Finalna inicjalizacja ikon
-    document.addEventListener('DOMContentLoaded', () => {
-      if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-      }
-    });
-  </script>
+        loadHistory();
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
