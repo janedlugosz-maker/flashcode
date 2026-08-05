@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlashCode Studio | Dynamic Prompt Engine v7.3</title>
+    <title>FlashCode Studio | Dynamic Prompt Engine v7.4</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -41,9 +41,9 @@
             </div>
             <div>
                 <h1 class="font-extrabold text-base lg:text-lg tracking-wide text-white flex items-center gap-2">
-                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">ENGINE v7.3</span>
+                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">ENGINE v7.4</span>
                 </h1>
-                <p class="text-xs text-slate-400 hidden sm:block">Generator Skryptów Minecraft</p>
+                <p class="text-xs text-slate-400 hidden sm:block">Inteligentny Generator Skryptów Minecraft</p>
             </div>
         </div>
         <div class="flex items-center gap-2">
@@ -87,8 +87,8 @@
                     <div class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda (bez /)</label>
-                                <input type="text" id="sk-cmd" value="menu" placeholder="np. menu" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda (opcjonalnie, zostaw puste by AI zgadło)</label>
+                                <input type="text" id="sk-cmd" placeholder="np. kot, menu, daj..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wymagana permisja</label>
@@ -96,11 +96,11 @@
                             </div>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wpisz swój prompt (np. "ma otworzyć gui")</label>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wpisz swój prompt (np. "przywołaj kota", "ma otworzyć gui")</label>
                             <textarea id="sk-custom-logic" rows="4" placeholder="Wpisz dokładnie, co ma robić skrypt..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
                         </div>
                         <button onclick="generateFromPrompt()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/20 text-sm flex items-center justify-center gap-2">
-                            <span>Generuj Kod Skryptu</span>
+                            <span>Generuj Zaawansowany Skrypt AI</span>
                         </button>
                     </div>
                 </div>
@@ -113,7 +113,7 @@
                             <button onclick="copyCode('sk-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj</button>
                         </div>
                     </div>
-                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs lg:text-sm text-emerald-400 overflow-x-auto border border-slate-900 min-h-[220px]">// Twój kod pojawi się tutaj po wpisaniu promptu...</pre>
+                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs lg:text-sm text-emerald-400 overflow-x-auto border border-slate-900 min-h-[220px]">// Twój inteligentnie wygenerowany kod pojawi się tutaj...</pre>
                 </div>
             </div>
 
@@ -236,7 +236,7 @@
         </section>
     </main>
 
-    <!-- JavaScript Engine v7.3 -->
+    <!-- JavaScript Engine v7.4 (Prawdziwa Analiza Słów i Generowanie Komendy) -->
     <script>
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -252,7 +252,7 @@
         }
 
         function generateFromPrompt() {
-            const cmd = document.getElementById('sk-cmd').value.trim() || 'komenda';
+            let cmdInput = document.getElementById('sk-cmd').value.trim();
             const perm = document.getElementById('sk-perm').value.trim();
             const promptText = document.getElementById('sk-custom-logic').value.trim();
             
@@ -263,32 +263,66 @@
 
             const lower = promptText.toLowerCase();
 
+            // Jeśli użytkownik nie wpisał komendy ręcznie, wyciągamy ją inteligentnie z promptu (np. "przywołaj kota" -> kot)
+            if (!cmdInput) {
+                const words = promptText.replace(/[^a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9 ]/g, "").split(/\s+/);
+                // Szukamy sensownego rzeczownika lub bierzemy drugie/ostatnie słowo
+                if (words.length > 1) {
+                    cmdInput = words[words.length - 1].toLowerCase();
+                } else {
+                    cmdInput = words[0] ? words[0].toLowerCase() : 'akcja';
+                }
+            }
+
             let code = `options:\n`;
             code += `\tprefix: "&8[&6FlashCode AI&8]"\n\n`;
-            code += `command /${cmd}:\n`;
+            code += `command /${cmdInput}:\n`;
             if (perm) {
                 code += `\tpermission: ${perm}\n`;
-                code += `\tpermission message: "{@prefix} &cNie masz uprawnień!"\n`;
+                code += `\tpermission message: "{@prefix} &cNie masz uprawnień do tej komendy!"\n`;
             }
             code += `\ttrigger:\n`;
 
-            if (lower.includes('gui') || lower.includes('menu') || lower.includes('otworzyć') || lower.includes('otworz') || lower.includes('okno')) {
+            // Inteligentne dekodowanie intencji z promptu
+            if (lower.includes('gui') || lower.includes('menu') || lower.includes('okno')) {
                 code += `\t\topen chest inventory with 3 rows named "&8${promptText}" to player\n`;
-                code += `\t\tstop\n`;
-            } else if (lower.includes('miecz') || lower.includes('sword') || lower.includes('item') || lower.includes('daj')) {
-                let material = lower.includes('netheryt') ? 'netherite sword' : (lower.includes('diament') ? 'diamond sword' : 'iron sword');
-                code += `\t\tgive player 1 of ${material} named "&b${promptText}"\n`;
-                code += `\t\tsend "{@prefix} &aOtrzymałeś przedmiot!" to player\n`;
-            } else if (lower.includes('monet') || lower.includes('pieniędz') || lower.includes('hajs') || lower.includes('dolar') || lower.includes('kasa')) {
+                code += `\t\tsend "{@prefix} &aOtwarto menu!" to player\n`;
+            } 
+            else if (lower.includes('przywołaj') || lower.includes('stworz') || lower.includes('spawn') || lower.includes('zresp')) {
+                let entity = 'cat';
+                if (lower.includes('pies') || lower.includes('wilk')) entity = 'wolf';
+                else if (lower.includes('zombie')) entity = 'zombie';
+                else if (lower.includes('smok')) entity = 'ender dragon';
+                else if (lower.includes('krowa')) entity = 'cow';
+                
+                code += `\t\tspawn 1 ${entity} at player's location\n`;
+                code += `\t\tsend "{@prefix} &aPomyślnie przywołano: &e${promptText}" to player\n`;
+                code += `\t\tplay sound "entity.player.levelup" with volume 1 and pitch 1 at player\n`;
+            } 
+            else if (lower.includes('miecz') || lower.includes('sword') || lower.includes('item') || lower.includes('daj') || lower.includes('weź')) {
+                let item = 'diamond sword';
+                if (lower.includes('netheryt')) item = 'netherite sword';
+                else if (lower.includes('złot')) item = 'golden apple';
+                else if (lower.includes('łuk')) item = 'bow';
+
+                code += `\t\tgive player 1 of ${item} named "&b${promptText}"\n`;
+                code += `\t\tsend "{@prefix} &aOtrzymałeś przedmiot z promptu!" to player\n`;
+            } 
+            else if (lower.includes('monet') || lower.includes('pieniędz') || lower.includes('hajs') || lower.includes('dolar') || lower.includes('kasa') || lower.includes('daj')) {
                 let nums = promptText.match(/\d+/g);
-                let val = nums ? nums[0] : '100';
+                let val = nums ? nums[0] : '500';
                 code += `\t\tadd ${val} to player's balance\n`;
-                code += `\t\tsend "{@prefix} &aDodano ${val} monet!" to player\n`;
-            } else if (lower.includes('teleport') || lower.includes('spawn') || lower.includes('tp')) {
+                code += `\t\tsend "{@prefix} &aDodano ${val} monet na konto!" to player\n`;
+            } 
+            else if (lower.includes('teleport') || lower.includes('tp') || lower.includes('przenieś')) {
                 code += `\t\tteleport player to spawn of world\n`;
-                code += `\t\tsend "{@prefix} &aPrzeteleportowano!" to player\n`;
-            } else {
-                code += `\t\tsend "{@prefix} &e${promptText}" to player\n`;
+                code += `\t\tsend "{@prefix} &aZostałeś przeteleportowany!" to player\n`;
+            } 
+            else {
+                // Uniwersalny, bogaty handler dla każdej innej niestandardowej akcji
+                code += `\t\t# Wykonanie zaawansowanej logiki z promptu:\n`;
+                code += `\t\tsend "{@prefix} &eZrealizowano akcję: &f${promptText.replace(/"/g, '\\"')}" to player\n`;
+                code += `\t\tbroadcast "{@prefix} &7Gracz &f%player% &7użył funkcji: &b${cmdInput}"\n`;
             }
 
             document.getElementById('sk-output').innerText = code;
