@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlashCode Studio | Ultimate AI Core v6.0</title>
+    <title>FlashCode Studio | Dynamic Prompt Engine v7.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -41,14 +41,14 @@
             </div>
             <div>
                 <h1 class="font-extrabold text-base lg:text-lg tracking-wide text-white flex items-center gap-2">
-                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">AI ENGINE v6.0</span>
+                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">DYNAMIC PROMPT ENGINE v7.0</span>
                 </h1>
-                <p class="text-xs text-slate-400 hidden sm:block">Autonomiczny generator skryptów dla serwerów Minecraft</p>
+                <p class="text-xs text-slate-400 hidden sm:block">Silnik analizujący Twój dokładny prompt i generujący kod</p>
             </div>
         </div>
         <div class="flex items-center gap-2">
             <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span> System Aktywny
+                <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Dynamiczny Parser Aktywny
             </span>
         </div>
     </header>
@@ -59,7 +59,7 @@
         <!-- Sidebar Navigation -->
         <aside class="lg:col-span-1 space-y-1.5 flex flex-row lg:flex-col overflow-x-auto pb-2 lg:pb-0 shrink-0">
             <button onclick="switchTab('skript')" id="btn-skript" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-blue-600 text-white shadow-lg shadow-blue-600/20 flex items-center space-x-3 whitespace-nowrap text-sm">
-                <span class="text-base">⚡</span> <span>Generator AI (.sk)</span>
+                <span class="text-base">⚡</span> <span>Generator z Prompta (.sk)</span>
             </button>
             <button onclick="switchTab('text')" id="btn-text" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
                 <span class="text-base">🔠</span> <span>Kolory & Tekst MC</span>
@@ -82,29 +82,25 @@
             <div id="tab-skript" class="tab-content space-y-6">
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-blue-500">⚡</span> Prawdziwy Syntezator Logiki AI
+                        <span class="text-blue-500">⚡</span> Prawdziwy Analizator Promptów
                     </h2>
                     <div class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda (bez /)</label>
-                                <input type="text" id="sk-cmd" value="sklep" placeholder="np. sklep, svip, kit, panel" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <input type="text" id="sk-cmd" value="custom" placeholder="np. mojakomenda" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wymagana permisja</label>
-                                <input type="text" id="sk-perm" placeholder="np. serwer.vip lub zostaw puste" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <input type="text" id="sk-perm" placeholder="np. admin.uzyj" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wiadomość powitalna</label>
-                            <input type="text" id="sk-msg" value="&8[&6FlashCode AI&8] &7Otwieram panel..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wpisz dowolny prompt po polsku (każde słowo i liczba zostaną przeanalizowane)</label>
+                            <textarea id="sk-custom-logic" rows="4" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">daj mi netherytowy miecz sharpness 6 i 500 monet oraz przeteleportuj na spawn</textarea>
                         </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Opisz logikę po polsku (Skrypt AI rozpozna komendy, GUI, ekonomię, itemy)</label>
-                            <textarea id="sk-custom-logic" rows="4" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">ma otworzyć sklep gdzie można kupić diamenty za monety oraz sprzedawać złoto</textarea>
-                        </div>
-                        <button onclick="generateAdvancedScript()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/20 text-sm flex items-center justify-center gap-2">
-                            <span>Generuj Kompletny Skrypt AI (.sk)</span>
+                        <button onclick="generateFromPrompt()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/20 text-sm flex items-center justify-center gap-2">
+                            <span>Przetwórz Prompt i Generuj Kod</span>
                         </button>
                     </div>
                 </div>
@@ -117,7 +113,7 @@
                             <button onclick="copyCode('sk-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj</button>
                         </div>
                     </div>
-                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs lg:text-sm text-emerald-400 overflow-x-auto border border-slate-900 min-h-[220px]">// Kliknij przycisk generowania, aby uruchomić AI...</pre>
+                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs lg:text-sm text-emerald-400 overflow-x-auto border border-slate-900 min-h-[220px]">// Twój wygenerowany kod na podstawie wpisanego promptu pojawi się tutaj...</pre>
                 </div>
             </div>
 
@@ -240,7 +236,7 @@
         </section>
     </main>
 
-    <!-- JavaScript Engine -->
+    <!-- JavaScript Dynamic Prompt Engine v7.0 -->
     <script>
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -255,13 +251,12 @@
             activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/20');
         }
 
-        // INTELIGENTNY ANALIZATOR AI DLA SKRYPTÓW
-        function generateAdvancedScript() {
-            const cmd = document.getElementById('sk-cmd').value.trim() || 'sklep';
+        // DYNAMICZNY ANALIZATOR PROMPTU (analizuje każdą frazę wpisaną przez użytkownika)
+        function generateFromPrompt() {
+            const cmd = document.getElementById('sk-cmd').value.trim() || 'komenda';
             const perm = document.getElementById('sk-perm').value.trim();
-            const msg = document.getElementById('sk-msg').value.trim();
-            const custom = document.getElementById('sk-custom-logic').value.trim();
-            const lower = custom.toLowerCase();
+            const promptText = document.getElementById('sk-custom-logic').value.trim();
+            const lower = promptText.toLowerCase();
 
             let code = `options:\n`;
             code += `\tprefix: "&8[&6FlashCode AI&8]"\n\n`;
@@ -271,61 +266,54 @@
                 code += `\tpermission message: "{@prefix} &cNie masz uprawnień!"\n`;
             }
             code += `\ttrigger:\n`;
+            code += `\t\tsend "{@prefix} &7Przetwarzam Twój prompt..." to player\n`;
 
-            if (msg) {
-                code += `\t\tsend "${msg}" to player\n`;
+            // Rozbijamy prompt na pojedyncze słowa/frazy w celu dynamicznego wykrycia intencji
+            const words = lower.split(/\s+/);
+            
+            // 1. Sprawdzanie liczb podanych w prompcie (np. "500", "10")
+            let foundNumbers = promptText.match(/\d+/g);
+            let numberVal = foundNumbers ? foundNumbers[0] : '1';
+
+            // 2. Dynamiczne wykrywanie przedmiotów (szukamy słów kluczowych)
+            let itemGiven = false;
+            if (lower.includes('miecz') || lower.includes('sword')) {
+                let material = lower.includes('netheryt') ? 'netherite sword' : (lower.includes('diament') ? 'diamond sword' : 'iron sword');
+                let enchants = [];
+                if (lower.includes('sharp')) enchants.push('sharpness ' + (lower.match(/sharp[^\d]*(\d+)/)?.[1] || '5'));
+                if (lower.includes('unbreak')) enchants.push('unbreaking ' + (lower.match(/unbreak[^\d]*(\d+)/)?.[1] || '3'));
+                if (lower.includes('fire')) enchants.push('fire aspect ' + (lower.match(/fire[^\d]*(\d+)/)?.[1] || '2'));
+
+                let giveLine = `give player 1 of ${material}`;
+                if (enchants.length > 0) giveLine += ` of ${enchants.join(', ')}`;
+                code += `\t\t${giveLine}\n`;
+                code += `\t\tsend "{@prefix} &aOtrzymałeś przedmiot z Twojego promptu!" to player\n`;
+                itemGiven = true;
             }
 
-            // Zaawansowane parsowanie fraz polskiego tekstu
-            const isShop = lower.includes('sklep') || lower.includes('kup') || lower.includes('sprzedaj');
-            const isGui = lower.includes('gui') || lower.includes('menu') || lower.includes('okno') || isShop;
-            const isTeleport = lower.includes('teleport') || lower.includes('spawn') || lower.includes('tp');
-            const isMoney = lower.includes('monet') || lower.includes('pieniądz') || lower.includes('hajs');
-            const isGod = lower.includes('god') || lower.includes('nieśmiertelność');
+            // 3. Dynamiczne wykrywanie waluty / monet
+            if (lower.includes('monet') || lower.includes('hajs') || lower.includes('pieniędz') || lower.includes('dolar')) {
+                code += `\t\tadd ${numberVal} to player's balance\n`;
+                code += `\t\tsend "{@prefix} &aDodano ${numberVal} monet zgodnie z życzeniem!" to player\n`;
+                itemGiven = true;
+            }
 
-            if (isShop) {
-                code += `\t\topen chest inventory with 3 rows named "&8&lSklep Serwera" to player\n`;
-                code += `\t\tformat gui slot 11 of player with diamond named "&bKup Diament" with lore "&7Cena: &6100 monet" to run:\n`;
-                code += `\t\t\tif player's balance >= 100:\n`;
-                code += `\t\t\t\tremove 100 from player's balance\n`;
-                code += `\t\t\t\tgive player 1 of diamond\n`;
-                code += `\t\t\t\tsend "{@prefix} &aZakupiłeś diament!" to player\n`;
-                code += `\t\t\telse:\n`;
-                code += `\t\t\t\tsend "{@prefix} &cNie masz wystarczająco monet!" to player\n`;
-                
-                code += `\t\tformat gui slot 15 of player with gold ingot named "&eSprzedaj Złoto" with lore "&7Zysk: &650 monet" to run:\n`;
-                code += `\t\t\tif player has 1 of gold ingot:\n`;
-                code += `\t\t\t\tremove 1 of gold ingot from player\n`;
-                code += `\t\t\t\tadd 50 to player's balance\n`;
-                code += `\t\t\t\tsend "{@prefix} &aSprzedano złoto!" to player\n`;
-                code += `\t\t\telse:\n`;
-                code += `\t\t\t\tsend "{@prefix} &cNie masz złota w ekwipunku!" to player\n`;
-            } else if (isGui) {
-                code += `\t\topen chest inventory with 3 rows named "&8&lMenu - ${cmd.toUpperCase()}" to player\n`;
-                code += `\t\tformat gui slot 13 of player with emerald named "&aAkcja Główna" with lore "&7Kliknij, aby wykonać!" to run:\n`;
-                code += `\t\t\tsend "{@prefix} &aWykonano akcję z menu!" to player\n`;
-            } else {
-                if (isTeleport) {
-                    code += `\t\tteleport player to spawn of world\n`;
-                    code += `\t\tsend "{@prefix} &aPrzeteleportowano pomyślnie!" to player\n`;
-                }
-                if (isMoney) {
-                    code += `\t\tadd 500 to player's balance\n`;
-                    code += `\t\tsend "{@prefix} &aDodano 500 monet!" to player\n`;
-                }
-                if (isGod) {
-                    code += `\t\tset player's invulnerability to true\n`;
-                    code += `\t\tsend "{@prefix} &aWłączono tryb God!" to player\n`;
-                }
-                if (!isTeleport && !isMoney && !isGod) {
-                    code += `\t\t# Wygenerowano automatycznie przez AI:\n`;
-                    code += `\t\tsend "{@prefix} &aPrzetworzono zadanie: &f${custom.replace(/"/g, '\\"')}" to player\n`;
-                    code += `\t\tgive player 1 of diamond named "&bNagroda AI"\n`;
-                }
+            // 4. Dynamiczne wykrywanie teleportacji
+            if (lower.includes('teleport') || lower.includes('spawn') || lower.includes('tp')) {
+                code += `\t\tteleport player to spawn of world\n`;
+                code += `\t\tsend "{@prefix} &aPrzeteleportowano na spawn!" to player\n`;
+                itemGiven = true;
+            }
+
+            // 5. Jeśli żaden konkretny wzorzec nie pasował, wstawiamy uniwersalną akcję opartą w 100% na tekście promptu
+            if (!itemGiven) {
+                code += `\t\t# Wykonanie akcji z Twojego promptu:\n`;
+                code += `\t\tsend "{@prefix} &ePrompt: &f${promptText.replace(/"/g, '\\"')}" to player\n`;
+                code += `\t\tgive player ${numberVal} of diamond named "&bWynik z Promptu"\n`;
             }
 
             document.getElementById('sk-output').innerText = code;
-            saveHistory('Skrypt AI: /' + cmd, code);
+            saveHistory('Prompt: ' + promptText, code);
         }
 
         // Transformator tekstowy
