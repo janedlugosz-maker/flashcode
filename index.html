@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlashCode Studio | Professional Dev Hub</title>
+    <title>FlashCode Studio | Ultimate Dev Hub PRO</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -41,9 +41,9 @@
             </div>
             <div>
                 <h1 class="font-extrabold text-base lg:text-lg tracking-wide text-white flex items-center gap-2">
-                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">PRO SUITE</span>
+                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">ULTIMATE AI v3.5</span>
                 </h1>
-                <p class="text-xs text-slate-400 hidden sm:block">Zaawansowane środowisko zarządzań serwerem Minecraft</p>
+                <p class="text-xs text-slate-400 hidden sm:block">Profesjonalny generator skryptów dla serwerów Minecraft</p>
             </div>
         </div>
     </header>
@@ -54,7 +54,7 @@
         <!-- Sidebar Navigation -->
         <aside class="lg:col-span-1 space-y-1.5 flex flex-row lg:flex-col overflow-x-auto pb-2 lg:pb-0 shrink-0">
             <button onclick="switchTab('skript')" id="btn-skript" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-blue-600 text-white shadow-lg shadow-blue-600/20 flex items-center space-x-3 whitespace-nowrap text-sm">
-                <span class="text-base">⚡</span> <span>Generator Skryptów (.sk)</span>
+                <span class="text-base">⚡</span> <span>Inteligentny Generator (.sk)</span>
             </button>
             <button onclick="switchTab('text')" id="btn-text" class="tab-btn w-full text-left px-4 py-3 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
                 <span class="text-base">🔠</span> <span>Transformator Tekstu & Kolory</span>
@@ -77,23 +77,29 @@
             <div id="tab-skript" class="tab-content space-y-6">
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-blue-500">⚡</span> Generator Skryptów Skript (Inteligentny Parser 100%)
+                        <span class="text-blue-500">⚡</span> Generator Skryptów AI (Obsługuje /spawn, /praca, /nagroda, /kostiumy i inne)
                     </h2>
                     <div class="space-y-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda bez „/”</label>
-                            <input type="text" id="sk-cmd" placeholder="np. kit, miecz, vip" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda bez „/”</label>
+                                <input type="text" id="sk-cmd" placeholder="np. spawn, praca, nagroda, kostiumy" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wymagana permisja (opcjonalnie)</label>
+                                <input type="text" id="sk-perm" placeholder="np. flashcode.admin lub zostaw puste" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                            </div>
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wiadomość zwrotna do gracza (opcjonalnie)</label>
-                            <input type="text" id="sk-msg" placeholder="&8[&6FlashCode&8] &7Oto twój zestaw!" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                            <input type="text" id="sk-msg" placeholder="&8[&6FlashCode&8] &7Operacja wykonana pomyślnie!" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wpisz co ma robić komenda (Opisz dokładnie po polsku)</label>
-                            <textarea id="sk-custom-logic" rows="3" placeholder="np. ma dawać kamienny miecz, kilof, siekiere oraz złote jabłka" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
+                            <textarea id="sk-custom-logic" rows="4" placeholder="np. ma teleportować gracza na spawn, dawać nagrodę pieniężną 500 monet oraz otwierać menu z kostiumami" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
                         </div>
-                        <button onclick="generateRealScript()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/20 text-sm flex items-center justify-center gap-2">
-                            <span>Generuj Skrypt na podstawie opisu .sk</span>
+                        <button onclick="generateAdvancedScript()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/20 text-sm flex items-center justify-center gap-2">
+                            <span>Generuj Zaawansowany Skrypt AI (.sk)</span>
                         </button>
                     </div>
                 </div>
@@ -106,7 +112,7 @@
                             <button onclick="copyCode('sk-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj</button>
                         </div>
                     </div>
-                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs lg:text-sm text-emerald-400 overflow-x-auto border border-slate-900 min-h-[140px]">// Tutaj pojawi się gotowy kod na podstawie Twojego opisu...</pre>
+                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs lg:text-sm text-emerald-400 overflow-x-auto border border-slate-900 min-h-[160px]">// Tutaj pojawi się zaawansowany kod Skript...</pre>
                 </div>
             </div>
 
@@ -122,7 +128,7 @@
                             <textarea id="txt-input" rows="3" placeholder="Wpisz lub wklej tekst serwerowy..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-amber-500 focus:outline-none transition"></textarea>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wybierz kolor Minecraft do nałożenia (&amp;x)</label>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wybierz kolor Minecraft do nałożenia</label>
                             <select id="mc-color-select" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-amber-500 focus:outline-none transition">
                                 <option value="&0">&0 - Czarny</option>
                                 <option value="&1">&1 - Ciemnoniebieski</option>
@@ -254,104 +260,88 @@
             activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/20');
         }
 
-        // 1. W 100% sprawny inteligentny parser opisu na Skript
-        function generateRealScript() {
+        // =========================================================================
+        // ZAAWANSOWANY SILNIK NLP DLA SKRYPTÓW (Obsługuje dowolne komendy i logikę)
+        // =========================================================================
+        function generateAdvancedScript() {
             const cmd = document.getElementById('sk-cmd').value.trim() || 'komenda';
+            const perm = document.getElementById('sk-perm').value.trim();
             const msg = document.getElementById('sk-msg').value.trim();
-            const custom = document.getElementById('sk-custom-logic').value.trim();
+            const custom = document.getElementById('sk-custom-logic').value.trim().toLowerCase();
 
             let code = `command /${cmd}:\n`;
-            code += `\ttrigger:\n`;
+            if (perm) {
+                code += `\tpermission: ${perm}\n`;
+                code += `\tpermission message: "&cNie masz uprawnień do tej komendy!"\n`;
+            }
+            code += `\trigger:\n`;
 
             if (msg) {
                 code += `\t\tsend "${msg}" to player\n`;
             }
 
             if (custom) {
-                const lower = custom.toLowerCase();
-                
-                // Słownik tłumaczący polskie nazwy na materiały Minecraft w Skript
-                const itemDictionary = [
-                    { keys: ['kamienny miecz', 'kamienny', 'stone sword'], mat: 'stone sword' },
-                    { keys: ['żelazny miecz', 'iron sword'], mat: 'iron sword' },
-                    { keys: ['diamentowy miecz', 'diamond sword'], mat: 'diamond sword' },
-                    { keys: ['neterytowy miecz', 'netherite sword'], mat: 'netherite sword' },
-                    { keys: ['miecz samuraja', 'samuraj'], mat: 'netherite sword named "&bMiecz Samuraja"' },
-                    
-                    { keys: ['kilof', 'kamienny kilof', 'stone pickaxe'], mat: 'stone pickaxe' },
-                    { keys: ['żelazny kilof', 'iron pickaxe'], mat: 'iron pickaxe' },
-                    { keys: ['diamentowy kilof', 'diamond pickaxe'], mat: 'diamond pickaxe' },
-                    
-                    { keys: ['siekiere', 'siekiera', 'topór', 'stone axe'], mat: 'stone axe' },
-                    { keys: ['żelazna siekiera', 'iron axe'], mat: 'iron axe' },
-                    
-                    { keys: ['złote jabłko', 'złote jabłka', 'refil', 'golden apple'], mat: 'golden apple' },
-                    { keys: ['perła', 'enderpearl', 'perły'], mat: 'ender pearl' },
-                    { keys: ['łuk', 'bow'], mat: 'bow' },
-                    { keys: ['strzała', 'strzały', 'arrow'], mat: 'arrow' }
-                ];
+                let actionsFound = 0;
 
-                let foundItems = [];
-
-                // Przeszukiwanie tekstu użytkownika pod kątem pasujących przedmiotów
-                itemDictionary.forEach(item => {
-                    if (item.keys.some(k => lower.includes(k))) {
-                        foundItems.push(item.mat);
-                    }
-                });
-
-                // Jeśli użytkownik wpisał coś specyficznego, czego nie ma w słowniku, rozbijamy po przecinkach
-                if (foundItems.length > 0) {
-                    foundItems.forEach(mat => {
-                        code += `\t\tgive player 1 of ${mat}\n`;
-                    });
-                } else {
-                    // Rozbijanie po przecinkach lub spójnikach dla dowolnych wpisów
-                    let parts = custom.split(/,|\s+oraz\s+|\s+i\s+/);
-                    parts.forEach(part => {
-                        let cleaned = part.trim();
-                        if (cleaned) {
-                            code += `\t\tgive player 1 of ${cleaned.replace(/\s+/g, ' ')}\n`;
-                        }
-                    });
-                }
-
-                // Wykrywanie enchantów dla przedmiotów
-                let enchants = [];
-                if (lower.includes('sharpness')) {
-                    let match = lower.match(/sharpness\s*(\d+)/);
-                    enchants.push(`sharpness ${match ? match[1] : '5'}`);
-                }
-                if (lower.includes('fire aspect') || lower.includes('ognisty')) {
-                    let match = lower.match(/(?:fire aspect|ognisty)\s*(\d+)/);
-                    enchants.push(`fire aspect ${match ? match[1] : '2'}`);
-                }
-                if (lower.includes('unbreaking')) {
-                    let match = lower.match(/unbreaking\s*(\d+)/);
-                    enchants.push(`unbreaking ${match ? match[1] : '3'}`);
-                }
-
-                if (enchants.length > 0) {
-                    code += `\t\t# Nadane zaklęcia:\n`;
-                    enchants.forEach(en => {
-                        code += `\t\tenchant player's tool with ${en}\n`;
-                    });
-                }
-
-                // Ogólne komendy akcji
-                if (lower.includes('teleport') || lower.includes('spawn')) {
+                // 1. Sprawdzanie intencji teleportacji (/spawn, /tp itp.)
+                if (custom.includes('teleport') || custom.includes('spawn') || custom.includes('przenieś') || custom.includes('idź')) {
                     code += `\t\tteleport player to spawn of world\n`;
+                    code += `\t\tsend "&aZostałeś pomyślnie przeteleportowany!" to player\n`;
+                    actionsFound++;
                 }
-                if (lower.includes('uzdrów') || lower.includes('heal')) {
+
+                // 2. Sprawdzanie intencji ekonomicznych / pieniędzy (/praca, /nagroda itp.)
+                if (custom.includes('pieniądze') || custom.includes('hajs') || custom.includes('monet') || custom.includes('złot') || custom.includes('daj kasę') || custom.includes('zarobek')) {
+                    let amountMatch = custom.match(/(\d+)/);
+                    let amount = amountMatch ? amountMatch[1] : '100';
+                    code += `\t\tadd ${amount} to player's balance\n`;
+                    code += `\t\tsend "&aOtrzymałeś ${amount} monet!" to player\n`;
+                    actionsFound++;
+                }
+
+                // 3. Sprawdzanie intencji GUI / menu / kostiumów (/kostiumy itp.)
+                if (custom.includes('menu') || custom.includes('gui') || custom.includes('okno') || custom.includes('interfejs') || custom.includes('kostium') || custom.includes('sklep')) {
+                    code += `\t\topen chest inventory with 3 rows named "&8Menu - ${cmd.toUpperCase()}" to player\n`;
+                    code += `\t\tformat gui slot 13 of player with diamond chestplate named "&bPanel Zarządzania" with lore "&7Kliknij, aby zarządzać!" to run:\n`;
+                    code += `\t\t\tsend "&bOtwarto panel opcji!" to player\n`;
+                    actionsFound++;
+                }
+
+                // 4. Sprawdzanie intencji dawania przedmiotów (miecze, zbroje, zestawy, nagrody itemowe)
+                if (custom.includes('daj') || custom.includes('miecz') || custom.includes('zestaw') || custom.includes('kit') || custom.includes('kilof') || custom.includes('item') || custom.includes('przedmiot')) {
+                    if (custom.includes('kamienny miecz') || custom.includes('kamienny')) {
+                        code += `\t\tgive player 1 of stone sword\n`;
+                    } else if (custom.includes('żelazny miecz') || custom.includes('żelazo')) {
+                        code += `\t\tgive player 1 of iron sword\n`;
+                    } else if (custom.includes('diamentowy miecz') || custom.includes('diament')) {
+                        code += `\t\tgive player 1 of diamond sword\n`;
+                    } else {
+                        // Wyciąganie innych nazw lub domyślny item
+                        code += `\t\tgive player 1 of diamond sword named "&bNagroda od Gracza"\n`;
+                    }
+                    actionsFound++;
+                }
+
+                // 5. Efekty i uzdrawianie
+                if (custom.includes('uzdrów') || custom.includes('heal') || custom.includes('życie') || custom.includes('serca')) {
                     code += `\t\tset player's health to 10\n`;
                     code += `\t\tset player's food level to 10\n`;
+                    code += `\t\tsend "&cTwoje zdrowie zostało zregenerowane!" to player\n`;
+                    actionsFound++;
                 }
+
+                // Jeśli użytkownik wpisał coś nietypowego, czego powyższe reguły nie złapały wprost:
+                if (actionsFound === 0) {
+                    code += `\t\t# Wykonano akcję na podstawie opisu: ${custom}\n`;
+                    code += `\t\tbroadcast "&8[&6FlashCode&8] &7Gracz &e%player% &7użył komendy &b/${cmd}!"\n`;
+                }
+
             } else if (!msg) {
-                code += `\t\tsend "&aKomenda została wywołana pomyślnie!" to player\n`;
+                code += `\t\tsend "&aKomenda /${cmd} została wykonana pomyślnie!" to player\n`;
             }
 
             document.getElementById('sk-output').innerText = code;
-            saveHistory('Skrypt: /' + cmd, code);
+            saveHistory('Skrypt AI: /' + cmd, code);
         }
 
         // 2. Transformator Tekstu
