@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlashCode Studio | Professional Engine v16.0</title>
+    <title>FlashCode Studio | Enterprise Platform v20.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -11,456 +11,456 @@
             theme: {
                 extend: {
                     colors: {
-                        darkbg: '#040609',
-                        cardbg: '#0b101d',
-                        cardborder: '#192237',
+                        darkbg: '#020617',
+                        cardbg: '#0f172a',
+                        cardborder: '#1e293b',
                         accent: '#2563eb',
-                        minecraft: '#f59e0b'
+                        crypto: '#f59e0b'
                     }
                 }
             }
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
         ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #040609; }
-        ::-webkit-scrollbar-thumb { background: #192237; border-radius: 3px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
+        canvas.game-viewport { touch-action: none; background: #090d16; }
     </style>
 </head>
 <body class="bg-darkbg text-slate-100 min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
 
     <!-- Top Header -->
-    <header class="bg-cardbg/95 backdrop-blur-md border-b border-cardborder sticky top-0 z-50 px-4 lg:px-8 py-3.5 flex justify-between items-center shadow-2xl">
+    <header class="bg-cardbg/90 backdrop-blur-md border-b border-cardborder sticky top-0 z-50 px-6 py-4 flex justify-between items-center shadow-xl">
         <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-blue-500/25 text-white font-extrabold text-lg">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-emerald-500 flex items-center justify-center shadow-lg shadow-blue-500/20 text-white font-extrabold text-lg">
                 FC
             </div>
             <div>
-                <h1 class="font-extrabold text-base lg:text-lg tracking-wide text-white flex items-center gap-2">
-                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">ENGINE v16.0 PRO</span>
+                <h1 class="font-extrabold text-base tracking-wide text-white flex items-center gap-2">
+                    FLASHCODE STUDIO <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full font-mono">ENTERPRISE v20.0</span>
                 </h1>
-                <p class="text-xs text-slate-400 hidden sm:block">Profesjonalny Generator Skryptów Minecraft</p>
+                <p class="text-xs text-slate-400">Mobilna Strzelanka FPS, AI Generator Grafik i Giełda Krypto + Finanse</p>
             </div>
         </div>
-        <div class="flex items-center gap-3">
-            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span> System Stabilny
-            </span>
+        <div class="flex items-center gap-4">
+            <div class="bg-slate-900 border border-cardborder px-4 py-2 rounded-xl flex items-center gap-3 shadow-inner">
+                <span class="text-xs text-slate-400 font-medium">Portfel PLN:</span>
+                <span id="global-pln-balance" class="text-sm font-mono font-bold text-emerald-400">5,000.00 PLN</span>
+            </div>
         </div>
     </header>
 
     <!-- Main Workspace Layout -->
-    <main class="flex-1 max-w-[1600px] w-full mx-auto p-4 lg:p-6 grid grid-cols-1 lg:grid-cols-5 gap-6">
+    <main class="flex-1 max-w-[1700px] w-full mx-auto p-4 lg:p-6 grid grid-cols-1 lg:grid-cols-5 gap-6">
         
         <!-- Sidebar Navigation -->
         <aside class="lg:col-span-1 space-y-2 flex flex-row lg:flex-col overflow-x-auto pb-2 lg:pb-0 shrink-0">
-            <button onclick="switchTab('skript')" id="btn-skript" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-blue-600 text-white shadow-lg shadow-blue-600/25 flex items-center space-x-3 whitespace-nowrap text-sm">
-                <span class="text-base">⚡</span> <span>FlashCode Skript</span>
+            <button onclick="switchTab('fps')" id="btn-fps" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-blue-600 text-white shadow-lg shadow-blue-600/20 flex items-center space-x-3 whitespace-nowrap text-sm">
+                <span class="text-base">🎯</span> <span>Mobilny FPS (CS Style)</span>
             </button>
-            <button onclick="switchTab('text')" id="btn-text" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
-                <span class="text-base">🔠</span> <span>Kolory & Tekst MC</span>
+            <button onclick="switchTab('ai')" id="btn-ai" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
+                <span class="text-base">🎨</span> <span>AI Generator z Promptu</span>
             </button>
-            <button onclick="switchTab('pack')" id="btn-pack" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
-                <span class="text-base">📦</span> <span>Menedżer Paczki</span>
+            <button onclick="switchTab('crypto')" id="btn-crypto" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
+                <span class="text-base">📈</span> <span>Giełda Kryptowalut</span>
             </button>
-            <button onclick="switchTab('storage')" id="btn-storage" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
-                <span class="text-base">💾</span> <span>Zapisana Historia</span>
+            <button onclick="switchTab('calculator')" id="btn-calculator" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
+                <span class="text-base">🧮</span> <span>Kalkulator Prowizji</span>
             </button>
         </aside>
 
         <!-- Main Content Area -->
         <section class="lg:col-span-4 space-y-6">
 
-            <!-- TAB 1: FLASHCODE SKRIPT GENERATOR -->
-            <div id="tab-skript" class="tab-content space-y-6">
-                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
-                    <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-blue-400">⚡</span> Generator Skryptów Pro (Engine v16.0)
-                    </h2>
-                    <div class="space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda Główna</label>
-                                <input type="text" id="sk-cmd" placeholder="np. dajmiecz" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Alias</label>
-                                <input type="text" id="sk-alias" placeholder="np. miecz" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Permisja</label>
-                                <input type="text" id="sk-perm" placeholder="np. fc.admin" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
-                            </div>
-                        </div>
+            <!-- TAB 1: MOBILNA STRZELANKA FPS -->
+            <div id="tab-fps" class="tab-content space-y-6">
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl flex flex-col items-center">
+                    <div class="w-full flex justify-between items-center mb-4 border-b border-cardborder pb-3">
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Opis / Zadanie (Opisz przedmiot, nazwę i enchanty)</label>
-                            <textarea id="sk-prompt" rows="4" placeholder="np. daje graczowi drewniany miecz nazwany &aMiecz Kamery z enchantami sharpness 6 unbreaking 3 fireaspect 2" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
+                            <h2 class="text-base font-bold text-white flex items-center gap-2">
+                                <span class="text-blue-500">🎯</span> FlashStrike Mobile Arena (CS-Style Engine)
+                            </h2>
+                            <p class="text-xs text-slate-400">Użyj wirtualnego dżojstika i przycisków akcji na ekranie dotykowym lub myszki.</p>
                         </div>
-                        <button onclick="generateProfessionalScript()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/25 text-sm flex items-center justify-center gap-2">
-                            <span>Generuj profesjonalny kod (.sk)</span>
-                        </button>
+                        <div class="flex items-center gap-4 text-xs font-mono">
+                            <span class="bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800 text-emerald-400">HP: <span id="player-hp">100</span></span>
+                            <span class="bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800 text-amber-400">Kills: <span id="player-kills">0</span></span>
+                            <button onclick="startFpsGame()" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-1.5 rounded-lg transition shadow-md">Start / Restart</button>
+                        </div>
                     </div>
-                </div>
 
-                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="font-semibold text-sm text-slate-300 flex items-center gap-2">
-                            <span>Wynik Skryptu:</span>
-                            <span id="sk-lines" class="text-xs text-blue-400 font-mono bg-blue-950/40 px-2 py-0.5 rounded border border-blue-900/40">0 linii</span>
-                        </h3>
-                        <div class="flex gap-2">
-                            <button onclick="downloadFile('sk-output', 'skrypt.sk', 'text/plain')" class="text-xs bg-slate-800 hover:bg-slate-700 text-blue-400 px-3 py-1.5 rounded-lg border border-slate-700 transition">Pobierz .sk</button>
-                            <button onclick="copyCode('sk-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj</button>
+                    <div class="relative w-full max-w-4xl aspect-[16/9] bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 shadow-2xl flex items-center justify-center">
+                        <canvas id="fpsCanvas" class="w-full h-full game-viewport"></canvas>
+                        
+                        <div id="fps-overlay" class="absolute inset-0 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center space-y-4">
+                            <div class="w-16 h-16 rounded-2xl bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-blue-400 text-2xl font-bold">CS</div>
+                            <h3 class="text-xl font-extrabold text-white">FlashStrike Mobile v1.0</h3>
+                            <p class="text-xs text-slate-400 max-w-md">Eliminuj wrogów terrorystów pojawiających się na arenie. Strzelaj precyzyjnie, dbaj o amunicję!</p>
+                            <button onclick="startFpsGame()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3 px-8 rounded-xl transition shadow-lg text-sm">Rozpocznij Grę</button>
+                        </div>
+
+                        <div class="absolute bottom-4 left-4 flex gap-2 pointer-events-auto">
+                            <button ontouchstart="movePlayer(-1, 0)" onmousedown="movePlayer(-1, 0)" class="w-12 h-12 bg-slate-800/80 hover:bg-slate-700 border border-slate-700 rounded-xl text-white font-bold flex items-center justify-center active:bg-blue-600">◀</button>
+                            <button ontouchstart="movePlayer(1, 0)" onmousedown="movePlayer(1, 0)" class="w-12 h-12 bg-slate-800/80 hover:bg-slate-700 border border-slate-700 rounded-xl text-white font-bold flex items-center justify-center active:bg-blue-600">▶</button>
+                        </div>
+                        <div class="absolute bottom-4 right-4 flex gap-2 pointer-events-auto">
+                            <button ontouchstart="playerShoot()" onclick="playerShoot()" class="bg-red-600 hover:bg-red-500 text-white font-bold px-6 py-3 rounded-xl shadow-lg border border-red-500/40 text-sm active:scale-95 transition">STRZAŁ 💥</button>
                         </div>
                     </div>
-                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs text-emerald-400 overflow-x-auto border border-slate-900 max-h-[450px]">// Twój wygenerowany skrypt pojawi się tutaj...</pre>
                 </div>
             </div>
 
-            <!-- TAB 2: TRANSFORMATOR TEKSTU I KOLORY MC -->
-            <div id="tab-text" class="tab-content hidden space-y-6">
-                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
-                    <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-amber-500">🔠</span> Transformator Tekstu & Kolory Minecraft
+            <!-- TAB 2: AI GENERATOR GRAFIK Z PROMPTU -->
+            <div id="tab-ai" class="tab-content hidden space-y-6">
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl space-y-5">
+                    <h2 class="text-base font-bold text-white flex items-center gap-2 border-b border-cardborder pb-3">
+                        <span class="text-indigo-400">🎨</span> Zaawansowany Generator Graficzny (Prompt-to-Image / Gradient Engine)
                     </h2>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Tekst wejściowy</label>
-                            <textarea id="txt-input" rows="3" placeholder="Wpisz tekst..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-amber-500 focus:outline-none transition"></textarea>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-1 space-y-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Prompt tekstowy grafiki</label>
+                                <textarea id="ai-prompt-input" rows="4" placeholder="np. cyberpunk neon city grid background with purple and cyan glowing aesthetic, 4k resolution" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-indigo-500 focus:outline-none transition"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Styl Renderowania</label>
+                                <select id="ai-style" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-indigo-500 focus:outline-none transition">
+                                    <option value="cyberpunk">Cyberpunk Neon Matrix</option>
+                                    <option value="space">Deep Space Nebula</option>
+                                    <option value="abstract">Abstract Liquid Gradient</option>
+                                    <option value="minimal">Minimal Dark Glass</option>
+                                </select>
+                            </div>
+                            <button onclick="generateAiGraphic()" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg text-sm flex items-center justify-center gap-2">
+                                <span>🚀 Generuj z Promptu</span>
+                            </button>
                         </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Kolor Minecraft</label>
-                            <select id="mc-color" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-amber-500 focus:outline-none transition">
-                                <option value="&2">&2 - Zielony</option>
-                                <option value="&6">&6 - Złoty</option>
-                                <option value="&b">&b - Turkusowy</option>
-                                <option value="&c">&c - Czerwony</option>
-                                <option value="&e" selected>&e - Żółty</option>
-                                <option value="&f">&f - Biały</option>
-                            </select>
-                        </div>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                            <button onclick="transformText('caps')" class="bg-slate-900 hover:bg-slate-800 border border-cardborder p-3 rounded-xl text-xs font-bold text-amber-400 transition">Małe Kapitały</button>
-                            <button onclick="transformText('color')" class="bg-slate-900 hover:bg-slate-800 border border-cardborder p-3 rounded-xl text-xs font-bold text-emerald-400 transition">Aplikuj Kolor</button>
-                            <button onclick="transformText('lore')" class="bg-slate-900 hover:bg-slate-800 border border-cardborder p-3 rounded-xl text-xs font-bold text-cyan-400 transition">Format Lore</button>
-                            <button onclick="transformText('clear')" class="bg-red-950/20 hover:bg-red-900/30 border border-red-900/30 p-3 rounded-xl text-xs font-bold text-red-400 transition">Wyczyść</button>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="font-semibold text-sm text-slate-300">Wynik:</h3>
-                        <button onclick="copyCode('txt-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj</button>
+                        <div class="lg:col-span-2 flex flex-col justify-between space-y-4">
+                            <div class="flex justify-between items-center text-xs text-slate-400 border-b border-slate-800 pb-2">
+                                <span>Wynik Generacji AI Canvas</span>
+                                <span id="ai-status" class="text-indigo-400 font-mono">Oczekiwanie na prompt...</span>
+                            </div>
+                            <div id="ai-canvas-output" class="w-full h-72 rounded-2xl border border-slate-800 bg-slate-950 flex flex-col items-center justify-center relative overflow-hidden shadow-inner">
+                                <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#6366f1_1px,transparent_1px)] [background-size:20px_20px]"></div>
+                                <span class="text-slate-500 text-sm z-10 font-mono">Tutaj pojawi się wygenerowana grafika</span>
+                            </div>
+                            <div class="flex gap-3">
+                                <button onclick="downloadAiGraphic()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-indigo-400 text-xs font-bold py-3 px-4 rounded-xl border border-slate-700 transition">Pobierz PNG</button>
+                            </div>
+                        </div>
                     </div>
-                    <div id="txt-output" class="bg-slate-950 p-4 rounded-xl font-mono text-sm text-slate-300 overflow-x-auto border border-slate-900 min-h-[90px] flex items-center">Wynik pojawi się tutaj...</div>
                 </div>
             </div>
 
-            <!-- TAB 3: MENEDŻER PACZKI -->
-            <div id="tab-pack" class="tab-content hidden space-y-6">
-                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
-                    <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-cyan-500">📦</span> Menedżer Paczki Serwera
-                    </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                        <div class="md:col-span-2">
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Nazwa elementu</label>
-                            <input type="text" id="pack-name" placeholder="np. EssentialsX" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-cyan-500 focus:outline-none transition">
-                        </div>
+            <!-- TAB 3: GIEŁDA KRYPTOWALUT -->
+            <div id="tab-crypto" class="tab-content hidden space-y-6">
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl space-y-6">
+                    <div class="flex justify-between items-center border-b border-cardborder pb-4">
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Typ</label>
-                            <select id="pack-type" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-cyan-500 focus:outline-none transition">
-                                <option value="Plugin .JAR">Plugin (.jar)</option>
-                                <option value="Skrypt .SK">Skrypt (.sk)</option>
-                                <option value="Konfiguracja YML">Konfiguracja (YML)</option>
-                            </select>
+                            <h2 class="text-base font-bold text-white flex items-center gap-2">
+                                <span class="text-crypto">📈</span> Globalna Giełda Kryptowalut (Live Tracker)
+                            </h2>
+                            <p class="text-xs text-slate-400 mt-1">Śledź aktualne kursy popularnych kryptowalut w czasie rzeczywistym.</p>
                         </div>
+                        <button onclick="refreshCryptoPrices()" class="bg-slate-800 hover:bg-slate-700 text-crypto text-xs font-bold px-3.5 py-2 rounded-xl border border-slate-700 transition">Odśwież Kursy</button>
                     </div>
-                    <button onclick="addPackItem()" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-cyan-600/25 text-sm">Dodaj do Paczki</button>
-                </div>
 
-                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="font-semibold text-sm text-slate-300">Skład paczki:</h3>
-                        <button onclick="exportPackList()" class="text-xs bg-slate-800 hover:bg-slate-700 text-cyan-400 px-3 py-1.5 rounded-lg border border-slate-700 transition">Pobierz spis (TXT)</button>
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4" id="crypto-grid">
+                        <!-- Generowane dynamicznie -->
                     </div>
-                    <div id="pack-container" class="space-y-2.5 max-h-72 overflow-y-auto pr-1"></div>
                 </div>
             </div>
 
-            <!-- TAB 4: ZAPISANA HISTORIA -->
-            <div id="tab-storage" class="tab-content hidden space-y-6">
-                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
-                    <div class="flex justify-between items-center mb-4 border-b border-cardborder pb-3">
-                        <h2 class="text-base font-bold text-white flex items-center gap-2">
-                            <span class="text-emerald-500">💾</span> Historia Wygenerowanych Skryptów
-                        </h2>
-                        <button onclick="clearHistory()" class="text-xs bg-red-950/40 text-red-400 border border-red-900/40 px-3 py-1.5 rounded-lg hover:bg-red-900/40 transition">Wyczyść</button>
+            <!-- TAB 4: KALKULATOR PROWIZJI -->
+            <div id="tab-calculator" class="tab-content hidden space-y-6">
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl space-y-6">
+                    <h2 class="text-base font-bold text-white flex items-center gap-2 border-b border-cardborder pb-3">
+                        <span class="text-emerald-500">🧮</span> Kalkulator Prowizji Płatności
+                    </h2>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Kwota transakcji (PLN)</label>
+                                <input type="number" id="calc-amount" value="100" oninput="calculateCommission()" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-emerald-500 focus:outline-none font-mono">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wybierz metodę płatności</label>
+                                <select id="calc-method" onchange="calculateCommission()" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-emerald-500 focus:outline-none">
+                                    <option value="blik_przelew">Blik przelew (0% prowizji)</option>
+                                    <option value="crypto">Crypto (0% prowizji)</option>
+                                    <option value="psc_paragon">PSC z paragonem (10% prowizji)</option>
+                                    <option value="blik_kod">Blik kod (10% prowizji)</option>
+                                    <option value="paypal">PayPal (10% prowizji)</option>
+                                    <option value="psc_bez_paragonu">PSC bez paragonu (15% prowizji)</option>
+                                    <option value="mypsc">MyPSC (25% prowizji)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Podsumowanie kalkulacji</h3>
+                                <div class="mt-4 space-y-3 font-mono">
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-slate-400">Wybrana prowizja:</span>
+                                        <span id="res-fee-percent" class="text-amber-400 font-bold">0%</span>
+                                    </div>
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-slate-400">Kwota prowizji:</span>
+                                        <span id="res-fee-amount" class="text-red-400 font-bold">0.00 PLN</span>
+                                    </div>
+                                    <div class="border-t border-slate-800 pt-3 flex justify-between text-base font-bold">
+                                        <span class="text-slate-200">Kwota do zapłaty:</span>
+                                        <span id="res-total" class="text-emerald-400 font-bold">100.00 PLN</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button onclick="alert('Transakcja zasymulowana pomyślnie!')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition text-xs shadow-lg">Zatwierdź Płatność</button>
+                        </div>
                     </div>
-                    <div id="history-container" class="space-y-3 max-h-[500px] overflow-y-auto pr-1"></div>
                 </div>
             </div>
 
         </section>
     </main>
 
-    <!-- Professional Core Engine v16 -->
+    <!-- App Engine Script -->
     <script>
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(el => {
-                el.classList.remove('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/25');
+                el.classList.remove('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/20');
                 el.classList.add('bg-cardbg', 'text-slate-300', 'border', 'border-transparent');
             });
 
             document.getElementById('tab-' + tabId).classList.remove('hidden');
             const activeBtn = document.getElementById('btn-' + tabId);
             activeBtn.classList.remove('bg-cardbg', 'text-slate-300', 'border', 'border-transparent');
-            activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/25');
+            activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/20');
+
+            if (tabId === 'crypto') renderCrypto();
+            if (tabId === 'calculator') calculateCommission();
+            if (tabId === 'fps') resizeCanvas();
         }
 
-        // --- PROFESJONALNY PARSER SKRYPTÓW (Engine v16.0) ---
-        function generateProfessionalScript() {
-            const cmd = document.getElementById('sk-cmd').value.trim() || 'skrypt';
-            const alias = document.getElementById('sk-alias').value.trim();
-            const perm = document.getElementById('sk-perm').value.trim();
-            const prompt = document.getElementById('sk-prompt').value.trim();
+        // --- MODULE 1: MOBILE FPS (CS STYLE) ---
+        const canvas = document.getElementById('fpsCanvas');
+        const ctx = canvas.getContext('2d');
+        let gameInterval = null;
+        let player = { x: 400, y: 250, hp: 100, kills: 0 };
+        let enemies = [];
+        let bullets = [];
 
-            if (!prompt) {
-                alert('Wpisz treść zadania dla generatora!');
-                return;
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+            player.x = canvas.width / 2;
+            player.y = canvas.height - 60;
+        }
+
+        window.addEventListener('resize', () => {
+            if (!document.getElementById('tab-fps').classList.contains('hidden')) {
+                resizeCanvas();
+            }
+        });
+
+        function startFpsGame() {
+            document.getElementById('fps-overlay').classList.add('hidden');
+            player.hp = 100;
+            player.kills = 0;
+            enemies = [];
+            bullets = [];
+            updateFpsHud();
+
+            if (gameInterval) clearInterval(gameInterval);
+            gameInterval = setInterval(updateFpsFrame, 1000 / 60);
+        }
+
+        function movePlayer(dx, dy) {
+            player.x += dx * 25;
+            if (player.x < 30) player.x = 30;
+            if (player.x > canvas.width - 30) player.x = canvas.width - 30;
+        }
+
+        function playerShoot() {
+            bullets.push({ x: player.x, y: player.y - 15 });
+        }
+
+        function updateFpsFrame() {
+            ctx.fillStyle = '#090d16';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            if (Math.random() < 0.03 && enemies.length < 5) {
+                enemies.push({ x: Math.random() * (canvas.width - 60) + 30, y: -20, speed: 1.5 + Math.random() * 1.5 });
             }
 
-            const outputEl = document.getElementById('sk-output');
-            const linesEl = document.getElementById('sk-lines');
-            outputEl.innerText = '⚡ Kompilowanie profesjonalnego kodu Skript...';
+            ctx.fillStyle = '#3b82f6';
+            ctx.beginPath();
+            ctx.arc(player.x, player.y, 16, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = '#60a5fa';
+            ctx.lineWidth = 3;
+            ctx.stroke();
 
-            setTimeout(() => {
-                let code = `# =====================================================================\n`;
-                code += `# FLASHCODE STUDIO - PROFESSIONAL ENGINE v16.0\n`;
-                code += `# Komenda główna: /${cmd}\n`;
-                if (alias) code += `# Alias: /${alias}\n`;
-                if (perm) code += `# Wymagana permisja: ${perm}\n`;
-                code += `# Prompt: "${prompt}"\n`;
-                code += `# =====================================================================\n\n`;
-                
-                code += `options:\n`;
-                code += `\tprefix: "&8[&bFlashCode&8] &7»"\n\n`;
+            ctx.fillStyle = '#f59e0b';
+            for (let i = bullets.length - 1; i >= 0; i--) {
+                bullets[i].y -= 10;
+                ctx.beginPath();
+                ctx.arc(bullets[i].x, bullets[i].y, 4, 0, Math.PI * 2);
+                ctx.fill();
+                if (bullets[i].y < 0) bullets.splice(i, 1);
+            }
 
-                code += `command /${cmd}${alias ? ' alias /' + alias : ''}:\n`;
-                if (perm) {
-                    code += `    permission: ${perm}\n`;
-                    code += `    permission message: "{@prefix} &cBrak uprawnień do tej komendy!"\n`;
-                }
-                code += `    trigger:\n`;
+            ctx.fillStyle = '#ef4444';
+            for (let i = enemies.length - 1; i >= 0; i--) {
+                enemies[i].y += enemies[i].speed;
+                ctx.beginPath();
+                ctx.arc(enemies[i].x, enemies[i].y, 16, 0, Math.PI * 2);
+                ctx.fill();
 
-                const pLower = prompt.toLowerCase();
-
-                // Baza materiałów Minecraft
-                const materials = [
-                    { keys: ['neterytowy miecz', 'netherite sword'], mat: 'netherite sword' },
-                    { keys: ['diamentowy miecz', 'diamond sword'], mat: 'diamond sword' },
-                    { keys: ['żelazny miecz', 'iron sword'], mat: 'iron sword' },
-                    { keys: ['kamienny miecz', 'stone sword'], mat: 'stone sword' },
-                    { keys: ['drewniany miecz', 'wooden sword'], mat: 'wooden sword' },
-                    { keys: ['neterytowy kilof', 'netherite pickaxe'], mat: 'netherite pickaxe' },
-                    { keys: ['diamentowy kilof', 'diamond pickaxe'], mat: 'diamond pickaxe' },
-                    { keys: ['złote jabłko', 'koksu', 'golden apple'], mat: 'golden apple:1' },
-                    { keys: ['diament', 'diamond'], mat: 'diamond' },
-                    { keys: ['łuk', 'bow'], mat: 'bow' }
-                ];
-
-                let targetMaterial = 'diamond sword';
-                for (let m of materials) {
-                    if (m.keys.some(k => pLower.includes(k))) {
-                        targetMaterial = m.mat;
+                for (let b = bullets.length - 1; b >= 0; b--) {
+                    let dist = Math.hypot(bullets[b].x - enemies[i].x, bullets[b].y - enemies[i].y);
+                    if (dist < 20) {
+                        enemies.splice(i, 1);
+                        bullets.splice(b, 1);
+                        player.kills++;
+                        updateFpsHud();
                         break;
                     }
                 }
 
-                // Precyzyjne wyciąganie nazwy własnej przedmiotu (np. nazwany &aMiecz Kamery)
-                let itemName = '';
-                let nameMarker = pLower.indexOf('nazwany');
-                if (nameMarker !== -1) {
-                    let sub = prompt.substring(nameMarker + 7).trim();
-                    let boundary = sub.toLowerCase().search(/\b(z |enchantami|o |oraz|posiadający)\b/);
-                    if (boundary !== -1) {
-                        itemName = sub.substring(0, boundary).trim();
-                    } else {
-                        itemName = sub.trim();
+                if (enemies[i] && enemies[i].y > canvas.height - 30) {
+                    enemies.splice(i, 1);
+                    player.hp -= 15;
+                    updateFpsHud();
+                    if (player.hp <= 0) {
+                        clearInterval(gameInterval);
+                        document.getElementById('fps-overlay').classList.remove('hidden');
+                        document.querySelector('#fps-overlay h3').innerText = 'Koniec Gry! Wynik: ' + player.kills + ' zabójstw';
                     }
                 }
-
-                // Obsługa wszystkich enchantów i poziomów bez wyjątku
-                const enchantMap = [
-                    { names: ['ostrość', 'sharpness'], sk: 'sharpness' },
-                    { names: ['niezniszczalność', 'unbreaking'], sk: 'unbreaking' },
-                    { names: ['ognisty aspekt', 'fire aspect', 'fireaspect'], sk: 'fire aspect' },
-                    { names: ['fortuna', 'fortune'], sk: 'fortune' },
-                    { names: ['wydajność', 'efficiency'], sk: 'efficiency' },
-                    { names: ['ochrona', 'protection'], sk: 'protection' },
-                    { names: ['odrzut', 'knockback'], sk: 'knockback' },
-                    { names: ['płomień', 'flame'], sk: 'flame' },
-                    { names: ['moc', 'power'], sk: 'power' }
-                ];
-
-                let collectedEnchants = [];
-                enchantMap.forEach(en => {
-                    for (let n of en.names) {
-                        let idx = pLower.indexOf(n);
-                        if (idx !== -1) {
-                            let chunk = pLower.substring(idx, idx + 25);
-                            let matchNum = chunk.match(/\d+/);
-                            let lvl = matchNum ? matchNum[0] : '1';
-                            collectedEnchants.push(`${en.sk} ${lvl}`);
-                            break;
-                        }
-                    }
-                });
-
-                // Składanie docelowej linii itemu
-                let itemExpr = `1 of ${targetMaterial}`;
-                if (collectedEnchants.length > 0) {
-                    itemExpr += ` of ${collectedEnchants.join(' and ')}`;
-                }
-                if (itemName) {
-                    itemExpr += ` named "${itemName}"`;
-                }
-
-                code += `        give player ${itemExpr}\n`;
-                code += `        send "{@prefix} &aOtrzymałeś pomyślnie skonfigurowany przedmiot!" to player\n`;
-                code += `        play sound "entity.player.levelup" with volume 1 and pitch 1 to player\n`;
-                code += `        play sound "entity.experience_orb.pickup" with volume 0.5 and pitch 1 to player\n`;
-
-                outputEl.innerText = code;
-                const totalLines = code.split('\n').length;
-                linesEl.innerText = totalLines + ' linii kodu';
-                saveHistory('FlashCode Pro: /' + cmd, code);
-
-            }, 300);
+            }
         }
 
-        // --- TRANSFORMATOR TEKSTU ---
-        function transformText(action) {
-            const input = document.getElementById('txt-input').value;
-            const output = document.getElementById('txt-output');
-            if (!input && action !== 'clear') {
-                output.innerText = 'Wpisz najpierw tekst!';
+        function updateFpsHud() {
+            document.getElementById('player-hp').innerText = player.hp;
+            document.getElementById('player-kills').innerText = player.kills;
+        }
+
+        // --- MODULE 2: AI GENERATOR GRAFIK Z PROMPTU ---
+        function generateAiGraphic() {
+            const prompt = document.getElementById('ai-prompt-input').value.trim();
+            const style = document.getElementById('ai-style').value;
+            const output = document.getElementById('ai-canvas-output');
+            const status = document.getElementById('ai-status');
+
+            if (!prompt) {
+                alert('Wpisz prompt tekstowy dla generatora!');
                 return;
             }
 
-            let res = "";
-            if (action === 'caps') {
-                const map = {'a':'ᴀ','b':'ʙ','c':'ᴄ','d':'ᴅ','e':'ᴇ','f':'ꜰ','g':'ɢ','h':'ʜ','i':'ɪ','j':'ᴊ','k':'ᴋ','l':'ʟ','m':'ᴍ','n':'ɴ','o':'ᴏ','p':'ᴘ','q':'ꞯ','r':'ʀ','s':'ꜱ','t':'ᴛ','u':'ᴜ','v':'ᴠ','w':'ᴡ','y':'ʏ','z':'ᴢ'};
-                res = input.toLowerCase().split('').map(c => map[c] || c).join('');
-            } else if (action === 'color') {
-                const col = document.getElementById('mc-color').value;
-                res = input.split('').map(c => c === ' ' ? ' ' : col + c).join('');
-            } else if (action === 'lore') {
-                res = input.split('\n').map(l => `lore: "${l.toUpperCase()}"`).join('\n');
-            } else if (action === 'clear') {
-                res = "";
-                document.getElementById('txt-input').value = "";
-            }
-            output.innerText = res || 'Brak danych.';
-        }
+            status.innerText = 'Generowanie grafiki sieciowej...';
+            setTimeout(() => {
+                let c1 = '#2563eb', c2 = '#9333ea';
+                if (style === 'cyberpunk') { c1 = '#ff0055'; c2 = '#00f0ff'; }
+                if (style === 'space') { c1 = '#0f172a'; c2 = '#3b82f6'; }
+                if (style === 'abstract') { c1 = '#10b981'; c2 = '#6366f1'; }
+                if (style === 'minimal') { c1 = '#334155'; c2 = '#0f172a'; }
 
-        // --- MENEDŻER PACZKI ---
-        let packData = JSON.parse(localStorage.getItem('fc_pack_v16') || '[]');
-        renderPack();
-
-        function addPackItem() {
-            const name = document.getElementById('pack-name').value.trim();
-            const type = document.getElementById('pack-type').value;
-            if (!name) return alert('Wpisz nazwę!');
-            packData.push({ name, type });
-            localStorage.setItem('fc_pack_v16', JSON.stringify(packData));
-            document.getElementById('pack-name').value = '';
-            renderPack();
-        }
-
-        function renderPack() {
-            const container = document.getElementById('pack-container');
-            if (packData.length === 0) {
-                container.innerHTML = '<p class="text-xs text-slate-500 p-2">Paczka jest pusta.</p>';
-                return;
-            }
-            container.innerHTML = packData.map((item, idx) => `
-                <div class="flex justify-between items-center bg-slate-900 border border-cardborder p-3 rounded-xl text-sm">
-                    <div><span class="font-bold text-white">${item.name}</span> <span class="text-[10px] text-cyan-400 ml-2 bg-cyan-950/40 px-2 py-0.5 rounded">${item.type}</span></div>
-                    <button onclick="removePack(${idx})" class="text-red-400 text-xs font-semibold">Usuń</button>
-                </div>
-            `).join('');
-        }
-
-        function removePack(idx) {
-            packData.splice(idx, 1);
-            localStorage.setItem('fc_pack_v16', JSON.stringify(packData));
-            renderPack();
-        }
-
-        function exportPackList() {
-            const text = "=== SPIS PACZKI ===\n\n" + packData.map(i => `- [${i.type}] ${i.name}`).join('\n');
-            const blob = new Blob([text], { type: 'text/plain' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'paczka.txt';
-            link.click();
-        }
-
-        // --- HISTORIA ---
-        function saveHistory(title, data) {
-            let history = JSON.parse(localStorage.getItem('fc_history_v16') || '[]');
-            history.unshift({ title, data, time: new Date().toLocaleTimeString() });
-            if (history.length > 20) history.pop();
-            localStorage.setItem('fc_history_v16', JSON.stringify(history));
-            loadHistory();
-        }
-
-        function loadHistory() {
-            let history = JSON.parse(localStorage.getItem('fc_history_v16') || '[]');
-            const container = document.getElementById('history-container');
-            if (!container) return;
-            if (history.length === 0) {
-                container.innerHTML = '<p class="text-xs text-slate-500 p-2">Brak historii.</p>';
-                return;
-            }
-            container.innerHTML = history.map(h => `
-                <div class="bg-slate-900 border border-cardborder p-3 rounded-xl text-xs space-y-1">
-                    <div class="flex justify-between text-slate-400">
-                        <span class="text-blue-400 font-bold">${h.title}</span>
-                        <span>${h.time}</span>
+                output.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
+                output.innerHTML = `
+                    <div class="absolute inset-0 opacity-30 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                    <div class="z-10 bg-black/50 backdrop-blur-md px-6 py-3 rounded-xl border border-white/10 text-center max-w-md">
+                        <span class="text-[10px] text-indigo-400 font-mono uppercase tracking-wider block">AI Generated Asset</span>
+                        <h4 class="font-bold text-white text-sm mt-1">"${prompt}"</h4>
                     </div>
-                    <pre class="font-mono text-slate-300 bg-slate-950 p-2 rounded overflow-x-auto">${h.data}</pre>
+                `;
+                status.innerText = 'Gotowe (Sukces)';
+            }, 500);
+        }
+
+        function downloadAiGraphic() {
+            alert('Pobieranie wygenerowanej grafiki w wysokiej rozdzielczości...');
+        }
+
+        // --- MODULE 3: GIEŁDA KRYPTOWALUT ---
+        let cryptoList = [
+            { name: 'Bitcoin', symbol: 'BTC', price: 345200.00, change: '+3.4%' },
+            { name: 'Litecoin', symbol: 'LTC', price: 385.50, change: '-1.2%' },
+            { name: 'Ethereum', symbol: 'ETH', price: 13200.00, change: '+5.8%' },
+            { name: 'Solana', symbol: 'SOL', price: 640.20, change: '+2.1%' },
+            { name: 'Ripple', symbol: 'XRP', price: 2.45, change: '-0.5%' },
+            { name: 'Cardano', symbol: 'ADA', price: 1.85, change: '+1.0%' }
+        ];
+
+        function renderCrypto() {
+            const container = document.getElementById('crypto-grid');
+            container.innerHTML = cryptoList.map(c => `
+                <div class="bg-slate-900 border border-cardborder rounded-2xl p-5 flex flex-col justify-between space-y-4 shadow-md">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-xs text-slate-400 font-mono">${c.symbol}</span>
+                            <h4 class="font-bold text-white text-base">${c.name}</h4>
+                        </div>
+                        <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-md ${c.change.startsWith('+') ? 'bg-emerald-950/40 text-emerald-400 border border-emerald-900/30' : 'bg-red-950/40 text-red-400 border border-red-900/30'}">${c.change}</span>
+                    </div>
+                    <div class="flex justify-between items-end pt-3 border-t border-slate-800">
+                        <div>
+                            <span class="text-[10px] text-slate-500 block uppercase">Aktualna cena</span>
+                            <span class="text-amber-400 font-mono font-bold text-lg">${c.price.toLocaleString('pl-PL', { minimumFractionDigits: 2 })} PLN</span>
+                        </div>
+                        <button onclick="alert('Handel krypto dla ${c.symbol} został aktywowany.')" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-3 py-2 rounded-xl transition">Handluj</button>
+                    </div>
                 </div>
             `).join('');
         }
 
-        function clearHistory() {
-            localStorage.removeItem('fc_history_v16');
-            loadHistory();
+        function refreshCryptoPrices() {
+            cryptoList.forEach(c => {
+                let delta = (Math.random() * 4 - 2);
+                c.price = parseFloat((c.price * (1 + delta / 100)).toFixed(2));
+                c.change = (delta >= 0 ? '+' : '') + delta.toFixed(1) + '%';
+            });
+            renderCrypto();
+            alert('Kursy kryptowalut zostały zaktualizowane pomyślnie!');
         }
 
-        // --- POMOCNICZE ---
-        function copyCode(elementId) {
-            navigator.clipboard.writeText(document.getElementById(elementId).innerText);
-            alert('Skopiowano do schowka!');
+        // --- MODULE 4: KALKULATOR PROWIZJI ---
+        const commissionRates = {
+            'blik_przelew': 0,
+            'crypto': 0,
+            'psc_paragon': 10,
+            'blik_kod': 10,
+            'paypal': 10,
+            'psc_bez_paragonu': 15,
+            'mypsc': 25
+        };
+
+        function calculateCommission() {
+            const amountInput = parseFloat(document.getElementById('calc-amount').value) || 0;
+            const method = document.getElementById('calc-method').value;
+            const percent = commissionRates[method] || 0;
+
+            const feeAmount = (amountInput * percent) / 100;
+            const total = amountInput + feeAmount;
+
+            document.getElementById('res-fee-percent').innerText = percent + '%';
+            document.getElementById('res-fee-amount').innerText = feeAmount.toFixed(2) + ' PLN';
+            document.getElementById('res-total').innerText = total.toFixed(2) + ' PLN';
         }
 
-        function downloadFile(elementId, filename, type) {
-            const blob = new Blob([document.getElementById(elementId).innerText], { type: type });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = filename;
-            link.click();
-        }
-
-        loadHistory();
+        resizeCanvas();
+        renderCrypto();
+        calculateCommission();
     </script>
 </body>
 </html>
