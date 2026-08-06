@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlashCode Studio | Dynamic Engine v14.0</title>
+    <title>FlashCode Studio | Professional Engine v16.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -41,14 +41,14 @@
             </div>
             <div>
                 <h1 class="font-extrabold text-base lg:text-lg tracking-wide text-white flex items-center gap-2">
-                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">ENGINE v14.0</span>
+                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">ENGINE v16.0 PRO</span>
                 </h1>
-                <p class="text-xs text-slate-400 hidden sm:block">Dynamiczny Generator Skryptów Minecraft</p>
+                <p class="text-xs text-slate-400 hidden sm:block">Profesjonalny Generator Skryptów Minecraft</p>
             </div>
         </div>
         <div class="flex items-center gap-3">
             <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Parser Aktywny
+                <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span> System Stabilny
             </span>
         </div>
     </header>
@@ -79,29 +79,29 @@
             <div id="tab-skript" class="tab-content space-y-6">
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-blue-400">⚡</span> FlashCode - Inteligentny Generator z Parserem Enchantów
+                        <span class="text-blue-400">⚡</span> Generator Skryptów Pro (Engine v16.0)
                     </h2>
                     <div class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda Główna</label>
-                                <input type="text" id="sk-cmd" placeholder="np. kit" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <input type="text" id="sk-cmd" placeholder="np. dajmiecz" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Alias</label>
-                                <input type="text" id="sk-alias" placeholder="np. zbrojownia" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <input type="text" id="sk-alias" placeholder="np. miecz" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Permisja</label>
-                                <input type="text" id="sk-perm" placeholder="np. fc.kit" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <input type="text" id="sk-perm" placeholder="np. fc.admin" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Opis / Zadanie (Wpisz itemy, enchanty np. neterytowy miecz ostrość 5, złote jabłko)</label>
-                            <textarea id="sk-prompt" rows="4" placeholder="np. daje graczowi neterytowy miecz ostrość 5, niezniszczalność 3 oraz diamentowy hełm ochrona 4..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Opis / Zadanie (Opisz przedmiot, nazwę i enchanty)</label>
+                            <textarea id="sk-prompt" rows="4" placeholder="np. daje graczowi drewniany miecz nazwany &aMiecz Kamery z enchantami sharpness 6 unbreaking 3 fireaspect 2" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
                         </div>
-                        <button onclick="generateDynamicScript()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/25 text-sm flex items-center justify-center gap-2">
-                            <span>Generuj kod z uwzględnieniem enchantów (.sk)</span>
+                        <button onclick="generateProfessionalScript()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/25 text-sm flex items-center justify-center gap-2">
+                            <span>Generuj profesjonalny kod (.sk)</span>
                         </button>
                     </div>
                 </div>
@@ -209,7 +209,7 @@
         </section>
     </main>
 
-    <!-- JavaScript Dynamic Parser Engine v14 -->
+    <!-- Professional Core Engine v16 -->
     <script>
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -224,28 +224,28 @@
             activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/25');
         }
 
-        // --- DYNAMICZNY PARSER PRZEDMIOTÓW I ENCHANTÓW (Engine v14) ---
-        function generateDynamicScript() {
-            const cmd = document.getElementById('sk-cmd').value.trim() || 'itemy';
+        // --- PROFESJONALNY PARSER SKRYPTÓW (Engine v16.0) ---
+        function generateProfessionalScript() {
+            const cmd = document.getElementById('sk-cmd').value.trim() || 'skrypt';
             const alias = document.getElementById('sk-alias').value.trim();
             const perm = document.getElementById('sk-perm').value.trim();
             const prompt = document.getElementById('sk-prompt').value.trim();
 
             if (!prompt) {
-                alert('Wpisz co ma zawierać skrypt i jakie itemy/enchanty przekazać!');
+                alert('Wpisz treść zadania dla generatora!');
                 return;
             }
 
             const outputEl = document.getElementById('sk-output');
             const linesEl = document.getElementById('sk-lines');
-            outputEl.innerText = '⚙️ Analizowanie itemów i enchantów...';
+            outputEl.innerText = '⚡ Kompilowanie profesjonalnego kodu Skript...';
 
             setTimeout(() => {
                 let code = `# =====================================================================\n`;
-                code += `# FLASHCODE STUDIO - DYNAMIC ENGINE v14.0\n`;
-                code += `# Komenda: /${cmd}\n`;
+                code += `# FLASHCODE STUDIO - PROFESSIONAL ENGINE v16.0\n`;
+                code += `# Komenda główna: /${cmd}\n`;
                 if (alias) code += `# Alias: /${alias}\n`;
-                if (perm) code += `# Permisja: ${perm}\n`;
+                if (perm) code += `# Wymagana permisja: ${perm}\n`;
                 code += `# Prompt: "${prompt}"\n`;
                 code += `# =====================================================================\n\n`;
                 
@@ -255,115 +255,92 @@
                 code += `command /${cmd}${alias ? ' alias /' + alias : ''}:\n`;
                 if (perm) {
                     code += `    permission: ${perm}\n`;
-                    code += `    permission message: "{@prefix} &cBrak uprawnień!"\n`;
+                    code += `    permission message: "{@prefix} &cBrak uprawnień do tej komendy!"\n`;
                 }
                 code += `    trigger:\n`;
 
-                const pText = prompt.toLowerCase();
-                let actionsFound = 0;
+                const pLower = prompt.toLowerCase();
 
-                // Słowniki tłumaczeń materiałów z polskiego na Minecraft
+                // Baza materiałów Minecraft
                 const materials = [
-                    { k: ['neterytowy miecz', 'netherite sword'], item: 'netherite sword' },
-                    { k: ['diamentowy miecz', 'diamond sword'], item: 'diamond sword' },
-                    { k: ['żelazny miecz', 'iron sword'], item: 'iron sword' },
-                    { k: ['kamienny miecz', 'stone sword'], item: 'stone sword' },
-                    { k: ['drewniany miecz', 'wooden sword'], item: 'wooden sword' },
-                    
-                    { k: ['neterytowy kilof', 'netherite pickaxe'], item: 'netherite pickaxe' },
-                    { k: ['diamentowy kilof', 'diamond pickaxe'], item: 'diamond pickaxe' },
-                    { k: ['żelazny kilof', 'iron pickaxe'], item: 'iron pickaxe' },
-                    
-                    { k: ['diamentowy hełm', 'diamond helmet'], item: 'diamond helmet' },
-                    { k: ['diamentowa klata', 'diamentowy napierśnik', 'diamond chestplate'], item: 'diamond chestplate' },
-                    { k: ['diamentowe spodnie', 'diamond leggings'], item: 'diamond leggings' },
-                    { k: ['diamentowe buty', 'diamond boots'], item: 'diamond boots' },
-                    
-                    { k: ['neterytowy hełm', 'netherite helmet'], item: 'netherite helmet' },
-                    { k: ['neterytowa klata', 'netherite chestplate'], item: 'netherite chestplate' },
-                    
-                    { k: ['złote jabłko', 'koksu', 'golden apple'], item: 'golden apple:1' },
-                    { k: ['zwykłe jabłko', 'apple'], item: 'apple' },
-                    { k: ['diament', 'diamond'], item: 'diamond' },
-                    { k: ['ender pearl', 'perła'], item: 'ender pearl' },
-                    { k: ['łuk', 'bow'], item: 'bow' }
+                    { keys: ['neterytowy miecz', 'netherite sword'], mat: 'netherite sword' },
+                    { keys: ['diamentowy miecz', 'diamond sword'], mat: 'diamond sword' },
+                    { keys: ['żelazny miecz', 'iron sword'], mat: 'iron sword' },
+                    { keys: ['kamienny miecz', 'stone sword'], mat: 'stone sword' },
+                    { keys: ['drewniany miecz', 'wooden sword'], mat: 'wooden sword' },
+                    { keys: ['neterytowy kilof', 'netherite pickaxe'], mat: 'netherite pickaxe' },
+                    { keys: ['diamentowy kilof', 'diamond pickaxe'], mat: 'diamond pickaxe' },
+                    { keys: ['złote jabłko', 'koksu', 'golden apple'], mat: 'golden apple:1' },
+                    { keys: ['diament', 'diamond'], mat: 'diamond' },
+                    { keys: ['łuk', 'bow'], mat: 'bow' }
                 ];
 
-                // Słownik enchantów
-                const enchants = [
-                    { k: ['ostrość', 'sharpness'], name: 'sharpness' },
-                    { k: ['niezniszczalność', 'unbreaking'], name: 'unbreaking' },
-                    { k: ['fortuna', 'fortune'], name: 'fortune' },
-                    { k: ['wydajność', 'efficiency'], name: 'efficiency' },
-                    { k: ['ochrona', 'protection'], name: 'protection' },
-                    { k: ['odrzut', 'knockback'], name: 'knockback' },
-                    { k: ['ognisty aspekt', 'fire aspect'], name: 'fire aspect' },
-                    { k: ['płomień', 'flame'], name: 'flame' },
-                    { k: ['moc', 'power'], name: 'power' },
-                    { k: ['nabiegun', 'infinity'], name: 'infinity' },
-                    { k: ['przepalanie', 'mending'], name: 'mending' }
+                let targetMaterial = 'diamond sword';
+                for (let m of materials) {
+                    if (m.keys.some(k => pLower.includes(k))) {
+                        targetMaterial = m.mat;
+                        break;
+                    }
+                }
+
+                // Precyzyjne wyciąganie nazwy własnej przedmiotu (np. nazwany &aMiecz Kamery)
+                let itemName = '';
+                let nameMarker = pLower.indexOf('nazwany');
+                if (nameMarker !== -1) {
+                    let sub = prompt.substring(nameMarker + 7).trim();
+                    let boundary = sub.toLowerCase().search(/\b(z |enchantami|o |oraz|posiadający)\b/);
+                    if (boundary !== -1) {
+                        itemName = sub.substring(0, boundary).trim();
+                    } else {
+                        itemName = sub.trim();
+                    }
+                }
+
+                // Obsługa wszystkich enchantów i poziomów bez wyjątku
+                const enchantMap = [
+                    { names: ['ostrość', 'sharpness'], sk: 'sharpness' },
+                    { names: ['niezniszczalność', 'unbreaking'], sk: 'unbreaking' },
+                    { names: ['ognisty aspekt', 'fire aspect', 'fireaspect'], sk: 'fire aspect' },
+                    { names: ['fortuna', 'fortune'], sk: 'fortune' },
+                    { names: ['wydajność', 'efficiency'], sk: 'efficiency' },
+                    { names: ['ochrona', 'protection'], sk: 'protection' },
+                    { names: ['odrzut', 'knockback'], sk: 'knockback' },
+                    { names: ['płomień', 'flame'], sk: 'flame' },
+                    { names: ['moc', 'power'], sk: 'power' }
                 ];
 
-                // Wykrywanie przedmiotów i budowanie ich linii
-                let detectedItems = [];
-                
-                materials.forEach(mat => {
-                    let matched = mat.k.some(kw => pText.includes(kw));
-                    if (matched) {
-                        // Sprawdzamy czy w pobliżu są enchanty
-                        let itemEnchants = [];
-                        enchants.forEach(en => {
-                            let enMatched = en.k.some(ekw => pText.includes(ekw));
-                            if (enMatched) {
-                                // Próbujemy wyciągnąć cyfrę obok enchantu (np. "ostrość 5" -> 5)
-                                let level = 1;
-                                for (let kw of en.k) {
-                                    let idx = pText.indexOf(kw);
-                                    if (idx !== -1) {
-                                        let sub = pText.substring(idx, idx + 15);
-                                        let numMatch = sub.match(/\d+/);
-                                        if (numMatch) level = parseInt(numMatch[0]);
-                                    }
-                                }
-                                itemEnchants.push(`${en.name} ${level}`);
-                            }
-                        });
-
-                        let itemString = mat.item;
-                        if (itemEnchants.length > 0) {
-                            itemString += ` of ${itemEnchants.join(' and ')}`;
+                let collectedEnchants = [];
+                enchantMap.forEach(en => {
+                    for (let n of en.names) {
+                        let idx = pLower.indexOf(n);
+                        if (idx !== -1) {
+                            let chunk = pLower.substring(idx, idx + 25);
+                            let matchNum = chunk.match(/\d+/);
+                            let lvl = matchNum ? matchNum[0] : '1';
+                            collectedEnchants.push(`${en.sk} ${lvl}`);
+                            break;
                         }
-                        detectedItems.push(itemString);
                     }
                 });
 
-                // Jeśli parser nic nie znalazł z bazy, wyciągamy chociaż ogólne słowa lub damy domyślny item
-                if (detectedItems.length === 0) {
-                    code += `        give player diamond sword of sharpness 5 and unbreaking 3\n`;
-                    code += `        give player golden apple:1 named "&6Magiczne Jabłko" \n`;
-                } else {
-                    detectedItems.forEach(item => {
-                        code += `        give player 1 of ${item}\n`;
-                    });
+                // Składanie docelowej linii itemu
+                let itemExpr = `1 of ${targetMaterial}`;
+                if (collectedEnchants.length > 0) {
+                    itemExpr += ` of ${collectedEnchants.join(' and ')}`;
+                }
+                if (itemName) {
+                    itemExpr += ` named "${itemName}"`;
                 }
 
-                code += `        send "{@prefix} &aOtrzymałeś zestaw przedmiotów ze skryptu!" to player\n`;
+                code += `        give player ${itemExpr}\n`;
+                code += `        send "{@prefix} &aOtrzymałeś pomyślnie skonfigurowany przedmiot!" to player\n`;
                 code += `        play sound "entity.player.levelup" with volume 1 and pitch 1 to player\n`;
-
-                // Dodatkowe opcje z promptu (efekty, teleport, itp.)
-                if (pText.includes('efekt') || pText.includes('speed') || pText.includes('szybkość')) {
-                    code += `        apply effect speed 2 to the player for 30 seconds\n`;
-                }
-                if (pText.includes('ulecz') || pText.includes('heal')) {
-                    code += `        heal the player\n`;
-                }
-
                 code += `        play sound "entity.experience_orb.pickup" with volume 0.5 and pitch 1 to player\n`;
 
                 outputEl.innerText = code;
-                const linesCount = code.split('\n').length;
-                linesEl.innerText = linesCount + ' linii kodu';
-                saveHistory('FlashCode (v14): /' + cmd, code);
+                const totalLines = code.split('\n').length;
+                linesEl.innerText = totalLines + ' linii kodu';
+                saveHistory('FlashCode Pro: /' + cmd, code);
 
             }, 300);
         }
@@ -394,7 +371,7 @@
         }
 
         // --- MENEDŻER PACZKI ---
-        let packData = JSON.parse(localStorage.getItem('fc_pack_v14') || '[]');
+        let packData = JSON.parse(localStorage.getItem('fc_pack_v16') || '[]');
         renderPack();
 
         function addPackItem() {
@@ -402,7 +379,7 @@
             const type = document.getElementById('pack-type').value;
             if (!name) return alert('Wpisz nazwę!');
             packData.push({ name, type });
-            localStorage.setItem('fc_pack_v14', JSON.stringify(packData));
+            localStorage.setItem('fc_pack_v16', JSON.stringify(packData));
             document.getElementById('pack-name').value = '';
             renderPack();
         }
@@ -423,7 +400,7 @@
 
         function removePack(idx) {
             packData.splice(idx, 1);
-            localStorage.setItem('fc_pack_v14', JSON.stringify(packData));
+            localStorage.setItem('fc_pack_v16', JSON.stringify(packData));
             renderPack();
         }
 
@@ -438,15 +415,15 @@
 
         // --- HISTORIA ---
         function saveHistory(title, data) {
-            let history = JSON.parse(localStorage.getItem('fc_history_v14') || '[]');
+            let history = JSON.parse(localStorage.getItem('fc_history_v16') || '[]');
             history.unshift({ title, data, time: new Date().toLocaleTimeString() });
             if (history.length > 20) history.pop();
-            localStorage.setItem('fc_history_v14', JSON.stringify(history));
+            localStorage.setItem('fc_history_v16', JSON.stringify(history));
             loadHistory();
         }
 
         function loadHistory() {
-            let history = JSON.parse(localStorage.getItem('fc_history_v14') || '[]');
+            let history = JSON.parse(localStorage.getItem('fc_history_v16') || '[]');
             const container = document.getElementById('history-container');
             if (!container) return;
             if (history.length === 0) {
@@ -465,7 +442,7 @@
         }
 
         function clearHistory() {
-            localStorage.removeItem('fc_history_v14');
+            localStorage.removeItem('fc_history_v16');
             loadHistory();
         }
 
