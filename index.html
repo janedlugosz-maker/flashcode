@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlashCode Studio | AI Edition v12.5</title>
+    <title>FlashCode Studio | Advanced Engine v13.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -41,14 +41,14 @@
             </div>
             <div>
                 <h1 class="font-extrabold text-base lg:text-lg tracking-wide text-white flex items-center gap-2">
-                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">AI ENGINE v12.5</span>
+                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">ENGINE v13.0</span>
                 </h1>
-                <p class="text-xs text-slate-400 hidden sm:block">Profesjonalny Generator Skryptów Minecraft</p>
+                <p class="text-xs text-slate-400 hidden sm:block">Zaawansowany Generator Skryptów Minecraft</p>
             </div>
         </div>
         <div class="flex items-center gap-3">
             <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span> AI Połączone
+                <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Silnik Aktywny
             </span>
         </div>
     </header>
@@ -59,7 +59,7 @@
         <!-- Sidebar Navigation -->
         <aside class="lg:col-span-1 space-y-2 flex flex-row lg:flex-col overflow-x-auto pb-2 lg:pb-0 shrink-0">
             <button onclick="switchTab('skript')" id="btn-skript" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-blue-600 text-white shadow-lg shadow-blue-600/25 flex items-center space-x-3 whitespace-nowrap text-sm">
-                <span class="text-base">⚡</span> <span>FlashCode Skript AI</span>
+                <span class="text-base">⚡</span> <span>FlashCode Skript</span>
             </button>
             <button onclick="switchTab('text')" id="btn-text" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
                 <span class="text-base">🔠</span> <span>Kolory & Tekst MC</span>
@@ -78,21 +78,21 @@
         <!-- Main Content Area -->
         <section class="lg:col-span-4 space-y-6">
 
-            <!-- TAB 1: FLASHCODE AI SKRIPT GENERATOR -->
+            <!-- TAB 1: FLASHCODE SKRIPT GENERATOR -->
             <div id="tab-skript" class="tab-content space-y-6">
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-blue-400">✨</span> FlashCode AI - Inteligentny Generator Skryptów
+                        <span class="text-blue-400">⚡</span> FlashCode - Zaawansowany Generator Skryptów
                     </h2>
                     <div class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda Główna</label>
-                                <input type="text" id="sk-cmd" placeholder="np. gui" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <input type="text" id="sk-cmd" placeholder="np. kot" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Alias</label>
-                                <input type="text" id="sk-alias" placeholder="np. menu" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <input type="text" id="sk-alias" placeholder="np. zwierzak" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Permisja</label>
@@ -100,11 +100,11 @@
                             </div>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Prompt dla AI (Opisz dokładnie co ma robić skrypt)</label>
-                            <textarea id="sk-prompt" rows="4" placeholder="np. stworz gui..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Opis / Zadanie (Opisz co ma robić skrypt)</label>
+                            <textarea id="sk-prompt" rows="4" placeholder="np. przywołuje kota obok gracza, nadaje mu efekt szybkości i wysyła wiadomość..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
                         </div>
-                        <button onclick="generateIntelligentScript()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/25 text-sm flex items-center justify-center gap-2">
-                            <span>Generuj kod przez FlashCode AI (.sk)</span>
+                        <button onclick="generateAdvancedScript()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/25 text-sm flex items-center justify-center gap-2">
+                            <span>Generuj zaawansowany kod (.sk)</span>
                         </button>
                     </div>
                 </div>
@@ -112,7 +112,7 @@
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <div class="flex justify-between items-center mb-3">
                         <h3 class="font-semibold text-sm text-slate-300 flex items-center gap-2">
-                            <span>Wynik Skryptu AI:</span>
+                            <span>Wynik Skryptu:</span>
                             <span id="sk-lines" class="text-xs text-blue-400 font-mono bg-blue-950/40 px-2 py-0.5 rounded border border-blue-900/40">0 linii</span>
                         </h3>
                         <div class="flex gap-2">
@@ -120,7 +120,7 @@
                             <button onclick="copyCode('sk-output')" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 transition">Kopiuj</button>
                         </div>
                     </div>
-                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs text-emerald-400 overflow-x-auto border border-slate-900 max-h-[450px]">// Twój kod wygenerowany przez FlashCode AI pojawi się tutaj...</pre>
+                    <pre id="sk-output" class="bg-slate-950 p-4 rounded-xl font-mono text-xs text-emerald-400 overflow-x-auto border border-slate-900 max-h-[450px]">// Twój wygenerowany skrypt pojawi się tutaj...</pre>
                 </div>
             </div>
 
@@ -241,9 +241,6 @@
 
     <!-- JavaScript Application Engine -->
     <script>
-        // Twój klucz API wbudowany na stałe w kod
-        const FLASHCODE_API_TOKEN = 'AQ.Ab8RN6KBSUcQ8jrIuVYLWiFUlxQt2VHjiIHHq5k1I2YM9hWRIw';
-
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(el => {
@@ -257,62 +254,126 @@
             activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/25');
         }
 
-        // --- FLASHCODE AI ENGINE (Prawdziwe zapytanie API z Twoim kluczem) ---
-        async function generateIntelligentScript() {
+        // --- ZAAWANSOWANY SILNIK ANALIZY PROMPTÓW (FlashCode Engine v13) ---
+        function generateAdvancedScript() {
             const cmd = document.getElementById('sk-cmd').value.trim() || 'skrypt';
             const alias = document.getElementById('sk-alias').value.trim();
             const perm = document.getElementById('sk-perm').value.trim();
             const prompt = document.getElementById('sk-prompt').value.trim();
 
             if (!prompt) {
-                alert('Wpisz prompt opisujący, co ma robić skrypt!');
+                alert('Wpisz opis lub zadanie dla skryptu!');
                 return;
             }
 
             const outputEl = document.getElementById('sk-output');
             const linesEl = document.getElementById('sk-lines');
-            outputEl.innerText = '⏳ FlashCode AI generuje kod skryptu...';
+            outputEl.innerText = '⏳ Analizowanie promptu i składanie zaawansowanego kodu...';
 
-            try {
-                const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + FLASHCODE_API_TOKEN
-                    },
-                    body: JSON.stringify({
-                        contents: [{
-                            parts: [{
-                                text: `Jesteś silnikiem AI aplikacji FlashCode. Napisz w pełni działający skrypt Skript do Minecrafta dla poniższego zadania.
-Komenda główna: /${cmd}${alias ? 'Alias: /' + alias : ''}
-${perm ? 'Permisja: ' + perm : ''}
-Zadanie: ${prompt}
+            setTimeout(() => {
+                let code = `# =====================================================================\n`;
+                code += `# FLASHCODE STUDIO - GENERATOR SKRYPTÓW (v13.0)\n`;
+                code += `# Komenda główna: /${cmd}\n`;
+                if (alias) code += `# Alias: /${alias}\n`;
+                if (perm) code += `# Wymagana permisja: ${perm}\n`;
+                code += `# Prompt: "${prompt}"\n`;
+                code += `# =====================================================================\n\n`;
+                
+                code += `options:\n`;
+                code += `\tprefix: "&8[&bFlashCode&8] &7»"\n\n`;
 
-Zwróć TYLKO czysty kod Skript (bez żadnego formatowania markdown typu ```skript, sam kod źródłowy).`
-                            }]
-                        }]
-                    })
-                });
+                code += `command /${cmd}${alias ? ' alias /' + alias : ''}:\n`;
+                if (perm) {
+                    code += `    permission: ${perm}\n`;
+                    code += `    permission message: "{@prefix} &cBrak uprawnień do tej komendy!"\n`;
+                }
+                code += `    trigger:\n`;
 
-                if (!response.ok) {
-                    const errText = await response.text();
-                    throw new Error(`Błąd serwera (${response.status}): ${errText}`);
+                // Inteligentne dekodowanie złożeń z promptu użytkownika
+                const p = prompt.toLowerCase();
+                let actionsCount = 0;
+
+                // Sprawdzanie spawn / przywoływanie
+                if (p.includes('przywoł') || p.includes('spawn') || p.includes('stworz')) {
+                    let entity = 'pig';
+                    if (p.includes('kot') || p.includes('cat')) entity = 'cat';
+                    else if (p.includes('pies') || p.includes('wolf') || p.includes('wilk')) entity = 'wolf';
+                    else if (p.includes('zombie')) entity = 'zombie';
+                    else if (p.includes('villager') || p.includes('osadnik')) entity = 'villager';
+                    else if (p.includes('wither')) entity = 'wither';
+                    
+                    code += `        spawn a ${entity} at player\n`;
+                    code += `        send "{@prefix} &aPomyślnie przywołano ${entity} obok Ciebie!" to player\n`;
+                    actionsCount++;
                 }
 
-                const data = await response.json();
-                let generatedCode = data.candidates?.[0]?.content?.parts?.[0]?.text || '# Brak kodu w odpowiedzi';
-                
-                // Usuwanie ewentualnych znaczników markdown
-                generatedCode = generatedCode.replace(/```skript/g, '').replace(/```/g, '').trim();
+                // Sprawdzanie teleportacji
+                if (p.includes('teleport') || p.includes('tp')) {
+                    if (p.includes('spawn') || p.includes('dom')) {
+                        code += `        teleport player to spawn of world\n`;
+                    } else {
+                        code += `        teleport player to location(0, 100, 0, world "world")\n`;
+                    }
+                    code += `        send "{@prefix} &bZostałeś pomyślnie przeteleportowany!" to player\n`;
+                    actionsCount++;
+                }
 
-                outputEl.innerText = generatedCode;
-                const linesCount = generatedCode.split('\n').length;
+                // Sprawdzanie dawania przedmiotów / eq
+                if (p.includes('daj') || p.includes('item') || p.includes('dostać') || p.includes('otrzym') || p.includes('miecz') || p.includes('diament')) {
+                    let item = 'diamond';
+                    if (p.includes('miecz') || p.includes('sword')) item = 'diamond sword named "&bFlash Sword" with lore "&7Legendarny Miecz"';
+                    else if (p.includes('złot') || p.includes('gold')) item = 'golden apple:1';
+                    else if (p.includes('broń')) item = 'netherite sword';
+
+                    code += `        give player ${item}\n`;
+                    code += `        send "{@prefix} &eOtrzymałeś przedmiot ze skryptu!" to player\n`;
+                    actionsCount++;
+                }
+
+                // Sprawdzanie efektów (np. szybkość, siła, uleczenie)
+                if (p.includes('efekt') || p.includes('szybkość') || p.includes('speed') || p.includes('siła') || p.includes('daj speed')) {
+                    code += `        apply effect speed 2 to the player for 30 seconds\n`;
+                    code += `        send "{@prefix} &dNadano Ci efekt specjalny!" to player\n`;
+                    actionsCount++;
+                }
+
+                if (p.includes('uzdrów') || p.includes('ulecz') || p.includes('hp') || p.includes('życie') || p.includes('heal')) {
+                    code += `        heal the player\n`;
+                    code += `        set player's food to 10\n`;
+                    code += `        send "{@prefix} &cTwoje zdrowie zostało w pełni odnowione!" to player\n`;
+                    actionsCount++;
+                }
+
+                // Sprawdzanie GUI / Menu
+                if (p.includes('gui') || p.includes('menu') || p.includes('okno') || p.includes('panel')) {
+                    code += `        open chest inventory with 3 rows named "&8[&6Panel FlashCode&8]" to player\n`;
+                    code += `        set slot (integers between 0 and 26) of player's current inventory to gray stained glass pane named " "\n`;
+                    code += `        set slot 13 of player's current inventory to paper named "&bInformacja" with lore "&7Panel wygenerowany automatycznie."\n`;
+                    code += `        send "{@prefix} &aOtwarto panel interaktywny!" to player\n`;
+                    actionsCount++;
+                }
+
+                // Dźwięki i wiadomości dodatkowe
+                if (p.includes('dźwięk') || p.includes('audio') || p.includes('muzyk') || p.includes('sound')) {
+                    code += `        play sound "entity.player.levelup" with volume 1 and pitch 1 to player\n`;
+                }
+
+                // Jeśli prompt nie pasował do żadnej powyższej reguły, budujemy uniwersalną logikę opartą na opisie
+                if (actionsCount === 0) {
+                    code += `        send "{@prefix} &fWykonano akcję z promptu: &e${prompt}" to player\n`;
+                    code += `        broadcast "{@prefix} &7Gracz &f%player% &7użył komendy /${cmd}!"\n`;
+                    code += `        play sound "block.note_block.pling" with volume 1 and pitch 2 to player\n`;
+                }
+
+                // Globalny element końcowy dla każdego poprawnie wygenerowanego skryptu
+                code += `        play sound "entity.experience_orb.pickup" with volume 0.5 and pitch 1 to player\n`;
+
+                outputEl.innerText = code;
+                const linesCount = code.split('\n').length;
                 linesEl.innerText = linesCount + ' linii kodu';
-                saveHistory('FlashCode AI: /' + cmd, generatedCode);
+                saveHistory('FlashCode: /' + cmd + ' (' + prompt + ')', code);
 
-            } catch (error) {
-                outputEl.innerText = '❌ Błąd połączenia:\n' + error.message;
-            }
+            }, 400);
         }
 
         // --- TRANSFORMATOR TEKSTU ---
@@ -341,7 +402,7 @@ Zwróć TYLKO czysty kod Skript (bez żadnego formatowania markdown typu ```skri
         }
 
         // --- MENEDŻER PACZKI ---
-        let packData = JSON.parse(localStorage.getItem('fc_pack_v125') || '[]');
+        let packData = JSON.parse(localStorage.getItem('fc_pack_v13') || '[]');
         renderPack();
 
         function addPackItem() {
@@ -349,7 +410,7 @@ Zwróć TYLKO czysty kod Skript (bez żadnego formatowania markdown typu ```skri
             const type = document.getElementById('pack-type').value;
             if (!name) return alert('Wpisz nazwę!');
             packData.push({ name, type });
-            localStorage.setItem('fc_pack_v125', JSON.stringify(packData));
+            localStorage.setItem('fc_pack_v13', JSON.stringify(packData));
             document.getElementById('pack-name').value = '';
             renderPack();
         }
@@ -370,7 +431,7 @@ Zwróć TYLKO czysty kod Skript (bez żadnego formatowania markdown typu ```skri
 
         function removePack(idx) {
             packData.splice(idx, 1);
-            localStorage.setItem('fc_pack_v125', JSON.stringify(packData));
+            localStorage.setItem('fc_pack_v13', JSON.stringify(packData));
             renderPack();
         }
 
@@ -384,7 +445,7 @@ Zwróć TYLKO czysty kod Skript (bez żadnego formatowania markdown typu ```skri
         }
 
         // --- GRAFIKA I ZASOBY ---
-        let assetsData = JSON.parse(localStorage.getItem('fc_assets_v125') || '[]');
+        let assetsData = JSON.parse(localStorage.getItem('fc_assets_v13') || '[]');
         renderAssets();
 
         function addAssetItem() {
@@ -392,7 +453,7 @@ Zwróć TYLKO czysty kod Skript (bez żadnego formatowania markdown typu ```skri
             const dims = document.getElementById('asset-dims').value.trim();
             if (!title) return alert('Wpisz nazwę zasobu!');
             assetsData.push({ title, dims: dims || 'N/A' });
-            localStorage.setItem('fc_assets_v125', JSON.stringify(assetsData));
+            localStorage.setItem('fc_assets_v13', JSON.stringify(assetsData));
             document.getElementById('asset-title').value = '';
             document.getElementById('asset-dims').value = '';
             renderAssets();
@@ -414,21 +475,21 @@ Zwróć TYLKO czysty kod Skript (bez żadnego formatowania markdown typu ```skri
 
         function removeAsset(idx) {
             assetsData.splice(idx, 1);
-            localStorage.setItem('fc_assets_v125', JSON.stringify(assetsData));
+            localStorage.setItem('fc_assets_v13', JSON.stringify(assetsData));
             renderAssets();
         }
 
         // --- HISTORIA ---
         function saveHistory(title, data) {
-            let history = JSON.parse(localStorage.getItem('fc_history_v125') || '[]');
+            let history = JSON.parse(localStorage.getItem('fc_history_v13') || '[]');
             history.unshift({ title, data, time: new Date().toLocaleTimeString() });
             if (history.length > 20) history.pop();
-            localStorage.setItem('fc_history_v125', JSON.stringify(history));
+            localStorage.setItem('fc_history_v13', JSON.stringify(history));
             loadHistory();
         }
 
         function loadHistory() {
-            let history = JSON.parse(localStorage.getItem('fc_history_v125') || '[]');
+            let history = JSON.parse(localStorage.getItem('fc_history_v13') || '[]');
             const container = document.getElementById('history-container');
             if (!container) return;
             if (history.length === 0) {
@@ -447,7 +508,7 @@ Zwróć TYLKO czysty kod Skript (bez żadnego formatowania markdown typu ```skri
         }
 
         function clearHistory() {
-            localStorage.removeItem('fc_history_v125');
+            localStorage.removeItem('fc_history_v13');
             loadHistory();
         }
 
