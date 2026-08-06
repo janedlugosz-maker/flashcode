@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlashCode Studio | Advanced Engine v13.0</title>
+    <title>FlashCode Studio | Dynamic Engine v14.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -41,14 +41,14 @@
             </div>
             <div>
                 <h1 class="font-extrabold text-base lg:text-lg tracking-wide text-white flex items-center gap-2">
-                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">ENGINE v13.0</span>
+                    FLASHCODE STUDIO <span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-mono">ENGINE v14.0</span>
                 </h1>
-                <p class="text-xs text-slate-400 hidden sm:block">Zaawansowany Generator Skryptów Minecraft</p>
+                <p class="text-xs text-slate-400 hidden sm:block">Dynamiczny Generator Skryptów Minecraft</p>
             </div>
         </div>
         <div class="flex items-center gap-3">
             <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Silnik Aktywny
+                <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Parser Aktywny
             </span>
         </div>
     </header>
@@ -67,9 +67,6 @@
             <button onclick="switchTab('pack')" id="btn-pack" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
                 <span class="text-base">📦</span> <span>Menedżer Paczki</span>
             </button>
-            <button onclick="switchTab('assets')" id="btn-assets" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
-                <span class="text-base">🎨</span> <span>Grafika & Zasoby</span>
-            </button>
             <button onclick="switchTab('storage')" id="btn-storage" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
                 <span class="text-base">💾</span> <span>Zapisana Historia</span>
             </button>
@@ -82,29 +79,29 @@
             <div id="tab-skript" class="tab-content space-y-6">
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-blue-400">⚡</span> FlashCode - Zaawansowany Generator Skryptów
+                        <span class="text-blue-400">⚡</span> FlashCode - Inteligentny Generator z Parserem Enchantów
                     </h2>
                     <div class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Komenda Główna</label>
-                                <input type="text" id="sk-cmd" placeholder="np. kot" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <input type="text" id="sk-cmd" placeholder="np. kit" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Alias</label>
-                                <input type="text" id="sk-alias" placeholder="np. zwierzak" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <input type="text" id="sk-alias" placeholder="np. zbrojownia" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Permisja</label>
-                                <input type="text" id="sk-perm" placeholder="np. flashcode.admin" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
+                                <input type="text" id="sk-perm" placeholder="np. fc.kit" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition">
                             </div>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Opis / Zadanie (Opisz co ma robić skrypt)</label>
-                            <textarea id="sk-prompt" rows="4" placeholder="np. przywołuje kota obok gracza, nadaje mu efekt szybkości i wysyła wiadomość..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Opis / Zadanie (Wpisz itemy, enchanty np. neterytowy miecz ostrość 5, złote jabłko)</label>
+                            <textarea id="sk-prompt" rows="4" placeholder="np. daje graczowi neterytowy miecz ostrość 5, niezniszczalność 3 oraz diamentowy hełm ochrona 4..." class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-blue-500 focus:outline-none transition"></textarea>
                         </div>
-                        <button onclick="generateAdvancedScript()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/25 text-sm flex items-center justify-center gap-2">
-                            <span>Generuj zaawansowany kod (.sk)</span>
+                        <button onclick="generateDynamicScript()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-blue-600/25 text-sm flex items-center justify-center gap-2">
+                            <span>Generuj kod z uwzględnieniem enchantów (.sk)</span>
                         </button>
                     </div>
                 </div>
@@ -196,34 +193,7 @@
                 </div>
             </div>
 
-            <!-- TAB 4: GRAFIKA I ZASOBY -->
-            <div id="tab-assets" class="tab-content hidden space-y-6">
-                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
-                    <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-purple-500">🎨</span> Rejestr Zasobów Graficznych
-                    </h2>
-                    <div class="space-y-4">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Nazwa zasobu</label>
-                                <input type="text" id="asset-title" placeholder="np. Ikona Serwera" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Rozmiar</label>
-                                <input type="text" id="asset-dims" placeholder="np. 64x64 px" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-purple-500 focus:outline-none transition">
-                            </div>
-                        </div>
-                        <button onclick="addAssetItem()" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-purple-600/25 text-sm">Zapisz Zasób</button>
-                    </div>
-                </div>
-
-                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
-                    <h3 class="font-semibold text-sm text-slate-300 mb-4">Zapisane grafiki:</h3>
-                    <div id="assets-container" class="space-y-2.5 max-h-72 overflow-y-auto pr-1"></div>
-                </div>
-            </div>
-
-            <!-- TAB 5: ZAPISANA HISTORIA -->
+            <!-- TAB 4: ZAPISANA HISTORIA -->
             <div id="tab-storage" class="tab-content hidden space-y-6">
                 <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl">
                     <div class="flex justify-between items-center mb-4 border-b border-cardborder pb-3">
@@ -239,7 +209,7 @@
         </section>
     </main>
 
-    <!-- JavaScript Application Engine -->
+    <!-- JavaScript Dynamic Parser Engine v14 -->
     <script>
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -254,28 +224,28 @@
             activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/25');
         }
 
-        // --- ZAAWANSOWANY SILNIK ANALIZY PROMPTÓW (FlashCode Engine v13) ---
-        function generateAdvancedScript() {
-            const cmd = document.getElementById('sk-cmd').value.trim() || 'skrypt';
+        // --- DYNAMICZNY PARSER PRZEDMIOTÓW I ENCHANTÓW (Engine v14) ---
+        function generateDynamicScript() {
+            const cmd = document.getElementById('sk-cmd').value.trim() || 'itemy';
             const alias = document.getElementById('sk-alias').value.trim();
             const perm = document.getElementById('sk-perm').value.trim();
             const prompt = document.getElementById('sk-prompt').value.trim();
 
             if (!prompt) {
-                alert('Wpisz opis lub zadanie dla skryptu!');
+                alert('Wpisz co ma zawierać skrypt i jakie itemy/enchanty przekazać!');
                 return;
             }
 
             const outputEl = document.getElementById('sk-output');
             const linesEl = document.getElementById('sk-lines');
-            outputEl.innerText = '⏳ Analizowanie promptu i składanie zaawansowanego kodu...';
+            outputEl.innerText = '⚙️ Analizowanie itemów i enchantów...';
 
             setTimeout(() => {
                 let code = `# =====================================================================\n`;
-                code += `# FLASHCODE STUDIO - GENERATOR SKRYPTÓW (v13.0)\n`;
-                code += `# Komenda główna: /${cmd}\n`;
+                code += `# FLASHCODE STUDIO - DYNAMIC ENGINE v14.0\n`;
+                code += `# Komenda: /${cmd}\n`;
                 if (alias) code += `# Alias: /${alias}\n`;
-                if (perm) code += `# Wymagana permisja: ${perm}\n`;
+                if (perm) code += `# Permisja: ${perm}\n`;
                 code += `# Prompt: "${prompt}"\n`;
                 code += `# =====================================================================\n\n`;
                 
@@ -285,95 +255,117 @@
                 code += `command /${cmd}${alias ? ' alias /' + alias : ''}:\n`;
                 if (perm) {
                     code += `    permission: ${perm}\n`;
-                    code += `    permission message: "{@prefix} &cBrak uprawnień do tej komendy!"\n`;
+                    code += `    permission message: "{@prefix} &cBrak uprawnień!"\n`;
                 }
                 code += `    trigger:\n`;
 
-                // Inteligentne dekodowanie złożeń z promptu użytkownika
-                const p = prompt.toLowerCase();
-                let actionsCount = 0;
+                const pText = prompt.toLowerCase();
+                let actionsFound = 0;
 
-                // Sprawdzanie spawn / przywoływanie
-                if (p.includes('przywoł') || p.includes('spawn') || p.includes('stworz')) {
-                    let entity = 'pig';
-                    if (p.includes('kot') || p.includes('cat')) entity = 'cat';
-                    else if (p.includes('pies') || p.includes('wolf') || p.includes('wilk')) entity = 'wolf';
-                    else if (p.includes('zombie')) entity = 'zombie';
-                    else if (p.includes('villager') || p.includes('osadnik')) entity = 'villager';
-                    else if (p.includes('wither')) entity = 'wither';
+                // Słowniki tłumaczeń materiałów z polskiego na Minecraft
+                const materials = [
+                    { k: ['neterytowy miecz', 'netherite sword'], item: 'netherite sword' },
+                    { k: ['diamentowy miecz', 'diamond sword'], item: 'diamond sword' },
+                    { k: ['żelazny miecz', 'iron sword'], item: 'iron sword' },
+                    { k: ['kamienny miecz', 'stone sword'], item: 'stone sword' },
+                    { k: ['drewniany miecz', 'wooden sword'], item: 'wooden sword' },
                     
-                    code += `        spawn a ${entity} at player\n`;
-                    code += `        send "{@prefix} &aPomyślnie przywołano ${entity} obok Ciebie!" to player\n`;
-                    actionsCount++;
-                }
+                    { k: ['neterytowy kilof', 'netherite pickaxe'], item: 'netherite pickaxe' },
+                    { k: ['diamentowy kilof', 'diamond pickaxe'], item: 'diamond pickaxe' },
+                    { k: ['żelazny kilof', 'iron pickaxe'], item: 'iron pickaxe' },
+                    
+                    { k: ['diamentowy hełm', 'diamond helmet'], item: 'diamond helmet' },
+                    { k: ['diamentowa klata', 'diamentowy napierśnik', 'diamond chestplate'], item: 'diamond chestplate' },
+                    { k: ['diamentowe spodnie', 'diamond leggings'], item: 'diamond leggings' },
+                    { k: ['diamentowe buty', 'diamond boots'], item: 'diamond boots' },
+                    
+                    { k: ['neterytowy hełm', 'netherite helmet'], item: 'netherite helmet' },
+                    { k: ['neterytowa klata', 'netherite chestplate'], item: 'netherite chestplate' },
+                    
+                    { k: ['złote jabłko', 'koksu', 'golden apple'], item: 'golden apple:1' },
+                    { k: ['zwykłe jabłko', 'apple'], item: 'apple' },
+                    { k: ['diament', 'diamond'], item: 'diamond' },
+                    { k: ['ender pearl', 'perła'], item: 'ender pearl' },
+                    { k: ['łuk', 'bow'], item: 'bow' }
+                ];
 
-                // Sprawdzanie teleportacji
-                if (p.includes('teleport') || p.includes('tp')) {
-                    if (p.includes('spawn') || p.includes('dom')) {
-                        code += `        teleport player to spawn of world\n`;
-                    } else {
-                        code += `        teleport player to location(0, 100, 0, world "world")\n`;
+                // Słownik enchantów
+                const enchants = [
+                    { k: ['ostrość', 'sharpness'], name: 'sharpness' },
+                    { k: ['niezniszczalność', 'unbreaking'], name: 'unbreaking' },
+                    { k: ['fortuna', 'fortune'], name: 'fortune' },
+                    { k: ['wydajność', 'efficiency'], name: 'efficiency' },
+                    { k: ['ochrona', 'protection'], name: 'protection' },
+                    { k: ['odrzut', 'knockback'], name: 'knockback' },
+                    { k: ['ognisty aspekt', 'fire aspect'], name: 'fire aspect' },
+                    { k: ['płomień', 'flame'], name: 'flame' },
+                    { k: ['moc', 'power'], name: 'power' },
+                    { k: ['nabiegun', 'infinity'], name: 'infinity' },
+                    { k: ['przepalanie', 'mending'], name: 'mending' }
+                ];
+
+                // Wykrywanie przedmiotów i budowanie ich linii
+                let detectedItems = [];
+                
+                materials.forEach(mat => {
+                    let matched = mat.k.some(kw => pText.includes(kw));
+                    if (matched) {
+                        // Sprawdzamy czy w pobliżu są enchanty
+                        let itemEnchants = [];
+                        enchants.forEach(en => {
+                            let enMatched = en.k.some(ekw => pText.includes(ekw));
+                            if (enMatched) {
+                                // Próbujemy wyciągnąć cyfrę obok enchantu (np. "ostrość 5" -> 5)
+                                let level = 1;
+                                for (let kw of en.k) {
+                                    let idx = pText.indexOf(kw);
+                                    if (idx !== -1) {
+                                        let sub = pText.substring(idx, idx + 15);
+                                        let numMatch = sub.match(/\d+/);
+                                        if (numMatch) level = parseInt(numMatch[0]);
+                                    }
+                                }
+                                itemEnchants.push(`${en.name} ${level}`);
+                            }
+                        });
+
+                        let itemString = mat.item;
+                        if (itemEnchants.length > 0) {
+                            itemString += ` of ${itemEnchants.join(' and ')}`;
+                        }
+                        detectedItems.push(itemString);
                     }
-                    code += `        send "{@prefix} &bZostałeś pomyślnie przeteleportowany!" to player\n`;
-                    actionsCount++;
+                });
+
+                // Jeśli parser nic nie znalazł z bazy, wyciągamy chociaż ogólne słowa lub damy domyślny item
+                if (detectedItems.length === 0) {
+                    code += `        give player diamond sword of sharpness 5 and unbreaking 3\n`;
+                    code += `        give player golden apple:1 named "&6Magiczne Jabłko" \n`;
+                } else {
+                    detectedItems.forEach(item => {
+                        code += `        give player 1 of ${item}\n`;
+                    });
                 }
 
-                // Sprawdzanie dawania przedmiotów / eq
-                if (p.includes('daj') || p.includes('item') || p.includes('dostać') || p.includes('otrzym') || p.includes('miecz') || p.includes('diament')) {
-                    let item = 'diamond';
-                    if (p.includes('miecz') || p.includes('sword')) item = 'diamond sword named "&bFlash Sword" with lore "&7Legendarny Miecz"';
-                    else if (p.includes('złot') || p.includes('gold')) item = 'golden apple:1';
-                    else if (p.includes('broń')) item = 'netherite sword';
+                code += `        send "{@prefix} &aOtrzymałeś zestaw przedmiotów ze skryptu!" to player\n`;
+                code += `        play sound "entity.player.levelup" with volume 1 and pitch 1 to player\n`;
 
-                    code += `        give player ${item}\n`;
-                    code += `        send "{@prefix} &eOtrzymałeś przedmiot ze skryptu!" to player\n`;
-                    actionsCount++;
-                }
-
-                // Sprawdzanie efektów (np. szybkość, siła, uleczenie)
-                if (p.includes('efekt') || p.includes('szybkość') || p.includes('speed') || p.includes('siła') || p.includes('daj speed')) {
+                // Dodatkowe opcje z promptu (efekty, teleport, itp.)
+                if (pText.includes('efekt') || pText.includes('speed') || pText.includes('szybkość')) {
                     code += `        apply effect speed 2 to the player for 30 seconds\n`;
-                    code += `        send "{@prefix} &dNadano Ci efekt specjalny!" to player\n`;
-                    actionsCount++;
                 }
-
-                if (p.includes('uzdrów') || p.includes('ulecz') || p.includes('hp') || p.includes('życie') || p.includes('heal')) {
+                if (pText.includes('ulecz') || pText.includes('heal')) {
                     code += `        heal the player\n`;
-                    code += `        set player's food to 10\n`;
-                    code += `        send "{@prefix} &cTwoje zdrowie zostało w pełni odnowione!" to player\n`;
-                    actionsCount++;
                 }
 
-                // Sprawdzanie GUI / Menu
-                if (p.includes('gui') || p.includes('menu') || p.includes('okno') || p.includes('panel')) {
-                    code += `        open chest inventory with 3 rows named "&8[&6Panel FlashCode&8]" to player\n`;
-                    code += `        set slot (integers between 0 and 26) of player's current inventory to gray stained glass pane named " "\n`;
-                    code += `        set slot 13 of player's current inventory to paper named "&bInformacja" with lore "&7Panel wygenerowany automatycznie."\n`;
-                    code += `        send "{@prefix} &aOtwarto panel interaktywny!" to player\n`;
-                    actionsCount++;
-                }
-
-                // Dźwięki i wiadomości dodatkowe
-                if (p.includes('dźwięk') || p.includes('audio') || p.includes('muzyk') || p.includes('sound')) {
-                    code += `        play sound "entity.player.levelup" with volume 1 and pitch 1 to player\n`;
-                }
-
-                // Jeśli prompt nie pasował do żadnej powyższej reguły, budujemy uniwersalną logikę opartą na opisie
-                if (actionsCount === 0) {
-                    code += `        send "{@prefix} &fWykonano akcję z promptu: &e${prompt}" to player\n`;
-                    code += `        broadcast "{@prefix} &7Gracz &f%player% &7użył komendy /${cmd}!"\n`;
-                    code += `        play sound "block.note_block.pling" with volume 1 and pitch 2 to player\n`;
-                }
-
-                // Globalny element końcowy dla każdego poprawnie wygenerowanego skryptu
                 code += `        play sound "entity.experience_orb.pickup" with volume 0.5 and pitch 1 to player\n`;
 
                 outputEl.innerText = code;
                 const linesCount = code.split('\n').length;
                 linesEl.innerText = linesCount + ' linii kodu';
-                saveHistory('FlashCode: /' + cmd + ' (' + prompt + ')', code);
+                saveHistory('FlashCode (v14): /' + cmd, code);
 
-            }, 400);
+            }, 300);
         }
 
         // --- TRANSFORMATOR TEKSTU ---
@@ -402,7 +394,7 @@
         }
 
         // --- MENEDŻER PACZKI ---
-        let packData = JSON.parse(localStorage.getItem('fc_pack_v13') || '[]');
+        let packData = JSON.parse(localStorage.getItem('fc_pack_v14') || '[]');
         renderPack();
 
         function addPackItem() {
@@ -410,7 +402,7 @@
             const type = document.getElementById('pack-type').value;
             if (!name) return alert('Wpisz nazwę!');
             packData.push({ name, type });
-            localStorage.setItem('fc_pack_v13', JSON.stringify(packData));
+            localStorage.setItem('fc_pack_v14', JSON.stringify(packData));
             document.getElementById('pack-name').value = '';
             renderPack();
         }
@@ -431,7 +423,7 @@
 
         function removePack(idx) {
             packData.splice(idx, 1);
-            localStorage.setItem('fc_pack_v13', JSON.stringify(packData));
+            localStorage.setItem('fc_pack_v14', JSON.stringify(packData));
             renderPack();
         }
 
@@ -444,52 +436,17 @@
             link.click();
         }
 
-        // --- GRAFIKA I ZASOBY ---
-        let assetsData = JSON.parse(localStorage.getItem('fc_assets_v13') || '[]');
-        renderAssets();
-
-        function addAssetItem() {
-            const title = document.getElementById('asset-title').value.trim();
-            const dims = document.getElementById('asset-dims').value.trim();
-            if (!title) return alert('Wpisz nazwę zasobu!');
-            assetsData.push({ title, dims: dims || 'N/A' });
-            localStorage.setItem('fc_assets_v13', JSON.stringify(assetsData));
-            document.getElementById('asset-title').value = '';
-            document.getElementById('asset-dims').value = '';
-            renderAssets();
-        }
-
-        function renderAssets() {
-            const container = document.getElementById('assets-container');
-            if (assetsData.length === 0) {
-                container.innerHTML = '<p class="text-xs text-slate-500 p-2">Brak zasobów.</p>';
-                return;
-            }
-            container.innerHTML = assetsData.map((item, idx) => `
-                <div class="bg-slate-900 border border-cardborder p-3 rounded-xl text-sm flex justify-between items-center">
-                    <div><span class="font-bold text-white">${item.title}</span> <span class="text-xs text-blue-400">(${item.dims})</span></div>
-                    <button onclick="removeAsset(${idx})" class="text-red-400 text-xs font-semibold">Usuń</button>
-                </div>
-            `).join('');
-        }
-
-        function removeAsset(idx) {
-            assetsData.splice(idx, 1);
-            localStorage.setItem('fc_assets_v13', JSON.stringify(assetsData));
-            renderAssets();
-        }
-
         // --- HISTORIA ---
         function saveHistory(title, data) {
-            let history = JSON.parse(localStorage.getItem('fc_history_v13') || '[]');
+            let history = JSON.parse(localStorage.getItem('fc_history_v14') || '[]');
             history.unshift({ title, data, time: new Date().toLocaleTimeString() });
             if (history.length > 20) history.pop();
-            localStorage.setItem('fc_history_v13', JSON.stringify(history));
+            localStorage.setItem('fc_history_v14', JSON.stringify(history));
             loadHistory();
         }
 
         function loadHistory() {
-            let history = JSON.parse(localStorage.getItem('fc_history_v13') || '[]');
+            let history = JSON.parse(localStorage.getItem('fc_history_v14') || '[]');
             const container = document.getElementById('history-container');
             if (!container) return;
             if (history.length === 0) {
@@ -508,7 +465,7 @@
         }
 
         function clearHistory() {
-            localStorage.removeItem('fc_history_v13');
+            localStorage.removeItem('fc_history_v14');
             loadHistory();
         }
 
