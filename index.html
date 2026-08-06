@@ -68,20 +68,19 @@
 
     <main class="flex-1 max-w-5xl w-full mx-auto p-3 sm:p-5">
 
-        <!-- TAB CRYPTO (Giełda z saldem 1000 i prowizjami) -->
+        <!-- TAB CRYPTO -->
         <div id="tab-crypto" class="tab-content space-y-4">
             <div class="bg-cardbg border border-cardborder p-4 sm:p-6 rounded-2xl shadow-xl space-y-4">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-cardborder pb-3">
                     <div>
                         <h2 class="text-sm font-bold text-white flex items-center gap-2">
-                            <span class="text-crypto">📈</span> Symulator Giełdy i Pramidowy Trading Krypto
+                            <span class="text-crypto">📈</span> Symulator Giełdy i Trading Krypto
                         </h2>
                         <p class="text-[11px] text-slate-400">Kupuj taniej, sprzedawaj drożej. Prowizja giełdowa: 1.5% od transakcji.</p>
                     </div>
                     <button onclick="triggerMarketTick()" class="bg-slate-800 hover:bg-slate-700 text-crypto text-[11px] font-bold px-3 py-1.5 rounded-xl border border-slate-700 transition w-full sm:w-auto">Symuluj Skok Ceny ⚡</button>
                 </div>
 
-                <!-- Panel wymiany / tradingu -->
                 <div class="bg-slate-900/80 border border-slate-800 p-4 rounded-2xl grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
                     <div>
                         <label class="block text-[11px] font-semibold text-slate-400 mb-1">Wybierz Aktywo</label>
@@ -98,7 +97,6 @@
                     </div>
                 </div>
 
-                <!-- Lista kryptowalut -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="crypto-grid">
                 </div>
             </div>
@@ -158,7 +156,6 @@
     </main>
 
     <script>
-        // STAN PORTFELA I GIEŁDY
         let walletPLN = 1000.00;
         let cryptoAssets = [
             { id: 'btc', name: 'Bitcoin', symbol: 'BTC', price: 345200.00, amount: 0, history: [340000, 342000, 345200] },
@@ -166,7 +163,7 @@
             { id: 'eth', name: 'Ethereum', symbol: 'ETH', price: 13200.00, amount: 0, history: [13000, 13100, 13200] },
             { id: 'sol', name: 'Solana', symbol: 'SOL', price: 640.20, amount: 0, history: [620, 630, 640.2] }
         ];
-        const COMMISSION_FEE = 0.015; // 1.5% prowizji giełdowej
+        const COMMISSION_FEE = 0.015;
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -219,8 +216,7 @@
 
         function triggerMarketTick() {
             cryptoAssets.forEach(c => {
-                let deltaPercent = (Math.random() * 6 - 2.8); // waha się od -2.8% do +3.2%
-                let oldPrice = c.price;
+                let deltaPercent = (Math.random() * 6 - 2.8);
                 c.price = Math.max(1, c.price * (1 + deltaPercent / 100));
                 c.history.push(c.price);
                 if (c.history.length > 10) c.history.shift();
@@ -262,10 +258,8 @@
             renderCryptoMarket();
         }
 
-        // Automatyczna zmiana cen co 5 sekund
         setInterval(triggerMarketTick, 5000);
 
-        // FPS GAME ENGINE
         const canvas = document.getElementById('fpsCanvas');
         const ctx = canvas.getContext('2d');
         let gameInterval = null;
@@ -305,13 +299,11 @@
                 enemies.push({ x: Math.random() * (canvas.width - 40) + 20, y: -10, speed: 1.2 + Math.random() * 1.5 });
             }
 
-            // Gracz
             ctx.fillStyle = '#3b82f6';
             ctx.beginPath();
             ctx.arc(player.x, player.y, 14, 0, Math.PI * 2);
             ctx.fill();
 
-            // Pociski
             ctx.fillStyle = '#f59e0b';
             for (let i = bullets.length - 1; i >= 0; i--) {
                 bullets[i].y -= 8;
@@ -321,7 +313,6 @@
                 if (bullets[i].y < 0) bullets.splice(i, 1);
             }
 
-            // Wrogowie
             ctx.fillStyle = '#ef4444';
             for (let i = enemies.length - 1; i >= 0; i--) {
                 enemies[i].y += enemies[i].speed;
@@ -329,7 +320,6 @@
                 ctx.arc(enemies[i].x, enemies[i].y, 14, 0, Math.PI * 2);
                 ctx.fill();
 
-                // Kolizje pocisk -> wróg
                 for (let b = bullets.length - 1; b >= 0; b--) {
                     let dist = Math.hypot(bullets[b].x - enemies[i].x, bullets[b].y - enemies[i].y);
                     if (dist < 18) {
