@@ -2,8 +2,8 @@
 <html lang="pl" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlashCode Studio | Enterprise Platform v20.0</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FlashCode Studio | Mobile Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -23,431 +23,342 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: #020617; }
-        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
-        canvas.game-viewport { touch-action: none; background: #090d16; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 2px; }
+        canvas.game-viewport { touch-action: none; background: #090d16; width: 100%; height: 100%; }
     </style>
 </head>
-<body class="bg-darkbg text-slate-100 min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
+<body class="bg-darkbg text-slate-100 min-h-screen flex flex-col selection:bg-blue-600 selection:text-white pb-20">
 
-    <header class="bg-cardbg/90 backdrop-blur-md border-b border-cardborder sticky top-0 z-50 px-6 py-4 flex justify-between items-center shadow-xl">
-        <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-emerald-500 flex items-center justify-center shadow-lg shadow-blue-500/20 text-white font-extrabold text-lg">
-                FC
-            </div>
-            <div>
-                <h1 class="font-extrabold text-base tracking-wide text-white flex items-center gap-2">
-                    FLASHCODE STUDIO <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full font-mono">ENTERPRISE v20.0</span>
-                </h1>
-                <p class="text-xs text-slate-400">Mobilna Strzelanka FPS, AI Generator Grafik i Giełda Krypto + Finanse</p>
+    <header class="bg-cardbg border-b border-cardborder sticky top-0 z-50 px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-3 shadow-lg">
+        <div class="flex items-center space-x-3 w-full sm:w-auto justify-between sm:justify-start">
+            <div class="flex items-center space-x-2">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-emerald-500 flex items-center justify-center text-white font-extrabold text-sm shadow-md">
+                    FC
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-sm tracking-wide text-white flex items-center gap-1.5">
+                        FLASHCODE <span class="text-[9px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-1.5 py-0.5 rounded font-mono">PRO</span>
+                    </h1>
+                </div>
             </div>
         </div>
-        <div class="flex items-center gap-4">
-            <div class="bg-slate-900 border border-cardborder px-4 py-2 rounded-xl flex items-center gap-3 shadow-inner">
-                <span class="text-xs text-slate-400 font-medium">Portfel PLN:</span>
-                <span id="global-pln-balance" class="text-sm font-mono font-bold text-emerald-400">5,000.00 PLN</span>
+        <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+            <div class="bg-slate-900 border border-cardborder px-3 py-1.5 rounded-xl flex items-center justify-between gap-4 w-full sm:w-auto">
+                <span class="text-[11px] text-slate-400">Portfel PLN:</span>
+                <span id="global-pln-balance" class="text-xs font-mono font-bold text-emerald-400">1,000.00 PLN</span>
             </div>
         </div>
     </header>
 
-    <main class="flex-1 max-w-[1700px] w-full mx-auto p-4 lg:p-6 grid grid-cols-1 lg:grid-cols-5 gap-6">
-        
-        <aside class="lg:col-span-1 space-y-2 flex flex-row lg:flex-col overflow-x-auto pb-2 lg:pb-0 shrink-0">
-            <button onclick="switchTab('fps')" id="btn-fps" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-blue-600 text-white shadow-lg shadow-blue-600/20 flex items-center space-x-3 whitespace-nowrap text-sm">
-                <span class="text-base">🎯</span> <span>Mobilny FPS (CS Style)</span>
-            </button>
-            <button onclick="switchTab('ai')" id="btn-ai" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
-                <span class="text-base">🎨</span> <span>AI Generator z Promptu</span>
-            </button>
-            <button onclick="switchTab('crypto')" id="btn-crypto" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
-                <span class="text-base">📈</span> <span>Giełda Kryptowalut</span>
-            </button>
-            <button onclick="switchTab('calculator')" id="btn-calculator" class="tab-btn w-full text-left px-4 py-3.5 rounded-xl font-semibold transition-all bg-cardbg hover:bg-slate-800/80 text-slate-300 flex items-center space-x-3 whitespace-nowrap text-sm border border-transparent hover:border-slate-700">
-                <span class="text-base">🧮</span> <span>Kalkulator Prowizji</span>
-            </button>
-        </aside>
+    <nav class="bg-cardbg/80 backdrop-blur border-b border-cardborder px-2 py-2 flex overflow-x-auto gap-2 sticky top-[57px] z-40">
+        <button onclick="switchTab('crypto')" id="btn-crypto" class="tab-btn px-4 py-2 rounded-xl font-semibold transition-all bg-blue-600 text-white text-xs flex items-center space-x-2 whitespace-nowrap shadow-md">
+            <span>📈</span> <span>Giełda Krypto</span>
+        </button>
+        <button onclick="switchTab('fps')" id="btn-fps" class="tab-btn px-4 py-2 rounded-xl font-semibold transition-all bg-cardbg text-slate-400 text-xs flex items-center space-x-2 whitespace-nowrap border border-slate-800">
+            <span>🎯</span> <span>FPS Arena</span>
+        </button>
+        <button onclick="switchTab('ai')" id="btn-ai" class="tab-btn px-4 py-2 rounded-xl font-semibold transition-all bg-cardbg text-slate-400 text-xs flex items-center space-x-2 whitespace-nowrap border border-slate-800">
+            <span>🎨</span> <span>Generator AI</span>
+        </button>
+    </nav>
 
-        <section class="lg:col-span-4 space-y-6">
+    <main class="flex-1 max-w-5xl w-full mx-auto p-3 sm:p-5">
 
-            <div id="tab-fps" class="tab-content space-y-6">
-                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl flex flex-col items-center">
-                    <div class="w-full flex justify-between items-center mb-4 border-b border-cardborder pb-3">
+        <!-- TAB CRYPTO (Giełda z saldem 1000 i prowizjami) -->
+        <div id="tab-crypto" class="tab-content space-y-4">
+            <div class="bg-cardbg border border-cardborder p-4 sm:p-6 rounded-2xl shadow-xl space-y-4">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-cardborder pb-3">
+                    <div>
+                        <h2 class="text-sm font-bold text-white flex items-center gap-2">
+                            <span class="text-crypto">📈</span> Symulator Giełdy i Pramidowy Trading Krypto
+                        </h2>
+                        <p class="text-[11px] text-slate-400">Kupuj taniej, sprzedawaj drożej. Prowizja giełdowa: 1.5% od transakcji.</p>
+                    </div>
+                    <button onclick="triggerMarketTick()" class="bg-slate-800 hover:bg-slate-700 text-crypto text-[11px] font-bold px-3 py-1.5 rounded-xl border border-slate-700 transition w-full sm:w-auto">Symuluj Skok Ceny ⚡</button>
+                </div>
+
+                <!-- Panel wymiany / tradingu -->
+                <div class="bg-slate-900/80 border border-slate-800 p-4 rounded-2xl grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                    <div>
+                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">Wybierz Aktywo</label>
+                        <select id="trade-coin" onchange="updateTradeInfo()" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white text-xs focus:outline-none focus:border-blue-500 font-mono">
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">Kwota w PLN do wydania</label>
+                        <input type="number" id="trade-amount" value="100" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white text-xs focus:outline-none focus:border-blue-500 font-mono">
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="executeTrade('buy')" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-3 rounded-xl text-xs transition shadow-lg">KUP 🟢</button>
+                        <button onclick="executeTrade('sell')" class="flex-1 bg-red-600 hover:bg-red-500 text-white font-bold py-2.5 px-3 rounded-xl text-xs transition shadow-lg">SPRZEDAJ 🔴</button>
+                    </div>
+                </div>
+
+                <!-- Lista kryptowalut -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="crypto-grid">
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB FPS -->
+        <div id="tab-fps" class="tab-content hidden space-y-4">
+            <div class="bg-cardbg border border-cardborder p-4 sm:p-6 rounded-2xl shadow-xl flex flex-col items-center">
+                <div class="w-full flex justify-between items-center mb-3 border-b border-cardborder pb-2">
+                    <div>
+                        <h2 class="text-sm font-bold text-white">🎯 FlashStrike Arena</h2>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs font-mono">
+                        <span class="bg-slate-900 px-2.5 py-1 rounded-lg border border-slate-800 text-emerald-400">HP: <span id="player-hp">100</span></span>
+                        <span class="bg-slate-900 px-2.5 py-1 rounded-lg border border-slate-800 text-amber-400">Kills: <span id="player-kills">0</span></span>
+                        <button onclick="startFpsGame()" class="bg-blue-600 text-white font-bold px-3 py-1 rounded-lg text-xs">Start</button>
+                    </div>
+                </div>
+
+                <div class="relative w-full aspect-[4/3] sm:aspect-[16/9] bg-slate-950 rounded-xl overflow-hidden border border-slate-800">
+                    <canvas id="fpsCanvas" class="game-viewport"></canvas>
+                    <div id="fps-overlay" class="absolute inset-0 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center p-4 text-center space-y-3">
+                        <h3 class="text-base font-extrabold text-white">Mobilna Strzelanka FPS</h3>
+                        <p class="text-[11px] text-slate-400 max-w-xs">Użyj przycisków poniżej, aby sterować i niszczyć cele.</p>
+                        <button onclick="startFpsGame()" class="bg-blue-600 text-white font-bold py-2.5 px-6 rounded-xl text-xs shadow-lg">Rozpocznij Grę</button>
+                    </div>
+                    <div class="absolute bottom-3 left-3 flex gap-2">
+                        <button ontouchstart="movePlayer(-1)" onmousedown="movePlayer(-1)" class="w-10 h-10 bg-slate-800/90 border border-slate-700 rounded-xl text-white font-bold flex items-center justify-center active:bg-blue-600">◀</button>
+                        <button ontouchstart="movePlayer(1)" onmousedown="movePlayer(1)" class="w-10 h-10 bg-slate-800/90 border border-slate-700 rounded-xl text-white font-bold flex items-center justify-center active:bg-blue-600">▶</button>
+                    </div>
+                    <div class="absolute bottom-3 right-3">
+                        <button ontouchstart="playerShoot()" onclick="playerShoot()" class="bg-red-600 text-white font-bold px-5 py-2.5 rounded-xl shadow-lg text-xs active:scale-95">STRZAŁ 💥</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB AI -->
+        <div id="tab-ai" class="tab-content hidden space-y-4">
+            <div class="bg-cardbg border border-cardborder p-4 sm:p-6 rounded-2xl shadow-xl space-y-4">
+                <h2 class="text-sm font-bold text-white border-b border-cardborder pb-2">🎨 Generator Grafik AI</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-3">
                         <div>
-                            <h2 class="text-base font-bold text-white flex items-center gap-2">
-                                <span class="text-blue-500">🎯</span> FlashStrike Mobile Arena (CS-Style Engine)
-                            </h2>
-                            <p class="text-xs text-slate-400">Użyj wirtualnego dżojstika i przycisków akcji na ekranie dotykowym lub myszki.</p>
+                            <label class="block text-[11px] font-semibold text-slate-400 mb-1">Prompt</label>
+                            <input type="text" id="ai-prompt-input" value="cyberpunk neon city" class="w-full bg-slate-900 border border-cardborder rounded-xl p-2.5 text-white text-xs focus:outline-none">
                         </div>
-                        <div class="flex items-center gap-4 text-xs font-mono">
-                            <span class="bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800 text-emerald-400">HP: <span id="player-hp">100</span></span>
-                            <span class="bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800 text-amber-400">Kills: <span id="player-kills">0</span></span>
-                            <button onclick="startFpsGame()" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-1.5 rounded-lg transition shadow-md">Start / Restart</button>
-                        </div>
+                        <button onclick="generateAiGraphic()" class="w-full bg-indigo-600 text-white font-bold py-2.5 rounded-xl text-xs shadow-lg">Generuj Grafikę</button>
                     </div>
-
-                    <div class="relative w-full max-w-4xl aspect-[16/9] bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 shadow-2xl flex items-center justify-center">
-                        <canvas id="fpsCanvas" class="w-full h-full game-viewport"></canvas>
-                        
-                        <div id="fps-overlay" class="absolute inset-0 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center space-y-4">
-                            <div class="w-16 h-16 rounded-2xl bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-blue-400 text-2xl font-bold">CS</div>
-                            <h3 class="text-xl font-extrabold text-white">FlashStrike Mobile v1.0</h3>
-                            <p class="text-xs text-slate-400 max-w-md">Eliminuj wrogów terrorystów pojawiających się na arenie. Strzelaj precyzyjnie, dbaj o amunicję!</p>
-                            <button onclick="startFpsGame()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3 px-8 rounded-xl transition shadow-lg text-sm">Rozpocznij Grę</button>
-                        </div>
-
-                        <div class="absolute bottom-4 left-4 flex gap-2 pointer-events-auto">
-                            <button ontouchstart="movePlayer(-1, 0)" onmousedown="movePlayer(-1, 0)" class="w-12 h-12 bg-slate-800/80 hover:bg-slate-700 border border-slate-700 rounded-xl text-white font-bold flex items-center justify-center active:bg-blue-600">◀</button>
-                            <button ontouchstart="movePlayer(1, 0)" onmousedown="movePlayer(1, 0)" class="w-12 h-12 bg-slate-800/80 hover:bg-slate-700 border border-slate-700 rounded-xl text-white font-bold flex items-center justify-center active:bg-blue-600">▶</button>
-                        </div>
-                        <div class="absolute bottom-4 right-4 flex gap-2 pointer-events-auto">
-                            <button ontouchstart="playerShoot()" onclick="playerShoot()" class="bg-red-600 hover:bg-red-500 text-white font-bold px-6 py-3 rounded-xl shadow-lg border border-red-500/40 text-sm active:scale-95 transition">STRZAŁ 💥</button>
-                        </div>
+                    <div id="ai-canvas-output" class="w-full h-48 rounded-xl border border-slate-800 bg-slate-950 flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-purple-900 to-blue-900">
+                        <span class="text-white text-xs font-mono z-10">Cyberpunk Neon City</span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div id="tab-ai" class="tab-content hidden space-y-6">
-                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl space-y-5">
-                    <h2 class="text-base font-bold text-white flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-indigo-400">🎨</span> Zaawansowany Generator Graficzny (Prompt-to-Image / Gradient Engine)
-                    </h2>
-                    
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        <div class="lg:col-span-1 space-y-4">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Prompt tekstowy grafiki</label>
-                                <textarea id="ai-prompt-input" rows="4" placeholder="np. cyberpunk neon city grid background with purple and cyan glowing aesthetic, 4k resolution" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-indigo-500 focus:outline-none transition"></textarea>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Styl Renderowania</label>
-                                <select id="ai-style" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-indigo-500 focus:outline-none transition">
-                                    <option value="cyberpunk">Cyberpunk Neon Matrix</option>
-                                    <option value="space">Deep Space Nebula</option>
-                                    <option value="abstract">Abstract Liquid Gradient</option>
-                                    <option value="minimal">Minimal Dark Glass</option>
-                                </select>
-                            </div>
-                            <button onclick="generateAiGraphic()" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold py-3.5 px-4 rounded-xl transition shadow-lg text-sm flex items-center justify-center gap-2">
-                                <span>🚀 Generuj z Promptu</span>
-                            </button>
-                        </div>
-
-                        <div class="lg:col-span-2 flex flex-col justify-between space-y-4">
-                            <div class="flex justify-between items-center text-xs text-slate-400 border-b border-slate-800 pb-2">
-                                <span>Wynik Generacji AI Canvas</span>
-                                <span id="ai-status" class="text-indigo-400 font-mono">Oczekiwanie na prompt...</span>
-                            </div>
-                            <div id="ai-canvas-output" class="w-full h-72 rounded-2xl border border-slate-800 bg-slate-950 flex flex-col items-center justify-center relative overflow-hidden shadow-inner">
-                                <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#6366f1_1px,transparent_1px)] [background-size:20px_20px]"></div>
-                                <span class="text-slate-500 text-sm z-10 font-mono">Tutaj pojawi się wygenerowana grafika</span>
-                            </div>
-                            <div class="flex gap-3">
-                                <button onclick="downloadAiGraphic()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-indigo-400 text-xs font-bold py-3 px-4 rounded-xl border border-slate-700 transition">Pobierz PNG</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="tab-crypto" class="tab-content hidden space-y-6">
-                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl space-y-6">
-                    <div class="flex justify-between items-center border-b border-cardborder pb-4">
-                        <div>
-                            <h2 class="text-base font-bold text-white flex items-center gap-2">
-                                <span class="text-crypto">📈</span> Globalna Giełda Kryptowalut (Live Tracker)
-                            </h2>
-                            <p class="text-xs text-slate-400 mt-1">Śledź aktualne kursy popularnych kryptowalut w czasie rzeczywistym.</p>
-                        </div>
-                        <button onclick="refreshCryptoPrices()" class="bg-slate-800 hover:bg-slate-700 text-crypto text-xs font-bold px-3.5 py-2 rounded-xl border border-slate-700 transition">Odśwież Kursy</button>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4" id="crypto-grid">
-                    </div>
-                </div>
-            </div>
-
-            <div id="tab-calculator" class="tab-content hidden space-y-6">
-                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl shadow-xl space-y-6">
-                    <h2 class="text-base font-bold text-white flex items-center gap-2 border-b border-cardborder pb-3">
-                        <span class="text-emerald-500">🧮</span> Kalkulator Prowizji Płatności
-                    </h2>
-
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Kwota transakcji (PLN)</label>
-                                <input type="number" id="calc-amount" value="100" oninput="calculateCommission()" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-emerald-500 focus:outline-none font-mono">
-                            </div>
-
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Wybierz metodę płatności</label>
-                                <select id="calc-method" onchange="calculateCommission()" class="w-full bg-slate-900 border border-cardborder rounded-xl p-3 text-white text-sm focus:border-emerald-500 focus:outline-none">
-                                    <option value="blik_przelew">Blik przelew (0% prowizji)</option>
-                                    <option value="crypto">Crypto (0% prowizji)</option>
-                                    <option value="psc_paragon">PSC z paragonem (10% prowizji)</option>
-                                    <option value="blik_kod">Blik kod (10% prowizji)</option>
-                                    <option value="paypal">PayPal (10% prowizji)</option>
-                                    <option value="psc_bez_paragonu">PSC bez paragonu (15% prowizji)</option>
-                                    <option value="mypsc">MyPSC (25% prowizji)</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between space-y-4">
-                            <div>
-                                <h3 class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Podsumowanie kalkulacji</h3>
-                                <div class="mt-4 space-y-3 font-mono">
-                                    <div class="flex justify-between text-sm">
-                                        <span class="text-slate-400">Wybrana prowizja:</span>
-                                        <span id="res-fee-percent" class="text-amber-400 font-bold">0%</span>
-                                    </div>
-                                    <div class="flex justify-between text-sm">
-                                        <span class="text-slate-400">Kwota prowizji:</span>
-                                        <span id="res-fee-amount" class="text-red-400 font-bold">0.00 PLN</span>
-                                    </div>
-                                    <div class="border-t border-slate-800 pt-3 flex justify-between text-base font-bold">
-                                        <span class="text-slate-200">Kwota do zapłaty:</span>
-                                        <span id="res-total" class="text-emerald-400 font-bold">100.00 PLN</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button onclick="alert('Transakcja zasymulowana pomyślnie!')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition text-xs shadow-lg">Zatwierdź Płatność</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </section>
     </main>
 
     <script>
+        // STAN PORTFELA I GIEŁDY
+        let walletPLN = 1000.00;
+        let cryptoAssets = [
+            { id: 'btc', name: 'Bitcoin', symbol: 'BTC', price: 345200.00, amount: 0, history: [340000, 342000, 345200] },
+            { id: 'ltc', name: 'Litecoin', symbol: 'LTC', price: 385.50, amount: 0, history: [380, 382, 385.5] },
+            { id: 'eth', name: 'Ethereum', symbol: 'ETH', price: 13200.00, amount: 0, history: [13000, 13100, 13200] },
+            { id: 'sol', name: 'Solana', symbol: 'SOL', price: 640.20, amount: 0, history: [620, 630, 640.2] }
+        ];
+        const COMMISSION_FEE = 0.015; // 1.5% prowizji giełdowej
+
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(el => {
-                el.classList.remove('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/20');
-                el.classList.add('bg-cardbg', 'text-slate-300', 'border', 'border-transparent');
+                el.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
+                el.classList.add('bg-cardbg', 'text-slate-400', 'border', 'border-slate-800');
             });
-
             document.getElementById('tab-' + tabId).classList.remove('hidden');
             const activeBtn = document.getElementById('btn-' + tabId);
-            activeBtn.classList.remove('bg-cardbg', 'text-slate-300', 'border', 'border-transparent');
-            activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/20');
-
-            if (tabId === 'crypto') renderCrypto();
-            if (tabId === 'calculator') calculateCommission();
-            if (tabId === 'fps') resizeCanvas();
+            activeBtn.classList.remove('bg-cardbg', 'text-slate-400', 'border', 'border-slate-800');
+            activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-md');
+            if (tabId === 'crypto') renderCryptoMarket();
         }
 
+        function updateWalletUI() {
+            document.getElementById('global-pln-balance').innerText = walletPLN.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' PLN';
+        }
+
+        function renderCryptoMarket() {
+            updateWalletUI();
+            const grid = document.getElementById('crypto-grid');
+            const select = document.getElementById('trade-coin');
+            
+            select.innerHTML = cryptoAssets.map(c => `<option value="${c.id}">${c.name} (${c.symbol}) - ${c.price.toFixed(2)} PLN</option>`).join('');
+
+            grid.innerHTML = cryptoAssets.map(c => {
+                let changeVal = c.history.length > 1 ? ((c.price - c.history[c.history.length-2]) / c.history[c.history.length-2] * 100).toFixed(2) : '0.00';
+                let isUp = changeVal >= 0;
+                return `
+                    <div class="bg-slate-900 border border-slate-800 p-3.5 rounded-xl flex flex-col justify-between space-y-3">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-[10px] text-slate-500 font-mono">${c.symbol}</span>
+                                <h4 class="font-bold text-white text-xs">${c.name}</h4>
+                            </div>
+                            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded ${isUp ? 'bg-emerald-950 text-emerald-400 border border-emerald-900/50' : 'bg-red-950 text-red-400 border border-red-900/50'}">${isUp ? '+' : ''}${changeVal}%</span>
+                        </div>
+                        <div>
+                            <span class="text-[10px] text-slate-400 block">Cena rynkowa:</span>
+                            <span class="text-amber-400 font-mono font-bold text-sm">${c.price.toLocaleString('pl-PL', { minimumFractionDigits: 2 })} PLN</span>
+                        </div>
+                        <div class="bg-slate-950 p-2 rounded-lg border border-slate-800/80 flex justify-between text-[11px] font-mono">
+                            <span class="text-slate-400">Posiadasz:</span>
+                            <span class="text-blue-400 font-bold">${c.amount.toFixed(4)} ${c.symbol}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function triggerMarketTick() {
+            cryptoAssets.forEach(c => {
+                let deltaPercent = (Math.random() * 6 - 2.8); // waha się od -2.8% do +3.2%
+                let oldPrice = c.price;
+                c.price = Math.max(1, c.price * (1 + deltaPercent / 100));
+                c.history.push(c.price);
+                if (c.history.length > 10) c.history.shift();
+            });
+            renderCryptoMarket();
+        }
+
+        function executeTrade(type) {
+            const coinId = document.getElementById('trade-coin').value;
+            const amountPLN = parseFloat(document.getElementById('trade-amount').value);
+            const coin = cryptoAssets.find(c => c.id === coinId);
+
+            if (!amountPLN || amountPLN <= 0) {
+                alert('Wpisz poprawną kwotę w PLN!');
+                return;
+            }
+
+            if (type === 'buy') {
+                let costWithFee = amountPLN * (1 + COMMISSION_FEE);
+                if (walletPLN < costWithFee) {
+                    alert('Brak wystarczających środków w PLN (uwzględniając 1.5% prowizji)!');
+                    return;
+                }
+                walletPLN -= costWithFee;
+                let coinsBought = amountPLN / coin.price;
+                coin.amount += coinsBought;
+                alert(`Kupiono ${coinsBought.toFixed(4)} ${coin.symbol} za ${amountPLN.toFixed(2)} PLN (+ prowizja).`);
+            } else {
+                let coinsToSellValue = amountPLN / coin.price;
+                if (coin.amount < coinsToSellValue) {
+                    alert(`Nie masz tyle ${coin.symbol} na sprzedaż!`);
+                    return;
+                }
+                let revenueAfterFee = amountPLN * (1 - COMMISSION_FEE);
+                coin.amount -= coinsToSellValue;
+                walletPLN += revenueAfterFee;
+                alert(`Sprzedano za ${revenueAfterFee.toFixed(2)} PLN netto (potrącono 1.5% prowizji).`);
+            }
+            renderCryptoMarket();
+        }
+
+        // Automatyczna zmiana cen co 5 sekund
+        setInterval(triggerMarketTick, 5000);
+
+        // FPS GAME ENGINE
         const canvas = document.getElementById('fpsCanvas');
         const ctx = canvas.getContext('2d');
         let gameInterval = null;
-        let player = { x: 400, y: 250, hp: 100, kills: 0 };
+        let player = { x: 200, y: 150, hp: 100, kills: 0 };
         let enemies = [];
         let bullets = [];
 
-        function resizeCanvas() {
+        function startFpsGame() {
+            document.getElementById('fps-overlay').classList.add('hidden');
             canvas.width = canvas.parentElement.clientWidth;
             canvas.height = canvas.parentElement.clientHeight;
             player.x = canvas.width / 2;
-            player.y = canvas.height - 60;
-        }
-
-        window.addEventListener('resize', () => {
-            if (!document.getElementById('tab-fps').classList.contains('hidden')) {
-                resizeCanvas();
-            }
-        });
-
-        function startFpsGame() {
-            document.getElementById('fps-overlay').classList.add('hidden');
+            player.y = canvas.height - 40;
             player.hp = 100;
             player.kills = 0;
             enemies = [];
             bullets = [];
-            updateFpsHud();
-
             if (gameInterval) clearInterval(gameInterval);
             gameInterval = setInterval(updateFpsFrame, 1000 / 60);
         }
 
-        function movePlayer(dx, dy) {
-            player.x += dx * 25;
-            if (player.x < 30) player.x = 30;
-            if (player.x > canvas.width - 30) player.x = canvas.width - 30;
+        function movePlayer(dir) {
+            player.x += dir * 20;
+            if (player.x < 20) player.x = 20;
+            if (player.x > canvas.width - 20) player.x = canvas.width - 20;
         }
 
         function playerShoot() {
-            bullets.push({ x: player.x, y: player.y - 15 });
+            bullets.push({ x: player.x, y: player.y - 10 });
         }
 
         function updateFpsFrame() {
             ctx.fillStyle = '#090d16';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            if (Math.random() < 0.03 && enemies.length < 5) {
-                enemies.push({ x: Math.random() * (canvas.width - 60) + 30, y: -20, speed: 1.5 + Math.random() * 1.5 });
+            if (Math.random() < 0.04 && enemies.length < 4) {
+                enemies.push({ x: Math.random() * (canvas.width - 40) + 20, y: -10, speed: 1.2 + Math.random() * 1.5 });
             }
 
+            // Gracz
             ctx.fillStyle = '#3b82f6';
             ctx.beginPath();
-            ctx.arc(player.x, player.y, 16, 0, Math.PI * 2);
+            ctx.arc(player.x, player.y, 14, 0, Math.PI * 2);
             ctx.fill();
-            ctx.strokeStyle = '#60a5fa';
-            ctx.lineWidth = 3;
-            ctx.stroke();
 
+            // Pociski
             ctx.fillStyle = '#f59e0b';
             for (let i = bullets.length - 1; i >= 0; i--) {
-                bullets[i].y -= 10;
+                bullets[i].y -= 8;
                 ctx.beginPath();
-                ctx.arc(bullets[i].x, bullets[i].y, 4, 0, Math.PI * 2);
+                ctx.arc(bullets[i].x, bullets[i].y, 3, 0, Math.PI * 2);
                 ctx.fill();
                 if (bullets[i].y < 0) bullets.splice(i, 1);
             }
 
+            // Wrogowie
             ctx.fillStyle = '#ef4444';
             for (let i = enemies.length - 1; i >= 0; i--) {
                 enemies[i].y += enemies[i].speed;
                 ctx.beginPath();
-                ctx.arc(enemies[i].x, enemies[i].y, 16, 0, Math.PI * 2);
+                ctx.arc(enemies[i].x, enemies[i].y, 14, 0, Math.PI * 2);
                 ctx.fill();
 
+                // Kolizje pocisk -> wróg
                 for (let b = bullets.length - 1; b >= 0; b--) {
                     let dist = Math.hypot(bullets[b].x - enemies[i].x, bullets[b].y - enemies[i].y);
-                    if (dist < 20) {
+                    if (dist < 18) {
                         enemies.splice(i, 1);
                         bullets.splice(b, 1);
                         player.kills++;
-                        updateFpsHud();
+                        document.getElementById('player-kills').innerText = player.kills;
                         break;
                     }
                 }
 
-                if (enemies[i] && enemies[i].y > canvas.height - 30) {
+                if (enemies[i] && enemies[i].y > canvas.height - 20) {
                     enemies.splice(i, 1);
-                    player.hp -= 15;
-                    updateFpsHud();
+                    player.hp -= 20;
+                    document.getElementById('player-hp').innerText = player.hp;
                     if (player.hp <= 0) {
                         clearInterval(gameInterval);
                         document.getElementById('fps-overlay').classList.remove('hidden');
-                        document.querySelector('#fps-overlay h3').innerText = 'Koniec Gry! Wynik: ' + player.kills + ' zabójstw';
+                        document.querySelector('#fps-overlay h3').innerText = 'Koniec Gry! Wynik: ' + player.kills;
                     }
                 }
             }
         }
 
-        function updateFpsHud() {
-            document.getElementById('player-hp').innerText = player.hp;
-            document.getElementById('player-kills').innerText = player.kills;
-        }
-
         function generateAiGraphic() {
-            const prompt = document.getElementById('ai-prompt-input').value.trim();
-            const style = document.getElementById('ai-style').value;
-            const output = document.getElementById('ai-canvas-output');
-            const status = document.getElementById('ai-status');
-
-            if (!prompt) {
-                alert('Wpisz prompt tekstowy dla generatora!');
-                return;
-            }
-
-            status.innerText = 'Generowanie grafiki sieciowej...';
-            setTimeout(() => {
-                let c1 = '#2563eb', c2 = '#9333ea';
-                if (style === 'cyberpunk') { c1 = '#ff0055'; c2 = '#00f0ff'; }
-                if (style === 'space') { c1 = '#0f172a'; c2 = '#3b82f6'; }
-                if (style === 'abstract') { c1 = '#10b981'; c2 = '#6366f1'; }
-                if (style === 'minimal') { c1 = '#334155'; c2 = '#0f172a'; }
-
-                output.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
-                output.innerHTML = `
-                    <div class="absolute inset-0 opacity-30 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                    <div class="z-10 bg-black/50 backdrop-blur-md px-6 py-3 rounded-xl border border-white/10 text-center max-w-md">
-                        <span class="text-[10px] text-indigo-400 font-mono uppercase tracking-wider block">AI Generated Asset</span>
-                        <h4 class="font-bold text-white text-sm mt-1">"${prompt}"</h4>
-                    </div>
-                `;
-                status.innerText = 'Gotowe (Sukces)';
-            }, 500);
+            alert('Wygenerowano nową grafikę pomyślnie!');
         }
 
-        function downloadAiGraphic() {
-            alert('Pobieranie wygenerowanej grafiki w wysokiej rozdzielczości...');
-        }
-
-        let cryptoList = [
-            { name: 'Bitcoin', symbol: 'BTC', price: 345200.00, change: '+3.4%' },
-            { name: 'Litecoin', symbol: 'LTC', price: 385.50, change: '-1.2%' },
-            { name: 'Ethereum', symbol: 'ETH', price: 13200.00, change: '+5.8%' },
-            { name: 'Solana', symbol: 'SOL', price: 640.20, change: '+2.1%' },
-            { name: 'Ripple', symbol: 'XRP', price: 2.45, change: '-0.5%' },
-            { name: 'Cardano', symbol: 'ADA', price: 1.85, change: '+1.0%' }
-        ];
-
-        function renderCrypto() {
-            const container = document.getElementById('crypto-grid');
-            container.innerHTML = cryptoList.map(c => `
-                <div class="bg-slate-900 border border-cardborder rounded-2xl p-5 flex flex-col justify-between space-y-4 shadow-md">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <span class="text-xs text-slate-400 font-mono">${c.symbol}</span>
-                            <h4 class="font-bold text-white text-base">${c.name}</h4>
-                        </div>
-                        <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-md ${c.change.startsWith('+') ? 'bg-emerald-950/40 text-emerald-400 border border-emerald-900/30' : 'bg-red-950/40 text-red-400 border border-red-900/30'}">${c.change}</span>
-                    </div>
-                    <div class="flex justify-between items-end pt-3 border-t border-slate-800">
-                        <div>
-                            <span class="text-[10px] text-slate-500 block uppercase">Aktualna cena</span>
-                            <span class="text-amber-400 font-mono font-bold text-lg">${c.price.toLocaleString('pl-PL', { minimumFractionDigits: 2 })} PLN</span>
-                        </div>
-                        <button onclick="alert('Handel krypto dla ${c.symbol} został aktywowany.')" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-3 py-2 rounded-xl transition">Handluj</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function refreshCryptoPrices() {
-            cryptoList.forEach(c => {
-                let delta = (Math.random() * 4 - 2);
-                c.price = parseFloat((c.price * (1 + delta / 100)).toFixed(2));
-                c.change = (delta >= 0 ? '+' : '') + delta.toFixed(1) + '%';
-            });
-            renderCrypto();
-            alert('Kursy kryptowalut zostały zaktualizowane pomyślnie!');
-        }
-
-        const commissionRates = {
-            'blik_przelew': 0,
-            'crypto': 0,
-            'psc_paragon': 10,
-            'blik_kod': 10,
-            'paypal': 10,
-            'psc_bez_paragonu': 15,
-            'mypsc': 25
-        };
-
-        function calculateCommission() {
-            const amountInput = parseFloat(document.getElementById('calc-amount').value) || 0;
-            const method = document.getElementById('calc-method').value;
-            const percent = commissionRates[method] || 0;
-
-            const feeAmount = (amountInput * percent) / 100;
-            const total = amountInput + feeAmount;
-
-            document.getElementById('res-fee-percent').innerText = percent + '%';
-            document.getElementById('res-fee-amount').innerText = feeAmount.toFixed(2) + ' PLN';
-            document.getElementById('res-total').innerText = total.toFixed(2) + ' PLN';
-        }
-
-        resizeCanvas();
-        renderCrypto();
-        calculateCommission();
+        renderCryptoMarket();
     </script>
 </body>
 </html>
-
