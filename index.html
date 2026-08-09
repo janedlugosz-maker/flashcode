@@ -3,352 +3,419 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FlashCode Studio | Mobile Pro</title>
+    <title>Empire Tycoon Ultimate Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        darkbg: '#020617',
-                        cardbg: '#0f172a',
-                        cardborder: '#1e293b',
-                        accent: '#2563eb',
-                        crypto: '#f59e0b'
-                    }
-                }
-            }
-        }
-    </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        body { background: #020617; color: #f8fafc; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; user-select: none; }
+        .glass { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .tab-content { display: none; }
+        .tab-active { display: block; }
+        button:active { transform: scale(0.97); }
         ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: #020617; }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 2px; }
-        canvas.game-viewport { touch-action: none; background: #090d16; width: 100%; height: 100%; }
     </style>
 </head>
-<body class="bg-darkbg text-slate-100 min-h-screen flex flex-col selection:bg-blue-600 selection:text-white pb-20">
+<body class="pb-28">
 
-    <header class="bg-cardbg border-b border-cardborder sticky top-0 z-50 px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-3 shadow-lg">
-        <div class="flex items-center space-x-3 w-full sm:w-auto justify-between sm:justify-start">
-            <div class="flex items-center space-x-2">
-                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-emerald-500 flex items-center justify-center text-white font-extrabold text-sm shadow-md">
-                    FC
-                </div>
-                <div>
-                    <h1 class="font-extrabold text-sm tracking-wide text-white flex items-center gap-1.5">
-                        FLASHCODE <span class="text-[9px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-1.5 py-0.5 rounded font-mono">PRO</span>
-                    </h1>
-                </div>
+    <!-- Globalny Panel Stanu / Header -->
+    <header class="p-4 glass sticky top-0 z-50 border-b border-slate-800 shadow-2xl">
+        <div class="flex justify-between items-center mb-2">
+            <div>
+                <span class="text-[10px] text-slate-400 uppercase tracking-widest font-mono">Dostępne Środki</span>
+                <div id="money" class="text-2xl font-black text-emerald-400 font-mono">0.00 PLN</div>
+            </div>
+            <div class="text-right">
+                <span class="text-[10px] text-slate-400 uppercase tracking-widest font-mono">Dochód Pasywny</span>
+                <div id="income-rate" class="text-xs font-mono font-bold text-blue-400">+0.00 PLN/s</div>
             </div>
         </div>
-        <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
-            <div class="bg-slate-900 border border-cardborder px-3 py-1.5 rounded-xl flex items-center justify-between gap-4 w-full sm:w-auto">
-                <span class="text-[11px] text-slate-400">Portfel PLN:</span>
-                <span id="global-pln-balance" class="text-xs font-mono font-bold text-emerald-400">1,000.00 PLN</span>
-            </div>
+        <div class="w-full bg-slate-900 rounded-full h-1.5 overflow-hidden border border-slate-800">
+            <div id="exp-bar" class="bg-gradient-to-r from-blue-500 to-indigo-500 h-full w-0 transition-all duration-300"></div>
+        </div>
+        <div class="flex justify-between text-[9px] text-slate-400 font-mono mt-1">
+            <span id="player-title">Początkujący Przedsiębiorca</span>
+            <span id="player-networth">Wartość imperium: 0 PLN</span>
         </div>
     </header>
 
-    <nav class="bg-cardbg/80 backdrop-blur border-b border-cardborder px-2 py-2 flex overflow-x-auto gap-2 sticky top-[57px] z-40">
-        <button onclick="switchTab('crypto')" id="btn-crypto" class="tab-btn px-4 py-2 rounded-xl font-semibold transition-all bg-blue-600 text-white text-xs flex items-center space-x-2 whitespace-nowrap shadow-md">
-            <span>📈</span> <span>Giełda Krypto</span>
-        </button>
-        <button onclick="switchTab('fps')" id="btn-fps" class="tab-btn px-4 py-2 rounded-xl font-semibold transition-all bg-cardbg text-slate-400 text-xs flex items-center space-x-2 whitespace-nowrap border border-slate-800">
-            <span>🎯</span> <span>FPS Arena</span>
-        </button>
-        <button onclick="switchTab('ai')" id="btn-ai" class="tab-btn px-4 py-2 rounded-xl font-semibold transition-all bg-cardbg text-slate-400 text-xs flex items-center space-x-2 whitespace-nowrap border border-slate-800">
-            <span>🎨</span> <span>Generator AI</span>
-        </button>
-    </nav>
-
-    <main class="flex-1 max-w-5xl w-full mx-auto p-3 sm:p-5">
-
-        <!-- TAB CRYPTO -->
-        <div id="tab-crypto" class="tab-content space-y-4">
-            <div class="bg-cardbg border border-cardborder p-4 sm:p-6 rounded-2xl shadow-xl space-y-4">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-cardborder pb-3">
-                    <div>
-                        <h2 class="text-sm font-bold text-white flex items-center gap-2">
-                            <span class="text-crypto">📈</span> Symulator Giełdy i Trading Krypto
-                        </h2>
-                        <p class="text-[11px] text-slate-400">Kupuj taniej, sprzedawaj drożej. Prowizja giełdowa: 1.5% od transakcji.</p>
-                    </div>
-                    <button onclick="triggerMarketTick()" class="bg-slate-800 hover:bg-slate-700 text-crypto text-[11px] font-bold px-3 py-1.5 rounded-xl border border-slate-700 transition w-full sm:w-auto">Symuluj Skok Ceny ⚡</button>
-                </div>
-
-                <div class="bg-slate-900/80 border border-slate-800 p-4 rounded-2xl grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
-                    <div>
-                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">Wybierz Aktywo</label>
-                        <select id="trade-coin" onchange="updateTradeInfo()" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white text-xs focus:outline-none focus:border-blue-500 font-mono">
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">Kwota w PLN do wydania</label>
-                        <input type="number" id="trade-amount" value="100" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white text-xs focus:outline-none focus:border-blue-500 font-mono">
-                    </div>
-                    <div class="flex gap-2">
-                        <button onclick="executeTrade('buy')" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-3 rounded-xl text-xs transition shadow-lg">KUP 🟢</button>
-                        <button onclick="executeTrade('sell')" class="flex-1 bg-red-600 hover:bg-red-500 text-white font-bold py-2.5 px-3 rounded-xl text-xs transition shadow-lg">SPRZEDAJ 🔴</button>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="crypto-grid">
-                </div>
+    <!-- Główna Zawartość Zakładek -->
+    <main class="p-4 max-w-2xl mx-auto">
+        
+        <!-- ZAKŁADKA 1: BIZNESY I FIRMY -->
+        <div id="tab-biznes" class="tab-content tab-active space-y-4">
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-base font-bold text-slate-200 flex items-center gap-2">🏢 Korporacje i Biznesy</h2>
+                <button onclick="claimBonus()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold px-3 py-1.5 rounded-xl shadow transition">Szybki Zysk ⚡</button>
             </div>
+            <div id="biznes-container" class="space-y-3"></div>
         </div>
 
-        <!-- TAB FPS -->
-        <div id="tab-fps" class="tab-content hidden space-y-4">
-            <div class="bg-cardbg border border-cardborder p-4 sm:p-6 rounded-2xl shadow-xl flex flex-col items-center">
-                <div class="w-full flex justify-between items-center mb-3 border-b border-cardborder pb-2">
-                    <div>
-                        <h2 class="text-sm font-bold text-white">🎯 FlashStrike Arena</h2>
-                    </div>
-                    <div class="flex items-center gap-3 text-xs font-mono">
-                        <span class="bg-slate-900 px-2.5 py-1 rounded-lg border border-slate-800 text-emerald-400">HP: <span id="player-hp">100</span></span>
-                        <span class="bg-slate-900 px-2.5 py-1 rounded-lg border border-slate-800 text-amber-400">Kills: <span id="player-kills">0</span></span>
-                        <button onclick="startFpsGame()" class="bg-blue-600 text-white font-bold px-3 py-1 rounded-lg text-xs">Start</button>
-                    </div>
-                </div>
-
-                <div class="relative w-full aspect-[4/3] sm:aspect-[16/9] bg-slate-950 rounded-xl overflow-hidden border border-slate-800">
-                    <canvas id="fpsCanvas" class="game-viewport"></canvas>
-                    <div id="fps-overlay" class="absolute inset-0 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center p-4 text-center space-y-3">
-                        <h3 class="text-base font-extrabold text-white">Mobilna Strzelanka FPS</h3>
-                        <p class="text-[11px] text-slate-400 max-w-xs">Użyj przycisków poniżej, aby sterować i niszczyć cele.</p>
-                        <button onclick="startFpsGame()" class="bg-blue-600 text-white font-bold py-2.5 px-6 rounded-xl text-xs shadow-lg">Rozpocznij Grę</button>
-                    </div>
-                    <div class="absolute bottom-3 left-3 flex gap-2">
-                        <button ontouchstart="movePlayer(-1)" onmousedown="movePlayer(-1)" class="w-10 h-10 bg-slate-800/90 border border-slate-700 rounded-xl text-white font-bold flex items-center justify-center active:bg-blue-600">◀</button>
-                        <button ontouchstart="movePlayer(1)" onmousedown="movePlayer(1)" class="w-10 h-10 bg-slate-800/90 border border-slate-700 rounded-xl text-white font-bold flex items-center justify-center active:bg-blue-600">▶</button>
-                    </div>
-                    <div class="absolute bottom-3 right-3">
-                        <button ontouchstart="playerShoot()" onclick="playerShoot()" class="bg-red-600 text-white font-bold px-5 py-2.5 rounded-xl shadow-lg text-xs active:scale-95">STRZAŁ 💥</button>
-                    </div>
-                </div>
-            </div>
+        <!-- ZAKŁADKA 2: NIERUCHOMOŚCI -->
+        <div id="tab-nieruchomosci" class="tab-content space-y-4">
+            <h2 class="text-base font-bold text-slate-200 mb-2">🏠 Nieruchomości i Luksusy</h2>
+            <div id="nieruchomosci-container" class="space-y-3"></div>
         </div>
 
-        <!-- TAB AI -->
-        <div id="tab-ai" class="tab-content hidden space-y-4">
-            <div class="bg-cardbg border border-cardborder p-4 sm:p-6 rounded-2xl shadow-xl space-y-4">
-                <h2 class="text-sm font-bold text-white border-b border-cardborder pb-2">🎨 Generator Grafik AI</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="space-y-3">
-                        <div>
-                            <label class="block text-[11px] font-semibold text-slate-400 mb-1">Prompt</label>
-                            <input type="text" id="ai-prompt-input" value="cyberpunk neon city" class="w-full bg-slate-900 border border-cardborder rounded-xl p-2.5 text-white text-xs focus:outline-none">
-                        </div>
-                        <button onclick="generateAiGraphic()" class="w-full bg-indigo-600 text-white font-bold py-2.5 rounded-xl text-xs shadow-lg">Generuj Grafikę</button>
-                    </div>
-                    <div id="ai-canvas-output" class="w-full h-48 rounded-xl border border-slate-800 bg-slate-950 flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-purple-900 to-blue-900">
-                        <span class="text-white text-xs font-mono z-10">Cyberpunk Neon City</span>
-                    </div>
+        <!-- ZAKŁADKA 3: BANK I LOKATY -->
+        <div id="tab-bank" class="tab-content space-y-4">
+            <h2 class="text-base font-bold text-slate-200 mb-2">🏦 Bank Centralny & Lokaty</h2>
+            <div class="glass p-4 rounded-2xl space-y-3 border border-slate-800">
+                <h3 class="text-xs font-bold text-slate-300">Załóż Lokatę Terminową (Procent Składany)</h3>
+                <p class="text-[11px] text-slate-400">Zablokuj środki na określony czas, aby zyskać wysokie odsetki pasywne.</p>
+                <div class="flex gap-2">
+                    <input type="number" id="deposit-amount" placeholder="Kwota PLN" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white font-mono focus:outline-none focus:border-blue-500">
+                    <button onclick="createDeposit()" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 rounded-xl text-xs whitespace-nowrap">Wpłać</button>
                 </div>
             </div>
+            <div id="deposits-container" class="space-y-3"></div>
+        </div>
+
+        <!-- ZAKŁADKA 4: GIEŁDA KRYPTO & AKCJI -->
+        <div id="tab-gielda" class="tab-content space-y-4">
+            <h2 class="text-base font-bold text-slate-200 mb-2">📈 Giełda Papierów Wartościowych & Krypto</h2>
+            <div class="grid grid-cols-2 gap-2 mb-2">
+                <button onclick="setMarketSub('crypto')" id="sub-btn-crypto" class="py-2 rounded-xl text-xs font-bold bg-blue-600 text-white">Kryptowaluty</button>
+                <button onclick="setMarketSub('stocks')" id="sub-btn-stocks" class="py-2 rounded-xl text-xs font-bold bg-slate-900 text-slate-400 border border-slate-800">Akcje Spółek</button>
+            </div>
+            <div id="market-container" class="space-y-3"></div>
         </div>
 
     </main>
 
+    <!-- Dolny Pasek Nawigacyjny -->
+    <nav class="fixed bottom-0 w-full glass p-2 flex justify-around border-t border-slate-800 z-50">
+        <button onclick="switchTab('biznes')" id="nav-biznes" class="flex flex-col items-center flex-1 py-1 text-blue-400 transition">
+            <span class="text-lg">🏢</span>
+            <span class="text-[10px] font-bold mt-0.5">Biznesy</span>
+        </button>
+        <button onclick="switchTab('nieruchomosci')" id="nav-nieruchomosci" class="flex flex-col items-center flex-1 py-1 text-slate-400 transition">
+            <span class="text-lg">🏠</span>
+            <span class="text-[10px] font-bold mt-0.5">Nieruchomości</span>
+        </button>
+        <button onclick="switchTab('bank')" id="nav-bank" class="flex flex-col items-center flex-1 py-1 text-slate-400 transition">
+            <span class="text-lg">🏦</span>
+            <span class="text-[10px] font-bold mt-0.5">Bank</span>
+        </button>
+        <button onclick="switchTab('gielda')" id="nav-gielda" class="flex flex-col items-center flex-1 py-1 text-slate-400 transition">
+            <span class="text-lg">📈</span>
+            <span class="text-[10px] font-bold mt-0.5">Giełda</span>
+        </button>
+    </nav>
+
     <script>
-        let walletPLN = 1000.00;
-        let cryptoAssets = [
-            { id: 'btc', name: 'Bitcoin', symbol: 'BTC', price: 345200.00, amount: 0, history: [340000, 342000, 345200] },
-            { id: 'ltc', name: 'Litecoin', symbol: 'LTC', price: 385.50, amount: 0, history: [380, 382, 385.5] },
-            { id: 'eth', name: 'Ethereum', symbol: 'ETH', price: 13200.00, amount: 0, history: [13000, 13100, 13200] },
-            { id: 'sol', name: 'Solana', symbol: 'SOL', price: 640.20, amount: 0, history: [620, 630, 640.2] }
-        ];
-        const COMMISSION_FEE = 0.015;
+        // Główny obiekt stanu gry
+        let game = JSON.parse(localStorage.getItem('empireUltimateSave')) || {
+            money: 10000.0,
+            lastTick: Date.now(),
+            marketMode: 'crypto',
+            biznesy: {
+                kiosk: { name: 'Kiosk z prasą', count: 0, cost: 1000, profit: 8, multiplier: 1 },
+                sklep: { name: 'Sklep spożywczy', count: 0, cost: 12500, profit: 65, multiplier: 1 },
+                restauracja: { name: 'Restauracja w mieście', count: 0, cost: 95000, profit: 480, multiplier: 1 },
+                supermarket: { name: 'Supermarket budowlany', count: 0, cost: 850000, profit: 3900, multiplier: 1 },
+                fabryka: { name: 'Fabryka aut elektrycznych', count: 0, cost: 7500000, profit: 32000, multiplier: 1 },
+                korporacja: { name: 'Globalna Korporacja Tech', count: 0, cost: 65000000, profit: 260000, multiplier: 1 }
+            },
+            nieruchomosci: {
+                kawalerka: { name: 'Kawalerka pod wynajem', count: 0, cost: 250000, profit: 1400 },
+                apartament: { name: 'Apartament w Warszawie', count: 0, cost: 1800000, profit: 9800 },
+                hotel: { name: 'Sieć hoteli 5-gwiazdkowych', count: 0, cost: 22000000, profit: 115000 },
+                wyspa: { name: 'Prywatna wyspa z rezydencją', count: 0, cost: 250000000, profit: 1250000 }
+            },
+            deposits: [],
+            crypto: {
+                BTC: { name: 'Bitcoin', price: 350000, amount: 0, volatility: 0.035 },
+                ETH: { name: 'Ethereum', price: 14500, amount: 0, volatility: 0.05 },
+                SOL: { name: 'Solana', price: 620, amount: 0, volatility: 0.08 },
+                DOGE: { name: 'Dogecoin', price: 1.15, amount: 0, volatility: 0.14 }
+            },
+            stocks: {
+                APPL: { name: 'Appls Inc.', price: 950, amount: 0, volatility: 0.025 },
+                GGL: { name: 'Gooogle Corp', price: 1400, amount: 0, volatility: 0.03 },
+                TSLA: { name: 'Tessla Motors', price: 1100, amount: 0, volatility: 0.06 }
+            }
+        };
 
+        // System offline i przeliczanie zysków
+        function initOfflineEarnings() {
+            let now = Date.now();
+            let elapsed = (now - game.lastTick) / 1000;
+            if (elapsed > 5) {
+                let totalSecIncome = calculateIncomePerSecond();
+                let earned = totalSecIncome * elapsed;
+                if (earned > 0) {
+                    game.money += earned;
+                    setTimeout(() => {
+                        alert(`Witaj ponownie! Podczas Twojej nieobecności Twoje imperium zarobiło: ${earned.toLocaleString('pl-PL', {maximumFractionDigits: 2})} PLN`);
+                    }, 500);
+                }
+            }
+        }
+
+        function calculateIncomePerSecond() {
+            let total = 0;
+            Object.values(game.biznesy).forEach(b => total += (b.count * b.profit * b.multiplier));
+            Object.values(game.nieruchomosci).forEach(n => total += (n.count * n.profit));
+            return total;
+        }
+
+        function calculateNetWorth() {
+            let net = game.money;
+            Object.values(game.biznesy).forEach(b => net += b.count * b.cost);
+            Object.values(game.nieruchomosci).forEach(n => net += n.count * n.cost);
+            Object.keys(game.crypto).forEach(c => net += game.crypto[c].amount * game.crypto[c].price);
+            Object.keys(game.stocks).forEach(s => net += game.stocks[s].amount * game.stocks[s].price);
+            game.deposits.forEach(d => net += d.amount);
+            return net;
+        }
+
+        // Nawigacja
         function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.tab-btn').forEach(el => {
-                el.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
-                el.classList.add('bg-cardbg', 'text-slate-400', 'border', 'border-slate-800');
-            });
-            document.getElementById('tab-' + tabId).classList.remove('hidden');
-            const activeBtn = document.getElementById('btn-' + tabId);
-            activeBtn.classList.remove('bg-cardbg', 'text-slate-400', 'border', 'border-slate-800');
-            activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-md');
-            if (tabId === 'crypto') renderCryptoMarket();
-        }
-
-        function updateWalletUI() {
-            document.getElementById('global-pln-balance').innerText = walletPLN.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' PLN';
-        }
-
-        function renderCryptoMarket() {
-            updateWalletUI();
-            const grid = document.getElementById('crypto-grid');
-            const select = document.getElementById('trade-coin');
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('tab-active'));
+            document.getElementById('tab-' + tabId).classList.add('tab-active');
             
-            select.innerHTML = cryptoAssets.map(c => `<option value="${c.id}">${c.name} (${c.symbol}) - ${c.price.toFixed(2)} PLN</option>`).join('');
+            ['biznes', 'nieruchomosci', 'bank', 'gielda'].forEach(id => {
+                let btn = document.getElementById('nav-' + id);
+                if (id === tabId) {
+                    btn.className = "flex flex-col items-center flex-1 py-1 text-blue-400 transition scale-105 font-bold";
+                } else {
+                    btn.className = "flex flex-col items-center flex-1 py-1 text-slate-400 transition";
+                }
+            });
+            renderAll();
+        }
 
-            grid.innerHTML = cryptoAssets.map(c => {
-                let changeVal = c.history.length > 1 ? ((c.price - c.history[c.history.length-2]) / c.history[c.history.length-2] * 100).toFixed(2) : '0.00';
-                let isUp = changeVal >= 0;
-                return `
-                    <div class="bg-slate-900 border border-slate-800 p-3.5 rounded-xl flex flex-col justify-between space-y-3">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <span class="text-[10px] text-slate-500 font-mono">${c.symbol}</span>
-                                <h4 class="font-bold text-white text-xs">${c.name}</h4>
-                            </div>
-                            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded ${isUp ? 'bg-emerald-950 text-emerald-400 border border-emerald-900/50' : 'bg-red-950 text-red-400 border border-red-900/50'}">${isUp ? '+' : ''}${changeVal}%</span>
-                        </div>
+        function setMarketSub(sub) {
+            game.marketMode = sub;
+            document.getElementById('sub-btn-crypto').className = sub === 'crypto' ? "py-2 rounded-xl text-xs font-bold bg-blue-600 text-white" : "py-2 rounded-xl text-xs font-bold bg-slate-900 text-slate-400 border border-slate-800";
+            document.getElementById('sub-btn-stocks').className = sub === 'stocks' ? "py-2 rounded-xl text-xs font-bold bg-blue-600 text-white" : "py-2 rounded-xl text-xs font-bold bg-slate-900 text-slate-400 border border-slate-800";
+            renderMarket();
+        }
+
+        // Pętla główna gry (zapis i odświeżanie)
+        function gameLoop() {
+            let now = Date.now();
+            let delta = (now - game.lastTick) / 1000;
+            game.lastTick = now;
+
+            let secIncome = calculateIncomePerSecond();
+            game.money += secIncome * delta;
+
+            // Obsługa lokat bankowych (odsetki co sekundę)
+            game.deposits.forEach(d => {
+                let interestPerSec = (d.amount * 0.12) / 86400; // 12% w skali roku
+                d.amount += interestPerSec * delta;
+            });
+
+            updateHeader();
+            renderActiveTab();
+            localStorage.setItem('empireUltimateSave', JSON.stringify(game));
+        }
+
+        function updateHeader() {
+            document.getElementById('money').innerText = game.money.toLocaleString('pl-PL', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' PLN';
+            document.getElementById('income-rate').innerText = '+' + calculateIncomePerSecond().toLocaleString('pl-PL', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' PLN/s';
+            document.getElementById('player-networth').innerText = 'Wartość imperium: ' + Math.floor(calculateNetWorth()).toLocaleString('pl-PL') + ' PLN';
+            
+            let nw = calculateNetWorth();
+            let title = "Początkujący Przedsiębiorca";
+            let progress = 0;
+            if (nw > 100000) { title = "Lokalny Inwestor"; progress = 25; }
+            if (nw > 1000000) { title = "Milioner Biznesu"; progress = 50; }
+            if (nw > 50000000) { title = "Magnat Finansowy"; progress = 75; }
+            if (nw > 1000000000) { title = "Miliarder / Globalny Baron"; progress = 100; }
+            
+            document.getElementById('player-title').innerText = title;
+            document.getElementById('exp-bar').style.width = progress + '%';
+        }
+
+        function renderActiveTab() {
+            if (document.getElementById('tab-biznes').classList.contains('tab-active')) renderBiznes();
+            if (document.getElementById('tab-nieruchomosci').classList.contains('tab-active')) renderNieruchomosci();
+            if (document.getElementById('tab-bank').classList.contains('tab-active')) renderBank();
+            if (document.getElementById('tab-gielda').classList.contains('tab-active')) renderMarket();
+        }
+
+        function renderAll() {
+            renderActiveTab();
+        }
+
+        // Renderowanie zakładek
+        function renderBiznes() {
+            let html = '';
+            Object.keys(game.biznesy).forEach(k => {
+                let b = game.biznesy[k];
+                html += `
+                    <div class="glass p-3.5 rounded-2xl flex justify-between items-center border border-slate-800 shadow-lg">
                         <div>
-                            <span class="text-[10px] text-slate-400 block">Cena rynkowa:</span>
-                            <span class="text-amber-400 font-mono font-bold text-sm">${c.price.toLocaleString('pl-PL', { minimumFractionDigits: 2 })} PLN</span>
+                            <div class="font-bold text-sm text-white">${b.name}</div>
+                            <div class="text-[11px] text-slate-400">Posiadasz: <span class="text-blue-400 font-bold">${b.count}</span> | Zysk: +${(b.count * b.profit * b.multiplier).toLocaleString()} PLN/s</div>
                         </div>
-                        <div class="bg-slate-950 p-2 rounded-lg border border-slate-800/80 flex justify-between text-[11px] font-mono">
-                            <span class="text-slate-400">Posiadasz:</span>
-                            <span class="text-blue-400 font-bold">${c.amount.toFixed(4)} ${c.symbol}</span>
+                        <button onclick="buyBiznes('${k}')" class="bg-blue-600 hover:bg-blue-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition">
+                            Kup <br><span class="font-mono text-[10px] text-blue-200">${Math.floor(b.cost).toLocaleString()} PLN</span>
+                        </button>
+                    </div>
+                `;
+            });
+            document.getElementById('biznes-container').innerHTML = html;
+        }
+
+        function renderNieruchomosci() {
+            let html = '';
+            Object.keys(game.nieruchomosci).forEach(k => {
+                let n = game.nieruchomosci[k];
+                html += `
+                    <div class="glass p-3.5 rounded-2xl flex justify-between items-center border border-slate-800 shadow-lg">
+                        <div>
+                            <div class="font-bold text-sm text-white">${n.name}</div>
+                            <div class="text-[11px] text-slate-400">Posiadasz: <span class="text-emerald-400 font-bold">${n.count}</span> | Czynsz: +${(n.count * n.profit).toLocaleString()} PLN/s</div>
+                        </div>
+                        <button onclick="buyNieruchomosc('${k}')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-md transition">
+                            Kup <br><span class="font-mono text-[10px] text-emerald-200">${Math.floor(n.cost).toLocaleString()} PLN</span>
+                        </button>
+                    </div>
+                `;
+            });
+            document.getElementById('nieruchomosci-container').innerHTML = html;
+        }
+
+        function renderBank() {
+            let html = game.deposits.length === 0 ? '<p class="text-xs text-slate-500 text-center py-4">Brak aktywnych lokat.</p>' : '';
+            game.deposits.forEach((d, index) => {
+                html += `
+                    <div class="glass p-3.5 rounded-2xl flex justify-between items-center border border-slate-800">
+                        <div>
+                            <div class="text-xs text-slate-400 font-mono">Lokata Terminowa #${index + 1}</div>
+                            <div class="font-bold text-emerald-400 text-sm font-mono">${d.amount.toLocaleString('pl-PL', {minimumFractionDigits: 2})} PLN</div>
+                            <div class="text-[10px] text-slate-500">Oprocentowanie: 12% w skali roku</div>
+                        </div>
+                        <button onclick="withdrawDeposit(${index})" class="bg-red-600/80 hover:bg-red-600 text-white px-3 py-1.5 rounded-xl text-xs font-bold">Wypłać</button>
+                    </div>
+                `;
+            });
+            document.getElementById('deposits-container').innerHTML = html;
+        }
+
+        function renderMarket() {
+            let container = document.getElementById('market-container');
+            let data = game.marketMode === 'crypto' ? game.crypto : game.stocks;
+            let html = '';
+
+            Object.keys(data).forEach(k => {
+                let asset = data[k];
+                let totalVal = asset.amount * asset.price;
+                html += `
+                    <div class="glass p-3.5 rounded-2xl space-y-2 border border-slate-800 shadow-lg">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-[10px] font-mono text-purple-400 font-bold">${k}</span>
+                                <div class="text-sm font-bold text-white">${asset.name}</div>
+                                <div class="text-xs font-mono text-emerald-400 font-bold">${asset.price.toLocaleString('pl-PL', {minimumFractionDigits: 2})} PLN</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-[10px] text-slate-400">Posiadasz:</span>
+                                <div class="text-xs font-mono font-bold text-blue-400">${asset.amount.toFixed(4)}</div>
+                                <div class="text-[10px] text-slate-500 font-mono">(${totalVal.toLocaleString('pl-PL', {maximumFractionDigits: 2})} PLN)</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-2 pt-1">
+                            <button onclick="tradeAsset('${game.marketMode}', '${k}', 1)" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white py-1.5 rounded-xl text-xs font-bold">KUP (1 szt)</button>
+                            <button onclick="tradeAsset('${game.marketMode}', '${k}', -1)" class="flex-1 bg-red-600 hover:bg-red-500 text-white py-1.5 rounded-xl text-xs font-bold">SPRZEDAJ</button>
                         </div>
                     </div>
                 `;
-            }).join('');
-        }
-
-        function triggerMarketTick() {
-            cryptoAssets.forEach(c => {
-                let deltaPercent = (Math.random() * 6 - 2.8);
-                c.price = Math.max(1, c.price * (1 + deltaPercent / 100));
-                c.history.push(c.price);
-                if (c.history.length > 10) c.history.shift();
             });
-            renderCryptoMarket();
+            container.innerHTML = html;
         }
 
-        function executeTrade(type) {
-            const coinId = document.getElementById('trade-coin').value;
-            const amountPLN = parseFloat(document.getElementById('trade-amount').value);
-            const coin = cryptoAssets.find(c => c.id === coinId);
+        // Akcje w grze
+        function buyBiznes(id) {
+            let b = game.biznesy[id];
+            if (game.money >= b.cost) {
+                game.money -= b.cost;
+                b.count++;
+                b.cost *= 1.18;
+                renderBiznes();
+            } else {
+                alert('Brak wystarczających środków!');
+            }
+        }
 
-            if (!amountPLN || amountPLN <= 0) {
-                alert('Wpisz poprawną kwotę w PLN!');
+        function buyNieruchomosc(id) {
+            let n = game.nieruchomosci[id];
+            if (game.money >= n.cost) {
+                game.money -= n.cost;
+                n.count++;
+                n.cost *= 1.22;
+                renderNieruchomosci();
+            } else {
+                alert('Brak wystarczających środków!');
+            }
+        }
+
+        function createDeposit() {
+            let amount = parseFloat(document.getElementById('deposit-amount').value);
+            if (!amount || amount <= 0 || amount > game.money) {
+                alert('Wpisz poprawną kwotę lokaty!');
                 return;
             }
+            game.money -= amount;
+            game.deposits.push({ amount: amount });
+            document.getElementById('deposit-amount').value = '';
+            renderBank();
+        }
 
-            if (type === 'buy') {
-                let costWithFee = amountPLN * (1 + COMMISSION_FEE);
-                if (walletPLN < costWithFee) {
-                    alert('Brak wystarczających środków w PLN (uwzględniając 1.5% prowizji)!');
-                    return;
+        function withdrawDeposit(index) {
+            game.money += game.deposits[index].amount;
+            game.deposits.splice(index, 1);
+            renderBank();
+        }
+
+        function tradeAsset(type, id, dir) {
+            let asset = game[type][id];
+            if (dir === 1) {
+                if (game.money >= asset.price) {
+                    game.money -= asset.price;
+                    asset.amount += 1;
+                } else {
+                    alert('Brak środków na zakup aktywa!');
                 }
-                walletPLN -= costWithFee;
-                let coinsBought = amountPLN / coin.price;
-                coin.amount += coinsBought;
-                alert(`Kupiono ${coinsBought.toFixed(4)} ${coin.symbol} za ${amountPLN.toFixed(2)} PLN (+ prowizja).`);
-            } else {
-                let coinsToSellValue = amountPLN / coin.price;
-                if (coin.amount < coinsToSellValue) {
-                    alert(`Nie masz tyle ${coin.symbol} na sprzedaż!`);
-                    return;
-                }
-                let revenueAfterFee = amountPLN * (1 - COMMISSION_FEE);
-                coin.amount -= coinsToSellValue;
-                walletPLN += revenueAfterFee;
-                alert(`Sprzedano za ${revenueAfterFee.toFixed(2)} PLN netto (potrącono 1.5% prowizji).`);
-            }
-            renderCryptoMarket();
-        }
-
-        setInterval(triggerMarketTick, 5000);
-
-        const canvas = document.getElementById('fpsCanvas');
-        const ctx = canvas.getContext('2d');
-        let gameInterval = null;
-        let player = { x: 200, y: 150, hp: 100, kills: 0 };
-        let enemies = [];
-        let bullets = [];
-
-        function startFpsGame() {
-            document.getElementById('fps-overlay').classList.add('hidden');
-            canvas.width = canvas.parentElement.clientWidth;
-            canvas.height = canvas.parentElement.clientHeight;
-            player.x = canvas.width / 2;
-            player.y = canvas.height - 40;
-            player.hp = 100;
-            player.kills = 0;
-            enemies = [];
-            bullets = [];
-            if (gameInterval) clearInterval(gameInterval);
-            gameInterval = setInterval(updateFpsFrame, 1000 / 60);
-        }
-
-        function movePlayer(dir) {
-            player.x += dir * 20;
-            if (player.x < 20) player.x = 20;
-            if (player.x > canvas.width - 20) player.x = canvas.width - 20;
-        }
-
-        function playerShoot() {
-            bullets.push({ x: player.x, y: player.y - 10 });
-        }
-
-        function updateFpsFrame() {
-            ctx.fillStyle = '#090d16';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            if (Math.random() < 0.04 && enemies.length < 4) {
-                enemies.push({ x: Math.random() * (canvas.width - 40) + 20, y: -10, speed: 1.2 + Math.random() * 1.5 });
-            }
-
-            ctx.fillStyle = '#3b82f6';
-            ctx.beginPath();
-            ctx.arc(player.x, player.y, 14, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.fillStyle = '#f59e0b';
-            for (let i = bullets.length - 1; i >= 0; i--) {
-                bullets[i].y -= 8;
-                ctx.beginPath();
-                ctx.arc(bullets[i].x, bullets[i].y, 3, 0, Math.PI * 2);
-                ctx.fill();
-                if (bullets[i].y < 0) bullets.splice(i, 1);
-            }
-
-            ctx.fillStyle = '#ef4444';
-            for (let i = enemies.length - 1; i >= 0; i--) {
-                enemies[i].y += enemies[i].speed;
-                ctx.beginPath();
-                ctx.arc(enemies[i].x, enemies[i].y, 14, 0, Math.PI * 2);
-                ctx.fill();
-
-                for (let b = bullets.length - 1; b >= 0; b--) {
-                    let dist = Math.hypot(bullets[b].x - enemies[i].x, bullets[b].y - enemies[i].y);
-                    if (dist < 18) {
-                        enemies.splice(i, 1);
-                        bullets.splice(b, 1);
-                        player.kills++;
-                        document.getElementById('player-kills').innerText = player.kills;
-                        break;
-                    }
-                }
-
-                if (enemies[i] && enemies[i].y > canvas.height - 20) {
-                    enemies.splice(i, 1);
-                    player.hp -= 20;
-                    document.getElementById('player-hp').innerText = player.hp;
-                    if (player.hp <= 0) {
-                        clearInterval(gameInterval);
-                        document.getElementById('fps-overlay').classList.remove('hidden');
-                        document.querySelector('#fps-overlay h3').innerText = 'Koniec Gry! Wynik: ' + player.kills;
-                    }
+            } else if (dir === -1) {
+                if (asset.amount >= 1) {
+                    asset.amount -= 1;
+                    game.money += asset.price;
+                } else {
+                    alert('Nie posiadasz tego aktywa do sprzedaży!');
                 }
             }
+            renderMarket();
         }
 
-        function generateAiGraphic() {
-            alert('Wygenerowano nową grafikę pomyślnie!');
+        function claimBonus() {
+            let bonus = calculateIncomePerSecond() * 10;
+            if (bonus < 50) bonus = 50;
+            game.money += bonus;
+            alert(`Odebrano szybki zastrzyk gotówki: +${bonus.toFixed(2)} PLN!`);
         }
 
-        renderCryptoMarket();
+        // Fluktuacje giełdowe co 4 sekundy
+        function marketTick() {
+            ['crypto', 'stocks'].forEach(type => {
+                let market = game[type];
+                Object.keys(market).forEach(k => {
+                    let asset = market[k];
+                    let change = (Math.random() - 0.48) * asset.volatility;
+                    asset.price = Math.max(0.1, asset.price * (1 + change));
+                });
+            });
+            renderActiveTab();
+        }
+
+        // Uruchomienie silnika
+        initOfflineEarnings();
+        setInterval(gameLoop, 250);       // Płynna aktualizacja ekonomii co 0.25s
+        setInterval(marketTick, 4000);   // Zmiana cen giełdowych co 4s
     </script>
 </body>
 </html>
