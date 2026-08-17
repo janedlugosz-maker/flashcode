@@ -1,450 +1,476 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Coins, Wallet, TrendingUp, TrendingDown, 
-  AlertTriangle, Zap, Heart, DollarSign, 
-  Gamepad2, ShoppingBag, Briefcase, Landmark, Skull, 
-  ChevronRight, CheckCircle2, XCircle, Lock, 
-  Trophy, Clock, Package, Compass, Sparkles, CreditCard, ArrowUpRight, ArrowDownRight, Info
-} from 'lucide-react';
-
-type LocationType = 'map' | 'job' | 'bank' | 'casino' | 'lifestyle' | 'blackmarket';
-
-interface PlayerState {
-  name: string;
-  cash: number;
-  bankBalance: number;
-  bankDebt: number;
-  cryptoWallet: {
-    BTC: number;
-    ETH: number;
-    MEME: number;
-  };
-  energy: number;
-  maxEnergy: number;
-  health: number;
-  maxHealth: number;
-  prestige: number;
-  jobId: string;
-  jobExp: number;
-  inventory: string[];
-  properties: string[];
-  cars: string[];
-  jailTimer: number;
-}
-
-interface Job {
-  id: string;
-  name: string;
-  category: 'legal' | 'crypto' | 'underground';
-  salary: number;
-  energyCost: number;
-  requiredPrestige: number;
-  description: string;
-}
-
-interface CryptoAsset {
-  symbol: 'BTC' | 'ETH' | 'MEME';
-  name: string;
-  price: number;
-  history: number[];
-  change24h: number;
-}
-
-interface LuxuryItem {
-  id: string;
-  name: string;
-  type: 'property' | 'car' | 'gadget';
-  price: number;
-  prestigeBonus: number;
-  icon: string;
-  description: string;
-}
-
-interface Toast {
-  id: string;
-  message: string;
-  type: 'success' | 'error' | 'info' | 'warning';
-}
-
-const INITIAL_PLAYER: PlayerState = {
-  name: 'Janek "CryptoDev"',
-  cash: 15000,
-  bankBalance: 5000,
-  bankDebt: 0,
-  cryptoWallet: { BTC: 0.15, ETH: 1.2, MEME: 45000 },
-  energy: 100,
-  maxEnergy: 100,
-  health: 100,
-  maxHealth: 100,
-  prestige: 12,
-  jobId: 'junior_dev',
-  jobExp: 40,
-  inventory: ['Smartfon v1'],
-  properties: ['Kawalerka w Slumsach'],
-  cars: ['Rower Miejski'],
-  jailTimer: 0,
-};
-
-const JOBS_DATA: Job[] = [
-  { id: 'junior_dev', name: 'Junior Frontend Dev', category: 'legal', salary: 450, energyCost: 15, requiredPrestige: 0, description: 'Pisanie prostych komponentów w React.' },
-  { id: 'crypto_miner', name: 'Operator Farmy Krypto', category: 'crypto', salary: 950, energyCost: 25, requiredPrestige: 10, description: 'Pilnowanie koparek i chłodzenia.' },
-  { id: 'senior_architect', name: 'Lead Web3 Architect', category: 'legal', salary: 2800, energyCost: 40, requiredPrestige: 35, description: 'Projektowanie kontraktów DeFi.' },
-  { id: 'underground_hacker', name: 'Haker z Darknetu', category: 'underground', salary: 5000, energyCost: 60, requiredPrestige: 50, description: 'Ryzykowne pentesty i wyciąganie danych.' },
-];
-
-const LUXURY_ITEMS: LuxuryItem[] = [
-  { id: 'sport_car', name: 'Cyberpunk Hypercar X9', type: 'car', price: 250000, prestigeBonus: 45, icon: '🚗', description: 'Autonomiczny potwór z fuzją jądrową.' },
-  { id: 'island_villa', name: 'Willa na The Diamond Island', type: 'property', price: 1200000, prestigeBonus: 150, icon: '🏖️', description: 'Posiadłość z prywatną przystanią.' },
-  { id: 'gold_watch', name: 'Złoty Rolex Crypto', type: 'gadget', price: 45000, prestigeBonus: 15, icon: '⌚', description: 'Zegarek z kursem Bitcoina live.' },
-];
-
-export default function CryptoLifeApp() {
-  const [currentLocation, setCurrentLocation] = useState<LocationType>('map');
-  const [player, setPlayer] = useState<PlayerState>(INITIAL_PLAYER);
-  const [toasts, setToasts] = useState<Toast[]>([]);
-  const [gameTime, setGameTime] = useState({ day: 4, hour: 14, minute: 32 });
-
-  const [cryptos, setCryptos] = useState<CryptoAsset[]>([
-    { symbol: 'BTC', name: 'Bitcoin', price: 68450, history: [65000, 68450], change24h: 3.4 },
-    { symbol: 'ETH', name: 'Ethereum', price: 3520, history: [3400, 3520], change24h: 1.8 },
-    { symbol: 'MEME', name: 'PepeGigaCoin', price: 0.045, history: [0.038, 0.045], change24h: 14.5 },
-  ]);
-
-  const [slotReels, setSlotReels] = useState<string[]>(['💎', '💎', '💎']);
-  const [slotBet, setSlotBet] = useState<number>(100);
-  const [isSpinning, setIsSpinning] = useState<boolean>(false);
-
-  const [rouletteBetAmount, setRouletteBetAmount] = useState<number>(200);
-  const [rouletteChoice, setRouletteChoice] = useState<'red' | 'black' | 'green'>('red');
-  const [rouletteResult, setRouletteResult] = useState<string | null>(null);
-
-  const [loanAmount, setLoanAmount] = useState<number>(10000);
-  const [smuggleActive, setSmuggleActive] = useState<boolean>(false);
-  const [smuggleProgress, setSmuggleProgress] = useState<number>(0);
-
-  const addToast = (message: string, type: Toast['type'] = 'info') => {
-    const id = Math.random().toString(36).substring(2, 9);
-    setToasts((prev) => [...prev, { id, message, type }]);
-    setTimeout(() => {
-      setToasts((prev) => prev.filter((t) => t.id !== id));
-    }, 4000);
-  };
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setGameTime((prev) => {
-        let newMin = prev.minute + 15;
-        let newHour = prev.hour;
-        let newDay = prev.day;
-        if (newMin >= 60) { newMin = 0; newHour += 1; }
-        if (newHour >= 24) { newHour = 0; newDay += 1; }
-        return { day: newDay, hour: newHour, minute: newMin };
-      });
-
-      if (player.jailTimer > 0) {
-        setPlayer((prev) => ({ ...prev, jailTimer: prev.jailTimer - 1 }));
-      }
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [player.jailTimer]);
-
-  const workJob = (job: Job) => {
-    if (player.energy < job.energyCost) {
-      addToast('Za mało energii! Odpocznij chwilę.', 'error');
-      return;
-    }
-    setPlayer((prev) => ({
-      ...prev,
-      cash: prev.cash + job.salary,
-      energy: prev.energy - job.energyCost,
-      jobExp: prev.jobExp + 10,
-    }));
-    addToast(`Zarobiono ${job.salary}$ pracując jako ${job.name}!`, 'success');
-  };
-
-  const tradeCrypto = (symbol: 'BTC' | 'ETH' | 'MEME', type: 'buy' | 'sell', amount: number) => {
-    const crypto = cryptos.find((c) => c.symbol === symbol);
-    if (!crypto) return;
-    const cost = amount * crypto.price;
-    if (type === 'buy') {
-      if (player.cash < cost) { addToast('Brak gotówki!', 'error'); return; }
-      setPlayer((prev) => ({
-        ...prev,
-        cash: prev.cash - cost,
-        cryptoWallet: { ...prev.cryptoWallet, [symbol]: prev.cryptoWallet[symbol] + amount }
-      }));
-      addToast(`Kupiono ${amount} ${symbol}`, 'success');
-    } else {
-      if (player.cryptoWallet[symbol] < amount) { addToast('Nie masz tylu monet!', 'error'); return; }
-      setPlayer((prev) => ({
-        ...prev,
-        cash: prev.cash + cost,
-        cryptoWallet: { ...prev.cryptoWallet, [symbol]: prev.cryptoWallet[symbol] - amount }
-      }));
-      addToast(`Sprzedano ${amount} ${symbol}`, 'success');
-    }
-  };
-
-  const spinSlots = () => {
-    if (player.cash < slotBet) { addToast('Za mało gotówki!', 'error'); return; }
-    setPlayer((prev) => ({ ...prev, cash: prev.cash - slotBet }));
-    setIsSpinning(true);
-    setTimeout(() => {
-      const symbols = ['💎', '🍒', '7️⃣', '🍋', '⭐'];
-      const r1 = symbols[Math.floor(Math.random() * symbols.length)];
-      const r2 = symbols[Math.floor(Math.random() * symbols.length)];
-      const r3 = symbols[Math.floor(Math.random() * symbols.length)];
-      setSlotReels([r1, r2, r3]);
-      setIsSpinning(false);
-      if (r1 === r2 && r2 === r3) {
-        const win = slotBet * 10;
-        setPlayer((prev) => ({ ...prev, cash: prev.cash + win }));
-        addToast(`JACKPOT! +${win}$`, 'success');
-      } else {
-        addToast('Przegrana w slotach.', 'warning');
-      }
-    }, 800);
-  };
-
-  const playRoulette = () => {
-    if (player.cash < rouletteBetAmount) { addToast('Za mało gotówki!', 'error'); return; }
-    setPlayer((prev) => ({ ...prev, cash: prev.cash - rouletteBetAmount }));
-    const roll = Math.floor(Math.random() * 37);
-    const color = roll === 0 ? 'green' : roll % 2 === 0 ? 'red' : 'black';
-    setRouletteResult(`Wylosowano: ${roll} (${color.toUpperCase()})`);
-    if (color === rouletteChoice) {
-      const win = rouletteBetAmount * (color === 'green' ? 14 : 2);
-      setPlayer((prev) => ({ ...prev, cash: prev.cash + win }));
-      addToast(`Wygrana w ruletce! +${win}$`, 'success');
-    } else {
-      addToast('Przegrana w ruletce.', 'error');
-    }
-  };
-
-  const buyLuxuryItem = (item: LuxuryItem) => {
-    if (player.cash < item.price) { addToast('Za mało gotówki!', 'error'); return; }
-    setPlayer((prev) => ({
-      ...prev,
-      cash: prev.cash - item.price,
-      prestige: prev.prestige + item.prestigeBonus,
-      properties: item.type === 'property' ? [...prev.properties, item.name] : prev.properties,
-      cars: item.type === 'car' ? [...prev.cars, item.name] : prev.cars,
-    }));
-    addToast(`Kupiono ${item.name}! Prestiż +${item.prestigeBonus}`, 'success');
-  };
-
-  const startSmuggling = () => {
-    if (player.energy < 30) { addToast('Za mało energii!', 'error'); return; }
-    setSmuggleActive(true);
-    setSmuggleProgress(0);
-    setPlayer((prev) => ({ ...prev, energy: prev.energy - 30 }));
-    const interval = setInterval(() => {
-      setSmuggleProgress((p) => {
-        if (p >= 100) {
-          clearInterval(interval);
-          setSmuggleActive(false);
-          if (Math.random() < 0.4) {
-            setPlayer((prev) => ({ ...prev, jailTimer: 30, cash: Math.max(0, prev.cash - 1000) }));
-            addToast('Wpadka! Areszt na 30 sekund.', 'error');
-          } else {
-            const reward = 5000;
-            setPlayer((prev) => ({ ...prev, cash: prev.cash + reward }));
-            addToast(`Przemyt udany! +${reward}$`, 'success');
-          }
-          return 100;
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoLife RP - Ultimate Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
         }
-        return p + 50;
-      });
-    }, 400);
-  };
+        .animate-pulse-slow { animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col select-none">
 
-  return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans flex flex-col select-none">
-      
-      {/* Toast Messages */}
-      <div className="fixed top-20 right-4 z-50 flex flex-col gap-2 pointer-events-none">
-        {toasts.map((t) => (
-          <div key={t.id} className="pointer-events-auto px-4 py-3 rounded-xl bg-slate-900 border border-emerald-500/50 shadow-2xl flex items-center gap-3 text-xs font-semibold text-white">
-            <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
-            <span>{t.message}</span>
-          </div>
-        ))}
-      </div>
+    <!-- Powiadomienia (Toast) -->
+    <div id="toast-container" class="fixed top-20 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-      {/* Jail Banner */}
-      {player.jailTimer > 0 && (
-        <div className="bg-rose-950 border-b border-rose-500 px-4 py-2 text-center text-rose-200 text-xs font-bold">
-          🚨 ARESZT POLICYJNY: {player.jailTimer}s do zwolnienia!
-        </div>
-      )}
-
-      {/* Header */}
-      <header className="sticky top-0 z-30 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 py-3 flex items-center justify-between gap-2">
-        <div className="flex items-center gap-2 cursor-pointer" onClick={() => setCurrentLocation('map')}>
-          <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center text-slate-950 font-black">
-            <Coins className="w-5 h-5" />
-          </div>
-          <span className="font-extrabold text-sm bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
-            CryptoLife RP
-          </span>
-        </div>
-
-        <div className="flex items-center gap-2 text-xs font-medium overflow-x-auto py-1">
-          <span className="bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800 text-emerald-400">💵 ${player.cash.toLocaleString()}</span>
-          <span className="bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800 text-amber-400">⚡ {player.energy}</span>
-          <span className="bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800 text-yellow-400">🏆 {player.prestige}XP</span>
-        </div>
-      </header>
-
-      {/* Content */}
-      <main className="flex-1 max-w-5xl w-full mx-auto p-4">
-        {currentLocation !== 'map' && (
-          <button 
-            onClick={() => setCurrentLocation('map')}
-            className="mb-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 hover:text-white"
-          >
-            <Compass className="w-3.5 h-3.5 text-emerald-400" /> Powrót na Mapę
-          </button>
-        )}
-
-        {currentLocation === 'map' && (
-          <div className="space-y-6">
-            <div className="text-center space-y-2">
-              <h2 className="text-2xl font-black text-white">Wyspa Kasyn i Banków</h2>
-              <p className="text-xs text-slate-400">Wybierz miejsce docelowe:</p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div onClick={() => setCurrentLocation('job')} className="p-5 bg-slate-900 border border-slate-800 rounded-2xl cursor-pointer hover:border-emerald-500/50 transition-all flex items-center justify-between">
-                <div>
-                  <h3 className="font-bold text-sm text-white flex items-center gap-2"><Briefcase className="w-4 h-4 text-emerald-400" /> Strefa Pracy</h3>
-                  <p className="text-xs text-slate-400 mt-1">Zarabiaj jako dev lub krypto-operator.</p>
-                </div>
-                <ChevronRight className="w-5 h-5 text-slate-500" />
-              </div>
-
-              <div onClick={() => setCurrentLocation('bank')} className="p-5 bg-slate-900 border border-slate-800 rounded-2xl cursor-pointer hover:border-teal-500/50 transition-all flex items-center justify-between">
-                <div>
-                  <h3 className="font-bold text-sm text-white flex items-center gap-2"><Landmark className="w-4 h-4 text-teal-400" /> Bank & Giełda Krypto</h3>
-                  <p className="text-xs text-slate-400 mt-1">Handluj BTC i ETH w czasie rzeczywistym.</p>
-                </div>
-                <ChevronRight className="w-5 h-5 text-slate-500" />
-              </div>
-
-              <div onClick={() => setCurrentLocation('casino')} className="p-5 bg-slate-900 border border-slate-800 rounded-2xl cursor-pointer hover:border-amber-500/50 transition-all flex items-center justify-between">
-                <div>
-                  <h3 className="font-bold text-sm text-white flex items-center gap-2"><Gamepad2 className="w-4 h-4 text-amber-400" /> Kasyno</h3>
-                  <p className="text-xs text-slate-400 mt-1">Automaty slotowe i amerykańska ruletka.</p>
-                </div>
-                <ChevronRight className="w-5 h-5 text-slate-500" />
-              </div>
-
-              <div onClick={() => setCurrentLocation('lifestyle')} className="p-5 bg-slate-900 border border-slate-800 rounded-2xl cursor-pointer hover:border-yellow-500/50 transition-all flex items-center justify-between">
-                <div>
-                  <h3 className="font-bold text-sm text-white flex items-center gap-2"><ShoppingBag className="w-4 h-4 text-yellow-400" /> Sklep z Luksusami</h3>
-                  <p className="text-xs text-slate-400 mt-1">Kupuj wille, auta i podnoś prestiż.</p>
-                </div>
-                <ChevronRight className="w-5 h-5 text-slate-500" />
-              </div>
-
-              <div onClick={() => setCurrentLocation('blackmarket')} className="p-5 bg-slate-900 border border-slate-800 rounded-2xl cursor-pointer hover:border-rose-500/50 transition-all flex items-center justify-between sm:col-span-2">
-                <div>
-                  <h3 className="font-bold text-sm text-white flex items-center gap-2"><Skull className="w-4 h-4 text-rose-400" /> Czarny Rynek</h3>
-                  <p className="text-xs text-slate-400 mt-1">Ryzykowne akcje przemytu.</p>
-                </div>
-                <ChevronRight className="w-5 h-5 text-slate-500" />
-              </div>
-            </div>
-          </div>
-        )}
-
-        {currentLocation === 'job' && (
-          <div className="space-y-4">
-            <h2 className="text-lg font-bold text-white">Strefa Pracy</h2>
-            <div className="grid gap-4">
-              {JOBS_DATA.map((job) => (
-                <div key={job.id} className="p-4 bg-slate-900 border border-slate-800 rounded-2xl flex items-center justify-between gap-4">
-                  <div>
-                    <h3 className="font-bold text-sm text-white">{job.name}</h3>
-                    <p className="text-xs text-slate-400">{job.description}</p>
-                    <span className="text-xs text-emerald-400 font-semibold mt-1 inline-block">+${job.salary} / zmiana</span>
-                  </div>
-                  <button onClick={() => workJob(job)} className="px-4 py-2 bg-emerald-500 text-slate-950 font-bold text-xs rounded-xl shrink-0">
-                    Pracuj
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {currentLocation === 'bank' && (
-          <div className="space-y-4">
-            <h2 className="text-lg font-bold text-white">Giełda Krypto</h2>
-            <div className="grid gap-4">
-              {cryptos.map((c) => (
-                <div key={c.symbol} className="p-4 bg-slate-900 border border-slate-800 rounded-2xl flex items-center justify-between">
-                  <div>
-                    <span className="font-bold text-white text-sm">{c.symbol}</span>
-                    <div className="text-emerald-400 font-black text-base">${c.price.toLocaleString()}</div>
-                  </div>
-                  <div className="flex gap-2">
-                    <button onClick={() => tradeCrypto(c.symbol, 'buy', c.symbol === 'MEME' ? 1000 : 0.1)} className="px-3 py-1.5 bg-emerald-500/20 text-emerald-400 font-bold text-xs rounded-xl border border-emerald-500/30">Kup</button>
-                    <button onClick={() => tradeCrypto(c.symbol, 'sell', c.symbol === 'MEME' ? 1000 : 0.1)} className="px-3 py-1.5 bg-rose-500/20 text-rose-400 font-bold text-xs rounded-xl border border-rose-500/30">Sprzedaj</button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {currentLocation === 'casino' && (
-          <div className="space-y-6">
-            <h2 className="text-lg font-bold text-white">Kasyno</h2>
-            <div className="p-5 bg-slate-900 border border-slate-800 rounded-2xl text-center space-y-4">
-              <h3 className="text-sm font-bold text-amber-400">Automaty Slotowe</h3>
-              <div className="flex justify-center gap-3 text-3xl">
-                {slotReels.map((s, i) => <span key={i} className="p-3 bg-slate-950 rounded-xl border border-slate-800">{s}</span>)}
-              </div>
-              <button onClick={spinSlots} disabled={isSpinning} className="w-full py-3 bg-amber-500 text-slate-950 font-bold text-xs rounded-xl">
-                {isSpinning ? 'Kręcenie...' : `Zakręć (${slotBet}$)`}
-              </button>
-            </div>
-          </div>
-        )}
-
-        {currentLocation === 'lifestyle' && (
-          <div className="space-y-4">
-            <h2 className="text-lg font-bold text-white">Sklep z Luksusami</h2>
-            <div className="grid gap-4">
-              {LUXURY_ITEMS.map((item) => (
-                <div key={item.id} className="p-4 bg-slate-900 border border-slate-800 rounded-2xl flex items-center justify-between">
-                  <div>
-                    <span className="text-xl">{item.icon}</span>
-                    <h3 className="font-bold text-sm text-white mt-1">{item.name}</h3>
-                    <span className="text-xs text-yellow-400 font-bold">${item.price.toLocaleString()}</span>
-                  </div>
-                  <button onClick={() => buyLuxuryItem(item)} className="px-4 py-2 bg-yellow-500 text-slate-950 font-bold text-xs rounded-xl">Kup</button>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {currentLocation === 'blackmarket' && (
-          <div className="space-y-4 text-center">
-            <h2 className="text-lg font-bold text-white">Czarny Rynek</h2>
-            <div className="p-6 bg-slate-900 border border-slate-800 rounded-2xl space-y-4">
-              <p className="text-xs text-slate-400">Ryzykowny przemyt danych przez darknet.</p>
-              {smuggleActive && <div className="text-xs font-bold text-rose-400">Postęp: {smuggleProgress}%</div>}
-              <button onClick={startSmuggling} disabled={smuggleActive} className="w-full py-3 bg-rose-500 text-slate-950 font-bold text-xs rounded-xl">
-                Start Przemytu (-30 Energii)
-              </button>
-            </div>
-          </div>
-        )}
-      </main>
-
+    <!-- Baner więzienia -->
+    <div id="jail-banner" class="hidden bg-rose-950 border-b border-rose-500 px-4 py-2 text-center text-rose-200 text-xs font-bold animate-pulse-slow">
+        🚨 ARESZT POLICYJNY: <span id="jail-timer">0</span>s do zwolnienia!
     </div>
-  );
-}
+
+    <!-- Nagłówek statystyk -->
+    <header class="sticky top-0 z-30 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 py-3 flex items-center justify-between gap-2 shadow-lg">
+        <div class="flex items-center gap-2 cursor-pointer" onclick="switchLocation('map')">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-slate-950 font-black shadow-md shadow-emerald-500/20">💎</div>
+            <div>
+                <span class="font-extrabold text-sm bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent block">
+                    CryptoLife RP
+                </span>
+                <span id="player-title" class="text-[10px] text-slate-400 block font-medium">Junior Dev</span>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-2 text-xs font-semibold overflow-x-auto py-1">
+            <div class="bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800 flex items-center gap-1.5 shadow-inner">
+                <span class="text-emerald-400">💵</span>
+                <span id="stat-cash" class="text-emerald-300">15,000</span>
+            </div>
+            <div class="bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800 flex items-center gap-1.5 shadow-inner">
+                <span class="text-amber-400">⚡</span>
+                <span id="stat-energy" class="text-amber-300">100</span>/<span id="stat-max-energy">100</span>
+            </div>
+            <div class="bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800 flex items-center gap-1.5 shadow-inner">
+                <span class="text-yellow-400">🏆</span>
+                <span id="stat-prestige" class="text-yellow-300">12</span> XP
+            </div>
+        </div>
+    </header>
+
+    <!-- Główna zawartość -->
+    <main class="flex-1 max-w-4xl w-full mx-auto p-4 pb-12">
+        <button id="back-btn" onclick="switchLocation('map')" class="hidden mb-4 items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 hover:text-white hover:border-slate-700 transition-all shadow-md">
+            🧭 Powrót na Mapę
+        </button>
+
+        <!-- 1. MAPA MIASTA -->
+        <div id="view-map" class="space-y-6">
+            <div class="text-center space-y-2 py-2">
+                <h2 class="text-2xl font-black text-white tracking-tight">Wyspa Kasyn i Korporacji</h2>
+                <p class="text-xs text-slate-400">Wybierz lokację, aby kontynuować swoją karierę:</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div onclick="switchLocation('job')" class="p-5 bg-slate-900/80 backdrop-blur border border-slate-800/80 rounded-2xl cursor-pointer hover:border-emerald-500/50 hover:bg-slate-900 transition-all group shadow-xl flex items-center justify-between">
+                    <div class="space-y-1">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-sm mb-2 group-hover:scale-110 transition-transform">💼</div>
+                        <h3 class="font-bold text-sm text-white">Strefa Pracy</h3>
+                        <p class="text-xs text-slate-400">Zarabiaj jako programista lub lider Web3.</p>
+                    </div>
+                    <span class="text-slate-600 group-hover:text-emerald-400 transition-colors">➔</span>
+                </div>
+
+                <div onclick="switchLocation('bank')" class="p-5 bg-slate-900/80 backdrop-blur border border-slate-800/80 rounded-2xl cursor-pointer hover:border-teal-500/50 hover:bg-slate-900 transition-all group shadow-xl flex items-center justify-between">
+                    <div class="space-y-1">
+                        <div class="w-8 h-8 rounded-lg bg-teal-500/10 text-teal-400 flex items-center justify-center font-bold text-sm mb-2 group-hover:scale-110 transition-transform">🏛️</div>
+                        <h3 class="font-bold text-sm text-white">Bank & Giełda Krypto</h3>
+                        <p class="text-xs text-slate-400">Lokaty, kredyty oraz giełda BTC/ETH/MEME.</p>
+                    </div>
+                    <span class="text-slate-600 group-hover:text-teal-400 transition-colors">➔</span>
+                </div>
+
+                <div onclick="switchLocation('casino')" class="p-5 bg-slate-900/80 backdrop-blur border border-slate-800/80 rounded-2xl cursor-pointer hover:border-amber-500/50 hover:bg-slate-900 transition-all group shadow-xl flex items-center justify-between">
+                    <div class="space-y-1">
+                        <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold text-sm mb-2 group-hover:scale-110 transition-transform">🎰</div>
+                        <h3 class="font-bold text-sm text-white">Kasyno Diamond</h3>
+                        <p class="text-xs text-slate-400">Automaty slotowe oraz amerykańska ruletka.</p>
+                    </div>
+                    <span class="text-slate-600 group-hover:text-amber-400 transition-colors">➔</span>
+                </div>
+
+                <div onclick="switchLocation('lifestyle')" class="p-5 bg-slate-900/80 backdrop-blur border border-slate-800/80 rounded-2xl cursor-pointer hover:border-yellow-500/50 hover:bg-slate-900 transition-all group shadow-xl flex items-center justify-between">
+                    <div class="space-y-1">
+                        <div class="w-8 h-8 rounded-lg bg-yellow-500/10 text-yellow-400 flex items-center justify-center font-bold text-sm mb-2 group-hover:scale-110 transition-transform">🛍️</div>
+                        <h3 class="font-bold text-sm text-white">Sklep z Luksusami</h3>
+                        <p class="text-xs text-slate-400">Kupuj superauta, wille i zegarki prestiżu.</p>
+                    </div>
+                    <span class="text-slate-600 group-hover:text-yellow-400 transition-colors">➔</span>
+                </div>
+
+                <div onclick="switchLocation('blackmarket')" class="p-5 bg-slate-900/80 backdrop-blur border border-slate-800/80 rounded-2xl cursor-pointer hover:border-rose-500/50 hover:bg-slate-900 transition-all group shadow-xl flex items-center justify-between sm:col-span-2">
+                    <div class="space-y-1">
+                        <div class="w-8 h-8 rounded-lg bg-rose-500/10 text-rose-400 flex items-center justify-center font-bold text-sm mb-2 group-hover:scale-110 transition-transform">💀</div>
+                        <h3 class="font-bold text-sm text-white">Czarny Rynek</h3>
+                        <p class="text-xs text-slate-400">Ryzykowne akcje darknetu i nielegalne operacje.</p>
+                    </div>
+                    <span class="text-slate-600 group-hover:text-rose-400 transition-colors">➔</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. STREFA PRACY -->
+        <div id="view-job" class="hidden space-y-4">
+            <h2 class="text-lg font-bold text-white flex items-center gap-2">💼 Strefa Pracy</h2>
+            <div class="grid gap-4">
+                <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl flex items-center justify-between gap-4">
+                    <div>
+                        <h3 class="font-bold text-sm text-white">Junior Frontend Dev</h3>
+                        <p class="text-xs text-slate-400">Pisanie prostych komponentów w React.</p>
+                        <span class="text-xs text-emerald-400 font-semibold mt-1 inline-block">+$450 (15 Energii)</span>
+                    </div>
+                    <button onclick="work(450, 15, 10)" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs rounded-xl shadow-lg transition-all shrink-0">Pracuj</button>
+                </div>
+                <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl flex items-center justify-between gap-4">
+                    <div>
+                        <h3 class="font-bold text-sm text-white">Operator Farmy Krypto</h3>
+                        <p class="text-xs text-slate-400">Pilnowanie chłodzenia koparek w datacenter.</p>
+                        <span class="text-xs text-emerald-400 font-semibold mt-1 inline-block">+$950 (25 Energii)</span>
+                    </div>
+                    <button onclick="work(950, 25, 20)" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs rounded-xl shadow-lg transition-all shrink-0">Pracuj</button>
+                </div>
+                <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl flex items-center justify-between gap-4">
+                    <div>
+                        <h3 class="font-bold text-sm text-white">Lead Web3 Architect</h3>
+                        <p class="text-xs text-slate-400">Projektowanie zaawansowanych kontraktów DeFi.</p>
+                        <span class="text-xs text-emerald-400 font-semibold mt-1 inline-block">+$2,800 (40 Energii)</span>
+                    </div>
+                    <button onclick="work(2800, 40, 45)" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs rounded-xl shadow-lg transition-all shrink-0">Pracuj</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. BANK & GIEŁDA KRYPTO -->
+        <div id="view-bank" class="hidden space-y-6">
+            <h2 class="text-lg font-bold text-white flex items-center gap-2">🏛️ Bank Centralny & Giełda</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl space-y-3">
+                    <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider">Konto Oszczędnościowe</h3>
+                    <div class="text-lg font-black text-white">$<span id="bank-balance">5,000</span></div>
+                    <div class="flex gap-2">
+                        <button onclick="depositBank(1000)" class="flex-1 py-2 bg-teal-500/20 text-teal-300 border border-teal-500/30 font-bold text-xs rounded-xl">Wpłać $1k</button>
+                        <button onclick="withdrawBank(1000)" class="flex-1 py-2 bg-slate-800 text-slate-300 font-bold text-xs rounded-xl">Wypłać $1k</button>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl space-y-3">
+                    <h3 class="text-xs font-bold text-rose-400 uppercase tracking-wider">Portfel Krypto (Stan)</h3>
+                    <div class="text-xs space-y-1 text-slate-300">
+                        <div>BTC: <span id="crypto-btc" class="font-bold text-white">0.15</span></div>
+                        <div>ETH: <span id="crypto-eth" class="font-bold text-white">1.20</span></div>
+                        <div>MEME: <span id="crypto-meme" class="font-bold text-white">45,000</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <h3 class="text-sm font-bold text-white">Notowania Rynkowe Live</h3>
+                <div class="grid gap-3">
+                    <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl flex items-center justify-between">
+                        <div>
+                            <span class="font-bold text-white text-sm">Bitcoin (BTC)</span>
+                            <div class="text-emerald-400 font-black text-base">$<span id="price-btc">68,450</span></div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="tradeCrypto('BTC', 'buy')" class="px-3 py-1.5 bg-emerald-500/20 text-emerald-400 font-bold text-xs rounded-xl border border-emerald-500/30">Kup 0.05</button>
+                            <button onclick="tradeCrypto('BTC', 'sell')" class="px-3 py-1.5 bg-rose-500/20 text-rose-400 font-bold text-xs rounded-xl border border-rose-500/30">Sprzedaj</button>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl flex items-center justify-between">
+                        <div>
+                            <span class="font-bold text-white text-sm">Ethereum (ETH)</span>
+                            <div class="text-emerald-400 font-black text-base">$<span id="price-eth">3,520</span></div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="tradeCrypto('ETH', 'buy')" class="px-3 py-1.5 bg-emerald-500/20 text-emerald-400 font-bold text-xs rounded-xl border border-emerald-500/30">Kup 0.5</button>
+                            <button onclick="tradeCrypto('ETH', 'sell')" class="px-3 py-1.5 bg-rose-500/20 text-rose-400 font-bold text-xs rounded-xl border border-rose-500/30">Sprzedaj</button>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl flex items-center justify-between">
+                        <div>
+                            <span class="font-bold text-white text-sm">PepeGigaCoin (MEME)</span>
+                            <div class="text-emerald-400 font-black text-base">$<span id="price-meme">0.045</span></div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="tradeCrypto('MEME', 'buy')" class="px-3 py-1.5 bg-emerald-500/20 text-emerald-400 font-bold text-xs rounded-xl border border-emerald-500/30">Kup 10k</button>
+                            <button onclick="tradeCrypto('MEME', 'sell')" class="px-3 py-1.5 bg-rose-500/20 text-rose-400 font-bold text-xs rounded-xl border border-rose-500/30">Sprzedaj</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. KASYNO -->
+        <div id="view-casino" class="hidden space-y-6">
+            <h2 class="text-lg font-bold text-white flex items-center gap-2">🎰 Kasyno Diamond</h2>
+            
+            <div class="p-5 bg-slate-900 border border-slate-800 rounded-2xl text-center space-y-4 shadow-xl">
+                <h3 class="text-sm font-bold text-amber-400">Automaty Slotowe (Multiplier x10)</h3>
+                <div id="slot-reels" class="flex justify-center gap-3 text-4xl">
+                    <span class="p-4 bg-slate-950 rounded-xl border border-slate-800 shadow-inner">💎</span>
+                    <span class="p-4 bg-slate-950 rounded-xl border border-slate-800 shadow-inner">💎</span>
+                    <span class="p-4 bg-slate-950 rounded-xl border border-slate-800 shadow-inner">💎</span>
+                </div>
+                <button onclick="spinSlots()" class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl shadow-lg transition-all">Zakręć Automat ($100)</button>
+            </div>
+
+            <div class="p-5 bg-slate-900 border border-slate-800 rounded-2xl text-center space-y-4 shadow-xl">
+                <h3 class="text-sm font-bold text-amber-400">Amerykańska Ruletka</h3>
+                <p class="text-xs text-slate-400">Wybierz kolor i podwoje swoją stawkę!</p>
+                <div class="flex justify-center gap-2">
+                    <button onclick="playRoulette('red')" class="px-4 py-2 bg-rose-600 text-white font-bold text-xs rounded-xl shadow">Czerwone (x2)</button>
+                    <button onclick="playRoulette('black')" class="px-4 py-2 bg-slate-950 text-white border border-slate-700 font-bold text-xs rounded-xl shadow">Czarne (x2)</button>
+                    <button onclick="playRoulette('green')" class="px-4 py-2 bg-emerald-600 text-white font-bold text-xs rounded-xl shadow">Zielone (x14)</button>
+                </div>
+                <div id="roulette-result" class="text-xs font-semibold text-slate-300 h-5">Wynik losowania: Brak</div>
+            </div>
+        </div>
+
+        <!-- 5. SKLEP Z LUKSUSAMI -->
+        <div id="view-lifestyle" class="hidden space-y-4">
+            <h2 class="text-lg font-bold text-white flex items-center gap-2">🛍️ Sklep z Luksusami</h2>
+            <div class="grid gap-4">
+                <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl flex items-center justify-between gap-4">
+                    <div>
+                        <span class="text-2xl">⌚</span>
+                        <h3 class="font-bold text-sm text-white mt-1">Złoty Rolex Crypto Edition</h3>
+                        <p class="text-xs text-slate-400">Zegarek z live tickerem kursu BTC.</p>
+                        <span class="text-xs text-yellow-400 font-bold mt-1 inline-block">$45,000 (Prestiż +15)</span>
+                    </div>
+                    <button onclick="buyItem(45000, 15, 'Złoty Rolex')" class="px-4 py-2 bg-yellow-500 hover:bg-yellow-400 text-slate-950 font-bold text-xs rounded-xl shadow-lg shrink-0">Kup</button>
+                </div>
+                <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl flex items-center justify-between gap-4">
+                    <div>
+                        <span class="text-2xl">🚗</span>
+                        <h3 class="font-bold text-sm text-white mt-1">Cyberpunk Hypercar X9</h3>
+                        <p class="text-xs text-slate-400">Autonomiczny pojazd zasilany fuzją jądrową.</p>
+                        <span class="text-xs text-yellow-400 font-bold mt-1 inline-block">$250,000 (Prestiż +45)</span>
+                    </div>
+                    <button onclick="buyItem(250000, 45, 'Hypercar X9')" class="px-4 py-2 bg-yellow-500 hover:bg-yellow-400 text-slate-950 font-bold text-xs rounded-xl shadow-lg shrink-0">Kup</button>
+                </div>
+                <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl flex items-center justify-between gap-4">
+                    <div>
+                        <span class="text-2xl">🏖️</span>
+                        <h3 class="font-bold text-sm text-white mt-1">Willa na Diamond Island</h3>
+                        <p class="text-xs text-slate-400">Posiadłość z prywatnym helipadem i bazą danych.</p>
+                        <span class="text-xs text-yellow-400 font-bold mt-1 inline-block">$1,200,000 (Prestiż +150)</span>
+                    </div>
+                    <button onclick="buyItem(1200000, 150, 'Willa Diamond')" class="px-4 py-2 bg-yellow-500 hover:bg-yellow-400 text-slate-950 font-bold text-xs rounded-xl shadow-lg shrink-0">Kup</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. CZARNY RYNEK -->
+        <div id="view-blackmarket" class="hidden space-y-4 text-center">
+            <h2 class="text-lg font-bold text-white flex items-center justify-center gap-2">💀 Czarny Rynek</h2>
+            <div class="p-6 bg-slate-900 border border-slate-800 rounded-2xl space-y-4 shadow-xl">
+                <p class="text-xs text-slate-400">Nielegalny przemyt poufnych danych przez sieć Tor. Istnieje 40% szans na wpadkę i areszt policyjny!</p>
+                <div id="smuggle-status" class="text-xs font-bold text-rose-400"></div>
+                <button onclick="smuggle()" class="w-full py-3 bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs rounded-xl shadow-lg transition-all">Start Przemytu (-30 Energii, Nagroda: $5,000)</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Stan Gry
+        let player = {
+            cash: 15000,
+            bankBalance: 5000,
+            energy: 100,
+            maxEnergy: 100,
+            prestige: 12,
+            jailTimer: 0,
+            crypto: { BTC: 0.15, ETH: 1.2, MEME: 45000 }
+        };
+
+        let prices = { BTC: 68450, ETH: 3520, MEME: 0.045 };
+
+        function updateUI() {
+            document.getElementById('stat-cash').innerText = player.cash.toLocaleString();
+            document.getElementById('bank-balance').innerText = player.bankBalance.toLocaleString();
+            document.getElementById('stat-energy').innerText = player.energy;
+            document.getElementById('stat-max-energy').innerText = player.maxEnergy;
+            document.getElementById('stat-prestige').innerText = player.prestige;
+
+            document.getElementById('crypto-btc').innerText = player.crypto.BTC.toFixed(2);
+            document.getElementById('crypto-eth').innerText = player.crypto.ETH.toFixed(2);
+            document.getElementById('crypto-meme').innerText = player.crypto.MEME.toLocaleString();
+
+            document.getElementById('price-btc').innerText = prices.BTC.toLocaleString();
+            document.getElementById('price-eth').innerText = prices.ETH.toLocaleString();
+            document.getElementById('price-meme').innerText = prices.MEME;
+
+            // Tytuł gracza
+            let title = "Junior Dev";
+            if (player.prestige > 50) title = "Senior Web3 Architect";
+            if (player.prestige > 150) title = "Crypto Tycoon";
+            if (player.prestige > 300) title = "Cyber Baron";
+            document.getElementById('player-title').innerText = title;
+
+            // Więzienie
+            const jailBanner = document.getElementById('jail-banner');
+            if (player.jailTimer > 0) {
+                jailBanner.classList.remove('hidden');
+                document.getElementById('jail-timer').innerText = player.jailTimer;
+            } else {
+                jailBanner.classList.add('hidden');
+            }
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = "pointer-events-auto px-4 py-3 rounded-xl bg-slate-900 border border-emerald-500/50 shadow-2xl flex items-center gap-3 text-xs font-semibold text-white";
+            toast.innerHTML = `✨ <span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 4000);
+        }
+
+        function switchLocation(loc) {
+            ['map', 'job', 'bank', 'casino', 'lifestyle', 'blackmarket'].forEach(id => {
+                document.getElementById('view-' + id).classList.add('hidden');
+            });
+            document.getElementById('view-' + loc).classList.remove('hidden');
+            
+            const backBtn = document.getElementById('back-btn');
+            if (loc === 'map') {
+                backBtn.classList.add('hidden');
+                backBtn.classList.remove('inline-flex');
+            } else {
+                backBtn.classList.remove('hidden');
+                backBtn.classList.add('inline-flex');
+            }
+        }
+
+        function work(salary, energyCost, xpGain) {
+            if (player.jailTimer > 0) { showToast('Jesteś w areszcie!'); return; }
+            if (player.energy < energyCost) { showToast('Za mało energii! Odpocznij chwilę.'); return; }
+            player.cash += salary;
+            player.energy -= energyCost;
+            player.prestige += xpGain;
+            updateUI();
+            showToast(`Zarobiono $${salary} i zdobyto ${xpGain} XP!`);
+        }
+
+        function depositBank(amount) {
+            if (player.cash < amount) { showToast('Brak gotówki w portfelu!'); return; }
+            player.cash -= amount;
+            player.bankBalance += amount;
+            updateUI();
+            showToast(`Wpłacono $${amount} do banku.`);
+        }
+
+        function withdrawBank(amount) {
+            if (player.bankBalance < amount) { showToast('Brak środków na koncie bankowym!'); return; }
+            player.bankBalance -= amount;
+            player.cash += amount;
+            updateUI();
+            showToast(`Wypłacono $${amount} z banku.`);
+        }
+
+        function tradeCrypto(symbol, type) {
+            let cost = symbol === 'BTC' ? prices.BTC * 0.05 : symbol === 'ETH' ? prices.ETH * 0.5 : prices.MEME * 10000;
+            let qty = symbol === 'BTC' ? 0.05 : symbol === 'ETH' ? 0.5 : 10000;
+
+            if (type === 'buy') {
+                if (player.cash < cost) { showToast('Za mało gotówki!'); return; }
+                player.cash -= cost;
+                player.crypto[symbol] += qty;
+                showToast(`Kupiono ${qty} ${symbol}`);
+            } else {
+                if (player.crypto[symbol] < qty) { showToast(`Nie masz tylu jednostek ${symbol}!`); return; }
+                player.crypto[symbol] -= qty;
+                player.cash += cost;
+                showToast(`Sprzedano ${qty} ${symbol} za $${cost.toFixed(2)}`);
+            }
+            updateUI();
+        }
+
+        function spinSlots() {
+            if (player.cash < 100) { showToast('Za mało gotówki na automaty ($100)!'); return; }
+            player.cash -= 100;
+            const symbols = ['💎', '🍒', '7️⃣', '🍋', '⭐'];
+            const r1 = symbols[Math.floor(Math.random() * symbols.length)];
+            const r2 = symbols[Math.floor(Math.random() * symbols.length)];
+            const r3 = symbols[Math.floor(Math.random() * symbols.length)];
+            
+            document.getElementById('slot-reels').innerHTML = `
+                <span class="p-4 bg-slate-950 rounded-xl border border-slate-800 shadow-inner">${r1}</span>
+                <span class="p-4 bg-slate-950 rounded-xl border border-slate-800 shadow-inner">${r2}</span>
+                <span class="p-4 bg-slate-950 rounded-xl border border-slate-800 shadow-inner">${r3}</span>
+            `;
+
+            if (r1 === r2 && r2 === r3) {
+                player.cash += 1000;
+                showToast('JACKPOT! Wygrana $1,000!');
+            } else {
+                showToast('Pudło w slotach.');
+            }
+            updateUI();
+        }
+
+        function playRoulette(choice) {
+            if (player.cash < 200) { showToast('Minimalna stawka w ruletce to $200!'); return; }
+            player.cash -= 200;
+            const roll = Math.floor(Math.random() * 37);
+            const color = roll === 0 ? 'green' : roll % 2 === 0 ? 'red' : 'black';
+            
+            document.getElementById('roulette-result').innerText = `Wylosowano: ${roll} (${color.toUpperCase()})`;
+
+            if (color === choice) {
+                let win = choice === 'green' ? 2800 : 400;
+                player.cash += win;
+                showToast(`Ruletka wygrana! Trafiono ${color}. +$${win}`);
+            } else {
+                showToast('Przegrana w ruletce.');
+            }
+            updateUI();
+        }
+
+        function buyItem(price, prestigeBonus, name) {
+            if (player.cash < price) { showToast('Za mało gotówki na ten luksus!'); return; }
+            player.cash -= price;
+            player.prestige += prestigeBonus;
+            updateUI();
+            showToast(`Zakupiono ${name}! Prestiż +${prestigeBonus}`);
+        }
+
+        function smuggle() {
+            if (player.energy < 30) { showToast('Za mało energii na przemyt!'); return; }
+            player.energy -= 30;
+            updateUI();
+            if (Math.random() < 0.4) {
+                player.jailTimer = 20;
+                showToast('Wpadka! Policja Cię namierzyła. Areszt na 20 sekund.');
+                let interval = setInterval(() => {
+                    player.jailTimer--;
+                    updateUI();
+                    if (player.jailTimer <= 0) clearInterval(interval);
+                }, 1000);
+            } else {
+                player.cash += 5000;
+                showToast('Przemyt danych udany! Zarobiono $5,000.');
+            }
+            updateUI();
+        }
+
+        // Pętla regeneracji energii oraz fluktuacji cen krypto co 8 sekund
+        setInterval(() => {
+            if (player.energy < player.maxEnergy) {
+                player.energy = Math.min(player.maxEnergy, player.energy + 5);
+            }
+            // Zmiana cen krypto o losowy procent
+            prices.BTC = Math.round(prices.BTC * (1 + (Math.random() * 0.08 - 0.038)));
+            prices.ETH = Math.round(prices.ETH * (1 + (Math.random() * 0.1 - 0.045)));
+            prices.MEME = parseFloat((prices.MEME * (1 + (Math.random() * 0.2 - 0.09))).toFixed(4));
+            updateUI();
+        }, 8000);
+
+        updateUI();
+    </script>
+</body>
+</html>
